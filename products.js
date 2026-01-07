@@ -481,6 +481,124 @@ const productos = [
     feedingPlan: [
       { etapa: "Consultar etiqueta", cantidad: "Segun especie", frecuencia: "Segun especie" }
     ]
+  },
+    // ========== HERRAMIENTAS ==========
+  {
+    id: 100,
+    name: "Almadana Fibra de Vidrio",
+    image: "./assets/almadanafibradevidrio.png",
+    description: "Almadana con mango de fibra de vidrio resistente",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Herramienta de impacto para trabajos pesados. Mango de fibra de vidrio para mayor durabilidad y absorcion de vibraciones."
+  },
+  {
+    id: 101,
+    name: "Almadana Mango de Madera",
+    image: "./assets/almadanamangodemadera.png",
+    description: "Almadana con mango tradicional de madera",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Almadana clasica con mango de madera. Ideal para demolicion y trabajos de construccion."
+  },
+  {
+    id: 102,
+    name: "Atomizador 1 Litro",
+    image: "./assets/atomizador1litro.png",
+    description: "Atomizador manual de 1 litro de capacidad",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Atomizador portatil para aplicacion de liquidos. Ideal para pequenas areas y uso domestico."
+  },
+  {
+    id: 103,
+    name: "Azadon CA",
+    image: "./assets/azadonCA.png",
+    description: "Azadon de alta calidad para trabajo agricola",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Azadon resistente para labores de labranza y preparacion de suelos. Hoja de acero templado."
+  },
+  {
+    id: 104,
+    name: "Bieldo de Heno",
+    image: "./assets/bieldoheno.jpg",
+    description: "Bieldo para manejo de heno y forraje",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Herramienta esencial para mover heno, paja y forraje. Puntas de acero resistente."
+  },
+  {
+    id: 105,
+    name: "Bomba Fumigadora 16 Litros",
+    image: "./assets/bomba16litros.png.webp",
+    description: "Bomba fumigadora de mochila 16 litros",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Bomba de mochila para fumigacion. Capacidad de 16 litros, ideal para areas medianas y grandes."
+  },
+  {
+    id: 106,
+    name: "Bomba Fumigar 5 Litros",
+    image: "./assets/bombafumigar5litros.png.webp",
+    description: "Bomba fumigadora portatil de 5 litros",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Bomba fumigadora compacta de 5 litros. Perfecta para jardines y areas pequenas."
+  },
+  {
+    id: 107,
+    name: "Bomba Manual de Aire",
+    image: "./assets/bombamanuaaldedaaire.png",
+    description: "Bomba manual para inflar",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Bomba de aire manual multiusos. Util para inflar neumaticos, balones y otros articulos."
+  },
+  {
+    id: 108,
+    name: "Candado Laton Pulido",
+    image: "./assets/candadolatonpulido.png",
+    description: "Candado de laton pulido de alta seguridad",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Candado resistente de laton pulido. Ideal para asegurar portones, bodegas y equipos."
+  },
+  {
+    id: 109,
+    name: "Carretilla IMACASA",
+    image: "./assets/carretilla-IMACASA.png",
+    description: "Carretilla de construccion marca IMACASA",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Carretilla robusta para transporte de materiales. Capacidad de carga alta, rueda neumatica."
+  },
+  {
+    id: 110,
+    name: "Chuzo Forjado",
+    image: "./assets/chuzoforjado.jpg",
+    description: "Chuzo de acero forjado para excavacion",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Chuzo de acero forjado para romper suelos duros y rocas. Punta templada de alta resistencia."
+  },
+  {
+    id: 111,
+    name: "Cinta Metrica Industrial 5m",
+    image: "./assets/cintametricaindustrial5m.png",
+    description: "Cinta metrica industrial de 5 metros",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Cinta metrica de uso industrial. 5 metros de longitud con carcasa resistente a golpes."
+  },
+  {
+    id: 112,
+    name: "Cinta Metrica Profesional 3m",
+    image: "./assets/cintametricaprofesional3m.png",
+    description: "Cinta metrica profesional de 3 metros",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Cinta metrica compacta de 3 metros. Ideal para mediciones precisas en espacios reducidos."
   }
 ];
 
