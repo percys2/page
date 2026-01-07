@@ -5,159 +5,179 @@ const alimentos = [
     description: "Alimento para aves en etapa de engorde"
   },
   {
-    name: "iniciarina",
-    image: "./assets/engordina.jpg",
+    name: "Iniciarina",
+    image: "./assets/iniciarina.JPG",
     description: "Alimento para pollos de engorde"
   },
   {
     name: "Novagallos",
-    image: "./assets/posturina.jpg",
+    image: "./assets/novagallos.JPG",
     description: "Alimento para gallos de pelea"
   },
-   {
+  {
     name: "Pre iniciarina",
     image: "./assets/preiniciarina.png",
-    description: "Alimento para gallos de pelea"
+    description: "Alimento para pollos en etapa inicial"
   },
-   {
+  {
     name: "Cavalleria Forte",
     image: "./assets/cavalleria.png",
-    description: "Alimento para gallos de pelea"
+    description: "Alimento para caballos"
   },
-   {
+  {
     name: "Omalina 100",
     image: "./assets/omalina100.png",
-    description: "Alimento para gallos de pelea"
+    description: "Alimento balanceado para aves"
   },
-   {
+  {
     name: "Omalina 200",
     image: "./assets/omalina200.png",
-    description: "Alimento para gallos de pelea"
+    description: "Alimento balanceado para aves"
   },
-   {
+  {
     name: "Omalina 300",
     image: "./assets/omalina300.png",
-    description: "Alimento para gallos de pelea"
+    description: "Alimento balanceado para aves"
   },
-   {
+  {
     name: "Conejos",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
+    image: "./assets/conejos.JPG",
+    description: "Alimento para conejos"
   },
-   {
+  {
     name: "Pollo Criollo",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
+    image: "./assets/pollocriollo.JPG",
+    description: "Alimento para pollos criollos"
   },
-   {
-    name: "Ponedora criolla",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
+  {
+    name: "Ponedora Criolla",
+    image: "./assets/ponedoracriolla.jpg",
+    description: "Alimento para gallinas ponedoras criollas"
   },
-   {
+  {
     name: "Mimado Adulto 50 lbs",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
-  },
-   {
-    name: "Mimado cachorro 50 lbs",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
-  },
-   {
-    name: "Dogui carne 1 lb",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
-  },
-   {
-    name: "Dogui carne 40 lbs",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
-  },
-   {
-    name: "Dogui carne y vegetales 40 lbs",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
-  },
-   {
-    name: "Dogui parrillada 40 lbs",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
+    image: "./assets/mimadoadullto.JPG",
+    description: "Alimento para perros adultos"
   },
   {
-    name: "Dogui pollo 40 lbs",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
+    name: "Mimado Cachorro 50 lbs",
+    image: "./assets/mimadocachorro.JPG",
+    description: "Alimento para cachorros"
   },
   {
-    name: "Dogui cachorro 1 lb",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
+    name: "Dogui Carne 1 lb",
+    image: "./assets/doguicarne1lb.jpg",
+    description: "Alimento para perros sabor carne"
   },
   {
-    name: "dogui cachorro 40 lbs",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
+    name: "Dogui Carne y Vegetales",
+    image: "./assets/doguicarneyvegetales.JPG",
+    description: "Alimento para perros sabor carne y vegetales"
   },
   {
-    name: "don gato adulto 1 lb",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
+    name: "Dogui Cachorro 1 lb",
+    image: "./assets/doguicachorro1lb.jpg",
+    description: "Alimento para cachorros"
   },
   {
-    name: "don gato 17.6 lbs",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
+    name: "Dogui Cachorros",
+    image: "./assets/doguicachorros1lb.JPG",
+    description: "Alimento para cachorros"
   },
   {
-    name: "gaty gatitos",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
+    name: "Don Gato 1 lb",
+    image: "./assets/dongato1lb.jpg",
+    description: "Alimento para gatos adultos"
   },
   {
-    name: "Gaty mar y tierra 1lb",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
+    name: "Don Gato 17.6 lbs",
+    image: "./assets/dongato.JPG",
+    description: "Alimento para gatos adultos"
   },
   {
-    name: "Gaty mar y tierra 17.6 lbs",
-    image: "./assets/posturina.jpg",
-    description: "Alimento para gallos de pelea"
+    name: "Gaty 1 lb",
+    image: "./assets/gaty1lb.jpg",
+    description: "Alimento para gatos"
   },
   {
-    name: "forrajina",
+    name: "Gaty 17.6 lbs",
+    image: "./assets/gaty17.JPG",
+    description: "Alimento para gatos"
+  },
+  {
+    name: "Gaty Pescado",
+    image: "./assets/gatypescado.png",
+    description: "Alimento para gatos sabor pescado"
+  },
+  {
+    name: "Forrajina",
     image: "./assets/forrajina.png",
-    description: "Alimento para gallos de pelea"
-  },
-  {
-    name: "Neopigg 2",
-    image: "./assets/neoppigg2.png",
-    description: "Alimento para gallos de pelea"
+    description: "Alimento forrajero para ganado"
   },
   {
     name: "Neopigg 1",
-    image: "./assets/neopig1.png",
-    description: "Alimento para gallos de pelea"
+    image: "./assets/nepigg1.png",
+    description: "Alimento para cerdos etapa 1"
   },
   {
-    name: "desarrollina",
-    image: "./assets/desarrollina.png",
-    description: "Alimento para gallos de pelea"
+    name: "Neopigg 2",
+    image: "./assets/neopigg2.png",
+    description: "Alimento para cerdos etapa 2"
   },
-    {
+  {
+    name: "Neopigg 4",
+    image: "./assets/neopigg4.jpg",
+    description: "Alimento para cerdos etapa 4"
+  },
+  {
+    name: "Desarrollina",
+    image: "./assets/desarrollina.png",
+    description: "Alimento para cerdos en desarrollo"
+  },
+  {
     name: "Jamonina",
     image: "./assets/jamonina.png",
     description: "Alimento para cerdos de engorde"
   },
-   {
+  {
     name: "Criacerdina",
     image: "./assets/criacerdina.png",
     description: "Alimento para cerdas en gestacion"
   },
   {
+    name: "Lacticerdina",
+    image: "./assets/lacticerdina.jpg",
+    description: "Alimento para cerdas en lactancia"
+  },
+  {
+    name: "Pignova 5",
+    image: "./assets/pignova5.png",
+    description: "Alimento para cerdos Pignova fase 5"
+  },
+  {
     name: "Pignova 6",
     image: "./assets/pignova6.png",
-    description: "Alimento para cerdas en gestacion"
+    description: "Alimento para cerdos Pignova fase 6"
+  },
+  {
+    name: "Petmaster",
+    image: "./assets/petmaster.JPG",
+    description: "Alimento premium para mascotas"
+  },
+  {
+    name: "Petmaster Adulto 1 lb",
+    image: "./assets/petmasteradulto1lb.jpg",
+    description: "Alimento para perros adultos"
+  },
+  {
+    name: "Petmaster Cachorro 1 lb",
+    image: "./assets/petmastercachorro1lb.JPG",
+    description: "Alimento para cachorros"
+  },
+  {
+    name: "Puralean",
+    image: "./assets/puralean.jpg",
+    description: "Alimento balanceado premium"
   }
 ];
 

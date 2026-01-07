@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Productos - AgroCentro Nica</title>
+  <link rel="stylesheet" href="products.css" />
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <a href="home.html">
+      <img src="./assets/logo.png" alt="Logo" class="logo">
+    </a>
+  </div>
+
+  <div class="navbar-right">
+    <div class="nav-links">
+      <a href="home.html">Inicio</a>
+      <a href="home.html#nosotros">Nosotros</a>
+      <a href="products.html" class="active">Productos</a>
+      <a href="contact.html">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO PRODUCTOS CON SEARCH -->
+<section class="products-hero">
+  <h1>Nuestros Productos</h1>
+  <p>Encuentra todo lo que necesitas para tus animales</p>
+  <div class="hero-search">
+    <input type="text" id="search-input" placeholder="Buscar producto...">
+  </div>
+</section>
+
+<!-- CONTENIDO PRINCIPAL -->
+<section class="products-section">
+  <div class="products-layout">
+    
+    <!-- SIDEBAR FILTROS -->
+    <aside class="filters-sidebar">
+      
+      <div class="filter-group">
+        <h4>Tipo de Producto</h4>
+        <div class="filter-buttons">
+          <button class="filter-btn type-btn active" data-type="all">Todos</button>
+          <button class="filter-btn type-btn" data-type="alimentos">Alimentos</button>
+          <button class="filter-btn type-btn" data-type="medicinas">Medicinas</button>
+          <button class="filter-btn type-btn" data-type="herramientas">Herramientas</button>
+          <button class="filter-btn type-btn" data-type="accesorios">Accesorios</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h4>Por Animal</h4>
+        <div class="filter-buttons">
+          <button class="filter-btn category-btn active" data-category="all">Todos</button>
+          <button class="filter-btn category-btn" data-category="aves">Aves</button>
+          <button class="filter-btn category-btn" data-category="perros">Perros</button>
+          <button class="filter-btn category-btn" data-category="gatos">Gatos</button>
+          <button class="filter-btn category-btn" data-category="cerdos">Cerdos</button>
+          <button class="filter-btn category-btn" data-category="equinos">Equinos</button>
+          <button class="filter-btn category-btn" data-category="otros">Otros</button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- PRODUCTOS -->
+    <main class="products-main">
+      <p id="products-count" class="products-count">Mostrando 0 productos</p>
+      <div class="products-grid" id="products-grid"></div>
+    </main>
+
+  </div>
+</section>
+
+<!-- MODAL DE PRODUCTO -->
+<div class="product-modal" id="product-modal">
+  <div class="modal-container">
+    <button class="modal-close" onclick="closeProductModal()">&times;</button>
+    <div class="modal-content" id="modal-product-content">
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-main">
+    
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="./assets/logo.png" alt="Logo">
+        <span>AgroCentro Nica</span>
+      </div>
+      <p>
+        Somos una empresa comprometida con el desarrollo del sector
+        agropecuario nicaraguense, brindando productos confiables,
+        asesoria y atencion cercana al productor.
+      </p>
+      <div class="footer-social">
+        <a href="https://wa.me/50582403490" target="_blank" class="social-link">W</a>
+        <a href="mailto:percyscastillo2013@outlook.com" class="social-link">@</a>
+      </div>
+    </div>
+
+    <div class="footer-column">
+      <h4>Navegacion</h4>
+      <ul>
+        <li><a href="home.html">Inicio</a></li>
+        <li><a href="home.html#nosotros">Nosotros</a></li>
+        <li><a href="products.html">Productos</a></li>
+        <li><a href="contact.html">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Categorias</h4>
+      <ul>
+        <li><a href="products.html">Aves</a></li>
+        <li><a href="products.html">Perros</a></li>
+        <li><a href="products.html">Gatos</a></li>
+        <li><a href="products.html">Cerdos</a></li>
+        <li><a href="products.html">Equinos</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Contacto</h4>
+      
+      <div class="footer-contact-item">
+        <div class="contact-icon">T</div>
+        <div class="contact-info">
+          <p>Telefono</p>
+          <a href="tel:+50582403490">8240 3490</a>
+        </div>
+      </div>
+      
+      <div class="footer-contact-item">
+        <div class="contact-icon">@</div>
+        <div class="contact-info">
+          <p>Email</p>
+          <a href="mailto:percyscastillo2013@outlook.com">percyscastillo2013@outlook.com</a>
+        </div>
+      </div>
+
+      <a href="https://wa.me/50582403490" target="_blank" class="footer-whatsapp-btn">
+        Escribenos por WhatsApp
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-content">
+      <p>&copy; 2026 AgroCentro Nica - Todos los derechos reservados</p>
+      <div class="footer-bottom-links">
+        <a href="#">Terminos</a>
+        <a href="#">Privacidad</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="products.js"></script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto - AgroCentro Nica</title>
+  <link rel="stylesheet" href="contact.css" />
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <a href="home.html">
+      <img src="./assets/logo.png" alt="Logo" class="logo">
+    </a>
+  </div>
+
+  <div class="navbar-right">
+    <div class="nav-links">
+      <a href="home.html">Inicio</a>
+      <a href="home.html#nosotros">Nosotros</a>
+      <a href="products.html">Productos</a>
+      <a href="contact.html" class="active">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO CONTACTO -->
+<section class="contact-hero">
+  <h1>Contactanos</h1>
+  <p>Estamos aqui para ayudarte con tus consultas, quejas o sugerencias</p>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact-section">
+  <div class="contact-container">
+    
+    <div class="contact-info-side">
+      <h2>Informacion de Contacto</h2>
+      <p>¿Tienes alguna queja, sugerencia o consulta? Completa el formulario o contactanos directamente.</p>
+      
+      <div class="contact-details">
+        <div class="contact-detail-item">
+          <div class="detail-icon">T</div>
+          <div class="detail-text">
+            <h4>Telefono</h4>
+            <a href="tel:+50582403490">8240 3490</a>
+          </div>
+        </div>
+        
+        <div class="contact-detail-item">
+          <div class="detail-icon">@</div>
+          <div class="detail-text">
+            <h4>Email</h4>
+            <a href="mailto:percyscastillo2013@outlook.com">percyscastillo2013@outlook.com</a>
+          </div>
+        </div>
+        
+        <div class="contact-detail-item">
+          <div class="detail-icon">W</div>
+          <div class="detail-text">
+            <h4>WhatsApp</h4>
+            <a href="https://wa.me/50582403490" target="_blank">Escribenos directamente</a>
+          </div>
+        </div>
+      </div>
+      
+      <a href="https://wa.me/50582403490" target="_blank" class="whatsapp-direct-btn">
+        Ir a WhatsApp
+      </a>
+    </div>
+    
+    <div class="contact-form-side">
+      <form class="contact-form" id="contact-form">
+        <h3>Envianos tu mensaje</h3>
+        
+        <div class="form-group">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Correo electronico</label>
+          <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="tipo">Tipo de mensaje</label>
+          <select id="tipo" name="tipo" required>
+            <option value="">Selecciona una opcion</option>
+            <option value="consulta">Consulta general</option>
+            <option value="queja">Queja</option>
+            <option value="sugerencia">Sugerencia de mejora</option>
+            <option value="pedido">Informacion de pedidos</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aqui..." required></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">Enviar Mensaje</button>
+      </form>
+    </div>
+    
+  </div>
+</section>
+
+<!-- UBICACIONES -->
+<section class="locations-section">
+  <div class="locations-container">
+    <h2>Nuestras Ubicaciones</h2>
+    <p class="locations-intro">Visitanos en cualquiera de nuestras sucursales</p>
+    
+    <div class="locations-grid">
+      
+      <div class="location-card">
+        <div class="location-map">
+          <iframe 
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-86.07%2C11.86%2C-86.03%2C11.90&layer=mapnik&marker=11.8764%2C-86.0519"
+            width="100%" 
+            height="250" 
+            style="border:0;" 
+            loading="lazy">
+          </iframe>
+        </div>
+        <div class="location-info">
+          <h3>Diriomo</h3>
+          <p>Diriomo, Granada, Nicaragua</p>
+          <a href="https://www.openstreetmap.org/?mlat=11.8764&mlon=-86.0519#map=15/11.8764/-86.0519" target="_blank" class="location-btn">
+            Ver en Mapa
+          </a>
+        </div>
+      </div>
+
+      <div class="location-card">
+        <div class="location-map">
+          <iframe 
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-86.13%2C11.90%2C-86.09%2C11.94&layer=mapnik&marker=11.9167%2C-86.1094"
+            width="100%" 
+            height="250" 
+            style="border:0;" 
+            loading="lazy">
+          </iframe>
+        </div>
+        <div class="location-info">
+          <h3>Masatepe</h3>
+          <p>Masatepe, Masaya, Nicaragua</p>
+          <a href="https://www.openstreetmap.org/?mlat=11.9167&mlon=-86.1094#map=15/11.9167/-86.1094" target="_blank" class="location-btn">
+            Ver en Mapa
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-main">
+    
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="./assets/logo.png" alt="Logo">
+        <span>AgroCentro Nica</span>
+      </div>
+      <p>
+        Somos una empresa comprometida con el desarrollo del sector
+        agropecuario nicaraguense, brindando productos confiables,
+        asesoria y atencion cercana al productor.
+      </p>
+      <div class="footer-social">
+        <a href="https://wa.me/50582403490" target="_blank" class="social-link">W</a>
+        <a href="mailto:percyscastillo2013@outlook.com" class="social-link">@</a>
+      </div>
+    </div>
+
+    <div class="footer-column">
+      <h4>Navegacion</h4>
+      <ul>
+        <li><a href="home.html">Inicio</a></li>
+        <li><a href="home.html#nosotros">Nosotros</a></li>
+        <li><a href="products.html">Productos</a></li>
+        <li><a href="contact.html">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Categorias</h4>
+      <ul>
+        <li><a href="products.html">Aves</a></li>
+        <li><a href="products.html">Perros</a></li>
+        <li><a href="products.html">Gatos</a></li>
+        <li><a href="products.html">Cerdos</a></li>
+        <li><a href="products.html">Equinos</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Contacto</h4>
+      
+      <div class="footer-contact-item">
+        <div class="contact-icon">T</div>
+        <div class="contact-info">
+          <p>Telefono</p>
+          <a href="tel:+50582403490">8240 3490</a>
+        </div>
+      </div>
+      
+      <div class="footer-contact-item">
+        <div class="contact-icon">@</div>
+        <div class="contact-info">
+          <p>Email</p>
+          <a href="mailto:percyscastillo2013@outlook.com">percyscastillo2013@outlook.com</a>
+        </div>
+      </div>
+
+      <a href="https://wa.me/50582403490" target="_blank" class="footer-whatsapp-btn">
+        Escribenos por WhatsApp
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-content">
+      <p>&copy; 2026 AgroCentro Nica - Todos los derechos reservados</p>
+      <div class="footer-bottom-links">
+        <a href="#">Terminos</a>
+        <a href="#">Privacidad</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const nombre = document.getElementById('nombre').value;
+  const email = document.getElementById('email').value;
+  const tipo = document.getElementById('tipo').value;
+  const mensaje = document.getElementById('mensaje').value;
+  
+  const tipoTexto = {
+    'consulta': 'Consulta general',
+    'queja': 'Queja',
+    'sugerencia': 'Sugerencia de mejora',
+    'pedido': 'Informacion de pedidos',
+    'otro': 'Otro'
+  };
+  
+  let whatsappMsg = `*Nuevo mensaje de contacto*\n\n`;
+  whatsappMsg += `*Nombre:* ${nombre}\n`;
+  whatsappMsg += `*Email:* ${email}\n`;
+  whatsappMsg += `*Tipo:* ${tipoTexto[tipo]}\n\n`;
+  whatsappMsg += `*Mensaje:*\n${mensaje}`;
+  
+  const encodedMsg = encodeURIComponent(whatsappMsg);
+  window.open(`https://wa.me/50582403490?text=${encodedMsg}`, '_blank');
+  
+  this.reset();
+  alert('Gracias por tu mensaje. Te redirigimos a WhatsApp para completar el envio.');
+});
+</script>
+
+</body>
+</html>
