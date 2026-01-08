@@ -7,12 +7,7 @@ const productos = [
     description: "Alimento para aves en etapa de engorde",
     category: "aves",
     type: "alimentos",
-    instructions: "Alimento completo para pollos de engorde. Suministrar a libre acceso asegurando agua fresca y limpia disponible en todo momento.",
-    feedingPlan: [
-      { etapa: "Semana 1-2", cantidad: "25-50g/ave/dia", frecuencia: "Libre acceso" },
-      { etapa: "Semana 3-4", cantidad: "80-120g/ave/dia", frecuencia: "Libre acceso" },
-      { etapa: "Semana 5-6", cantidad: "150-180g/ave/dia", frecuencia: "Libre acceso" }
-    ]
+    instructions: "Alimento completo para pollos de engorde. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 2,
@@ -21,12 +16,7 @@ const productos = [
     description: "Alimento para pollos de engorde",
     category: "aves",
     type: "alimentos",
-    instructions: "Alimento de inicio para pollos. Ideal para las primeras semanas de vida. Mantener comederos limpios y agua fresca.",
-    feedingPlan: [
-      { etapa: "Dia 1-7", cantidad: "15-25g/ave/dia", frecuencia: "Libre acceso" },
-      { etapa: "Dia 8-14", cantidad: "30-45g/ave/dia", frecuencia: "Libre acceso" },
-      { etapa: "Dia 15-21", cantidad: "50-70g/ave/dia", frecuencia: "Libre acceso" }
-    ]
+    instructions: "Alimento de inicio para pollos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 3,
@@ -35,12 +25,7 @@ const productos = [
     description: "Alimento para gallos de pelea",
     category: "aves",
     type: "alimentos",
-    instructions: "Alimento especializado para gallos de pelea. Alto contenido proteico para desarrollo muscular optimo.",
-    feedingPlan: [
-      { etapa: "Mantenimiento", cantidad: "80-100g/ave/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Entrenamiento", cantidad: "100-120g/ave/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Competencia", cantidad: "120-150g/ave/dia", frecuencia: "3 veces al dia" }
-    ]
+    instructions: "Alimento especializado para gallos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 4,
@@ -49,11 +34,7 @@ const productos = [
     description: "Alimento para pollos en etapa inicial",
     category: "aves",
     type: "alimentos",
-    instructions: "Alimento pre-iniciador para pollitos recien nacidos. Textura fina para facil consumo.",
-    feedingPlan: [
-      { etapa: "Dia 1-3", cantidad: "10-15g/ave/dia", frecuencia: "Libre acceso" },
-      { etapa: "Dia 4-7", cantidad: "15-25g/ave/dia", frecuencia: "Libre acceso" }
-    ]
+    instructions: "Alimento pre-iniciador para pollitos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 10,
@@ -62,11 +43,7 @@ const productos = [
     description: "Alimento para pollos criollos",
     category: "aves",
     type: "alimentos",
-    instructions: "Alimento balanceado para pollos criollos de patio. Complementar con pastoreo natural.",
-    feedingPlan: [
-      { etapa: "Crecimiento", cantidad: "60-80g/ave/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Adulto", cantidad: "100-120g/ave/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento balanceado para pollos criollos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 11,
@@ -75,11 +52,7 @@ const productos = [
     description: "Alimento para gallinas ponedoras criollas",
     category: "aves",
     type: "alimentos",
-    instructions: "Alimento para gallinas ponedoras. Rico en calcio para produccion de huevos de calidad.",
-    feedingPlan: [
-      { etapa: "Pre-postura", cantidad: "100-110g/ave/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Postura", cantidad: "120-130g/ave/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento para gallinas ponedoras. Consultar etiqueta del producto para dosis exactas."
   },
 
   // ========== ALIMENTOS - EQUINOS ==========
@@ -90,12 +63,7 @@ const productos = [
     description: "Alimento para caballos",
     category: "equinos",
     type: "alimentos",
-    instructions: "Alimento premium para caballos de trabajo y deporte. Suministrar junto con forraje de calidad.",
-    feedingPlan: [
-      { etapa: "Mantenimiento", cantidad: "2-3 kg/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Trabajo ligero", cantidad: "3-4 kg/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Trabajo intenso", cantidad: "4-6 kg/dia", frecuencia: "3 veces al dia" }
-    ]
+    instructions: "Alimento premium para caballos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 6,
@@ -104,11 +72,7 @@ const productos = [
     description: "Alimento balanceado para equinos",
     category: "equinos",
     type: "alimentos",
-    instructions: "Alimento balanceado para equinos en etapa de crecimiento. Complementar con heno o pasto.",
-    feedingPlan: [
-      { etapa: "Potros 6-12 meses", cantidad: "1.5-2 kg/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Potros 12-24 meses", cantidad: "2-3 kg/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento para equinos en crecimiento. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 7,
@@ -117,11 +81,7 @@ const productos = [
     description: "Alimento balanceado para equinos",
     category: "equinos",
     type: "alimentos",
-    instructions: "Alimento para equinos adultos en mantenimiento. Ideal para caballos de paseo.",
-    feedingPlan: [
-      { etapa: "Mantenimiento", cantidad: "2-2.5 kg/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Actividad moderada", cantidad: "2.5-3.5 kg/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento para equinos adultos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 8,
@@ -130,11 +90,7 @@ const productos = [
     description: "Alimento balanceado para equinos",
     category: "equinos",
     type: "alimentos",
-    instructions: "Alimento de alto rendimiento para caballos de competencia y trabajo pesado.",
-    feedingPlan: [
-      { etapa: "Trabajo pesado", cantidad: "4-5 kg/dia", frecuencia: "3 veces al dia" },
-      { etapa: "Competencia", cantidad: "5-6 kg/dia", frecuencia: "3 veces al dia" }
-    ]
+    instructions: "Alimento de alto rendimiento para caballos. Consultar etiqueta del producto para dosis exactas."
   },
 
   // ========== ALIMENTOS - PERROS ==========
@@ -145,12 +101,7 @@ const productos = [
     description: "Alimento para perros adultos",
     category: "perros",
     type: "alimentos",
-    instructions: "Alimento completo para perros adultos. Servir en plato limpio con agua fresca disponible.",
-    feedingPlan: [
-      { etapa: "Perro pequeno (1-10kg)", cantidad: "80-180g/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Perro mediano (10-25kg)", cantidad: "180-320g/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Perro grande (25-45kg)", cantidad: "320-480g/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento completo para perros adultos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 13,
@@ -159,12 +110,7 @@ const productos = [
     description: "Alimento para cachorros",
     category: "perros",
     type: "alimentos",
-    instructions: "Alimento para cachorros en crecimiento. Rico en proteinas y calcio para desarrollo oseo.",
-    feedingPlan: [
-      { etapa: "2-4 meses", cantidad: "55-110g/dia", frecuencia: "3-4 veces al dia" },
-      { etapa: "4-6 meses", cantidad: "110-180g/dia", frecuencia: "3 veces al dia" },
-      { etapa: "6-12 meses", cantidad: "180-280g/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento para cachorros en crecimiento. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 14,
@@ -173,11 +119,7 @@ const productos = [
     description: "Alimento para perros sabor carne",
     category: "perros",
     type: "alimentos",
-    instructions: "Alimento sabor carne para perros adultos. Presentacion practica de 1 libra.",
-    feedingPlan: [
-      { etapa: "Perro pequeno", cantidad: "80-150g/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Perro mediano", cantidad: "150-280g/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento sabor carne para perros. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 15,
@@ -186,12 +128,7 @@ const productos = [
     description: "Alimento para perros sabor carne y vegetales",
     category: "perros",
     type: "alimentos",
-    instructions: "Alimento balanceado con carne y vegetales. Nutricion completa para tu mascota.",
-    feedingPlan: [
-      { etapa: "Perro pequeno", cantidad: "80-150g/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Perro mediano", cantidad: "150-280g/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Perro grande", cantidad: "280-400g/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento balanceado con carne y vegetales. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 16,
@@ -200,11 +137,7 @@ const productos = [
     description: "Alimento para cachorros",
     category: "perros",
     type: "alimentos",
-    instructions: "Alimento especial para cachorros. Croquetas pequenas para facil masticacion.",
-    feedingPlan: [
-      { etapa: "2-4 meses", cantidad: "50-100g/dia", frecuencia: "3-4 veces al dia" },
-      { etapa: "4-8 meses", cantidad: "100-180g/dia", frecuencia: "3 veces al dia" }
-    ]
+    instructions: "Alimento especial para cachorros. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 17,
@@ -213,11 +146,7 @@ const productos = [
     description: "Alimento para cachorros",
     category: "perros",
     type: "alimentos",
-    instructions: "Alimento nutritivo para cachorros en desarrollo. Fortalece huesos y musculos.",
-    feedingPlan: [
-      { etapa: "2-4 meses", cantidad: "50-100g/dia", frecuencia: "3-4 veces al dia" },
-      { etapa: "4-8 meses", cantidad: "100-180g/dia", frecuencia: "3 veces al dia" }
-    ]
+    instructions: "Alimento nutritivo para cachorros. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 33,
@@ -226,12 +155,7 @@ const productos = [
     description: "Alimento premium para mascotas",
     category: "perros",
     type: "alimentos",
-    instructions: "Alimento premium de alta digestibilidad. Ideal para perros con estomago sensible.",
-    feedingPlan: [
-      { etapa: "Perro pequeno", cantidad: "70-140g/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Perro mediano", cantidad: "140-260g/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Perro grande", cantidad: "260-380g/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento premium de alta digestibilidad. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 34,
@@ -240,11 +164,7 @@ const productos = [
     description: "Alimento para perros adultos",
     category: "perros",
     type: "alimentos",
-    instructions: "Alimento premium para perros adultos. Presentacion de 1 libra.",
-    feedingPlan: [
-      { etapa: "Perro pequeno", cantidad: "70-140g/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Perro mediano", cantidad: "140-260g/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento premium para perros adultos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 35,
@@ -253,11 +173,7 @@ const productos = [
     description: "Alimento para cachorros",
     category: "perros",
     type: "alimentos",
-    instructions: "Alimento premium para cachorros. Alto contenido de DHA para desarrollo cerebral.",
-    feedingPlan: [
-      { etapa: "2-4 meses", cantidad: "45-90g/dia", frecuencia: "3-4 veces al dia" },
-      { etapa: "4-8 meses", cantidad: "90-160g/dia", frecuencia: "3 veces al dia" }
-    ]
+    instructions: "Alimento premium para cachorros. Consultar etiqueta del producto para dosis exactas."
   },
 
   // ========== ALIMENTOS - GATOS ==========
@@ -268,11 +184,7 @@ const productos = [
     description: "Alimento para gatos adultos",
     category: "gatos",
     type: "alimentos",
-    instructions: "Alimento completo para gatos adultos. Mantener agua fresca disponible siempre.",
-    feedingPlan: [
-      { etapa: "Gato adulto (3-5kg)", cantidad: "40-60g/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Gato grande (5-7kg)", cantidad: "60-80g/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento completo para gatos adultos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 19,
@@ -281,11 +193,7 @@ const productos = [
     description: "Alimento para gatos adultos",
     category: "gatos",
     type: "alimentos",
-    instructions: "Alimento para gatos adultos. Presentacion economica de 17.6 libras.",
-    feedingPlan: [
-      { etapa: "Gato adulto (3-5kg)", cantidad: "40-60g/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Gato grande (5-7kg)", cantidad: "60-80g/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento para gatos adultos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 20,
@@ -294,11 +202,7 @@ const productos = [
     description: "Alimento para gatos",
     category: "gatos",
     type: "alimentos",
-    instructions: "Alimento balanceado para gatos de todas las edades.",
-    feedingPlan: [
-      { etapa: "Gatito (hasta 1 ano)", cantidad: "30-50g/dia", frecuencia: "3 veces al dia" },
-      { etapa: "Gato adulto", cantidad: "40-65g/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento balanceado para gatos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 21,
@@ -307,11 +211,7 @@ const productos = [
     description: "Alimento para gatos",
     category: "gatos",
     type: "alimentos",
-    instructions: "Alimento para gatos. Presentacion familiar de 17.6 libras.",
-    feedingPlan: [
-      { etapa: "Gatito (hasta 1 ano)", cantidad: "30-50g/dia", frecuencia: "3 veces al dia" },
-      { etapa: "Gato adulto", cantidad: "40-65g/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento para gatos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 22,
@@ -320,11 +220,7 @@ const productos = [
     description: "Alimento para gatos sabor pescado",
     category: "gatos",
     type: "alimentos",
-    instructions: "Alimento sabor pescado que encanta a los gatos. Rico en Omega 3.",
-    feedingPlan: [
-      { etapa: "Gato adulto (3-5kg)", cantidad: "40-60g/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Gato grande (5-7kg)", cantidad: "60-80g/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento sabor pescado para gatos. Consultar etiqueta del producto para dosis exactas."
   },
 
   // ========== ALIMENTOS - CERDOS ==========
@@ -335,11 +231,7 @@ const productos = [
     description: "Alimento para cerdos etapa 1",
     category: "cerdos",
     type: "alimentos",
-    instructions: "Alimento de inicio para lechones recien destetados. Alta palatabilidad.",
-    feedingPlan: [
-      { etapa: "Destete (7-12kg)", cantidad: "200-400g/dia", frecuencia: "4-5 veces al dia" },
-      { etapa: "Post-destete (12-18kg)", cantidad: "400-600g/dia", frecuencia: "3-4 veces al dia" }
-    ]
+    instructions: "Alimento de inicio para lechones. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 25,
@@ -348,11 +240,7 @@ const productos = [
     description: "Alimento para cerdos etapa 2",
     category: "cerdos",
     type: "alimentos",
-    instructions: "Alimento de crecimiento para cerdos jovenes. Transicion desde Neopigg 1.",
-    feedingPlan: [
-      { etapa: "Crecimiento (18-30kg)", cantidad: "800-1200g/dia", frecuencia: "3 veces al dia" },
-      { etapa: "Desarrollo (30-50kg)", cantidad: "1200-1800g/dia", frecuencia: "2-3 veces al dia" }
-    ]
+    instructions: "Alimento de crecimiento para cerdos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 26,
@@ -361,11 +249,7 @@ const productos = [
     description: "Alimento para cerdos etapa 4",
     category: "cerdos",
     type: "alimentos",
-    instructions: "Alimento de finalizacion para cerdos de engorde. Maximiza ganancia de peso.",
-    feedingPlan: [
-      { etapa: "Engorde (50-80kg)", cantidad: "2-2.5kg/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Finalizacion (80-100kg)", cantidad: "2.5-3kg/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento de finalizacion para cerdos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 27,
@@ -374,11 +258,7 @@ const productos = [
     description: "Alimento para cerdos en desarrollo",
     category: "cerdos",
     type: "alimentos",
-    instructions: "Alimento para cerdos en etapa de desarrollo. Promueve crecimiento uniforme.",
-    feedingPlan: [
-      { etapa: "Desarrollo (25-50kg)", cantidad: "1.2-1.8kg/dia", frecuencia: "2-3 veces al dia" },
-      { etapa: "Pre-engorde (50-70kg)", cantidad: "1.8-2.2kg/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento para cerdos en desarrollo. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 28,
@@ -387,11 +267,7 @@ const productos = [
     description: "Alimento para cerdos de engorde",
     category: "cerdos",
     type: "alimentos",
-    instructions: "Alimento de engorde para cerdos. Optima conversion alimenticia.",
-    feedingPlan: [
-      { etapa: "Engorde (60-90kg)", cantidad: "2.2-2.8kg/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Finalizacion (90-110kg)", cantidad: "2.8-3.2kg/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento de engorde para cerdos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 29,
@@ -400,11 +276,7 @@ const productos = [
     description: "Alimento para cerdas en gestacion",
     category: "cerdos",
     type: "alimentos",
-    instructions: "Alimento para cerdas gestantes. Nutricion para desarrollo fetal optimo.",
-    feedingPlan: [
-      { etapa: "Gestacion temprana", cantidad: "1.8-2.2kg/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Gestacion tardia", cantidad: "2.5-3kg/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento para cerdas gestantes. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 30,
@@ -413,10 +285,7 @@ const productos = [
     description: "Alimento para cerdas en lactancia",
     category: "cerdos",
     type: "alimentos",
-    instructions: "Alimento para cerdas lactantes. Alta energia para produccion de leche.",
-    feedingPlan: [
-      { etapa: "Lactancia (segun lechones)", cantidad: "4-7kg/dia", frecuencia: "3 veces al dia" }
-    ]
+    instructions: "Alimento para cerdas lactantes. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 31,
@@ -425,10 +294,7 @@ const productos = [
     description: "Alimento para cerdos Pignova fase 5",
     category: "cerdos",
     type: "alimentos",
-    instructions: "Alimento fase 5 del programa Pignova. Para cerdos en crecimiento.",
-    feedingPlan: [
-      { etapa: "Crecimiento", cantidad: "1.5-2kg/dia", frecuencia: "2-3 veces al dia" }
-    ]
+    instructions: "Alimento fase 5 del programa Pignova. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 32,
@@ -437,10 +303,7 @@ const productos = [
     description: "Alimento para cerdos Pignova fase 6",
     category: "cerdos",
     type: "alimentos",
-    instructions: "Alimento fase 6 del programa Pignova. Para cerdos en finalizacion.",
-    feedingPlan: [
-      { etapa: "Finalizacion", cantidad: "2.5-3kg/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento fase 6 del programa Pignova. Consultar etiqueta del producto para dosis exactas."
   },
 
   // ========== ALIMENTOS - OTROS ==========
@@ -451,11 +314,7 @@ const productos = [
     description: "Alimento para conejos",
     category: "otros",
     type: "alimentos",
-    instructions: "Alimento peletizado para conejos. Complementar con heno y vegetales frescos.",
-    feedingPlan: [
-      { etapa: "Conejo joven", cantidad: "50-80g/dia", frecuencia: "2 veces al dia" },
-      { etapa: "Conejo adulto", cantidad: "80-120g/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Alimento peletizado para conejos. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 23,
@@ -464,11 +323,7 @@ const productos = [
     description: "Alimento forrajero para ganado",
     category: "otros",
     type: "alimentos",
-    instructions: "Suplemento forrajero para ganado bovino. Complementa el pastoreo.",
-    feedingPlan: [
-      { etapa: "Ganado en pastoreo", cantidad: "2-4kg/dia", frecuencia: "1-2 veces al dia" },
-      { etapa: "Ganado estabulado", cantidad: "4-6kg/dia", frecuencia: "2 veces al dia" }
-    ]
+    instructions: "Suplemento forrajero para ganado. Consultar etiqueta del producto para dosis exactas."
   },
   {
     id: 36,
@@ -477,12 +332,10 @@ const productos = [
     description: "Alimento balanceado premium",
     category: "otros",
     type: "alimentos",
-    instructions: "Alimento premium multiproposito. Consultar dosis segun especie.",
-    feedingPlan: [
-      { etapa: "Consultar etiqueta", cantidad: "Segun especie", frecuencia: "Segun especie" }
-    ]
+    instructions: "Alimento premium multiproposito. Consultar etiqueta del producto para dosis exactas."
   },
-    // ========== HERRAMIENTAS ==========
+
+  // ========== HERRAMIENTAS ==========
   {
     id: 100,
     name: "Almadana Fibra de Vidrio",
@@ -490,7 +343,7 @@ const productos = [
     description: "Almadana con mango de fibra de vidrio resistente",
     category: "otros",
     type: "herramientas",
-    instructions: "Herramienta de impacto para trabajos pesados. Mango de fibra de vidrio para mayor durabilidad y absorcion de vibraciones."
+    instructions: "Herramienta de impacto para trabajos pesados. Mango de fibra de vidrio para mayor durabilidad."
   },
   {
     id: 101,
@@ -499,7 +352,7 @@ const productos = [
     description: "Almadana con mango tradicional de madera",
     category: "otros",
     type: "herramientas",
-    instructions: "Almadana clasica con mango de madera. Ideal para demolicion y trabajos de construccion."
+    instructions: "Almadana clasica con mango de madera. Ideal para demolicion y construccion."
   },
   {
     id: 102,
@@ -508,7 +361,7 @@ const productos = [
     description: "Atomizador manual de 1 litro de capacidad",
     category: "otros",
     type: "herramientas",
-    instructions: "Atomizador portatil para aplicacion de liquidos. Ideal para pequenas areas y uso domestico."
+    instructions: "Atomizador portatil para aplicacion de liquidos. Ideal para pequenas areas."
   },
   {
     id: 103,
@@ -517,7 +370,7 @@ const productos = [
     description: "Azadon de alta calidad para trabajo agricola",
     category: "otros",
     type: "herramientas",
-    instructions: "Azadon resistente para labores de labranza y preparacion de suelos. Hoja de acero templado."
+    instructions: "Azadon resistente para labores de labranza y preparacion de suelos."
   },
   {
     id: 104,
@@ -526,7 +379,7 @@ const productos = [
     description: "Bieldo para manejo de heno y forraje",
     category: "otros",
     type: "herramientas",
-    instructions: "Herramienta esencial para mover heno, paja y forraje. Puntas de acero resistente."
+    instructions: "Herramienta esencial para mover heno, paja y forraje."
   },
   {
     id: 105,
@@ -535,7 +388,7 @@ const productos = [
     description: "Bomba fumigadora de mochila 16 litros",
     category: "otros",
     type: "herramientas",
-    instructions: "Bomba de mochila para fumigacion. Capacidad de 16 litros, ideal para areas medianas y grandes."
+    instructions: "Bomba de mochila para fumigacion. Capacidad de 16 litros."
   },
   {
     id: 106,
@@ -544,7 +397,7 @@ const productos = [
     description: "Bomba fumigadora portatil de 5 litros",
     category: "otros",
     type: "herramientas",
-    instructions: "Bomba fumigadora compacta de 5 litros. Perfecta para jardines y areas pequenas."
+    instructions: "Bomba fumigadora compacta de 5 litros. Perfecta para jardines."
   },
   {
     id: 107,
@@ -553,7 +406,7 @@ const productos = [
     description: "Bomba manual para inflar",
     category: "otros",
     type: "herramientas",
-    instructions: "Bomba de aire manual multiusos. Util para inflar neumaticos, balones y otros articulos."
+    instructions: "Bomba de aire manual multiusos. Util para inflar neumaticos y balones."
   },
   {
     id: 108,
@@ -562,7 +415,7 @@ const productos = [
     description: "Candado de laton pulido de alta seguridad",
     category: "otros",
     type: "herramientas",
-    instructions: "Candado resistente de laton pulido. Ideal para asegurar portones, bodegas y equipos."
+    instructions: "Candado resistente de laton pulido. Ideal para asegurar portones y bodegas."
   },
   {
     id: 109,
@@ -571,7 +424,7 @@ const productos = [
     description: "Carretilla de construccion marca IMACASA",
     category: "otros",
     type: "herramientas",
-    instructions: "Carretilla robusta para transporte de materiales. Capacidad de carga alta, rueda neumatica."
+    instructions: "Carretilla robusta para transporte de materiales. Rueda neumatica."
   },
   {
     id: 110,
@@ -580,7 +433,7 @@ const productos = [
     description: "Chuzo de acero forjado para excavacion",
     category: "otros",
     type: "herramientas",
-    instructions: "Chuzo de acero forjado para romper suelos duros y rocas. Punta templada de alta resistencia."
+    instructions: "Chuzo de acero forjado para romper suelos duros y rocas."
   },
   {
     id: 111,
@@ -589,7 +442,7 @@ const productos = [
     description: "Cinta metrica industrial de 5 metros",
     category: "otros",
     type: "herramientas",
-    instructions: "Cinta metrica de uso industrial. 5 metros de longitud con carcasa resistente a golpes."
+    instructions: "Cinta metrica de uso industrial. 5 metros de longitud."
   },
   {
     id: 112,
@@ -598,7 +451,360 @@ const productos = [
     description: "Cinta metrica profesional de 3 metros",
     category: "otros",
     type: "herramientas",
-    instructions: "Cinta metrica compacta de 3 metros. Ideal para mediciones precisas en espacios reducidos."
+    instructions: "Cinta metrica compacta de 3 metros."
+  },
+  {
+    id: 113,
+    name: "Cinta Sella Roscas",
+    image: "./assets/cintasellaroscas.png",
+    description: "Cinta de teflon para sellar roscas",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Cinta de teflon para sellar conexiones roscadas."
+  },
+  {
+    id: 114,
+    name: "Dispensador Cinta Empaque",
+    image: "./assets/dispensadorcintaempaque.png",
+    description: "Dispensador de cinta de empaque",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Dispensador ergonomico para cinta de empaque."
+  },
+  {
+    id: 115,
+    name: "Escoba Amarilla 30 Dientes",
+    image: "./assets/escobaamarilla30dientes.png",
+    description: "Escoba de jardin con 30 dientes",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Escoba de jardin para recoger hojas y residuos."
+  },
+  {
+    id: 116,
+    name: "Escoba Recta",
+    image: "./assets/escobarecta.webp",
+    description: "Escoba recta para limpieza",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Escoba recta multiusos para limpieza de pisos."
+  },
+  {
+    id: 117,
+    name: "Extension Electrica",
+    image: "./assets/extensionelectrica.png",
+    description: "Extension electrica multiusos",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Extension electrica para conectar equipos a distancia."
+  },
+  {
+    id: 118,
+    name: "Gato Hidraulico",
+    image: "./assets/gatohidraulico.png",
+    description: "Gato hidraulico para vehiculos",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Gato hidraulico de botella para levantar vehiculos."
+  },
+  {
+    id: 119,
+    name: "Juego de Destornilladores",
+    image: "./assets/juegodestornilladores.png",
+    description: "Set de destornilladores variados",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Juego completo de destornilladores con diferentes puntas."
+  },
+  {
+    id: 120,
+    name: "Juego Punta Taladro",
+    image: "./assets/juegopuntaladro.png",
+    description: "Set de brocas para taladro",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Juego de brocas para taladro. Varios tamanos."
+  },
+  {
+    id: 121,
+    name: "Lentes Ajustables",
+    image: "./assets/lentesajustables.jpeg",
+    description: "Lentes de seguridad ajustables",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Lentes de proteccion con patillas ajustables."
+  },
+  {
+    id: 122,
+    name: "Lentes Negros de Seguridad",
+    image: "./assets/lentesnegros.jpg",
+    description: "Lentes de seguridad oscuros",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Lentes de seguridad con filtro oscuro."
+  },
+  {
+    id: 123,
+    name: "Lima Cuadrada Bastarda",
+    image: "./assets/limacuadradabastarda.png",
+    description: "Lima cuadrada de corte bastardo",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Lima cuadrada para desbaste de metales."
+  },
+  {
+    id: 124,
+    name: "Lima Cuchillo Bastarda",
+    image: "./assets/limacuchillobastarda.webp",
+    description: "Lima tipo cuchillo de corte bastardo",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Lima tipo cuchillo para afilar y dar forma."
+  },
+  {
+    id: 125,
+    name: "Lima Cuchillo con Mango",
+    image: "./assets/limacuchilloconmango.webp",
+    description: "Lima tipo cuchillo con mango ergonomico",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Lima tipo cuchillo con mango de madera."
+  },
+  {
+    id: 126,
+    name: "Lima Motosierra",
+    image: "./assets/limamotosierra.jpg",
+    description: "Lima redonda para afilar motosierra",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Lima redonda especial para afilar cadenas de motosierra."
+  },
+  {
+    id: 127,
+    name: "Linterna 1 LED",
+    image: "./assets/linterna1led.jpeg",
+    description: "Linterna compacta de 1 LED",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Linterna portatil de 1 LED de alta potencia."
+  },
+  {
+    id: 128,
+    name: "Linterna 3 Cabezas",
+    image: "./assets/linterna3cabezas.jpeg",
+    description: "Linterna de 3 cabezas LED",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Linterna con 3 cabezas LED para iluminacion amplia."
+  },
+  {
+    id: 129,
+    name: "Linterna COB",
+    image: "./assets/linternacob.jpeg",
+    description: "Linterna con tecnologia COB",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Linterna con LED COB de alta luminosidad."
+  },
+  {
+    id: 130,
+    name: "Llave Ajustable",
+    image: "./assets/llaveajustable.png",
+    description: "Llave ajustable multiusos",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Llave ajustable de acero. Se adapta a diferentes tamanos."
+  },
+  {
+    id: 131,
+    name: "Llave de Laton",
+    image: "./assets/llavedelaton.png",
+    description: "Llave de paso de laton",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Llave de paso de laton para control de flujo de agua."
+  },
+  {
+    id: 132,
+    name: "Machete",
+    image: "./assets/machete.webp",
+    description: "Machete de uso agricola",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Machete de acero para labores agricolas."
+  },
+  {
+    id: 133,
+    name: "Machete 26 Pulgadas",
+    image: "./assets/machete26pulgadas.webp",
+    description: "Machete de 26 pulgadas",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Machete largo de 26 pulgadas. Mayor alcance."
+  },
+  {
+    id: 134,
+    name: "Machete 28 Pulgadas",
+    image: "./assets/machete28pulgada.jpeg",
+    description: "Machete de 28 pulgadas",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Machete extra largo de 28 pulgadas."
+  },
+  {
+    id: 135,
+    name: "Machete Cutacha",
+    image: "./assets/machetecutacha.jpeg",
+    description: "Machete tipo cutacha",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Machete cutacha tradicional. Hoja ancha."
+  },
+  {
+    id: 136,
+    name: "Machete Sierra",
+    image: "./assets/machetesierra.png",
+    description: "Machete con filo de sierra",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Machete con borde aserrado. Doble funcion."
+  },
+  {
+    id: 137,
+    name: "Stilson",
+    image: "./assets/stilson.jpeg",
+    description: "Llave Stilson para plomeria",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Llave Stilson de mordaza ajustable."
+  },
+
+  // ========== MEDICINAS ==========
+  {
+    id: 200,
+    name: "Amoxi LH500",
+    image: "./assets/Amoxi Lh500.jpg",
+    description: "Antibiotico Amoxicilina LH500",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Antibiotico de amplio espectro. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 201,
+    name: "Bolos Uterinos",
+    image: "./assets/Bolos Uterinos.jpg",
+    description: "Bolos uterinos para ganado",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Tratamiento intrauterino para ganado. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 202,
+    name: "Broomexihina",
+    image: "./assets/Broomexihina.jpg",
+    description: "Expectorante veterinario",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Expectorante y mucolitico. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 203,
+    name: "Calfstonic",
+    image: "./assets/Calfstonic.jpg",
+    description: "Suplemento vitaminico para terneros",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Tonico vitaminico para terneros. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 204,
+    name: "Chicken Vit Plus",
+    image: "./assets/Chicken vit plus.jpg",
+    description: "Vitaminas para aves",
+    category: "aves",
+    type: "medicinas",
+    instructions: "Complejo vitaminico para aves. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 205,
+    name: "Dolfen",
+    image: "./assets/dolfen.jpg",
+    description: "Antiinflamatorio veterinario",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Antiinflamatorio y analgesico. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 206,
+    name: "Doxiclina LH500",
+    image: "./assets/Doxiclina Lh500.jpg",
+    description: "Antibiotico Doxiciclina LH500",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Antibiotico de amplio espectro. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 207,
+    name: "Electrolitos y Aminoacidos",
+    image: "./assets/electrolitos,aminoacidos y min.jpg",
+    description: "Suplemento de electrolitos y minerales",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Rehidratante con electrolitos. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 208,
+    name: "Eritromicina Avicola",
+    image: "./assets/eritroomicina avicola.jpg",
+    description: "Antibiotico para aves",
+    category: "aves",
+    type: "medicinas",
+    instructions: "Antibiotico especifico para aves. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 209,
+    name: "Fenbendazol",
+    image: "./assets/fenbendazol.jpg",
+    description: "Desparasitante de amplio espectro",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Antiparasitario interno. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 210,
+    name: "Ivermectina Oral",
+    image: "./assets/livermectina oral.jpg",
+    description: "Antiparasitario oral",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Ivermectina de administracion oral. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 211,
+    name: "Oxitolac",
+    image: "./assets/oxitolac.jpg",
+    description: "Oxitocina veterinaria",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Oxitocina para uso veterinario. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 212,
+    name: "Selevit E",
+    image: "./assets/selevit e.jpg",
+    description: "Selenio y Vitamina E",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Suplemento de selenio y vitamina E. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 213,
+    name: "Vitamina K",
+    image: "./assets/vitamina k.jpg",
+    description: "Vitamina K inyectable",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Vitamina K para uso veterinario. Consultar etiqueta del producto para dosis exactas."
   }
 ];
 
@@ -631,33 +837,6 @@ function openProductModal(productId) {
   const modal = document.getElementById('product-modal');
   const modalContent = document.getElementById('modal-product-content');
 
-  let feedingPlanHTML = '';
-  if (product.feedingPlan && product.feedingPlan.length > 0) {
-    feedingPlanHTML = `
-      <div class="modal-feeding-plan">
-        <h4>Plan de Alimentacion</h4>
-        <table class="feeding-table">
-          <thead>
-            <tr>
-              <th>Etapa</th>
-              <th>Cantidad</th>
-              <th>Frecuencia</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${product.feedingPlan.map(plan => `
-              <tr>
-                <td>${plan.etapa}</td>
-                <td>${plan.cantidad}</td>
-                <td>${plan.frecuencia}</td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      </div>
-    `;
-  }
-
   modalContent.innerHTML = `
     <div class="modal-product-image">
       <img src="${product.image}" alt="${product.name}">
@@ -672,10 +851,8 @@ function openProductModal(productId) {
       
       <div class="modal-instructions">
         <h4>Instrucciones de Uso</h4>
-        <p>${product.instructions || 'Consultar etiqueta del producto para instrucciones detalladas.'}</p>
+        <p>${product.instructions}</p>
       </div>
-
-      ${feedingPlanHTML}
 
       <a href="https://wa.me/50582403490?text=Hola! Me interesa el producto: ${encodeURIComponent(product.name)}" target="_blank" class="modal-whatsapp-btn">
         Consultar por WhatsApp
@@ -722,7 +899,7 @@ function renderProducts(productsToRender) {
           </div>
           <h4 class="product-name">${product.name}</h4>
           <p class="product-description">${product.description}</p>
-          <span class="product-view-more">Ver instrucciones</span>
+          <span class="product-view-more">Ver detalles</span>
         </div>
       </div>
     `)
@@ -758,7 +935,6 @@ function filterProducts() {
 document.addEventListener('DOMContentLoaded', () => {
   renderProducts(productos);
 
-  // Filtro por tipo de producto
   const typeBtns = document.querySelectorAll('.type-btn');
   typeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -769,7 +945,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Filtro por animal/categoria
   const categoryBtns = document.querySelectorAll('.category-btn');
   categoryBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -780,14 +955,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Busqueda
   const searchInput = document.getElementById('search-input');
   searchInput.addEventListener('input', (e) => {
     searchTerm = e.target.value;
     filterProducts();
   });
 
-  // Cerrar modal con click fuera
   const modal = document.getElementById('product-modal');
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
@@ -795,7 +968,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Cerrar modal con tecla Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeProductModal();
