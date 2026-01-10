@@ -23,7 +23,12 @@
   </div>
 
   <div class="navbar-right">
-    <div class="nav-links">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-links" id="nav-links">
       <a href="index.html">Inicio</a>
       <a href="index.html#nosotros">Nosotros</a>
       <a href="products.html" class="active">Productos</a>
@@ -185,5 +190,25 @@
 </a>
 
 <script src="products.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+    
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+});
+</script>
 </body>
 </html>
