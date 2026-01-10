@@ -1023,6 +1023,125 @@ const productos = [
     category: "otros",
     type: "herramientas",
     instructions: "Valvula de paso tipo esfera. Control de flujo de agua."
+  },
+
+  // ========== MEDICINAS NUEVAS ==========
+  {
+    id: 238,
+    name: "Antitermico AleBet",
+    image: "./assets/antitermico-AleBet.jpg",
+    description: "Antitermico y analgesico veterinario",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Reduce fiebre y alivia dolor. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 239,
+    name: "Ascorbol",
+    image: "./assets/ascorbol.webp",
+    description: "Vitamina C veterinaria",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Suplemento de vitamina C. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 240,
+    name: "Azul Piotanico",
+    image: "./assets/azulpiotanico.webp",
+    description: "Desinfectante azul de metileno",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Antiseptico y desinfectante. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 241,
+    name: "Bronccowell",
+    image: "./assets/bronccowell.webp",
+    description: "Tratamiento respiratorio veterinario",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Para problemas respiratorios. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 242,
+    name: "Dermacalm",
+    image: "./assets/dermacalm.jpeg",
+    description: "Tratamiento dermatologico veterinario",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Para problemas de piel. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 243,
+    name: "Dermatryl",
+    image: "./assets/dermatryl.png",
+    description: "Spray dermatologico veterinario",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Tratamiento topico para heridas y piel. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 244,
+    name: "Desparasitante",
+    image: "./assets/desparasitante.jpg",
+    description: "Desparasitante de amplio espectro",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Elimina parasitos internos. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 245,
+    name: "Electrowell",
+    image: "./assets/electrowell.jpeg",
+    description: "Electrolitos veterinarios",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Rehidratante con electrolitos. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 246,
+    name: "Endal Plus",
+    image: "./assets/endalplus.jpeg",
+    description: "Desparasitante interno",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Antiparasitario de amplio espectro. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 247,
+    name: "Enrozol",
+    image: "./assets/enrozol.jpeg",
+    description: "Antibiotico veterinario",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Antibiotico de uso veterinario. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 248,
+    name: "Eriprin",
+    image: "./assets/eriprin.jpeg",
+    description: "Antibiotico eritromicina",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Antibiotico de amplio espectro. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 249,
+    name: "Fibronex",
+    image: "./assets/fibronex.png",
+    description: "Suplemento de fibra veterinario",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Suplemento digestivo. Consultar etiqueta del producto para dosis exactas."
+  },
+  {
+    id: 250,
+    name: "Fortalizador",
+    image: "./assets/fortalizador.jpeg",
+    description: "Vitaminas y minerales fortalecedores",
+    category: "otros",
+    type: "medicinas",
+    instructions: "Suplemento vitaminico fortalecedor. Consultar etiqueta del producto para dosis exactas."
   }
 ];
 
