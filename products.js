@@ -700,7 +700,7 @@ const productos = [
   },
   {
     id: 202,
-    name: "Broomexihina",
+    name: "Bromexhina",
     image: "./assets/Broomexihina.jpg",
     description: "Expectorante veterinario",
     category: "otros",
@@ -746,7 +746,7 @@ const productos = [
   {
     id: 207,
     name: "Electrolitos y Aminoacidos",
-    image: "./assets/electrolitos,aminoacidos y minerales.jpg",
+    image: "./assets/electrolitos.jpg",
     description: "Suplemento de electrolitos y minerales",
     category: "otros",
     type: "medicinas",
