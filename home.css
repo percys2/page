@@ -702,14 +702,16 @@ body {
   .about-icon-circle { width: 60px; height: 60px; }
   .about-icon-circle svg { width: 26px; height: 26px; }
   .values-section h3 { font-size: 24px; }
-  .footer-main { grid-template-columns: repeat(2, 1fr); gap: 30px; }
-  .footer-brand { grid-column: span 2; text-align: center; padding-right: 0; }
+  .footer-main { grid-template-columns: 1fr; text-align: center; gap: 20px; }
+  .footer-brand { grid-column: span 1; text-align: center; padding-right: 0; }
   .footer-logo { justify-content: center; }
   .footer-social { justify-content: center; }
   .footer-column { text-align: center; }
   .footer-column h4::after { left: 50%; transform: translateX(-50%); }
   .footer-contact-item { justify-content: center; }
   .footer-bottom-content { flex-direction: column; text-align: center; }
+  .footer-column:nth-child(2),
+  .footer-column:nth-child(3) { display: none; }
   .hero-content h1 { font-size: 40px; }
   .hero-content p { font-size: 18px; }
   .hero-image { height: 70vh; }
