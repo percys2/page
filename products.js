@@ -746,7 +746,7 @@ const productos = [
   {
     id: 207,
     name: "Electrolitos y Aminoacidos",
-    image: "./assets/electrolitos,aminoacidos y min.jpg",
+    image: "./assets/electrolitos,aminoacidos y minerales.jpg",
     description: "Suplemento de electrolitos y minerales",
     category: "otros",
     type: "medicinas",
@@ -805,6 +805,224 @@ const productos = [
     category: "otros",
     type: "medicinas",
     instructions: "Vitamina K para uso veterinario. Consultar etiqueta del producto para dosis exactas."
+  },
+
+  // ========== HERRAMIENTAS NUEVAS ==========
+  {
+    id: 214,
+    name: "Tenaza de Presion",
+    image: "./assets/tenazaddepreesion.jpeg",
+    description: "Tenaza de presion para sujecion firme",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Tenaza de presion con mordaza ajustable. Ideal para trabajos de soldadura y mecanica."
+  },
+  {
+    id: 215,
+    name: "Tenaza de Electricista",
+    image: "./assets/tenazaaddeeectricistaa.png",
+    description: "Tenaza profesional para electricistas",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Tenaza aislada para trabajos electricos. Corte y pelado de cables."
+  },
+  {
+    id: 216,
+    name: "Tenaza de Chofer",
+    image: "./assets/tenazadechofer.png",
+    description: "Tenaza multiusos tipo chofer",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Tenaza versatil para multiples usos. Agarre firme y duradero."
+  },
+  {
+    id: 217,
+    name: "Tenaza para Podar",
+    image: "./assets/tenazaparapodar.png",
+    description: "Tenaza de poda para jardineria",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Tenaza de poda con filo de acero. Ideal para ramas pequenas y medianas."
+  },
+  {
+    id: 218,
+    name: "Tenaza Finquera",
+    image: "./assets/tenzafinquera.jpg",
+    description: "Tenaza finquera para trabajo agricola",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Tenaza resistente para labores de finca. Corte de alambre y cercas."
+  },
+  {
+    id: 219,
+    name: "Tenaza Armador",
+    image: "./assets/enazarmaor.jpeg",
+    description: "Tenaza de armador para construccion",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Tenaza de armador para doblar y cortar varilla. Uso en construccion."
+  },
+  {
+    id: 220,
+    name: "Pala Cuadrada",
+    image: "./assets/palacuadrada.png",
+    description: "Pala cuadrada para construccion",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Pala cuadrada de acero. Ideal para mezclar y cargar materiales."
+  },
+  {
+    id: 221,
+    name: "Pala Redonda",
+    image: "./assets/palaredonda.webp",
+    description: "Pala redonda para excavacion",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Pala redonda para cavar y excavar. Mango ergonomico."
+  },
+  {
+    id: 222,
+    name: "Pala Mango Metalico",
+    image: "./assets/palamangometalico.webp",
+    description: "Pala con mango metalico reforzado",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Pala con mango de metal resistente. Mayor durabilidad."
+  },
+  {
+    id: 223,
+    name: "Pala Plegable",
+    image: "./assets/palaplegable.png",
+    description: "Pala plegable portatil",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Pala compacta y plegable. Facil de transportar."
+  },
+  {
+    id: 224,
+    name: "Pala Acova Hoyos",
+    image: "./assets/palaacovahoyos.jpeg",
+    description: "Pala especial para hacer hoyos",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Pala para cavar hoyos profundos. Ideal para postes y arboles."
+  },
+  {
+    id: 225,
+    name: "Piocha",
+    image: "./assets/piocha.png",
+    description: "Piocha para trabajo pesado",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Piocha de acero forjado. Para romper suelos duros."
+  },
+  {
+    id: 226,
+    name: "Rastrillo 16 Dientes",
+    image: "./assets/rastrillo16ddientes.jpg",
+    description: "Rastrillo de 16 dientes",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Rastrillo metalico de 16 dientes. Para nivelar y limpiar terrenos."
+  },
+  {
+    id: 227,
+    name: "Rastrillo Jardinero 16 Dientes",
+    image: "./assets/rastrillojardinero16ddientes.jpeg",
+    description: "Rastrillo de jardinero con 16 dientes",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Rastrillo para jardineria. Recoleccion de hojas y residuos."
+  },
+  {
+    id: 228,
+    name: "Rastrillo Uso Pesado",
+    image: "./assets/rastrillousopesado.png",
+    description: "Rastrillo de uso pesado industrial",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Rastrillo reforzado para trabajos pesados. Alta resistencia."
+  },
+  {
+    id: 229,
+    name: "Mazo de Hule",
+    image: "./assets/mazodehule.png",
+    description: "Mazo de hule para golpes suaves",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Mazo de goma para trabajos delicados. No dana superficies."
+  },
+  {
+    id: 230,
+    name: "Mini Bomba de Aire",
+    image: "./assets/minibombadeaire.png",
+    description: "Mini bomba de aire portatil",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Bomba de aire compacta. Ideal para bicicletas y balones."
+  },
+  {
+    id: 231,
+    name: "Pistola Plastica Jardineria",
+    image: "./assets/pistolaaplaticajrdineria.png",
+    description: "Pistola de riego para jardineria",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Pistola de riego con multiples patrones. Para manguera de jardin."
+  },
+  {
+    id: 232,
+    name: "Porta Herramientas",
+    image: "./assets/portaaherramientas.png",
+    description: "Porta herramientas de cinturon",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Porta herramientas para cinturon. Organiza tus herramientas."
+  },
+  {
+    id: 233,
+    name: "Portalampara",
+    image: "./assets/portalampara.jpeg",
+    description: "Portalampara electrico",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Portalampara para instalacion electrica. Facil instalacion."
+  },
+  {
+    id: 234,
+    name: "Regleta Electrica",
+    image: "./assets/regleta.webp",
+    description: "Regleta electrica multicontacto",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Regleta con multiples tomas. Proteccion contra sobrecarga."
+  },
+  {
+    id: 235,
+    name: "Regleta con USB",
+    image: "./assets/regletaconusb.jpg",
+    description: "Regleta electrica con puertos USB",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Regleta con tomas electricas y puertos USB integrados."
+  },
+  {
+    id: 236,
+    name: "Rociadora de Presion",
+    image: "./assets/rociadoradepresion.jpeg",
+    description: "Rociadora de presion manual",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Rociadora de presion para aplicacion de liquidos. Uso agricola."
+  },
+  {
+    id: 237,
+    name: "Valvula Esfera de Laton",
+    image: "./assets/valvulaaesferadedlaton.jpeg",
+    description: "Valvula de esfera de laton",
+    category: "otros",
+    type: "herramientas",
+    instructions: "Valvula de paso tipo esfera. Control de flujo de agua."
   }
 ];
 

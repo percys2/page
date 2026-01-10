@@ -8,7 +8,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
   background-color: #f5f7f6;
   color: #333;
   line-height: 1.6;
@@ -479,6 +479,190 @@ body {
 }
 
 /* =========================
+   UBICACIONES SECTION
+========================= */
+.locations-section {
+  padding: 80px 20px;
+  background: #ffffff;
+}
+
+.locations-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.locations-container h2 {
+  font-size: 36px;
+  color: #1e8f4f;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.locations-intro {
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 50px;
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.location-card {
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(30, 143, 79, 0.1);
+  transition: all 0.4s ease;
+}
+
+.location-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(30, 143, 79, 0.15);
+  border-color: rgba(30, 143, 79, 0.3);
+}
+
+.location-map {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+}
+
+.location-map::before {
+  content: "Sucursal";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #1e8f4f;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 10;
+  letter-spacing: 0.5px;
+}
+
+.location-map iframe {
+  display: block;
+  width: 100%;
+  height: 220px;
+  border: none;
+  filter: saturate(0.9);
+  transition: filter 0.3s ease;
+}
+
+.location-card:hover .location-map iframe {
+  filter: saturate(1);
+}
+
+.location-info {
+  padding: 25px 25px 30px;
+  text-align: center;
+}
+
+.location-info h3 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.location-info h3::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #1e8f4f;
+  border-radius: 50%;
+}
+
+.location-info p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.location-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: #1e8f4f;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.location-btn:hover {
+  background: #15703d;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(30, 143, 79, 0.3);
+}
+
+.location-btn::after {
+  content: "→";
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.location-btn:hover::after {
+  transform: translateX(4px);
+}
+
+/* =========================
+   FLOATING WHATSAPP BUTTON
+========================= */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.whatsapp-float:hover {
+  background: #128C7E;
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-float svg {
+  fill: white;
+}
+
+/* =========================
+   SVG ICONS
+========================= */
+.social-link svg {
+  color: white;
+}
+
+.contact-icon svg,
+.detail-icon svg {
+  color: white;
+}
+
+/* =========================
    RESPONSIVE
 ========================= */
 @media (max-width: 1024px) {
@@ -518,4 +702,14 @@ body {
   .footer-contact-item { justify-content: center; }
   .footer-bottom-content { flex-direction: column; text-align: center; }
   .contact-hero h1 { font-size: 32px; }
+  
+  /* Locations responsive */
+  .locations-section { padding: 50px 15px; }
+  .locations-container h2 { font-size: 28px; }
+  .locations-grid { grid-template-columns: 1fr; gap: 25px; }
+  .location-card { border-radius: 16px; }
+  .location-map { border-radius: 16px 16px 0 0; }
+  .location-map iframe { height: 180px; }
+  .location-info { padding: 20px 20px 25px; }
+  .location-info h3 { font-size: 20px; }
 }

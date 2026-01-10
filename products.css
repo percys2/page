@@ -8,7 +8,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
   background-color: #f5f7f6;
   color: #333;
   line-height: 1.6;
@@ -749,6 +749,47 @@ body {
 }
 
 .footer-bottom-links a:hover {
+  color: #1e8f4f;
+}
+
+/* =========================
+   FLOATING WHATSAPP BUTTON
+========================= */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.whatsapp-float:hover {
+  background: #128C7E;
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-float svg {
+  fill: white;
+}
+
+/* =========================
+   SVG ICONS
+========================= */
+.social-link svg {
+  color: white;
+}
+
+.contact-icon svg {
   color: #1e8f4f;
 }
 
