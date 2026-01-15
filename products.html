@@ -52,7 +52,12 @@
     
     <!-- SIDEBAR FILTROS -->
     <aside class="filters-sidebar">
+      <button class="filters-toggle" id="filters-toggle">
+        <span class="filters-toggle-text">Filtros</span>
+        <svg class="filters-toggle-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
       
+      <div class="filters-content" id="filters-content">
       <div class="filter-group">
         <h4>Tipo de Producto</h4>
         <div class="filter-buttons">
@@ -75,6 +80,7 @@
           <button class="filter-btn category-btn" data-category="equinos">Equinos</button>
           <button class="filter-btn category-btn" data-category="otros">Otros</button>
         </div>
+      </div>
       </div>
 
     </aside>

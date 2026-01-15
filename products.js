@@ -1310,4 +1310,14 @@ document.addEventListener('DOMContentLoaded', () => {
       closeProductModal();
     }
   });
+
+  const filtersToggle = document.getElementById('filters-toggle');
+  const filtersContent = document.getElementById('filters-content');
+  
+  if (filtersToggle && filtersContent) {
+    filtersToggle.addEventListener('click', () => {
+      filtersToggle.classList.toggle('active');
+      filtersContent.classList.toggle('active');
+    });
+  }
 });
