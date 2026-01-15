@@ -1255,12 +1255,46 @@ body {
   transform: translateY(-2px);
 }
 
+/* =========================
+   PRODUCT ACTIONS (FAVORITES + ADD TO CART)
+========================= */
+.product-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.favorite-btn {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: #666;
+}
+
+.favorite-btn:hover {
+  border-color: #ff6b35;
+  color: #ff6b35;
+}
+
+.favorite-btn.active {
+  background: #fff5f2;
+  border-color: #ff6b35;
+  color: #ff6b35;
+}
+
 .add-to-cart-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  width: 100%;
+  flex: 1;
   padding: 10px 15px;
   background: #1e8f4f;
   color: white;
@@ -1269,12 +1303,36 @@ body {
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
-  margin-top: 10px;
   transition: all 0.2s ease;
 }
 
 .add-to-cart-btn:hover {
   background: #176d3d;
+}
+
+.add-to-cart-btn:active {
+  transform: scale(0.95);
+}
+
+@keyframes cartPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.cart-btn.pulse {
+  animation: cartPulse 0.3s ease;
+}
+
+@keyframes addedFeedback {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); background: #28a745; }
+  100% { transform: scale(1); background: #28a745; }
+}
+
+.add-to-cart-btn.added {
+  animation: addedFeedback 0.3s ease;
+  background: #28a745;
 }
 
 .add-to-cart-btn.added {
