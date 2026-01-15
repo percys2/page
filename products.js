@@ -512,7 +512,7 @@ const productos = [
     instructions: "Alimento premium multiproposito. Consultar etiqueta del producto para dosis exactas."
   },
   {
-    id: 36,
+    id: 37,
     name: "Neopigg 3",
     image: "./assets/neopigg3.png",
     description: "Alimento balanceado premium",
