@@ -511,6 +511,16 @@ const productos = [
     type: "alimentos",
     instructions: "Alimento premium multiproposito. Consultar etiqueta del producto para dosis exactas."
   },
+  {
+    id: 36,
+    name: "Neopigg 3",
+    image: "./assets/neopigg3.png",
+    description: "Alimento balanceado premium",
+    category: "otros",
+    type: "alimentos",
+    instructions: "Alimento premium para lechones en crecimiento. Consultar etiqueta del producto para dosis exactas."
+  },
+
 
   // ========== HERRAMIENTAS ==========
   {
