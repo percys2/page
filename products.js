@@ -413,7 +413,7 @@ const productos = [
   {
     id: 25,
     name: "Neopigg 2",
-    image: "./assets/neopigg2.png",
+    image: "./assets/neopigg2.jpg",
     description: "Alimento para cerdos etapa 2",
     category: "cerdos",
     type: "alimentos",
@@ -498,7 +498,7 @@ const productos = [
     name: "Forrajina",
     image: "./assets/forrajina.png",
     description: "Alimento forrajero para ganado",
-    category: "otros",
+    category: "equinos",
     type: "alimentos",
     instructions: "Suplemento forrajero para ganado. Consultar etiqueta del producto para dosis exactas."
   },
@@ -507,7 +507,7 @@ const productos = [
     name: "Puralean",
     image: "./assets/puralean.jpg",
     description: "Alimento balanceado premium",
-    category: "otros",
+    category: "cerdos",
     type: "alimentos",
     instructions: "Alimento premium multiproposito. Consultar etiqueta del producto para dosis exactas."
   },
@@ -516,7 +516,7 @@ const productos = [
     name: "Neopigg 3",
     image: "./assets/neopigg3.png",
     description: "Alimento balanceado premium",
-    category: "otros",
+    category: "cerdos",
     type: "alimentos",
     instructions: "Alimento premium para lechones en crecimiento. Consultar etiqueta del producto para dosis exactas."
   },
