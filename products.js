@@ -1,4 +1,42 @@
 let cart = JSON.parse(localStorage.getItem('agrocentro_cart')) || [];
+let favorites = JSON.parse(localStorage.getItem('agrocentro_favorites')) || [];
+let currentSort = 'default';
+let currentView = 'grid';
+
+function saveFavorites() {
+  localStorage.setItem('agrocentro_favorites', JSON.stringify(favorites));
+  updateFavoriteButtons();
+}
+
+function toggleFavorite(productId, event) {
+  if (event) {
+    event.stopPropagation();
+  }
+  const index = favorites.indexOf(productId);
+  if (index > -1) {
+    favorites.splice(index, 1);
+  } else {
+    favorites.push(productId);
+  }
+  saveFavorites();
+}
+
+function isFavorite(productId) {
+  return favorites.includes(productId);
+}
+
+function updateFavoriteButtons() {
+  document.querySelectorAll('.favorite-btn').forEach(btn => {
+    const productId = parseInt(btn.dataset.favorite);
+    if (isFavorite(productId)) {
+      btn.classList.add('active');
+      btn.querySelector('svg').setAttribute('fill', '#ff6b35');
+    } else {
+      btn.classList.remove('active');
+      btn.querySelector('svg').setAttribute('fill', 'none');
+    }
+  });
+}
 
 function saveCart() {
   localStorage.setItem('agrocentro_cart', JSON.stringify(cart));
@@ -38,6 +76,12 @@ function addToCart(productId, event) {
     });
   }
   saveCart();
+  
+  const cartBtn = document.getElementById('cart-btn');
+  if (cartBtn) {
+    cartBtn.classList.add('pulse');
+    setTimeout(() => cartBtn.classList.remove('pulse'), 300);
+  }
   
   const btn = document.querySelector(`[data-add-cart="${productId}"]`);
   if (btn) {
@@ -1360,7 +1404,7 @@ function renderProducts(productsToRender) {
     .map(product => `
       <div class="product-card">
         <div class="product-image" onclick="openProductModal(${product.id})">
-          <img src="${product.image}" alt="${product.name}">
+          <img src="${product.image}" alt="${product.name}" loading="lazy">
         </div>
         <div class="product-info">
           <div class="product-tags">
@@ -1369,10 +1413,15 @@ function renderProducts(productsToRender) {
           </div>
           <h4 class="product-name" onclick="openProductModal(${product.id})">${product.name}</h4>
           <p class="product-description">${product.description}</p>
-          <button class="add-to-cart-btn" data-add-cart="${product.id}" onclick="addToCart(${product.id}, event)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-            Agregar
-          </button>
+          <div class="product-actions">
+            <button class="favorite-btn" data-favorite="${product.id}" onclick="toggleFavorite(${product.id}, event)" aria-label="Agregar a favoritos">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </button>
+            <button class="add-to-cart-btn" data-add-cart="${product.id}" onclick="addToCart(${product.id}, event)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+              Agregar
+            </button>
+          </div>
         </div>
       </div>
     `)
@@ -1382,6 +1431,72 @@ function renderProducts(productsToRender) {
 let currentCategory = 'all';
 let currentType = 'all';
 let searchTerm = '';
+let currentSortOrder = 'default';
+let currentViewMode = 'grid';
+let currentPage = 1;
+const productsPerPage = 12;
+let filteredProducts = [];
+
+function sortProducts(products, order) {
+  const sorted = [...products];
+  switch(order) {
+    case 'az':
+      return sorted.sort((a, b) => a.name.localeCompare(b.name));
+    case 'za':
+      return sorted.sort((a, b) => b.name.localeCompare(a.name));
+    case 'recent':
+      return sorted.sort((a, b) => b.id - a.id);
+    default:
+      return sorted;
+  }
+}
+
+function renderPagination(totalProducts) {
+  const paginationContainer = document.getElementById('pagination');
+  if (!paginationContainer) return;
+  
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
+  
+  if (totalPages <= 1) {
+    paginationContainer.innerHTML = '';
+    return;
+  }
+  
+  let html = '';
+  
+  html += `<button class="pagination-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>Anterior</button>`;
+  
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+      html += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+    } else if (i === currentPage - 2 || i === currentPage + 2) {
+      html += `<span class="pagination-dots">...</span>`;
+    }
+  }
+  
+  html += `<button class="pagination-btn" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Siguiente</button>`;
+  
+  paginationContainer.innerHTML = html;
+}
+
+function goToPage(page) {
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  if (page < 1 || page > totalPages) return;
+  currentPage = page;
+  renderProductsWithPagination();
+  window.scrollTo({ top: document.querySelector('.products-section').offsetTop - 100, behavior: 'smooth' });
+}
+
+function renderProductsWithPagination() {
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const productsToShow = filteredProducts.slice(startIndex, endIndex);
+  renderProducts(productsToShow);
+  renderPagination(filteredProducts.length);
+  
+  const countEl = document.getElementById('products-count');
+  countEl.textContent = `Mostrando ${startIndex + 1}-${Math.min(endIndex, filteredProducts.length)} de ${filteredProducts.length} producto${filteredProducts.length !== 1 ? 's' : ''}`;
+}
 
 function filterProducts() {
   let filtered = productos;
@@ -1402,11 +1517,17 @@ function filterProducts() {
     );
   }
 
-  renderProducts(filtered);
+  filtered = sortProducts(filtered, currentSortOrder);
+  filteredProducts = filtered;
+  currentPage = 1;
+  renderProductsWithPagination();
+  updateFavoriteButtons();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderProducts(productos);
+  filteredProducts = productos;
+  renderProductsWithPagination();
+  updateFavoriteButtons();
 
   const typeBtns = document.querySelectorAll('.type-btn');
   typeBtns.forEach(btn => {
@@ -1457,6 +1578,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Sort functionality
+  const sortSelect = document.getElementById('sort-select');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', (e) => {
+      currentSortOrder = e.target.value;
+      filterProducts();
+    });
+  }
+
+  // View toggle functionality
+  const viewBtns = document.querySelectorAll('.view-btn');
+  const productsGrid = document.getElementById('products-grid');
+  viewBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      viewBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentViewMode = btn.dataset.view;
+      if (currentViewMode === 'list') {
+        productsGrid.classList.add('list-view');
+      } else {
+        productsGrid.classList.remove('list-view');
+      }
+    });
+  });
+
   // Cart functionality
   updateCartCount();
   
@@ -1487,5 +1633,56 @@ document.addEventListener('DOMContentLoaded', () => {
         closeCart();
       }
     });
+  }
+
+  // Carousel functionality
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.carousel-dot');
+  const prevBtn = document.querySelector('.carousel-prev');
+  const nextBtn = document.querySelector('.carousel-next');
+  let currentSlide = 0;
+  let carouselInterval;
+
+  function showSlide(index) {
+    if (index >= slides.length) index = 0;
+    if (index < 0) index = slides.length - 1;
+    
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+    currentSlide = index;
+  }
+
+  function nextSlide() {
+    showSlide(currentSlide + 1);
+  }
+
+  function prevSlide() {
+    showSlide(currentSlide - 1);
+  }
+
+  function startCarousel() {
+    carouselInterval = setInterval(nextSlide, 5000);
+  }
+
+  function stopCarousel() {
+    clearInterval(carouselInterval);
+  }
+
+  if (slides.length > 0) {
+    if (prevBtn) prevBtn.addEventListener('click', () => { stopCarousel(); prevSlide(); startCarousel(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { stopCarousel(); nextSlide(); startCarousel(); });
+    
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        stopCarousel();
+        showSlide(index);
+        startCarousel();
+      });
+    });
+
+    startCarousel();
   }
 });

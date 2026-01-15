@@ -3,13 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Catalogo de productos AgroCentro Nica - Alimentos, medicinas, herramientas y accesorios para el sector agropecuario.">
+  <meta name="description" content="Catalogo de productos AgroCentro Nica - Alimentos, medicinas, herramientas y accesorios para el sector agropecuario en Nicaragua.">
+  <meta name="keywords" content="alimentos para animales, productos agropecuarios, Nicaragua, aves, perros, gatos, cerdos, equinos, medicinas veterinarias">
+  <meta name="author" content="AgroCentro Nica">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Productos - AgroCentro Nica">
+  <meta property="og:description" content="Encuentra alimentos, medicinas, herramientas y accesorios para el sector agropecuario.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://agrocentronica.com/products.html">
+  <meta property="og:image" content="./assets/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Productos - AgroCentro Nica">
+  <meta name="twitter:description" content="Catalogo de productos agropecuarios en Nicaragua.">
+  <link rel="canonical" href="https://agrocentronica.com/products.html">
   <title>Productos - AgroCentro Nica</title>
   <link rel="icon" type="image/png" href="./assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="products.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "AgroCentro Nica",
+    "description": "Tienda de productos agropecuarios en Nicaragua",
+    "url": "https://agrocentronica.com",
+    "logo": "./assets/logo.png",
+    "telephone": "+50582403490",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "NI"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Productos Agropecuarios",
+      "itemListElement": [
+        {
+          "@type": "OfferCatalog",
+          "name": "Alimentos para Animales",
+          "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Alimentos para Aves"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Alimentos para Perros"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Alimentos para Gatos"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Alimentos para Cerdos"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Alimentos para Equinos"}}
+          ]
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "Medicinas Veterinarias"
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "Herramientas Agropecuarias"
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "Accesorios"
+        }
+      ]
+    }
+  }
+  </script>
 </head>
 
 <body>
@@ -41,10 +97,52 @@
   </div>
 </nav>
 
-<!-- HERO PRODUCTOS CON SEARCH -->
-<section class="products-hero">
-  <h1>Nuestros Productos</h1>
-  <p>Encuentra todo lo que necesitas para tus animales</p>
+<!-- HERO CAROUSEL -->
+<section class="hero-carousel">
+  <div class="carousel-container">
+    <div class="carousel-slides">
+      <div class="carousel-slide active" style="background-image: url('./assets/hero.jpg');">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <h1>Nuestros Productos</h1>
+          <p>Encuentra todo lo que necesitas para tus animales</p>
+        </div>
+      </div>
+      <div class="carousel-slide" style="background-image: url('./assets/hero2.png');">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <h1>Calidad Garantizada</h1>
+          <p>Los mejores productos para el sector agropecuario</p>
+        </div>
+      </div>
+      <div class="carousel-slide" style="background-image: url('./assets/hero3.png');">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <h1>Variedad de Productos</h1>
+          <p>Alimentos, medicinas y herramientas</p>
+        </div>
+      </div>
+      <div class="carousel-slide" style="background-image: url('./assets/hero4.png');">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <h1>Atencion Personalizada</h1>
+          <p>Estamos para servirte</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-btn carousel-prev" aria-label="Anterior">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="carousel-btn carousel-next" aria-label="Siguiente">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <div class="carousel-dots">
+      <button class="carousel-dot active" data-slide="0"></button>
+      <button class="carousel-dot" data-slide="1"></button>
+      <button class="carousel-dot" data-slide="2"></button>
+      <button class="carousel-dot" data-slide="3"></button>
+    </div>
+  </div>
   <div class="hero-search">
     <input type="text" id="search-input" placeholder="Buscar producto...">
   </div>
@@ -91,8 +189,29 @@
 
     <!-- PRODUCTOS -->
     <main class="products-main">
-      <p id="products-count" class="products-count">Mostrando 0 productos</p>
+      <div class="products-toolbar">
+        <p id="products-count" class="products-count">Mostrando 0 productos</p>
+        <div class="toolbar-controls">
+          <div class="sort-control">
+            <select id="sort-select" class="sort-select">
+              <option value="default">Ordenar por</option>
+              <option value="az">A - Z</option>
+              <option value="za">Z - A</option>
+              <option value="recent">Mas recientes</option>
+            </select>
+          </div>
+          <div class="view-toggle">
+            <button class="view-btn active" data-view="grid" aria-label="Vista cuadricula">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+            </button>
+            <button class="view-btn" data-view="list" aria-label="Vista lista">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="products-grid" id="products-grid"></div>
+      <div class="pagination" id="pagination"></div>
     </main>
 
   </div>
