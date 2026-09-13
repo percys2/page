@@ -1140,6 +1140,12 @@
     elements.drawerOverlay.addEventListener("click", closeCart);
     elements.continueShopping.addEventListener("click", closeCart);
     elements.orderForm.addEventListener("submit", sendOrder);
+    // Incluye el botón de envío situado fuera del formulario mediante form="order-form".
+    Array.from(elements.orderForm.elements).forEach((control) => {
+      if (control.hasAttribute("data-enable-with-js")) control.disabled = false;
+    });
+    const formFallback = elements.orderForm.querySelector("[data-form-fallback]");
+    if (formFallback) formFallback.hidden = true;
     elements.modalClose.addEventListener("click", closeProductModal);
     elements.productModal.addEventListener("click", (event) => {
       if (event.target === elements.productModal) closeProductModal();

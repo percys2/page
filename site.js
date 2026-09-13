@@ -188,6 +188,12 @@
 
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`, "_blank", "noopener,noreferrer");
     });
+    // Habilitar datos personales solo después de impedir el envío HTML nativo.
+    Array.from(form.elements).forEach((control) => {
+      if (control.hasAttribute("data-enable-with-js")) control.disabled = false;
+    });
+    const fallback = form.querySelector("[data-form-fallback]");
+    if (fallback) fallback.hidden = true;
   }
 
   document.addEventListener("DOMContentLoaded", () => {

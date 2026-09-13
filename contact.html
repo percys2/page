@@ -110,13 +110,15 @@
 
         <section class="contact-form-panel" aria-labelledby="form-title">
           <h2 id="form-title">Preparar una consulta</h2>
-          <form id="contact-form" class="contact-form" novalidate>
-            <label><span>Nombre *</span><input name="name" type="text" autocomplete="name" required></label>
-            <label><span>Teléfono *</span><input name="phone" type="tel" autocomplete="tel" required></label>
-            <label><span>Consulta</span><select name="topic"><option>Producto o precio</option><option>Pedido y delivery</option><option>Asesoría</option><option>Otro</option></select></label>
-            <label class="full"><span>Mensaje *</span><textarea name="message" rows="5" placeholder="Producto que necesitás y tu ubicación" required></textarea></label>
+          <form id="contact-form" class="contact-form" novalidate method="post" action="contact.html">
+            <label><span>Nombre *</span><input disabled data-enable-with-js name="name" type="text" autocomplete="name" required></label>
+            <label><span>Teléfono *</span><input disabled data-enable-with-js name="phone" type="tel" autocomplete="tel" required></label>
+            <label><span>Consulta</span><select disabled data-enable-with-js name="topic"><option>Producto o precio</option><option>Pedido y delivery</option><option>Asesoría</option><option>Otro</option></select></label>
+            <label class="full"><span>Mensaje *</span><textarea disabled data-enable-with-js name="message" rows="5" placeholder="Producto que necesitás y tu ubicación" required></textarea></label>
             <p id="contact-form-message" class="form-message full" role="alert" hidden></p>
-            <button class="full" type="submit">Continuar en WhatsApp</button>
+            <button disabled data-enable-with-js class="full" type="submit">Continuar en WhatsApp</button>
+
+            <p class="full" data-form-fallback>Si el formulario no está disponible, <a href="https://wa.me/50582403490" target="_blank" rel="noopener noreferrer">escribinos por WhatsApp</a>.</p>
           </form>
         </section>
       </div>
@@ -154,6 +156,6 @@
   <div class="shell footer-bottom"><p>© 2026 AgroCentro Nica</p><a href="#page-top">Volver arriba ↑</a></div>
 </footer>
 
-  <script src="site.js?v=49" defer></script>
+  <script src="site.js?v=51" defer></script>
 </body>
 </html>

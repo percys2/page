@@ -260,7 +260,7 @@
         <button id="continue-shopping" type="button">Ver productos</button>
       </div>
 
-      <form class="order-form" id="order-form" novalidate>
+      <form class="order-form" id="order-form" novalidate method="post" action="products.html">
         <div class="order-form-heading">
           <span>Datos para atenderte</span>
           <small>Los campos con * son obligatorios</small>
@@ -268,16 +268,16 @@
         <div class="field-row">
           <label class="field">
             <span>Nombre *</span>
-            <input id="customer-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required>
+            <input disabled data-enable-with-js id="customer-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required>
           </label>
           <label class="field">
             <span>Teléfono *</span>
-            <input id="customer-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="8888 8888" required>
+            <input disabled data-enable-with-js id="customer-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="8888 8888" required>
           </label>
         </div>
         <label class="field">
           <span>¿Cómo querés recibirlo? *</span>
-          <select id="delivery-method" name="delivery" required>
+          <select disabled data-enable-with-js id="delivery-method" name="delivery" required>
             <option value="">Seleccioná una opción</option>
             <option value="Retiro en Diriomo">Retiro en Diriomo</option>
             <option value="Retiro en Masatepe">Retiro en Masatepe</option>
@@ -287,13 +287,15 @@
         </label>
         <label class="field">
           <span>Municipio, barrio o comunidad</span>
-          <input id="customer-location" name="location" type="text" autocomplete="address-level2" placeholder="Ej. Diriomo, barrio La Parroquia">
+          <input disabled data-enable-with-js id="customer-location" name="location" type="text" autocomplete="address-level2" placeholder="Ej. Diriomo, barrio La Parroquia">
         </label>
         <label class="field">
           <span>Notas del pedido</span>
-          <textarea id="order-notes" name="notes" rows="3" placeholder="Presentación, referencia de entrega u otra indicación"></textarea>
+          <textarea disabled data-enable-with-js id="order-notes" name="notes" rows="3" placeholder="Presentación, referencia de entrega u otra indicación"></textarea>
         </label>
         <p class="form-error" id="form-error" role="alert" hidden>Completá tu nombre, teléfono y forma de entrega.</p>
+
+        <p data-form-fallback>Si el formulario no está disponible, <a href="https://wa.me/50582403490" target="_blank" rel="noopener noreferrer">escribinos por WhatsApp</a>.</p>
       </form>
     </div>
 
@@ -303,7 +305,7 @@
         <strong id="order-total-items">0</strong>
       </div>
       <p>Revisá y enviá tu lista en WhatsApp. Te confirmamos disponibilidad, entrega y total antes de preparar el pedido.</p>
-      <button class="send-order" id="send-order" type="submit" form="order-form">
+      <button disabled data-enable-with-js class="send-order" id="send-order" type="submit" form="order-form">
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 11.9 11.9 0 0 0 1.8 17.8L.1 24l6.3-1.6a12 12 0 0 0 5.7 1.4A11.9 11.9 0 0 0 24 11.9c0-3.2-1.2-6.2-3.5-8.4ZM12.1 21.8a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.7-.2-.4A9.9 9.9 0 1 1 12.1 21.8Zm5.4-7.4c-.3-.1-1.8-.9-2-.9-.3-.1-.5-.2-.7.1l-.9 1.2c-.2.2-.4.2-.7.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2.1-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.5 1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4Z"/></svg>
         Continuar por WhatsApp
       </button>
@@ -331,6 +333,6 @@
   <script src="responsive-images.js?v=49" defer></script>
   <script src="veterinary-data.js?v=50" defer></script>
   <script src="catalog-model.js?v=50" defer></script>
-  <script src="store.js?v=54" defer></script>
+  <script src="store.js?v=55" defer></script>
 </body>
 </html>
