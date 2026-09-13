@@ -36,7 +36,7 @@
   <meta property="og:image" content="https://www.agrocentronica.com/assets/logo.png">
   <meta name="twitter:card" content="summary">
   <link rel="canonical" href="https://www.agrocentronica.com/products.html">
-  <link rel="icon" type="image/png" href="./assets/logo.png">
+  <link rel="icon" type="image/png" href="./assets/logo-brote-primero.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -61,9 +61,11 @@
     "address": {"@type": "PostalAddress", "addressCountry": "NI"}
   }
   </script>
+  <link rel="stylesheet" href="brand-preview.css?v=44">
+  <link rel="stylesheet" href="visual-polish.css?v=45">
 </head>
 
-<body class="store-page">
+<body class="store-page" id="page-top">
   <div class="agro-splash" id="agrocentro-splash" role="status" aria-label="Cargando AgroCentro Nica" aria-live="polite">
     <div class="agro-splash__identity" aria-hidden="true">
       <svg class="agro-splash__symbol" viewBox="0 0 800 757" width="800" height="757" xmlns="http://www.w3.org/2000/svg" focusable="false">
@@ -99,10 +101,7 @@
 
   <header class="site-header">
     <div class="shell header-main">
-      <a class="brand" href="index.html">
-        <img src="./assets/logo.png" alt="AgroCentro Nica" width="64" height="56">
-        <span><strong>AgroCentro Nica</strong><small>Diriomo · Masatepe</small></span>
-      </a>
+      <a class="brand brand-first" href="index.html" aria-label="AgroCentro Nica, inicio"><span class="brand-art"><img src="./assets/logo-brote-primero.png" alt="AgroCentro Nica" width="1774" height="887" fetchpriority="high"></span></a>
       <form class="header-search" action="products.html" method="get" role="search">
         <label class="sr-only" for="site-search">Buscar productos</label>
         <input id="site-search" name="q" type="search" placeholder="Buscar alimento, medicina o herramienta">
@@ -128,10 +127,7 @@
   <main>
     <section class="store-heading" aria-labelledby="store-title">
       <div class="shell">
-        <p class="breadcrumb">Inicio / Todos los productos</p>
-        <h1 id="store-title">Encontrá tu producto</h1>
-        <p>Buscá por nombre, animal o etapa y armá tu pedido. Confirmamos precio y disponibilidad por WhatsApp.</p>
-        <p><a class="help-link" href="guia-de-uso.html">¿Tenés dudas sobre el uso? Consultá nuestra guía →</a></p>
+        <h1 id="store-title">Catálogo</h1>
       </div>
     </section>
 
@@ -139,20 +135,16 @@
       <div class="shell search-panel">
         <label class="search-box" for="search-input">
           <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
-          <input id="search-input" type="search" autocomplete="off" placeholder="¿Qué producto buscás? Ej. Engordina, ivermectina, machete…">
+          <input id="search-input" type="search" autocomplete="off" placeholder="Buscar productos">
           <button class="search-clear" id="search-clear" type="button" aria-label="Limpiar búsqueda">×</button>
         </label>
-        <a class="help-link" href="https://wa.me/50582403490?text=Hola%2C%20no%20encuentro%20el%20producto%20que%20busco" target="_blank" rel="noopener noreferrer">¿No lo encontrás? Preguntanos</a>
       </div>
     </section>
 
     <section class="catalog-section" id="catalogo" aria-labelledby="catalog-title">
       <div class="shell">
         <div class="catalog-heading">
-          <div>
-            <p class="eyebrow">Catálogo</p>
-            <h2 id="catalog-title">Nuestro catálogo</h2>
-          </div>
+          <h2 id="catalog-title" class="sr-only">Productos</h2>
           <label class="sort-control" for="sort-select">
             <span>Ordenar</span>
             <select id="sort-select">
@@ -236,60 +228,25 @@
         </div>
       </div>
     </section>
-
-    <section class="marketing-callout" aria-labelledby="marketing-callout-title">
-      <div class="shell marketing-callout-inner">
-        <div>
-          <p class="marketing-callout-kicker">Atención para tu granja</p>
-          <h2 id="marketing-callout-title">¿Vas a iniciar un lote o necesitás reponer productos?</h2>
-          <p class="marketing-callout-copy">Contanos qué animales tenés y qué necesitás. Te ayudamos a elegir los productos y a organizar tu pedido.</p>
-        </div>
-        <div class="marketing-callout-actions">
-          <a class="marketing-callout-primary" href="https://wa.me/50582403490?text=Hola%2C%20AgroCentro%20Nica.%20Quiero%20consultar%20productos%20para%20mi%20granja." target="_blank" rel="noopener noreferrer">Consultar por WhatsApp</a>
-          <a class="marketing-callout-secondary" href="guia-de-uso.html">Ver guía de alimentos</a>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer class="site-footer footer-renewed">
-    <div class="shell">
-      <div class="footer-intro">
-        <div class="footer-identity">
-          <a href="index.html" aria-label="AgroCentro Nica, inicio"><img src="./assets/logo.png" alt="" width="58" height="52" loading="lazy"></a>
-          <div><strong>AgroCentro Nica</strong><p>Para el trabajo de cada día en tu granja.</p></div>
-        </div>
-        <p class="footer-description">Alimentos balanceados, productos veterinarios y herramientas, con atención directa para ayudarte a elegir.</p>
-      </div>
-      <div class="footer-columns">
-        <nav aria-labelledby="footer-products-title">
-          <h2 id="footer-products-title">Encontrá lo que buscás</h2>
-          <a href="products.html?type=alimentos">Alimentos balanceados</a>
-          <a href="products.html">Todos los productos</a>
-          <a href="guia-de-uso.html">Guía y preguntas frecuentes</a>
-        </nav>
-        <div>
-          <h2>Retiro y entrega</h2>
-          <dl class="footer-places">
-            <div><dt><a href="contact.html#locations-title">Diriomo</a></dt><dd>Granada</dd></div>
-            <div><dt><a href="contact.html#locations-title">Masatepe</a></dt><dd>Masaya</dd></div>
-            <div><dt>¿Necesitás entrega?</dt><dd>Consultanos cobertura y costo para tu ubicación.</dd></div>
-          </dl>
-        </div>
-        <div class="footer-contact">
-          <h2>Hablemos de tu pedido</h2>
-          <a class="footer-phone" href="tel:+50582403490">+505 8240 3490</a>
-          <a href="mailto:percyscastillo2013@outlook.com">percyscastillo2013@outlook.com</a>
-          <a href="products.html?cart=open">Revisar mi pedido</a>
-          <a href="contact.html">Contacto y sucursales</a>
-        </div>
-      </div>
-      <div class="footer-end">
-        <p>Te confirmamos disponibilidad, precios y total antes de preparar tu pedido.</p>
-        <p>© 2026 AgroCentro Nica · Diriomo y Masatepe</p>
+  <footer class="footer-first" aria-label="Pie de página de AgroCentro Nica">
+  <div class="shell footer-content">
+    <div class="footer-explore">
+      <a class="footer-whatsapp" href="https://wa.me/50582403490?text=Hola%2C%20quiero%20consultar%20precios%20y%20disponibilidad" target="_blank" rel="noopener noreferrer">WhatsApp · 8240 3490</a>
+      <nav class="footer-navigation" aria-label="Enlaces del pie de página"><a href="products.html">Catálogo</a><a href="guia-de-uso.html">Guía de uso</a><a href="contact.html">Contacto</a></nav>
+    </div>
+    <div>
+      <h3>Sucursales</h3>
+      <div class="footer-branches">
+        <a class="footer-branch" href="contact.html#sucursal-diriomo"><span><strong>Diriomo</strong><small>Granada</small></span><span aria-hidden="true">↗</span></a>
+        <a class="footer-branch" href="contact.html#sucursal-masatepe"><span><strong>Masatepe</strong><small>Masaya</small></span><span aria-hidden="true">↗</span></a>
       </div>
     </div>
-  </footer>
+  </div>
+  <div class="shell footer-bottom"><p>© 2026 AgroCentro Nica</p><a href="#page-top">Volver arriba ↑</a></div>
+</footer>
+
 
   <div class="drawer-overlay" id="drawer-overlay" hidden></div>
   <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true" inert>
@@ -382,6 +339,6 @@
   <script src="feed-guides-v12.js?v=31"></script>
   <script src="catalog-model.js?v=32"></script>
   <script src="products.js?v=30"></script>
-  <script src="store.js?v=38"></script>
+  <script src="store.js?v=44"></script>
 </body>
 </html>

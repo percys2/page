@@ -26,7 +26,7 @@
   </script>
   <meta name="description" content="Catálogo de AgroCentro Nica: alimentos balanceados, medicina veterinaria y herramientas. Pedidos por WhatsApp.">
   <meta name="theme-color" content="#073a29">
-  <link rel="icon" type="image/png" href="./assets/logo.png">
+  <link rel="icon" type="image/png" href="./assets/logo-brote-primero.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -37,8 +37,10 @@
   <link rel="stylesheet" href="mobile.css?v=36">
   <script src="splash.js?v=15" defer></script>
   <title>AgroCentro Nica | Catálogo</title>
+  <link rel="stylesheet" href="brand-preview.css?v=44">
+  <link rel="stylesheet" href="visual-polish.css?v=45">
 </head>
-<body class="home-page">
+<body class="home-page" id="page-top">
   <div class="agro-splash" id="agrocentro-splash" role="status" aria-label="Cargando AgroCentro Nica" aria-live="polite">
     <div class="agro-splash__identity" aria-hidden="true">
       <svg class="agro-splash__symbol" viewBox="0 0 800 757" width="800" height="757" xmlns="http://www.w3.org/2000/svg" focusable="false">
@@ -74,10 +76,7 @@
 
   <header class="site-header">
     <div class="shell header-main">
-      <a class="brand" href="index.html">
-        <img src="./assets/logo.png" alt="AgroCentro Nica" width="64" height="56">
-        <span><strong>AgroCentro Nica</strong><small>Diriomo · Masatepe</small></span>
-      </a>
+      <a class="brand brand-first" href="index.html" aria-label="AgroCentro Nica, inicio"><span class="brand-art"><img src="./assets/logo-brote-primero.png" alt="AgroCentro Nica" width="1774" height="887" fetchpriority="high"></span></a>
 
       <form class="header-search" action="products.html" method="get" role="search">
         <label class="sr-only" for="site-search">Buscar productos</label>
@@ -87,7 +86,7 @@
 
       <div class="header-actions">
         <a class="whatsapp-link" href="https://wa.me/50582403490?text=Hola%2C%20quiero%20consultar%20un%20producto" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-        <a class="order-link" href="products.html?cart=open">Mi pedido <span data-cart-count>0</span></a>
+        <a class="order-link" href="products.html?cart=open" aria-label="Abrir mi pedido"><svg class="order-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21.5 8H6.1"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg><span class="cart-label">Mi pedido</span><span data-cart-count>0</span></a>
         <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -105,9 +104,7 @@
     <section class="home-hero" aria-labelledby="home-title">
       <div class="shell home-hero-grid">
         <div class="home-hero-copy">
-          <p class="home-eyebrow">Agrotienda local · Diriomo y Masatepe</p>
-          <h1 id="home-title">Abastecé tu granja con AgroCentro Nica.</h1>
-          <p class="home-hero-lead">Alimentos balanceados, productos veterinarios y herramientas para el trabajo diario en tu granja. Elegí tus productos y armá tu pedido por WhatsApp.</p>
+          <h1 id="home-title">Productos para tu granja.</h1>
 
           <form class="home-hero-search" action="products.html" method="get" role="search">
             <label class="sr-only" for="home-search">Buscar un producto</label>
@@ -118,14 +115,7 @@
 
           <div class="home-hero-actions">
             <a class="home-primary-link" href="products.html">Ver productos</a>
-            <a class="home-secondary-link" href="https://wa.me/50582403490?text=Hola%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
           </div>
-
-          <ul class="home-service-points" aria-label="Beneficios del servicio">
-            <li>Atención directa</li>
-            <li>Retiro en Diriomo o Masatepe</li>
-            <li>Entrega según cobertura</li>
-          </ul>
         </div>
 
         <div class="home-sack-showcase" aria-label="Algunos de nuestros alimentos">
@@ -147,16 +137,15 @@
     </section>
 
     <nav class="shell home-category-links" aria-label="Comprar por categoría">
-      <a href="products.html?type=alimentos"><strong>Alimentos balanceados</strong><span>Por animal y etapa</span></a>
-      <a href="products.html?type=medicinas"><strong>Veterinaria</strong><span>Ver catálogo</span></a>
-      <a href="products.html?type=herramientas"><strong>Herramientas</strong><span>Para el campo y el trabajo</span></a>
+      <a href="products.html?type=alimentos"><strong>Alimentos</strong></a>
+      <a href="products.html?type=medicinas"><strong>Veterinaria</strong></a>
+      <a href="products.html?type=herramientas"><strong>Herramientas</strong></a>
     </nav>
 
     <section class="home-finder-section" aria-labelledby="finder-title">
       <div class="shell home-finder-panel">
         <div class="home-finder-heading">
-          <span>Compra guiada</span>
-          <h2 id="finder-title">Encontrá el alimento según el animal y su etapa</h2>
+          <h2 id="finder-title">Elegí por animal y etapa</h2>
         </div>
         <form class="home-finder" id="home-finder">
           <label>
@@ -192,72 +181,37 @@
 
     <section class="shell product-section home-featured" aria-labelledby="available-title">
       <div class="section-title-row">
-        <div><p class="home-section-kicker">Selección de la tienda</p><h2 id="available-title">Productos para comenzar tu pedido</h2><p>Una selección corta. El catálogo completo queda ordenado por animal y etapa.</p></div>
-        <a href="products.html">Ver catálogo completo →</a>
+        <div><h2 id="available-title">Productos destacados</h2></div>
+        <a href="products.html">Ver todos →</a>
       </div>
 
       <div class="home-product-grid" id="home-featured-products"></div>
       <noscript><p><a href="products.html">Abrir el catálogo de productos</a></p></noscript>
     </section>
-
-    <section class="marketing-callout" aria-labelledby="marketing-callout-title">
-      <div class="shell marketing-callout-inner">
-        <div>
-          <p class="marketing-callout-kicker">Atención para tu granja</p>
-          <h2 id="marketing-callout-title">¿Vas a iniciar un lote o necesitás reponer productos?</h2>
-          <p class="marketing-callout-copy">Contanos qué animales tenés y qué necesitás. Te ayudamos a elegir los productos y a organizar tu pedido.</p>
-        </div>
-        <div class="marketing-callout-actions">
-          <a class="marketing-callout-primary" href="https://wa.me/50582403490?text=Hola%2C%20AgroCentro%20Nica.%20Quiero%20consultar%20productos%20para%20mi%20granja." target="_blank" rel="noopener noreferrer">Consultar por WhatsApp</a>
-          <a class="marketing-callout-secondary" href="guia-de-uso.html">Ver guía de alimentos</a>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer class="site-footer footer-renewed">
-    <div class="shell">
-      <div class="footer-intro">
-        <div class="footer-identity">
-          <a href="index.html" aria-label="AgroCentro Nica, inicio"><img src="./assets/logo.png" alt="" width="58" height="52" loading="lazy"></a>
-          <div><strong>AgroCentro Nica</strong><p>Para el trabajo de cada día en tu granja.</p></div>
-        </div>
-        <p class="footer-description">Alimentos balanceados, productos veterinarios y herramientas, con atención directa para ayudarte a elegir.</p>
-      </div>
-      <div class="footer-columns">
-        <nav aria-labelledby="footer-products-title">
-          <h2 id="footer-products-title">Encontrá lo que buscás</h2>
-          <a href="products.html?type=alimentos">Alimentos balanceados</a>
-          <a href="products.html">Todos los productos</a>
-          <a href="guia-de-uso.html">Guía y preguntas frecuentes</a>
-        </nav>
-        <div>
-          <h2>Retiro y entrega</h2>
-          <dl class="footer-places">
-            <div><dt><a href="contact.html#locations-title">Diriomo</a></dt><dd>Granada</dd></div>
-            <div><dt><a href="contact.html#locations-title">Masatepe</a></dt><dd>Masaya</dd></div>
-            <div><dt>¿Necesitás entrega?</dt><dd>Consultanos cobertura y costo para tu ubicación.</dd></div>
-          </dl>
-        </div>
-        <div class="footer-contact">
-          <h2>Hablemos de tu pedido</h2>
-          <a class="footer-phone" href="tel:+50582403490">+505 8240 3490</a>
-          <a href="mailto:percyscastillo2013@outlook.com">percyscastillo2013@outlook.com</a>
-          <a href="products.html?cart=open">Revisar mi pedido</a>
-          <a href="contact.html">Contacto y sucursales</a>
-        </div>
-      </div>
-      <div class="footer-end">
-        <p>Te confirmamos disponibilidad, precios y total antes de preparar tu pedido.</p>
-        <p>© 2026 AgroCentro Nica · Diriomo y Masatepe</p>
+  <footer class="footer-first" aria-label="Pie de página de AgroCentro Nica">
+  <div class="shell footer-content">
+    <div class="footer-explore">
+      <a class="footer-whatsapp" href="https://wa.me/50582403490?text=Hola%2C%20quiero%20consultar%20precios%20y%20disponibilidad" target="_blank" rel="noopener noreferrer">WhatsApp · 8240 3490</a>
+      <nav class="footer-navigation" aria-label="Enlaces del pie de página"><a href="products.html">Catálogo</a><a href="guia-de-uso.html">Guía de uso</a><a href="contact.html">Contacto</a></nav>
+    </div>
+    <div>
+      <h3>Sucursales</h3>
+      <div class="footer-branches">
+        <a class="footer-branch" href="contact.html#sucursal-diriomo"><span><strong>Diriomo</strong><small>Granada</small></span><span aria-hidden="true">↗</span></a>
+        <a class="footer-branch" href="contact.html#sucursal-masatepe"><span><strong>Masatepe</strong><small>Masaya</small></span><span aria-hidden="true">↗</span></a>
       </div>
     </div>
-  </footer>
+  </div>
+  <div class="shell footer-bottom"><p>© 2026 AgroCentro Nica</p><a href="#page-top">Volver arriba ↑</a></div>
+</footer>
+
   <div class="home-toast" id="home-toast" role="status" aria-live="polite"></div>
   <script src="catalog-data.js?v=32"></script>
   <script src="image-overrides.js?v=40"></script>
   <script src="feed-guides-v12.js?v=31"></script>
   <script src="catalog-model.js?v=32"></script>
-  <script src="site.js?v=30"></script>
+  <script src="site.js?v=44"></script>
 </body>
 </html>

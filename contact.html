@@ -26,7 +26,7 @@
   </script>
   <meta name="description" content="Contacto, pedidos y puntos de retiro de AgroCentro Nica en Diriomo y Masatepe.">
   <meta name="theme-color" content="#073a29">
-  <link rel="icon" type="image/png" href="./assets/logo.png">
+  <link rel="icon" type="image/png" href="./assets/logo-brote-primero.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -35,8 +35,10 @@
   <link rel="stylesheet" href="mobile.css?v=36">
   <script src="splash.js?v=15" defer></script>
   <title>Contacto | AgroCentro Nica</title>
+  <link rel="stylesheet" href="brand-preview.css?v=44">
+  <link rel="stylesheet" href="visual-polish.css?v=45">
 </head>
-<body>
+<body id="page-top">
   <div class="agro-splash" id="agrocentro-splash" role="status" aria-label="Cargando AgroCentro Nica" aria-live="polite">
     <div class="agro-splash__identity" aria-hidden="true">
       <svg class="agro-splash__symbol" viewBox="0 0 800 757" width="800" height="757" xmlns="http://www.w3.org/2000/svg" focusable="false">
@@ -72,10 +74,7 @@
 
   <header class="site-header">
     <div class="shell header-main">
-      <a class="brand" href="index.html">
-        <img src="./assets/logo.png" alt="AgroCentro Nica" width="64" height="56">
-        <span><strong>AgroCentro Nica</strong><small>Diriomo · Masatepe</small></span>
-      </a>
+      <a class="brand brand-first" href="index.html" aria-label="AgroCentro Nica, inicio"><span class="brand-art"><img src="./assets/logo-brote-primero.png" alt="AgroCentro Nica" width="1774" height="887" fetchpriority="high"></span></a>
       <form class="header-search" action="products.html" method="get" role="search">
         <label class="sr-only" for="site-search">Buscar productos</label>
         <input id="site-search" name="q" type="search" placeholder="Buscar alimento, medicina o herramienta">
@@ -83,7 +82,7 @@
       </form>
       <div class="header-actions">
         <a class="whatsapp-link" href="https://wa.me/50582403490?text=Hola%2C%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-        <a class="order-link" href="products.html?cart=open">Mi pedido <span data-cart-count>0</span></a>
+        <a class="order-link" href="products.html?cart=open" aria-label="Abrir mi pedido"><svg class="order-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21.5 8H6.1"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg><span class="cart-label">Mi pedido</span><span data-cart-count>0</span></a>
         <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -130,11 +129,11 @@
         <div class="section-title-row"><div><h2 id="locations-title">Puntos de retiro</h2><p>Confirmá tu pedido antes de llegar.</p></div></div>
         <div class="location-grid">
           <article class="location-card">
-            <iframe title="Mapa de Diriomo" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-86.07%2C11.86%2C-86.03%2C11.90&amp;layer=mapnik&amp;marker=11.8764%2C-86.0519"></iframe>
+            <iframe id="sucursal-diriomo" title="Mapa de Diriomo" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-86.07%2C11.86%2C-86.03%2C11.90&amp;layer=mapnik&amp;marker=11.8764%2C-86.0519"></iframe>
             <div><h3>Diriomo</h3><p>Diriomo, Granada</p><a href="https://www.openstreetmap.org/?mlat=11.8764&amp;mlon=-86.0519#map=15/11.8764/-86.0519" target="_blank" rel="noopener noreferrer">Abrir mapa</a></div>
           </article>
           <article class="location-card">
-            <iframe title="Mapa de Masatepe" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-86.17%2C11.89%2C-86.12%2C11.93&amp;layer=mapnik&amp;marker=11.911683%2C-86.145126"></iframe>
+            <iframe id="sucursal-masatepe" title="Mapa de Masatepe" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-86.17%2C11.89%2C-86.12%2C11.93&amp;layer=mapnik&amp;marker=11.911683%2C-86.145126"></iframe>
             <div><h3>Masatepe</h3><p>Del puesto de chequeo de buses, 4 cuadras al norte.</p><a href="https://www.openstreetmap.org/?mlat=11.911683&amp;mlon=-86.145126#map=15/11.911683/-86.145126" target="_blank" rel="noopener noreferrer">Abrir mapa</a></div>
           </article>
         </div>
@@ -142,44 +141,23 @@
     </div>
   </main>
 
-  <footer class="site-footer footer-renewed">
-    <div class="shell">
-      <div class="footer-intro">
-        <div class="footer-identity">
-          <a href="index.html" aria-label="AgroCentro Nica, inicio"><img src="./assets/logo.png" alt="" width="58" height="52" loading="lazy"></a>
-          <div><strong>AgroCentro Nica</strong><p>Para el trabajo de cada día en tu granja.</p></div>
-        </div>
-        <p class="footer-description">Alimentos balanceados, productos veterinarios y herramientas, con atención directa para ayudarte a elegir.</p>
-      </div>
-      <div class="footer-columns">
-        <nav aria-labelledby="footer-products-title">
-          <h2 id="footer-products-title">Encontrá lo que buscás</h2>
-          <a href="products.html?type=alimentos">Alimentos balanceados</a>
-          <a href="products.html">Todos los productos</a>
-          <a href="guia-de-uso.html">Guía y preguntas frecuentes</a>
-        </nav>
-        <div>
-          <h2>Retiro y entrega</h2>
-          <dl class="footer-places">
-            <div><dt><a href="contact.html#locations-title">Diriomo</a></dt><dd>Granada</dd></div>
-            <div><dt><a href="contact.html#locations-title">Masatepe</a></dt><dd>Masaya</dd></div>
-            <div><dt>¿Necesitás entrega?</dt><dd>Consultanos cobertura y costo para tu ubicación.</dd></div>
-          </dl>
-        </div>
-        <div class="footer-contact">
-          <h2>Hablemos de tu pedido</h2>
-          <a class="footer-phone" href="tel:+50582403490">+505 8240 3490</a>
-          <a href="mailto:percyscastillo2013@outlook.com">percyscastillo2013@outlook.com</a>
-          <a href="products.html?cart=open">Revisar mi pedido</a>
-          <a href="contact.html">Contacto y sucursales</a>
-        </div>
-      </div>
-      <div class="footer-end">
-        <p>Te confirmamos disponibilidad, precios y total antes de preparar tu pedido.</p>
-        <p>© 2026 AgroCentro Nica · Diriomo y Masatepe</p>
+  <footer class="footer-first" aria-label="Pie de página de AgroCentro Nica">
+  <div class="shell footer-content">
+    <div class="footer-explore">
+      <a class="footer-whatsapp" href="https://wa.me/50582403490?text=Hola%2C%20quiero%20consultar%20precios%20y%20disponibilidad" target="_blank" rel="noopener noreferrer">WhatsApp · 8240 3490</a>
+      <nav class="footer-navigation" aria-label="Enlaces del pie de página"><a href="products.html">Catálogo</a><a href="guia-de-uso.html">Guía de uso</a><a href="contact.html">Contacto</a></nav>
+    </div>
+    <div>
+      <h3>Sucursales</h3>
+      <div class="footer-branches">
+        <a class="footer-branch" href="contact.html#sucursal-diriomo"><span><strong>Diriomo</strong><small>Granada</small></span><span aria-hidden="true">↗</span></a>
+        <a class="footer-branch" href="contact.html#sucursal-masatepe"><span><strong>Masatepe</strong><small>Masaya</small></span><span aria-hidden="true">↗</span></a>
       </div>
     </div>
-  </footer>
-  <script src="site.js?v=30"></script>
+  </div>
+  <div class="shell footer-bottom"><p>© 2026 AgroCentro Nica</p><a href="#page-top">Volver arriba ↑</a></div>
+</footer>
+
+  <script src="site.js?v=44"></script>
 </body>
 </html>
