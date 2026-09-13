@@ -148,6 +148,15 @@
     return numbersMatch && wordsMatch;
   }
 
+  function searchRank(product, query) {
+    if (!query) return 0;
+    const guide = getFeedGuide(product);
+    const names = [product.name, MODEL.getName(product), guide?.officialName, ...(guide?.aliases || [])]
+      .filter(Boolean).map(normalizeText);
+    if (names.includes(query)) return 0;
+    return names.some((name) => matchesSearch(name, query)) ? 1 : 2;
+  }
+
   function labelType(type) {
     return typeLabels[type] || "Producto";
   }
@@ -216,7 +225,7 @@
     } else if (state.sort === "za") {
       filtered.sort((a, b) => MODEL.getName(b).localeCompare(MODEL.getName(a), "es"));
     } else {
-      filtered.sort(MODEL.compareProducts);
+      filtered.sort((a, b) => searchRank(a, query) - searchRank(b, query) || MODEL.compareProducts(a, b));
     }
 
     state.filtered = MODEL.groupProducts(filtered, (product) => Boolean(query) && matchesSearch(normalizeText([

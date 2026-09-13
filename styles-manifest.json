@@ -3,7 +3,7 @@
   "preload_latin": "assets/fonts/manrope-latin-a30ddcd34970.woff2",
   "pages": {
     "index.html": {
-      "bundle": "styles-index-79cd7d1b1e4d.css",
+      "bundle": "styles-index-32618c7f50fb.css",
       "sources": [
         "font-manrope.css",
         "site.css",
@@ -11,15 +11,15 @@
         "catalog-navigation.css",
         "marketing.css",
         "mobile.css",
-        "brand-preview.css",
+        "brand.css",
         "visual-polish.css"
       ],
-      "bytes": 114615,
-      "gzip_bytes": 20847,
-      "sha256": "79cd7d1b1e4d221b7c666199c3033b251e08f5999dff0f535769784bf93092a1"
+      "bytes": 114585,
+      "gzip_bytes": 20804,
+      "sha256": "32618c7f50fbe6210f4f39f0eda469d0e6aade2284ca6ddd23bfc4356df81747"
     },
     "products.html": {
-      "bundle": "styles-products-16d49a23be9d.css",
+      "bundle": "styles-products-44605700800b.css",
       "sources": [
         "font-manrope.css",
         "products.css",
@@ -29,41 +29,41 @@
         "marketing.css",
         "mobile.css",
         "product-detail.css",
-        "brand-preview.css",
+        "brand.css",
         "visual-polish.css"
       ],
-      "bytes": 157978,
-      "gzip_bytes": 27553,
-      "sha256": "16d49a23be9d0a153b55046d7693ab2031de14879454e25be5eaf461ca6ce11a"
+      "bytes": 157948,
+      "gzip_bytes": 27509,
+      "sha256": "44605700800b8d860bb1f983622a113554410c84562911603deaf70d83ca0017"
     },
     "contact.html": {
-      "bundle": "styles-contact-1a557bf79f77.css",
+      "bundle": "styles-contact-b9d272c63548.css",
       "sources": [
         "font-manrope.css",
         "site.css",
         "marketing.css",
         "mobile.css",
-        "brand-preview.css",
+        "brand.css",
         "visual-polish.css"
       ],
-      "bytes": 95812,
-      "gzip_bytes": 17653,
-      "sha256": "1a557bf79f77612ea09d6385b64a06b0ca47935e0b566f8ac56e6e1765c7c333"
+      "bytes": 95782,
+      "gzip_bytes": 17618,
+      "sha256": "b9d272c6354867461dd9df1b52f0e98fb03f3c3fa48d6a8c789d6573ba856039"
     },
     "guia-de-uso.html": {
-      "bundle": "styles-guia-de-uso-ff4a3aa70e71.css",
+      "bundle": "styles-guia-de-uso-80db2874ed8b.css",
       "sources": [
         "font-manrope.css",
         "site.css",
         "usage-guide.css",
         "marketing.css",
         "mobile.css",
-        "brand-preview.css",
+        "brand.css",
         "visual-polish.css"
       ],
-      "bytes": 102375,
-      "gzip_bytes": 18668,
-      "sha256": "ff4a3aa70e718125d0ffebf3cd1b5957c2051261a508e1dd073724daaf118699"
+      "bytes": 102345,
+      "gzip_bytes": 18627,
+      "sha256": "80db2874ed8bc25be41a0b8aaa208de3e809f3dbd8624d724355f7645afc8b87"
     }
   }
 }

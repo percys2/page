@@ -33,20 +33,20 @@ USER_AGENT = (
 PAGE_SOURCES = {
     "index.html": [
         "site.css", "catalog-cutouts.css", "catalog-navigation.css",
-        "marketing.css", "mobile.css", "brand-preview.css", "visual-polish.css",
+        "marketing.css", "mobile.css", "brand.css", "visual-polish.css",
     ],
     "products.html": [
         "products.css", "site.css", "catalog-cutouts.css", "catalog-navigation.css",
-        "marketing.css", "mobile.css", "product-detail.css", "brand-preview.css",
+        "marketing.css", "mobile.css", "product-detail.css", "brand.css",
         "visual-polish.css",
     ],
     "contact.html": [
-        "site.css", "marketing.css", "mobile.css", "brand-preview.css",
+        "site.css", "marketing.css", "mobile.css", "brand.css",
         "visual-polish.css",
     ],
     "guia-de-uso.html": [
         "site.css", "usage-guide.css", "marketing.css", "mobile.css",
-        "brand-preview.css", "visual-polish.css",
+        "brand.css", "visual-polish.css",
     ],
 }
 

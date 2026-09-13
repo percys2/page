@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Read-only conservative image audit for the AgroCentro static publication.
 
-python audit-unused-assets.py --root ./dist --remote-state github-release-state.json
+python scripts/audit-unused-assets.py --root .
 
 Prints JSON; never deletes or edits website files. An optional --output writes the
 report. `remove` includes only local image files with no literal, selector, data,
 SVG or evaluated catalogue reference. `remote_only_review` requires manual review
 because this script cannot infer whether unrelated remote pages still need them.
-The unpublished ficha-muestra.* prototype is excluded as requested.
+The unpublished ficha-muestra.* prototype is excluded.
 """
 import argparse
 import fnmatch
@@ -79,7 +79,7 @@ def main():
     if isinstance(remote_rows, dict):
         remote_rows = remote_rows.get('tree', [])
     remote = {row['path']: row for row in remote_rows if row.get('type', 'blob') == 'blob'}
-    files = {p.relative_to(root).as_posix(): p for p in root.rglob('*') if p.is_file() and '.openai' not in p.parts}
+    files = {p.relative_to(root).as_posix(): p for p in root.rglob('*') if p.is_file() and not any(part.startswith('.') for part in p.relative_to(root).parts)}
     images = {name: p for name, p in files.items() if p.suffix.lower() in IMAGES}
     texts = {name: unquote(p.read_text(errors='replace')) for name, p in files.items()
              if p.suffix.lower() in SOURCES and not p.name.startswith(PROTOTYPE)}

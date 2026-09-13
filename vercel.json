@@ -20,7 +20,7 @@
       ]
     },
     {
-      "source": "/styles-index-79cd7d1b1e4d.css",
+      "source": "/styles-index-32618c7f50fb.css",
       "headers": [
         {
           "key": "Cache-Control",
@@ -29,7 +29,7 @@
       ]
     },
     {
-      "source": "/styles-products-1996b1a2c0bc.css",
+      "source": "/styles-contact-b9d272c63548.css",
       "headers": [
         {
           "key": "Cache-Control",
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "source": "/styles-contact-1a557bf79f77.css",
+      "source": "/styles-guia-de-uso-80db2874ed8b.css",
       "headers": [
         {
           "key": "Cache-Control",
@@ -47,16 +47,7 @@
       ]
     },
     {
-      "source": "/styles-guia-de-uso-ff4a3aa70e71.css",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/styles-products-16d49a23be9d.css",
+      "source": "/styles-products-44605700800b.css",
       "headers": [
         {
           "key": "Cache-Control",
