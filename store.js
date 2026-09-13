@@ -619,7 +619,6 @@
       ${vetRow('Fabricante / marca', vet.manufacturer)}
       </dl>${vet.identityNote ? `<p class="vet-identity-note">${escapeHtml(vet.identityNote)}</p>` : ''}` : '';
     const vetPrecautions = vet ? `<details class="product-information-section"><summary>Precauciones</summary><div class="product-information-body"><ul>${(vet.precautions?.length ? vet.precautions : ['Confirmá las precauciones de la presentación exacta en su etiqueta y con el médico veterinario.']).map(value => `<li>${escapeHtml(value)}</li>`).join('')}</ul></div></details>` : '';
-    const vetSources = vet?.sources?.length ? `<details class="product-information-section"><summary>Fuentes de información</summary><div class="product-information-body"><ul class="vet-sources">${vet.sources.filter(source => /^https:\/\//.test(source.url) || source.url.startsWith('./assets/')).map(source => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.label)}</a></li>`).join('')}</ul><p class="vet-source-date">Información revisada: ${escapeHtml(vet.reviewed || 'septiembre de 2026')}. Confirmá siempre el envase y la presentación disponibles.</p></div></details>` : '';
     const useMarkup = vet ? vetFacts : guide ? `<div class="feed-guide" aria-label="Guía de uso de ${name}">
       ${guideRow('Nombre en catálogo', guide.officialName && guide.officialName !== product.name ? guide.officialName : '')}
       ${guideRow('Animal', labelCategory(product.category))}
@@ -665,7 +664,7 @@
       </div>
       <div class="modal-product-details">
         <details class="product-information-section"${vet ? ' open' : ''}><summary>${useHeading}</summary><div class="product-information-body">${useMarkup}</div></details>
-        ${benefitsMarkup}${analysisMarkup}${vetPrecautions}${vetSources}
+        ${benefitsMarkup}${analysisMarkup}${vetPrecautions}
         ${guide ? `<a class="product-guide-link" href="guia-de-uso.html?tema=${({ aves: 'aves', cerdos: 'cerdos', equinos: 'equinos', perros: 'mascotas', gatos: 'mascotas' })[product.category] || 'compra'}">Guía de uso y preguntas frecuentes →</a>` : ''}
       </div>
     </div>`;
