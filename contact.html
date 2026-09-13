@@ -1,381 +1,185 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Contacta a AgroCentro Nica - Estamos aqui para ayudarte con tus consultas sobre productos agropecuarios.">
-  <title>Contacto - AgroCentro Nica</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <script>
+    (function (doc, win) {
+      var key = "agrocentro_intro_shown";
+      var shouldShow = false;
+      try {
+        shouldShow = win.sessionStorage.getItem(key) !== "1";
+        if (shouldShow) win.sessionStorage.setItem(key, "1");
+      } catch (error) {
+        shouldShow = false;
+      }
+      doc.documentElement.classList.add(shouldShow ? "agro-intro-pending" : "agro-intro-seen");
+      if (!shouldShow) return;
+      win.__agroIntroStartedAt = Date.now();
+      win.__agroIntroSafetyTimer = win.setTimeout(function () {
+        var splash = doc.getElementById("agrocentro-splash");
+        if (splash) splash.remove();
+        doc.documentElement.classList.remove("agro-intro-pending");
+        doc.documentElement.classList.add("agro-intro-seen");
+      }, 2500);
+    })(document, window);
+  </script>
+  <meta name="description" content="Contacto, pedidos y puntos de retiro de AgroCentro Nica en Diriomo y Masatepe.">
+  <meta name="theme-color" content="#073a29">
   <link rel="icon" type="image/png" href="./assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="contact.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=25">
+  <link rel="stylesheet" href="marketing.css?v=35">
+  <link rel="stylesheet" href="mobile.css?v=36">
+  <script src="splash.js?v=15" defer></script>
+  <title>Contacto | AgroCentro Nica</title>
 </head>
-
 <body>
-
-<!-- TOP BAR -->
-<div class="top-bar">
-  <div class="top-bar-content">
-    <div class="top-bar-social">
-      <a href="https://www.facebook.com/profile.php?id=61554439035135" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-      </a>
-      <a href="https://wa.me/50582403490" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      </a>
+  <div class="agro-splash" id="agrocentro-splash" role="status" aria-label="Cargando AgroCentro Nica" aria-live="polite">
+    <div class="agro-splash__identity" aria-hidden="true">
+      <svg class="agro-splash__symbol" viewBox="0 0 800 757" width="800" height="757" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <defs>
+          <path id="agro-nicaragua-shape" d="M799 3.65 773.93 46.83 793.65 119.19 753.92 179.99 726.49 299.63 735.84 366.22 736.47 460.38 711.64 482.45 706.48 528.94 690.75 545.34 711.55 596.58 673.31 657.09 679.69 687.09 713.28 724.83 683.34 755.61 620.14 749.05 588.31 713.74 525.87 700.95 489.06 719.86 363.04 677.54 341.29 699.19 302.93 651.56 213.09 579.55 162.35 505.53 96.96 456.43 37.69 399.2 1 373.37 22.98 349.28 59.44 359.98 108.64 357.82 133.58 316.74 170.3 300.86 166.24 221.22 237.35 220.05 269.3 180.32 333.79 206.89 352.33 182.45 441.23 118.62 444.45 86.45 475.62 46.23 510.3 39.52 535.64 62.39 673.41 38.79 753.43 1 799 3.65Z"/>
+          <clipPath id="agro-nicaragua-clip" clipPathUnits="userSpaceOnUse"><use href="#agro-nicaragua-shape"/></clipPath>
+        </defs>
+        <g class="agro-splash__map">
+          <use href="#agro-nicaragua-shape" fill="#1F6B3A"/>
+          <g clip-path="url(#agro-nicaragua-clip)" fill="none" stroke="#D9A526" stroke-width="18" stroke-linecap="round">
+            <path class="agro-splash__furrow" pathLength="1" d="M228 584C326 520 447 510 590 548"/>
+            <path class="agro-splash__furrow" pathLength="1" d="M218 636C344 570 482 572 626 613"/>
+            <path class="agro-splash__furrow" pathLength="1" d="M256 687C379 629 510 638 650 676"/>
+            <g class="agro-splash__sprout">
+              <path d="M418 536V407" stroke-width="16"/>
+              <path d="M422 439C435 382 478 348 536 352C524 407 483 440 422 439Z" fill="#D9A526" stroke="none"/>
+            </g>
+          </g>
+        </g>
+      </svg>
+      <p class="agro-splash__name">AGROCENTRO NICA</p>
     </div>
-    <span class="top-bar-text">Bienvenidos a AgroCentro Nica</span>
   </div>
-</div>
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="navbar-left">
-    <a href="index.html">
-      <img src="./assets/logo.png" alt="Logo" class="logo" loading="lazy">
-    </a>
-  </div>
-
-  <div class="navbar-right">
-    <div class="nav-links" id="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="index.html#nosotros">Nosotros</a>
-      <a href="products.html">Productos</a>
-      <a href="contact.html" class="active">Contacto</a>
+  <div class="utility-bar">
+    <div class="shell utility-inner">
+      <span>Pedidos y consultas por WhatsApp</span>
+      <span>Retiro en Diriomo y Masatepe</span>
+      <a href="tel:+50582403490">Tel. 8240 3490</a>
     </div>
-    <button class="cart-btn" id="cart-btn" aria-label="Carrito" onclick="window.location.href='products.html'">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-      <span class="cart-count" id="cart-count">0</span>
-    </button>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
   </div>
-</nav>
 
-<!-- HERO CONTACTO -->
-<section class="contact-hero">
-  <h1>Contactanos</h1>
-  <p>Estamos aqui para ayudarte con tus consultas, quejas o sugerencias</p>
-</section>
-
-<!-- CONTACTO -->
-<section class="contact-section">
-  <div class="contact-container">
-    
-    <div class="contact-info-side">
-      <h2>Informacion de Contacto</h2>
-      <p>¿Tienes alguna queja, sugerencia o consulta? Completa el formulario o contactanos directamente.</p>
-      
-      <div class="contact-details">
-        <div class="contact-detail-item">
-          <div class="detail-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <div class="detail-text">
-            <h4>Telefono</h4>
-            <a href="tel:+50582403490">8240 3490</a>
-          </div>
-        </div>
-        
-        <div class="contact-detail-item">
-          <div class="detail-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          </div>
-          <div class="detail-text">
-            <h4>Email</h4>
-            <a href="mailto:percyscastillo2013@outlook.com">percyscastillo2013@outlook.com</a>
-          </div>
-        </div>
-        
-        <div class="contact-detail-item">
-          <div class="detail-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          </div>
-          <div class="detail-text">
-            <h4>WhatsApp</h4>
-            <a href="https://wa.me/50582403490" target="_blank">Escribenos directamente</a>
-          </div>
-        </div>
-      </div>
-      
-      <a href="https://wa.me/50582403490" target="_blank" class="whatsapp-direct-btn">
-        Ir a WhatsApp
+  <header class="site-header">
+    <div class="shell header-main">
+      <a class="brand" href="index.html">
+        <img src="./assets/logo.png" alt="AgroCentro Nica" width="64" height="56">
+        <span><strong>AgroCentro Nica</strong><small>Diriomo · Masatepe</small></span>
       </a>
-    </div>
-    
-    <div class="contact-form-side">
-      <form class="contact-form" id="contact-form">
-        <h3>Envianos tu mensaje</h3>
-        
-        <div class="form-group">
-          <label for="nombre">Nombre completo</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="email">Correo electronico</label>
-          <input type="email" id="email" name="email" placeholder="tu@email.com" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="tipo">Tipo de mensaje</label>
-          <select id="tipo" name="tipo" required>
-            <option value="">Selecciona una opcion</option>
-            <option value="consulta">Consulta general</option>
-            <option value="queja">Queja</option>
-            <option value="sugerencia">Sugerencia de mejora</option>
-            <option value="pedido">Informacion de pedidos</option>
-            <option value="otro">Otro</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label for="mensaje">Mensaje</label>
-          <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aqui..." required></textarea>
-        </div>
-        
-        <button type="submit" class="submit-btn">Enviar Mensaje</button>
+      <form class="header-search" action="products.html" method="get" role="search">
+        <label class="sr-only" for="site-search">Buscar productos</label>
+        <input id="site-search" name="q" type="search" placeholder="Buscar alimento, medicina o herramienta">
+        <button type="submit">Buscar</button>
       </form>
-    </div>
-    
-  </div>
-</section>
-
-<!-- UBICACIONES -->
-<section class="locations-section">
-  <div class="locations-container">
-    <h2>Nuestras Ubicaciones</h2>
-    <p class="locations-intro">Visitanos en cualquiera de nuestras sucursales</p>
-    
-    <div class="locations-grid">
-      
-      <div class="location-card">
-        <div class="location-map">
-          <iframe 
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-86.07%2C11.86%2C-86.03%2C11.90&layer=mapnik&marker=11.8764%2C-86.0519"
-            width="100%" 
-            height="250" 
-            style="border:0;" 
-            loading="lazy">
-          </iframe>
-        </div>
-        <div class="location-info">
-          <h3>Diriomo</h3>
-          <p>Diriomo, Granada, Nicaragua</p>
-          <a href="https://www.openstreetmap.org/?mlat=11.8764&mlon=-86.0519#map=15/11.8764/-86.0519" target="_blank" class="location-btn">
-            Ver en Mapa
-          </a>
-        </div>
-      </div>
-
-      <div class="location-card">
-        <div class="location-map">
-          <iframe 
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-86.17%2C11.89%2C-86.12%2C11.93&layer=mapnik&marker=11.911683%2C-86.145126"
-            width="100%" 
-            height="250" 
-            style="border:0;" 
-            loading="lazy">
-          </iframe>
-        </div>
-        <div class="location-info">
-          <h3>Masatepe</h3>
-          <p>Masatepe, Masaya, Nicaragua</p>
-          <a href="https://www.openstreetmap.org/?mlat=11.911683&mlon=-86.145126#map=15/11.911683/-86.145126" target="_blank" class="location-btn">
-            Ver en Mapa
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-main">
-    
-    <div class="footer-brand">
-            <div class="footer-logo">
-              <img src="./assets/logo.png" alt="Logo" loading="lazy">
-              <span>AgroCentro Nica</span>
-            </div>
-            <p>
-              Somos una empresa comprometida con el desarrollo del sector
-              agropecuario nicaraguense, brindando productos confiables,
-              asesoria y atencion cercana al productor.
-            </p>
-            <div class="footer-social">
-              <a href="https://wa.me/50582403490" target="_blank" class="social-link" aria-label="WhatsApp">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        </a>
-        <a href="mailto:percyscastillo2013@outlook.com" class="social-link" aria-label="Email">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        </a>
+      <div class="header-actions">
+        <a class="whatsapp-link" href="https://wa.me/50582403490?text=Hola%2C%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a class="order-link" href="products.html?cart=open">Mi pedido <span data-cart-count>0</span></a>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
       </div>
     </div>
-
-    <div class="footer-column">
-      <h4>Navegacion</h4>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="index.html#nosotros">Nosotros</a></li>
-        <li><a href="products.html">Productos</a></li>
-        <li><a href="contact.html">Contacto</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-column">
-      <h4>Categorias</h4>
-      <ul>
-        <li><a href="products.html">Aves</a></li>
-        <li><a href="products.html">Perros</a></li>
-        <li><a href="products.html">Gatos</a></li>
-        <li><a href="products.html">Cerdos</a></li>
-        <li><a href="products.html">Equinos</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-column">
-      <h4>Contacto</h4>
-      
-      <div class="footer-contact-item">
-        <div class="contact-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div class="contact-info">
-          <p>Telefono</p>
-          <a href="tel:+50582403490">8240 3490</a>
-        </div>
+    <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+      <div class="shell nav-inner">
+        <a href="index.html">Inicio</a><a href="products.html">Tienda</a><a href="guia-de-uso.html">Guía de uso</a><a class="active" href="contact.html" aria-current="page">Contacto</a>
       </div>
-      
-      <div class="footer-contact-item">
-        <div class="contact-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    </nav>
+  </header>
+
+  <main id="contenido" class="contact-main">
+    <div class="shell">
+      <p class="breadcrumb">Inicio / Contacto</p>
+      <div class="contact-title">
+        <h1>Hablemos de tu pedido</h1>
+        <p>Para precios, disponibilidad y delivery, escribinos directamente por WhatsApp.</p>
+      </div>
+
+      <div class="contact-layout">
+        <section class="contact-details" aria-labelledby="direct-title">
+          <h2 id="direct-title">Atención directa</h2>
+          <dl>
+            <div><dt>WhatsApp y teléfono</dt><dd><a href="tel:+50582403490">+505 8240 3490</a></dd></div>
+            <div><dt>Correo</dt><dd><a href="mailto:percyscastillo2013@outlook.com">percyscastillo2013@outlook.com</a></dd></div>
+            <div><dt>Zonas</dt><dd>Diriomo, Masatepe y sectores cercanos</dd></div>
+          </dl>
+          <a class="whatsapp-button" href="https://wa.me/50582403490?text=Hola%2C%20quiero%20consultar%20precio%20y%20disponibilidad" target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a>
+        </section>
+
+        <section class="contact-form-panel" aria-labelledby="form-title">
+          <h2 id="form-title">Preparar una consulta</h2>
+          <form id="contact-form" class="contact-form" novalidate>
+            <label><span>Nombre *</span><input name="name" type="text" autocomplete="name" required></label>
+            <label><span>Teléfono *</span><input name="phone" type="tel" autocomplete="tel" required></label>
+            <label><span>Consulta</span><select name="topic"><option>Producto o precio</option><option>Pedido y delivery</option><option>Asesoría</option><option>Otro</option></select></label>
+            <label class="full"><span>Mensaje *</span><textarea name="message" rows="5" placeholder="Producto que necesitás y tu ubicación" required></textarea></label>
+            <p id="contact-form-message" class="form-message full" role="alert" hidden></p>
+            <button class="full" type="submit">Continuar en WhatsApp</button>
+          </form>
+        </section>
+      </div>
+
+      <section class="locations" aria-labelledby="locations-title">
+        <div class="section-title-row"><div><h2 id="locations-title">Puntos de retiro</h2><p>Confirmá tu pedido antes de llegar.</p></div></div>
+        <div class="location-grid">
+          <article class="location-card">
+            <iframe title="Mapa de Diriomo" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-86.07%2C11.86%2C-86.03%2C11.90&amp;layer=mapnik&amp;marker=11.8764%2C-86.0519"></iframe>
+            <div><h3>Diriomo</h3><p>Diriomo, Granada</p><a href="https://www.openstreetmap.org/?mlat=11.8764&amp;mlon=-86.0519#map=15/11.8764/-86.0519" target="_blank" rel="noopener noreferrer">Abrir mapa</a></div>
+          </article>
+          <article class="location-card">
+            <iframe title="Mapa de Masatepe" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-86.17%2C11.89%2C-86.12%2C11.93&amp;layer=mapnik&amp;marker=11.911683%2C-86.145126"></iframe>
+            <div><h3>Masatepe</h3><p>Del puesto de chequeo de buses, 4 cuadras al norte.</p><a href="https://www.openstreetmap.org/?mlat=11.911683&amp;mlon=-86.145126#map=15/11.911683/-86.145126" target="_blank" rel="noopener noreferrer">Abrir mapa</a></div>
+          </article>
         </div>
-        <div class="contact-info">
-          <p>Email</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer footer-renewed">
+    <div class="shell">
+      <div class="footer-intro">
+        <div class="footer-identity">
+          <a href="index.html" aria-label="AgroCentro Nica, inicio"><img src="./assets/logo.png" alt="" width="58" height="52" loading="lazy"></a>
+          <div><strong>AgroCentro Nica</strong><p>Para el trabajo de cada día en tu granja.</p></div>
+        </div>
+        <p class="footer-description">Alimentos balanceados, productos veterinarios y herramientas, con atención directa para ayudarte a elegir.</p>
+      </div>
+      <div class="footer-columns">
+        <nav aria-labelledby="footer-products-title">
+          <h2 id="footer-products-title">Encontrá lo que buscás</h2>
+          <a href="products.html?type=alimentos">Alimentos balanceados</a>
+          <a href="products.html">Todos los productos</a>
+          <a href="guia-de-uso.html">Guía y preguntas frecuentes</a>
+        </nav>
+        <div>
+          <h2>Retiro y entrega</h2>
+          <dl class="footer-places">
+            <div><dt><a href="contact.html#locations-title">Diriomo</a></dt><dd>Granada</dd></div>
+            <div><dt><a href="contact.html#locations-title">Masatepe</a></dt><dd>Masaya</dd></div>
+            <div><dt>¿Necesitás entrega?</dt><dd>Consultanos cobertura y costo para tu ubicación.</dd></div>
+          </dl>
+        </div>
+        <div class="footer-contact">
+          <h2>Hablemos de tu pedido</h2>
+          <a class="footer-phone" href="tel:+50582403490">+505 8240 3490</a>
           <a href="mailto:percyscastillo2013@outlook.com">percyscastillo2013@outlook.com</a>
+          <a href="products.html?cart=open">Revisar mi pedido</a>
+          <a href="contact.html">Contacto y sucursales</a>
         </div>
       </div>
-
-      <a href="https://wa.me/50582403490" target="_blank" class="footer-whatsapp-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        Escribenos por WhatsApp
-      </a>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <div class="footer-bottom-content">
-      <p>&copy; 2026 AgroCentro Nica - Todos los derechos reservados</p>
-      <div class="footer-bottom-links">
-        <a href="#">Terminos</a>
-        <a href="#">Privacidad</a>
+      <div class="footer-end">
+        <p>Te confirmamos disponibilidad, precios y total antes de preparar tu pedido.</p>
+        <p>© 2026 AgroCentro Nica · Diriomo y Masatepe</p>
       </div>
     </div>
-  </div>
-</footer>
-
-<!-- FLOATING WHATSAPP BUTTON -->
-<a href="https://wa.me/50582403490" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-</a>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-// Supabase Configuration
-const SUPABASE_URL = "https://iidketjiuxkxfnltfkfz.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlpZGtldGppdXhreGZubHRma2Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwMTQ0MzQsImV4cCI6MjA4MzU5MDQzNH0.fmvS9dhdjvwRz7vgEOYFPol9JZJxHonq1yz8_UOjJyQ";
-
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-document.getElementById('contact-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  const submitBtn = document.querySelector('.submit-btn');
-  const originalText = submitBtn.textContent;
-  submitBtn.textContent = 'Enviando...';
-  submitBtn.disabled = true;
-  
-  const nombre = document.getElementById('nombre').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const tipo = document.getElementById('tipo').value;
-  const mensaje = document.getElementById('mensaje').value.trim();
-  
-  const tipoTexto = {
-    'consulta': 'Consulta general',
-    'queja': 'Queja',
-    'sugerencia': 'Sugerencia de mejora',
-    'pedido': 'Informacion de pedidos',
-    'otro': 'Otro'
-  };
-  
-  // Guardar en Supabase
-  const { error } = await supabaseClient
-    .from('contact_submissions')
-    .insert([{ nombre, email, tipo, mensaje }]);
-  
-  if (error) {
-    console.error('Error Supabase:', error);
-    alert('Error al enviar. Por favor intenta de nuevo.');
-    submitBtn.textContent = originalText;
-    submitBtn.disabled = false;
-    return;
-  }
-  
-  // Tambien enviar a WhatsApp
-  let whatsappMsg = `*Nuevo mensaje de contacto*\n\n`;
-  whatsappMsg += `*Nombre:* ${nombre}\n`;
-  whatsappMsg += `*Email:* ${email}\n`;
-  whatsappMsg += `*Tipo:* ${tipoTexto[tipo]}\n\n`;
-  whatsappMsg += `*Mensaje:*\n${mensaje}`;
-  
-  const encodedMsg = encodeURIComponent(whatsappMsg);
-  window.open(`https://wa.me/50582403490?text=${encodedMsg}`, '_blank');
-  
-  this.reset();
-  submitBtn.textContent = originalText;
-  submitBtn.disabled = false;
-  alert('Mensaje enviado correctamente. Gracias por contactarnos!');
-});
-
-// Hamburger menu
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('nav-links');
-
-if (hamburger && navLinks) {
-  hamburger.addEventListener('click', function() {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
-  });
-  
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', function() {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('active');
-    });
-  });
-}
-
-// Update cart count from localStorage
-const cart = JSON.parse(localStorage.getItem('agrocentro_cart')) || [];
-const countEl = document.getElementById('cart-count');
-if (countEl) {
-  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-  countEl.textContent = totalItems;
-  if (totalItems === 0) {
-    countEl.classList.add('hidden');
-  } else {
-    countEl.classList.remove('hidden');
-  }
-}
-</script>
-
+  </footer>
+  <script src="site.js?v=30"></script>
 </body>
 </html>

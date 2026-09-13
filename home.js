@@ -6,7 +6,7 @@ const alimentos = [
   },
   {
     name: "Iniciarina",
-    image: "./assets/iniciarina.JPG",
+    image: "./assets/iniciarina-catalog-v12.webp",
     description: "Alimento para pollos de engorde"
   },
   {
@@ -16,27 +16,27 @@ const alimentos = [
   },
   {
     name: "Pre iniciarina",
-    image: "./assets/preiniciarina.png",
+    image: "./assets/preiniciarina-catalog-v11.webp",
     description: "Alimento para pollos en etapa inicial"
   },
   {
     name: "Cavalleria Forte",
-    image: "./assets/cavalleria.png",
+    image: "./assets/cavalleria-forte-catalog-v11.webp",
     description: "Alimento para caballos"
   },
   {
     name: "Omalina 100",
-    image: "./assets/omalina100.png",
+    image: "./assets/omalina-100-catalog-v11.webp",
     description: "Alimento balanceado para aves"
   },
   {
     name: "Omalina 200",
-    image: "./assets/omalina200.png",
+    image: "./assets/omalina-200-catalog-v11.webp",
     description: "Alimento balanceado para aves"
   },
   {
     name: "Omalina 300",
-    image: "./assets/omalina300.png",
+    image: "./assets/omalina-300-catalog-v11.webp",
     description: "Alimento balanceado para aves"
   },
   {
@@ -105,18 +105,13 @@ const alimentos = [
     description: "Alimento para gatos"
   },
   {
-    name: "Gaty Pescado",
-    image: "./assets/gatypescado.png",
-    description: "Alimento para gatos sabor pescado"
-  },
-  {
     name: "Forrajina",
-    image: "./assets/forrajina.png",
+    image: "./assets/forrajina-catalog-v11.webp",
     description: "Alimento forrajero para ganado"
   },
   {
     name: "Neopigg 1",
-    image: "./assets/nepigg1.png",
+    image: "./assets/neopigg-1-catalog-v11.webp",
     description: "Alimento para cerdos etapa 1"
   },
   {
@@ -136,12 +131,12 @@ const alimentos = [
   },
   {
     name: "Jamonina",
-    image: "./assets/jamonina.png",
+    image: "./assets/jamonina-catalog-v11.webp",
     description: "Alimento para cerdos de engorde"
   },
   {
     name: "Criacerdina",
-    image: "./assets/criacerdina.png",
+    image: "./assets/criacerdina-catalog-v11.webp",
     description: "Alimento para cerdas en gestacion"
   },
   {
@@ -151,12 +146,12 @@ const alimentos = [
   },
   {
     name: "Pignova 5",
-    image: "./assets/pignova5.png",
+    image: "./assets/pignova-5-catalog-v11.webp",
     description: "Alimento para cerdos Pignova fase 5"
   },
   {
     name: "Pignova 6",
-    image: "./assets/pignova6.png",
+    image: "./assets/pignova-6-catalog-v11.webp",
     description: "Alimento para cerdos Pignova fase 6"
   },
   {

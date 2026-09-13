@@ -1,0 +1,42 @@
+/*
+ * Guía breve tomada del catálogo y de las etiquetas visibles.
+ * Cuando el empaque no confirma una edad numérica, se muestra la fase.
+ */
+window.AGROCENTRO_FEED_GUIDES = {
+  1: { use: "Alimento completo para pollos de engorde.", stage: "Fase 2 · engorde", presentation: "45.4 kg (100 lb)" },
+  2: { use: "Alimento de inicio para pollos.", stage: "Fase 1 · inicio", presentation: "45.4 kg (100 lb)" },
+  3: { use: "Alimento especializado para gallos.", stage: "Edad según el programa de manejo", presentation: "45.4 kg (100 lb)" },
+  4: { use: "Alimento preiniciador para pollitos.", stage: "Fase 0 · preinicio", presentation: "45.4 kg (100 lb)" },
+  10: { use: "Alimento balanceado para pollos criollos.", stage: "Todas las etapas", presentation: "45.4 kg (100 lb)" },
+  11: { use: "Alimento para gallinas ponedoras criollas.", stage: "Etapa de postura", presentation: "45.4 kg (100 lb)" },
+  5: { use: "Alimento premium para caballos.", stage: "Edad o etapa por confirmar", presentation: "25 kg" },
+  6: { use: "Alimento para equinos en crecimiento.", stage: "Etapa de crecimiento", presentation: "45.4 kg (100 lb)" },
+  7: { use: "Alimento para equinos adultos.", stage: "Etapa adulta", presentation: "Confirmar presentación" },
+  8: { use: "Alimento para yeguas gestantes o lactantes y potros en crecimiento.", stage: "Gestación, lactancia o crecimiento", presentation: "45.4 kg (100 lb)" },
+  12: { use: "Alimento completo para perros adultos.", stage: "Etapa adulta", presentation: "22.7 kg (50 lb)" },
+  13: { use: "Alimento para cachorros en crecimiento.", stage: "Etapa cachorro", presentation: "22.7 kg (50 lb)" },
+  14: { use: "Alimento sabor carne para perros medianos y grandes.", stage: "Adultos · desde 18 meses", presentation: "454 g (1 lb)" },
+  15: { use: "Alimento con carne y vegetales para perros medianos y grandes.", stage: "Adultos · desde 18 meses", presentation: "18 kg (39.6 lb)" },
+  16: { use: "Alimento para cachorros medianos y grandes.", stage: "Desde 2 meses", presentation: "454 g (1 lb)" },
+  17: { use: "Alimento para cachorros medianos y grandes.", stage: "Desde 2 meses", presentation: "18 kg (39.6 lb)" },
+  33: { use: "Alimento de alta digestibilidad para perros adultos.", stage: "Desde 18 meses", presentation: "20 kg (44.1 lb)" },
+  34: { use: "Alimento premium para perros adultos.", stage: "Desde 18 meses", presentation: "454 g (1 lb)" },
+  35: { use: "Alimento premium para cachorros.", stage: "De 2 a 18 meses", presentation: "Confirmar presentación" },
+  18: { use: "Alimento completo para gatos adultos.", stage: "Desde 12 meses", presentation: "454 g (1 lb)" },
+  19: { use: "Alimento completo para gatos adultos.", stage: "Desde 12 meses", presentation: "8 kg (17.6 lb)" },
+  20: { use: "Alimento balanceado Mar y Tierra para gatos.", stage: "Adultos · desde 12 meses", presentation: "454 g (1 lb)" },
+  21: { use: "Alimento balanceado Mar y Tierra para gatos.", stage: "Adultos · desde 12 meses", presentation: "8 kg (17.6 lb)" },
+  24: { use: "Alimento de inicio para lechones.", stage: "Neopigg · etapa 1", presentation: "Saco de 55 lb" },
+  25: { use: "Alimento de crecimiento para cerdos.", stage: "Neopigg · etapa 2", presentation: "Saco de 55 lb" },
+  37: { use: "Alimento para lechones en crecimiento.", stage: "Neopigg · etapa 3", presentation: "Saco de 55 lb" },
+  26: { use: "Alimento de finalización para cerdos.", stage: "Neopigg · etapa 4", presentation: "Saco de 55 lb" },
+  27: { use: "Alimento para cerdos en desarrollo.", stage: "Fase 5 · desarrollo", presentation: "45.4 kg (100 lb)" },
+  28: { use: "Alimento para cerdos de engorde.", stage: "Fase 6 · engorde", presentation: "45.4 kg (100 lb)" },
+  29: { use: "Alimento para cerdas gestantes.", stage: "Etapa de gestación", presentation: "45.4 kg (100 lb)" },
+  30: { use: "Alimento para cerdas lactantes.", stage: "Etapa de lactancia", presentation: "Confirmar presentación" },
+  31: { use: "Alimento de la línea Pignova para cerdos.", stage: "Fase 5 · engorde", presentation: "45.4 kg (100 lb)" },
+  32: { use: "Alimento de la línea Pignova para cerdos.", stage: "Fase 6 · engorde", presentation: "45.4 kg (100 lb)" },
+  9: { use: "Alimento peletizado para conejos.", stage: "Todas las etapas", presentation: "45.4 kg (100 lb)" },
+  23: { use: "Suplemento forrajero para ganado.", stage: "Etapa según el manejo del ganado", presentation: "45.4 kg (100 lb)" },
+  36: { use: "Alimento para cerdos en engorde.", stage: "Fase 7 · engorde", presentation: "45.4 kg (100 lb)" }
+};

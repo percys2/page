@@ -1,0 +1,116 @@
+(function () {
+  "use strict";
+
+  const products = window.AGROCENTRO_PRODUCTS || [];
+  const guides = window.AGROCENTRO_FEED_GUIDES || {};
+  const images = window.AGROCENTRO_IMAGE_OVERRIDES || {};
+  const types = { alimentos: "Alimentos balanceados", medicinas: "Medicina veterinaria", herramientas: "Herramientas" };
+  const categories = { aves: "Aves", cerdos: "Cerdos", equinos: "Caballos", conejos: "Conejos", perros: "Perros", gatos: "Gatos", otros: "Uso general" };
+  const stages = {
+    preinicio: "Preinicio", inicio: "Inicio / crianza", desarrollo: "Crecimiento / desarrollo",
+    engorde: "Engorde / finalización", produccion: "Producción / postura", gestacion: "Gestación",
+    lactancia: "Lactancia", mantenimiento: "Adulto / mantenimiento / trabajo"
+  };
+  // Solo se agrupan presentaciones de la misma identidad comercial.
+  const families = [
+    { key: "dogui-cachorros", name: "Dogui Cachorros", ids: [16, 17] },
+    { key: "don-gato-adultos", name: "Don Gato Adultos", ids: [18, 19] },
+    { key: "gati-mar-tierra", name: "Gati Mar y Tierra", ids: [20, 21] },
+    { key: "pet-master-adultos", name: "Pet Master Adultos", ids: [34, 33] },
+    { key: "pet-master-cachorros", name: "Pet Master Cachorros", ids: [40, 35] }
+  ];
+  const familyById = new Map(families.flatMap((family) => family.ids.map((id) => [id, family])));
+  // Secuencia de exhibición; no constituye un programa ni una ración recomendada.
+  const feedOrder = [4, 2, 1, 38, 39, 11, 10, 3, 24, 25, 37, 26, 27, 28, 31, 32, 36, 29, 30, 8, 6, 7, 5, 23, 9, 13, 16, 17, 40, 35, 12, 14, 15, 34, 33, 18, 19, 20, 21];
+  const feedRank = new Map(feedOrder.map((id, index) => [id, index]));
+  const pigLines = { estandar: "Línea estándar", premium: "Línea premium" };
+  function getPigLine(product) {
+    return [27,28].includes(product.id) ? "estandar" : ([31,32].includes(product.id) ? "premium" : "");
+  }
+
+  function getGuide(product) {
+    const guide = product && product.type === "alimentos" ? guides[product.id] : null;
+    if (!guide) return null;
+    return { ...guide, presentation: (guide.presentation || "").split(/\s*·\s*línea/i)[0] };
+  }
+  function getImage(product) { return images[product.id] || product.image || "./assets/logo.png"; }
+  function getFallbackImage(product) {
+    return ({
+      33: "./assets/petmaster-catalog-v10.webp",
+      35: "./assets/petmaster-cachorro-1lb-catalog-v3.webp",
+      38: "./assets/posturina-fase1-original-v31.png",
+      39: "./assets/posturina-hp-original-v31.png"
+    })[product.id] || "";
+  }
+  function getName(product) { return familyById.get(product.id)?.name || product.name; }
+  function getOrderName(product) {
+    const presentation = getGuide(product)?.presentation;
+    return familyById.has(product.id) && presentation ? `${getName(product)} — ${presentation}` : product.name;
+  }
+  function getVariants(product) {
+    const ids = familyById.get(product.id)?.ids || [product.id];
+    return ids.map((id) => products.find((entry) => entry.id === id)).filter(Boolean);
+  }
+  function getAvailableCategories() {
+    return Object.keys(categories).filter((category) => products.some((product) => product.type === "alimentos" && product.category === category));
+  }
+  function getAvailableStages(category, pigLine = "all") {
+    return Object.keys(stages).filter((stage) => products.some((product) =>
+      product.type === "alimentos" && (category === "all" || product.category === category) &&
+      (pigLine === "all" || getPigLine(product) === pigLine) && getGuide(product)?.stages?.includes(stage)
+    ));
+  }
+  function normalizeFilters(state) {
+    if (!["all", ...Object.keys(types)].includes(state.type)) state.type = "all";
+    if (state.type !== "alimentos" || state.category !== "cerdos" || !pigLines[state.pigLine]) state.pigLine = "all";
+    if (state.type !== "alimentos") {
+      state.category = "all";
+      state.stage = "all";
+    } else {
+      if (!["all", ...getAvailableCategories()].includes(state.category)) state.category = "all";
+      if (!["all", ...getAvailableStages(state.category, state.pigLine)].includes(state.stage)) state.stage = "all";
+    }
+    return state;
+  }
+  function compareProducts(a, b) {
+    const typeOrder = Object.keys(types);
+    const typeDiff = typeOrder.indexOf(a.type) - typeOrder.indexOf(b.type);
+    if (typeDiff) return typeDiff;
+    if (a.type === "alimentos") {
+      const difference = (feedRank.get(a.id) ?? 999) - (feedRank.get(b.id) ?? 999);
+      if (difference) return difference;
+    }
+    return getName(a).localeCompare(getName(b), "es", { numeric: true });
+  }
+  function groupProducts(entries, prefer = () => false) {
+    const positions = new Map();
+    const grouped = [];
+    entries.forEach((product) => {
+      const key = familyById.get(product.id)?.key || product.id;
+      if (positions.has(key)) {
+        const index = positions.get(key);
+        if (prefer(product) && !prefer(grouped[index])) grouped[index] = product;
+      } else {
+        positions.set(key, grouped.length);
+        grouped.push(product);
+      }
+    });
+    return grouped;
+  }
+  function sectionName(product) {
+    const type = types[product.type] || "Productos";
+    if (product.type === "alimentos" && product.category === "cerdos") {
+      const group = pigLines[getPigLine(product)] || ([24,25,37,26].includes(product.id) ? "Lechones · NeoPigg" : (product.id === 36 ? "Finalización · Pur-A-Lean" : "Cerdas reproductoras"));
+      return `Cerdos · ${group}`;
+    }
+    if (product.type === "alimentos" && product.category === "aves") {
+      const group = [4,2,1].includes(product.id) ? "Pollos de engorde" : ([38,39,11].includes(product.id) ? "Postura" : "Aves de patio y gallos");
+      return `Aves · ${group}`;
+    }
+    return product.type === "alimentos" ? `${type} · ${categories[product.category] || "Otros"}` : type;
+  }
+  window.AGROCENTRO_CATALOG = {
+    products, types, categories, stages, pigLines, getPigLine, getGuide, getImage, getFallbackImage, getName, getOrderName, getVariants,
+    getAvailableCategories, getAvailableStages, normalizeFilters, compareProducts, groupProducts, sectionName
+  };
+})();

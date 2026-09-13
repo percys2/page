@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Resolvé tus dudas sobre alimentos para aves, cerdos, perros, gatos y caballos. Etapas de uso, presentaciones y pedidos en AgroCentro Nica.">
+  <meta name="theme-color" content="#073a29">
+  <link rel="icon" type="image/png" href="./assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=29">
+  <link rel="stylesheet" href="usage-guide.css?v=34">
+  <link rel="stylesheet" href="marketing.css?v=35">
+  <link rel="stylesheet" href="mobile.css?v=36">
+  <title>Guía de uso y preguntas frecuentes | AgroCentro Nica</title>
+</head>
+<body class="guide-page">
+  <a class="skip-link" href="#contenido">Ir a las preguntas frecuentes</a>
+  <div class="utility-bar">
+    <div class="shell utility-inner">
+      <span>Pedidos y consultas por WhatsApp</span>
+      <span>Retiro en Diriomo y Masatepe</span>
+      <a href="tel:+50582403490">Tel. 8240 3490</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="shell header-main">
+      <a class="brand" href="index.html">
+        <img src="./assets/logo.png" alt="AgroCentro Nica" width="64" height="56">
+        <span><strong>AgroCentro Nica</strong><small>Diriomo · Masatepe</small></span>
+      </a>
+
+      <form class="header-search" action="products.html" method="get" role="search">
+        <label class="sr-only" for="site-search">Buscar productos</label>
+        <input id="site-search" name="q" type="search" placeholder="Buscar alimento, medicina o herramienta">
+        <button type="submit">Buscar</button>
+      </form>
+
+      <div class="header-actions">
+        <a class="whatsapp-link" href="https://wa.me/50582403490?text=Hola%2C%20quiero%20consultar%20un%20producto" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a class="order-link" href="products.html?cart=open">Mi pedido <span data-cart-count>0</span></a>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+
+    <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+      <div class="shell nav-inner">
+        <a href="index.html">Inicio</a>
+        <a href="products.html">Tienda</a>
+        <a class="active" href="guia-de-uso.html" aria-current="page">Guía de uso</a>
+        <a href="contact.html">Contacto</a>
+      </div>
+    </nav>
+  </header>
+
+
+  <main id="contenido" class="guide-main">
+    <section class="guide-hero" aria-labelledby="guide-title">
+      <div class="shell">
+        <p class="breadcrumb"><a href="index.html">Inicio</a> / Guía de uso</p>
+        <div class="guide-hero-grid">
+          <div>
+            <p class="guide-kicker">Preguntas frecuentes · AgroCentro Nica</p>
+            <h1 id="guide-title">El alimento correcto empieza con una buena guía.</h1>
+            <p class="guide-intro">Conocé para qué sirve cada saco, en qué etapa usarlo y cómo pedirlo. Respuestas prácticas para tu granja y tus animales.</p>
+          </div>
+          <div class="guide-featured" aria-label="Preguntas destacadas">
+            <strong>EMPEZÁ POR AQUÍ</strong>
+            <a href="#pollos-engorde">¿Qué alimento le toca a mi pollo? <span aria-hidden="true">↗</span></a>
+            <a href="#lineas-cerdos">Cerdos: línea estándar o premium <span aria-hidden="true">↗</span></a>
+            <a href="#pedido-whatsapp">¿Cómo funciona mi pedido? <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="shell guide-layout">
+      <aside class="guide-sidebar">
+        <div id="guide-controls" hidden>
+          <h2>Buscá por tema</h2>
+          <div class="guide-topic-list" role="group" aria-label="Filtrar preguntas por tema">
+            <button type="button" data-guide-topic="all" aria-pressed="true">Todas las preguntas</button>
+            <button type="button" data-guide-topic="aves" aria-pressed="false">Aves</button>
+            <button type="button" data-guide-topic="cerdos" aria-pressed="false">Cerdos</button>
+            <button type="button" data-guide-topic="mascotas" aria-pressed="false">Perros y gatos</button>
+            <button type="button" data-guide-topic="equinos" aria-pressed="false">Caballos</button>
+            <button type="button" data-guide-topic="compra" aria-pressed="false">Presentaciones y pedidos</button>
+          </div>
+        </div>
+        <div class="guide-sidebar-note">¿Ya sabés qué necesitás?<br><a href="products.html">Volver a la tienda →</a></div>
+      </aside>
+      <div class="guide-content">
+        <label class="guide-search-label" for="guide-search">¿Qué querés saber?</label>
+        <input class="guide-search" id="guide-search" type="search" placeholder="Ej. postura, NeoPigg, edad o presentación" autocomplete="off" aria-controls="guide-questions">
+        <p class="guide-result-count" id="guide-result-count" role="status" aria-live="polite" hidden></p>
+        <div id="guide-questions"><p>Las fichas de la tienda incluyen el uso, la etapa y la presentación de cada alimento. <a href="products.html?type=alimentos">Consultá los alimentos aquí</a>.</p></div>
+        <div class="guide-empty" id="guide-empty" hidden>
+          <h2>No encontramos esa pregunta</h2>
+          <p>Probá con el nombre del producto o palabras como “edad”, “postura” o “presentación”. También podés consultarnos abajo.</p>
+          <button id="guide-reset" type="button">Ver todas las preguntas</button>
+        </div>
+        <section class="guide-contact" aria-labelledby="guide-contact-title">
+          <h2 id="guide-contact-title">Cada granja tiene sus propias preguntas.</h2>
+          <p>Contanos qué animal tenés, su edad y qué alimento está consumiendo. Si tenés el saco a mano, mandanos una foto de la etiqueta.</p>
+          <a href="https://wa.me/50582403490?text=Hola%2C%20AgroCentro%20Nica.%20Necesito%20orientaci%C3%B3n%20para%20elegir%20un%20alimento.%0A%0AAnimal%3A%20%0AEdad%3A%20%0APeso%20aproximado%3A%20%0AAlimento%20actual%3A%20%0AMi%20consulta%3A%20" target="_blank" rel="noopener noreferrer">Hacer mi consulta por WhatsApp ↗</a>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer footer-renewed">
+    <div class="shell">
+      <div class="footer-intro">
+        <div class="footer-identity">
+          <a href="index.html" aria-label="AgroCentro Nica, inicio"><img src="./assets/logo.png" alt="" width="58" height="52" loading="lazy"></a>
+          <div><strong>AgroCentro Nica</strong><p>Para el trabajo de cada día en tu granja.</p></div>
+        </div>
+        <p class="footer-description">Alimentos balanceados, productos veterinarios y herramientas, con atención directa para ayudarte a elegir.</p>
+      </div>
+      <div class="footer-columns">
+        <nav aria-labelledby="footer-products-title">
+          <h2 id="footer-products-title">Encontrá lo que buscás</h2>
+          <a href="products.html?type=alimentos">Alimentos balanceados</a>
+          <a href="products.html">Todos los productos</a>
+          <a href="guia-de-uso.html">Guía y preguntas frecuentes</a>
+        </nav>
+        <div>
+          <h2>Retiro y entrega</h2>
+          <dl class="footer-places">
+            <div><dt><a href="contact.html#locations-title">Diriomo</a></dt><dd>Granada</dd></div>
+            <div><dt><a href="contact.html#locations-title">Masatepe</a></dt><dd>Masaya</dd></div>
+            <div><dt>¿Necesitás entrega?</dt><dd>Consultanos cobertura y costo para tu ubicación.</dd></div>
+          </dl>
+        </div>
+        <div class="footer-contact">
+          <h2>Hablemos de tu pedido</h2>
+          <a class="footer-phone" href="tel:+50582403490">+505 8240 3490</a>
+          <a href="mailto:percyscastillo2013@outlook.com">percyscastillo2013@outlook.com</a>
+          <a href="products.html?cart=open">Revisar mi pedido</a>
+          <a href="contact.html">Contacto y sucursales</a>
+        </div>
+      </div>
+      <div class="footer-end">
+        <p>Te confirmamos disponibilidad, precios y total antes de preparar tu pedido.</p>
+        <p>© 2026 AgroCentro Nica · Diriomo y Masatepe</p>
+      </div>
+    </div>
+  </footer>
+  <script src="catalog-data.js?v=32"></script>
+  <script src="image-overrides.js?v=32"></script>
+  <script src="feed-guides-v12.js?v=31"></script>
+  <script src="catalog-model.js?v=32"></script>
+  <script src="site.js?v=30"></script>
+  <script src="usage-guide.js?v=34"></script>
+</body>
+</html>
