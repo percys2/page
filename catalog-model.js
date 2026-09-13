@@ -4,8 +4,26 @@
   const products = window.AGROCENTRO_PRODUCTS || [];
   const guides = window.AGROCENTRO_FEED_GUIDES || {};
   const images = window.AGROCENTRO_IMAGE_OVERRIDES || {};
-  const types = { alimentos: "Alimentos balanceados", medicinas: "Medicina veterinaria", herramientas: "Herramientas" };
+  const types = { alimentos: "Alimentos balanceados", medicinas: "Productos veterinarios", herramientas: "Herramientas" };
   const categories = { aves: "Aves", cerdos: "Cerdos", equinos: "Caballos", conejos: "Conejos", perros: "Perros", gatos: "Gatos", otros: "Uso general" };
+  const vetCategories = {
+    vitaminas: "Vitaminas y minerales", suplementos: "Suplementos y electrolitos",
+    antibioticos: "Antibióticos", antiparasitarios: "Antiparasitarios",
+    antiinflamatorios: "Antiinflamatorios y analgésicos", respiratorios: "Productos respiratorios",
+    antisepticos: "Antisépticos", dermatologicos: "Cuidado de la piel",
+    hormonales: "Productos hormonales", "por-confirmar": "Categoría por confirmar"
+  };
+  function getVetInfo(product) {
+    return product?.type === "medicinas" ? (window.AGROCENTRO_VETERINARY || {})[product.id] || null : null;
+  }
+  function getVetCategory(product) { return getVetInfo(product)?.category || "por-confirmar"; }
+  function getAvailableVetCategories() {
+    return Object.keys(vetCategories).filter(key => products.some(p => p.type === "medicinas" && getVetCategory(p) === key));
+  }
+  function getAvailableVetSpecies(category = "all") {
+    return [...new Set(products.filter(p => p.type === "medicinas" && (category === "all" || getVetCategory(p) === category))
+      .flatMap(p => getVetInfo(p)?.species || []))].sort((a,b) => a.localeCompare(b,"es"));
+  }
   const stages = {
     preinicio: "Preinicio", inicio: "Inicio / crianza", desarrollo: "Crecimiento / desarrollo",
     engorde: "Engorde / finalización", produccion: "Producción / postura", gestacion: "Gestación",
@@ -66,10 +84,10 @@
       39: "./assets/posturina-hp-original-v31.png"
     })[product.id] || "";
   }
-  function getName(product) { return familyById.get(product.id)?.name || product.name; }
+  function getName(product) { return getVetInfo(product)?.name || familyById.get(product.id)?.name || product.name; }
   function getOrderName(product) {
     const presentation = getGuide(product)?.presentation;
-    return familyById.has(product.id) && presentation ? `${getName(product)} — ${presentation}` : product.name;
+    return familyById.has(product.id) && presentation ? `${getName(product)} — ${presentation}` : getName(product);
   }
   function getVariants(product) {
     const ids = familyById.get(product.id)?.ids || [product.id];
@@ -86,6 +104,11 @@
   }
   function normalizeFilters(state) {
     if (!["all", ...Object.keys(types)].includes(state.type)) state.type = "all";
+    if (state.type !== "medicinas") { state.vetCategory = "all"; state.vetSpecies = "all"; }
+    else {
+      if (!["all", ...getAvailableVetCategories()].includes(state.vetCategory)) state.vetCategory = "all";
+      if (!["all", ...getAvailableVetSpecies(state.vetCategory)].includes(state.vetSpecies)) state.vetSpecies = "all";
+    }
     if (state.type !== "alimentos" || state.category !== "cerdos" || !pigLines[state.pigLine]) state.pigLine = "all";
     if (state.type !== "alimentos") {
       state.category = "all";
@@ -102,6 +125,11 @@
     if (typeDiff) return typeDiff;
     if (a.type === "alimentos") {
       const difference = (feedRank.get(a.id) ?? 999) - (feedRank.get(b.id) ?? 999);
+      if (difference) return difference;
+    }
+    if (a.type === "medicinas") {
+      const order = Object.keys(vetCategories);
+      const difference = order.indexOf(getVetCategory(a)) - order.indexOf(getVetCategory(b));
       if (difference) return difference;
     }
     return getName(a).localeCompare(getName(b), "es", { numeric: true });
@@ -123,6 +151,7 @@
   }
   function sectionName(product) {
     const type = types[product.type] || "Productos";
+    if (product.type === "medicinas") return vetCategories[getVetCategory(product)];
     if (product.type === "alimentos" && product.category === "cerdos") {
       const group = pigLines[getPigLine(product)] || ([24,25,37,26].includes(product.id) ? "Lechones · NeoPigg" : (product.id === 36 ? "Finalización · Pur-A-Lean" : "Cerdas reproductoras"));
       return `Cerdos · ${group}`;
@@ -134,6 +163,7 @@
     return product.type === "alimentos" ? `${type} · ${categories[product.category] || "Otros"}` : type;
   }
   window.AGROCENTRO_CATALOG = {
+    vetCategories, getVetInfo, getVetCategory, getAvailableVetCategories, getAvailableVetSpecies,
     products, types, categories, stages, pigLines, getPigLine, getGuide, getImage, getResponsiveAttributes, setResponsiveSource, getFallbackImage, getName, getOrderName, getVariants,
     getAvailableCategories, getAvailableStages, normalizeFilters, compareProducts, groupProducts, sectionName
   };

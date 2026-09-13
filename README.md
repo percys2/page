@@ -39,3 +39,8 @@ de los sacos dependen de ella. Las imágenes nuevas sin variantes siguen funcion
   las fuentes; no se necesita red para reconstruir los bundles existentes.
 - Los recursos con hash tienen caché prolongada. HTML y scripts conservan
   revalidación; al cambiar los scripts, actualizá su parámetro de versión.
+# Fichas de veterinaria
+
+`veterinary-data.js` guarda los datos descriptivos y las fuentes de los 27 productos veterinarios. La categoría del producto y las especies se filtran por separado. Un valor `null` o una lista vacía identifica información pendiente; no debe completarse deduciendo una fórmula por el nombre comercial.
+
+Antes de actualizar una ficha, contrastar el envase exacto y su fuente. Mantener nombre, descripción y precauciones de `catalog-data.js` coherentes con la ficha. Las presentaciones corresponden a las fotografías y no certifican existencias. No se incluyen pautas de tratamiento. Al modificar JavaScript, actualizar su versión en el HTML; al modificar estilos, regenerar el bundle y su referencia de caché.

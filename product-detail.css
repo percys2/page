@@ -42,6 +42,15 @@
 .store-page .modal-order-feedback { grid-column: 1 / -1; margin: 0; padding: 8px 10px; font-size: .875rem; line-height: 1.4; background: var(--green-050); color: var(--green-950); overflow-wrap: anywhere; }
 .store-page .modal-order-feedback[hidden] { display: none; }
 .store-page .modal-product-details { grid-area: details; min-width: 0; margin-top: 6px; border-top: 1px solid var(--line); }
+.store-page .vet-card-species { margin: 0; color: var(--muted); font-size: .875rem; line-height: 1.5; }
+.store-page .vet-card-species span { font-weight: 700; color: var(--green-950); }
+.store-page .vet-facts { margin: 0; }
+.store-page .vet-facts > div { display: grid; grid-template-columns: minmax(100px, .8fr) minmax(0, 1.5fr); gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.store-page .vet-facts dt { color: var(--muted); font-size: .875rem; }
+.store-page .vet-facts dd { margin: 0; color: var(--green-950); font-weight: 600; overflow-wrap: anywhere; }
+.store-page .vet-identity-note { margin-top: 14px !important; padding-left: 12px; border-left: 3px solid var(--maize); font-size: .875rem; }
+.store-page .vet-sources a { color: var(--green-950); text-underline-offset: 3px; }
+.store-page .vet-source-date { margin-top: 14px !important; font-size: .875rem; }
 .store-page .product-information-section { margin: 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: #fff; overflow: visible; }
 .store-page .product-information-section summary { display: flex; justify-content: space-between; align-items: center; gap: 14px; min-height: 48px; padding: 14px 0; list-style: none; color: var(--green-950); font-size: 1rem; font-weight: 800; cursor: pointer; }
 .store-page .product-information-section summary::-webkit-details-marker { display: none; }

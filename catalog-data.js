@@ -709,129 +709,129 @@ window.AGROCENTRO_PRODUCTS = [
   // ========== MEDICINAS ==========
   {
     id: 200,
-    name: "Amoxi LH500",
+    name: "Amoxi-LH 500",
     image: "./assets/Amoxi Lh500.jpg",
-    description: "Antibiotico Amoxicilina LH500",
+    description: "Antibacteriano veterinario con amoxicilina, presentado en polvo oral.",
     category: "otros",
     type: "medicinas",
-    instructions: "Antibiotico de amplio espectro. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La selección de este producto y sus precauciones requieren valoración del médico veterinario y revisión de la etiqueta de la presentación exacta."
   },
   {
     id: 201,
     name: "Bolos Uterinos",
     image: "./assets/Bolos Uterinos.jpg",
-    description: "Bolos uterinos para ganado",
+    description: "Producto veterinario que combina tetraciclina y estradiol; la etiqueta lo clasifica como antibacteriano.",
     category: "otros",
     type: "medicinas",
-    instructions: "Tratamiento intrauterino para ganado. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La selección de este producto y sus precauciones requieren valoración del médico veterinario y revisión de la etiqueta de la presentación exacta."
   },
   {
     id: 202,
-    name: "Bromexhina",
+    name: "Bromhexina LH 2%",
     image: "./assets/Broomexihina.jpg",
-    description: "Expectorante veterinario",
+    description: "Producto respiratorio veterinario con bromhexina, un componente mucolítico que ayuda a fluidificar secreciones.",
     category: "otros",
     type: "medicinas",
-    instructions: "Expectorante y mucolitico. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La selección de este producto y sus precauciones requieren valoración del médico veterinario y revisión de la etiqueta de la presentación exacta."
   },
   {
     id: 203,
-    name: "Calfstonic",
+    name: "Calfostonic",
     image: "./assets/Calfstonic.jpg",
-    description: "Suplemento vitaminico para terneros",
+    description: "Complemento nutricional que aporta minerales, vitaminas, oligoelementos y aminoácidos para diversas especies animales.",
     category: "otros",
     type: "medicinas",
-    instructions: "Tonico vitaminico para terneros. Consultar etiqueta del producto para dosis exactas."
+    instructions: "Confirmá las precauciones de esta presentación en la etiqueta del fabricante."
   },
   {
     id: 204,
-    name: "Chicken Vit Plus",
+    name: "Chickenvit-Plus",
     image: "./assets/Chicken vit plus.jpg",
-    description: "Vitaminas para aves",
+    description: "Complemento nutricional líquido para aves con vitaminas y aminoácidos.",
     category: "aves",
     type: "medicinas",
-    instructions: "Complejo vitaminico para aves. Consultar etiqueta del producto para dosis exactas."
+    instructions: "Confirmá las precauciones de esta presentación en la etiqueta del fabricante."
   },
   {
     id: 205,
-    name: "Dolfen",
+    name: "Dolfen 100 mg/ml",
     image: "./assets/dolfen.jpg",
-    description: "Antiinflamatorio veterinario",
+    description: "Antiinflamatorio veterinario no esteroideo con ketoprofeno, con propiedades analgésicas y antipiréticas.",
     category: "otros",
     type: "medicinas",
-    instructions: "Antiinflamatorio y analgesico. Consultar etiqueta del producto para dosis exactas."
+    instructions: "El prospecto señala contraindicaciones por hipersensibilidad al ketoprofeno e insuficiencia renal grave. Mantener fuera del alcance de los niños."
   },
   {
     id: 206,
-    name: "Doxiclina LH500",
+    name: "Doxiciclina LH 500",
     image: "./assets/Doxiclina Lh500.jpg",
-    description: "Antibiotico Doxiciclina LH500",
+    description: "Antibacteriano veterinario con doxiciclina, presentado en polvo oral.",
     category: "otros",
     type: "medicinas",
-    instructions: "Antibiotico de amplio espectro. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La selección de este producto y sus precauciones requieren valoración del médico veterinario y revisión de la etiqueta de la presentación exacta."
   },
   {
     id: 207,
-    name: "Electrolitos y Aminoacidos",
+    name: "Electrolitos + Aminoácidos + Vitaminas",
     image: "./assets/electrolitos.jpg",
-    description: "Suplemento de electrolitos y minerales",
+    description: "Complemento nutricional con sales, aminoácidos y vitaminas, destinado al apoyo del equilibrio de líquidos y electrolitos.",
     category: "otros",
     type: "medicinas",
-    instructions: "Rehidratante con electrolitos. Consultar etiqueta del producto para dosis exactas."
+    instructions: "Confirmá las precauciones de esta presentación en la etiqueta del fabricante."
   },
   {
     id: 208,
-    name: "Eritromicina Avicola",
+    name: "Eritromicina Avícola",
     image: "./assets/eritroomicina avicola.jpg",
-    description: "Antibiotico para aves",
+    description: "Antibacteriano veterinario para aves que combina eritromicina, trimetoprim y sulfametacina.",
     category: "aves",
     type: "medicinas",
-    instructions: "Antibiotico especifico para aves. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La selección de este producto y sus precauciones requieren valoración del médico veterinario y revisión de la etiqueta de la presentación exacta."
   },
   {
     id: 209,
-    name: "Fenbendazol",
+    name: "Fenbendazol 4% · LIVISTO",
     image: "./assets/fenbendazol.jpg",
-    description: "Desparasitante de amplio espectro",
+    description: "Antiparasitario veterinario con fenbendazol, presentado en polvo. La etiqueta fotografiada lo identifica como un producto contra parásitos internos.",
     category: "otros",
     type: "medicinas",
-    instructions: "Antiparasitario interno. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La etiqueta exige receta veterinaria. La etiqueta indica mantenerlo fuera del alcance de niños y animales domésticos."
   },
   {
     id: 210,
-    name: "Ivermectina Oral",
+    name: "Lhivermectin Avícola · LIVISTO",
     image: "./assets/livermectina oral.jpg",
-    description: "Antiparasitario oral",
+    description: "Antiparasitario veterinario para aves cuyo principio activo es ivermectina. El fabricante lo identifica como una solución oral.",
     category: "otros",
     type: "medicinas",
-    instructions: "Ivermectina de administracion oral. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La etiqueta exige receta veterinaria. La etiqueta indica mantenerlo fuera del alcance de niños y animales domésticos."
   },
   {
     id: 211,
-    name: "Oxitolac",
+    name: "Oxitolac · LIVISTO",
     image: "./assets/oxitolac.jpg",
-    description: "Oxitocina veterinaria",
+    description: "Preparado hormonal veterinario de LIVISTO cuyo principio activo es oxitocina. La presentación fotografiada es una solución inyectable.",
     category: "otros",
     type: "medicinas",
-    instructions: "Oxitocina para uso veterinario. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La selección de este producto y sus precauciones requieren valoración del médico veterinario y revisión de la etiqueta de la presentación exacta."
   },
   {
     id: 212,
-    name: "Selevit E",
+    name: "Selevit-E · LIVISTO",
     image: "./assets/selevit e.jpg",
-    description: "Selenio y Vitamina E",
+    description: "Preparado veterinario nutricional que combina vitamina E y selenio. El fabricante lo clasifica entre sus productos para carencias nutricionales.",
     category: "otros",
     type: "medicinas",
-    instructions: "Suplemento de selenio y vitamina E. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La etiqueta exige receta veterinaria."
   },
   {
     id: 213,
-    name: "Vitamina K",
+    name: "Vitamina K-LH · LIVISTO",
     image: "./assets/vitamina k.jpg",
-    description: "Vitamina K inyectable",
+    description: "Preparado veterinario de vitamina K en polvo soluble. Contiene menadiona y se relaciona con los procesos normales de coagulación.",
     category: "otros",
     type: "medicinas",
-    instructions: "Vitamina K para uso veterinario. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La etiqueta exige receta veterinaria. La etiqueta indica mantenerlo fuera del alcance de niños y animales domésticos."
   },
 
   // ========== HERRAMIENTAS NUEVAS ==========
@@ -1055,119 +1055,119 @@ window.AGROCENTRO_PRODUCTS = [
   // ========== MEDICINAS NUEVAS ==========
   {
     id: 238,
-    name: "Antitermico AleBet",
+    name: "Antitérmico Refresh · Ale-Bet",
     image: "./assets/antitermico-AleBet.jpg",
-    description: "Antitermico y analgesico veterinario",
+    description: "Fórmula veterinaria para aves con betaína, vitamina C, electrolitos y mentol. El fabricante la describe como apoyo al equilibrio hídrico frente al estrés por calor.",
     category: "otros",
     type: "medicinas",
-    instructions: "Reduce fiebre y alivia dolor. Consultar etiqueta del producto para dosis exactas."
+    instructions: "Confirmá las precauciones de esta presentación en la etiqueta del fabricante."
   },
   {
     id: 239,
-    name: "Ascorbol",
+    name: "Ascorbol Inyectable · Aranda",
     image: "./assets/ascorbol.webp",
-    description: "Vitamina C veterinaria",
+    description: "Multivitamínico veterinario para aves con vitaminas del complejo B, C y K3. Aranda lo describe como un preparado de apoyo metabólico.",
     category: "otros",
     type: "medicinas",
-    instructions: "Suplemento de vitamina C. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La ficha lo reserva para uso del médico veterinario. Debe mantenerse protegido de la luz y del calor, sin congelación. Mantener fuera del alcance de niños y animales domésticos."
   },
   {
     id: 240,
-    name: "Azul Piotanico",
+    name: "Azul Piotánico · Aranda",
     image: "./assets/azulpiotanico.webp",
-    description: "Desinfectante azul de metileno",
+    description: "Preparado veterinario tópico con ácido tánico y violeta de genciana. El fabricante lo clasifica como antiséptico, cicatrizante y repelente de insectos.",
     category: "otros",
     type: "medicinas",
-    instructions: "Antiseptico y desinfectante. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La ficha advierte evitar el contacto con ojos y mucosas y no ingerir el producto. La ficha lo reserva para uso del médico veterinario. Mantener fuera del alcance de niños y animales domésticos."
   },
   {
     id: 241,
-    name: "Bronccowell",
+    name: "Broncowell · Wellco",
     image: "./assets/bronccowell.webp",
-    description: "Tratamiento respiratorio veterinario",
+    description: "Broncowell en polvo soluble. Consultá la identificación completa de esta fórmula antes de elegir el producto.",
     category: "otros",
     type: "medicinas",
-    instructions: "Para problemas respiratorios. Consultar etiqueta del producto para dosis exactas."
+    instructions: "Confirmá las precauciones de esta presentación en la etiqueta del fabricante."
   },
   {
     id: 242,
-    name: "Dermacalm",
+    name: "Dermacalm Shampoo",
     image: "./assets/dermacalm.jpeg",
-    description: "Tratamiento dermatologico veterinario",
+    description: "Shampoo veterinario con acción calmante e hidratante para el cuidado de la piel de perros y gatos.",
     category: "otros",
     type: "medicinas",
-    instructions: "Para problemas de piel. Consultar etiqueta del producto para dosis exactas."
+    instructions: "Evitar el contacto con los ojos."
   },
   {
     id: 243,
-    name: "Dermatryl",
+    name: "Dermatryl Medicado Shampoo",
     image: "./assets/dermatryl.png",
-    description: "Spray dermatologico veterinario",
+    description: "Shampoo dermatológico para perros y gatos, formulado para la limpieza de escamas y exceso de grasa de la piel.",
     category: "otros",
     type: "medicinas",
-    instructions: "Tratamiento topico para heridas y piel. Consultar etiqueta del producto para dosis exactas."
+    instructions: "Confirmá las precauciones de esta presentación en la etiqueta del fabricante."
   },
   {
     id: 244,
-    name: "Desparasitante",
+    name: "Fripets Tabletas",
     image: "./assets/desparasitante.jpg",
-    description: "Desparasitante de amplio espectro",
+    description: "Antiparasitario interno en tabletas para perros y gatos.",
     category: "otros",
     type: "medicinas",
-    instructions: "Elimina parasitos internos. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La selección de este producto y sus precauciones requieren valoración del médico veterinario y revisión de la etiqueta de la presentación exacta."
   },
   {
     id: 245,
-    name: "Electrowell",
+    name: "Electrowell Polvo",
     image: "./assets/electrowell.jpeg",
-    description: "Electrolitos veterinarios",
+    description: "Suplemento veterinario de vitaminas y electrolitos en polvo soluble.",
     category: "otros",
     type: "medicinas",
-    instructions: "Rehidratante con electrolitos. Consultar etiqueta del producto para dosis exactas."
+    instructions: "Confirmá las precauciones de esta presentación en la etiqueta del fabricante."
   },
   {
     id: 246,
     name: "Endal Plus",
     image: "./assets/endalplus.jpeg",
-    description: "Desparasitante interno",
+    description: "Antiparasitario interno en tabletas masticables para perros.",
     category: "otros",
     type: "medicinas",
-    instructions: "Antiparasitario de amplio espectro. Consultar etiqueta del producto para dosis exactas."
+    instructions: "Mantener fuera del alcance de los niños. La ficha peruana indica venta bajo receta veterinaria."
   },
   {
     id: 247,
-    name: "Enrozol",
+    name: "Enrozol 10%",
     image: "./assets/enrozol.jpeg",
-    description: "Antibiotico veterinario",
+    description: "Antibiótico veterinario de Aranda con enrofloxacina, presentado como solución para aves.",
     category: "otros",
     type: "medicinas",
-    instructions: "Antibiotico de uso veterinario. Consultar etiqueta del producto para dosis exactas."
+    instructions: "Conservar protegido de la luz y del calor, fuera del alcance de los niños. El fabricante señala períodos de retiro para carne y huevos; verificar la etiqueta local con el veterinario."
   },
   {
     id: 248,
-    name: "Eriprin",
+    name: "Eriprim Pets",
     image: "./assets/eriprin.jpeg",
-    description: "Antibiotico eritromicina",
+    description: "Combinación antibacteriana veterinaria de Laboratorios Reveex, en polvo hidrosoluble para aves y conejos.",
     category: "otros",
     type: "medicinas",
-    instructions: "Antibiotico de amplio espectro. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La selección de este producto y sus precauciones requieren valoración del médico veterinario y revisión de la etiqueta de la presentación exacta."
   },
   {
     id: 249,
-    name: "Fibronex",
+    name: "Fipronex Spray",
     image: "./assets/fibronex.png",
-    description: "Suplemento de fibra veterinario",
+    description: "Antiparasitario externo de Agrovet Market con fipronil para perros y gatos.",
     category: "otros",
     type: "medicinas",
-    instructions: "Suplemento digestivo. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La selección de este producto y sus precauciones requieren valoración del médico veterinario y revisión de la etiqueta de la presentación exacta."
   },
   {
     id: 250,
-    name: "Fortalizador",
+    name: "Fortalizador Avícola Farbiovet",
     image: "./assets/fortalizador.jpeg",
-    description: "Vitaminas y minerales fortalecedores",
+    description: "Suplemento vitamínico en polvo de Farbiopharma, destinado al apoyo nutricional de las aves.",
     category: "otros",
     type: "medicinas",
-    instructions: "Suplemento vitaminico fortalecedor. Consultar etiqueta del producto para dosis exactas."
+    instructions: "La página del fabricante indica venta con prescripción veterinaria."
   }
 ];

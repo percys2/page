@@ -27,6 +27,8 @@
     category: "all",
     stage: "all",
     pigLine: "all",
+    vetCategory: "all",
+    vetSpecies: "all",
     query: "",
     sort: "default",
     visible: PAGE_SIZE,
@@ -154,6 +156,10 @@
     return categoryLabels[category] || "Uso general";
   }
 
+  function productCategoryLabel(product) {
+    return product.type === "medicinas" ? MODEL.vetCategories[MODEL.getVetCategory(product)] : labelCategory(product.category);
+  }
+
   function labelStage(stage) {
     return stageLabels[stage] || "Etapa productiva";
   }
@@ -172,18 +178,22 @@
 
     let filtered = catalog.filter((product) => {
       const guide = getFeedGuide(product);
+      const vet = MODEL.getVetInfo(product);
       const matchesType = state.type === "all" || product.type === state.type;
       const matchesCategory = state.category === "all" || product.category === state.category;
       const matchesStage = state.stage === "all" || Boolean(guide && Array.isArray(guide.stages) && guide.stages.includes(state.stage));
       const matchesLine = state.pigLine === "all" || MODEL.getPigLine(product) === state.pigLine;
+      const matchesVetCategory = state.vetCategory === "all" || (product.type === "medicinas" && MODEL.getVetCategory(product) === state.vetCategory);
+      const matchesVetSpecies = state.vetSpecies === "all" || Boolean(vet?.species?.includes(state.vetSpecies));
       const searchable = normalizeText([
         product.name,
         MODEL.getName(product),
         MODEL.pigLines[MODEL.getPigLine(product)] || "",
-        guide ? "" : product.description,
-        guide ? "" : product.instructions,
+        guide ? "" : (vet?.summary || product.description),
+        guide || vet ? "" : product.instructions,
         labelType(product.type),
-        labelCategory(product.category),
+        productCategoryLabel(product),
+        vet?.species?.join(" "), vet?.composition, vet?.manufacturer, vet?.form, vet?.presentation,
         guide && guide.stage,
         guide && guide.period,
         guide && guide.use,
@@ -198,7 +208,7 @@
         guide && Array.isArray(guide.stages) ? guide.stages.map((stage) => stageSearchTerms[stage] || "").join(" ") : ""
       ].join(" "));
       const matchesQuery = matchesSearch(searchable, query);
-      return matchesType && matchesCategory && matchesStage && matchesLine && matchesQuery;
+      return matchesType && matchesCategory && matchesStage && matchesLine && matchesVetCategory && matchesVetSpecies && matchesQuery;
     });
 
     if (state.sort === "az") {
@@ -224,12 +234,13 @@
     const variants = MODEL.getVariants(product);
     const hasVariants = variants.length > 1;
     const guide = getFeedGuide(product);
-    const description = escapeHtml((guide && guide.use) || product.description || "Consultá presentación y disponibilidad.");
+    const vet = MODEL.getVetInfo(product);
+    const description = escapeHtml(guide?.use || vet?.summary || product.description || "Consultá presentación y disponibilidad.");
     const type = escapeHtml(labelType(product.type));
-    const category = escapeHtml(labelCategory(product.category));
+    const category = escapeHtml(productCategoryLabel(product));
     const stage = guide ? escapeHtml(guide.stage) : "";
     const period = guide ? escapeHtml(guide.period) : "";
-    const presentation = guide && guide.presentation ? escapeHtml(guide.presentation) : "";
+    const presentation = escapeHtml(guide?.presentation || vet?.presentation || "");
     const line = MODEL.pigLines[MODEL.getPigLine(product)];
 
     return `
@@ -242,6 +253,7 @@
           <p class="product-category">${category}</p>
           <button class="product-name" type="button" data-detail="${product.id}">${name}</button>
           <p class="product-description">${description}</p>
+          ${vet ? `<p class="vet-card-species"><span>Especies</span> ${escapeHtml(vet.species?.join(" · ") || "Por confirmar en etiqueta")}</p>` : ""}
           ${line ? `<p class="feed-line">${escapeHtml(line)}</p>` : ""}
           ${guide ? `<p class="feed-stage${guide.agePrograms ? " has-age-programs" : ""}"><span>${stage}</span>${guide.agePrograms ? "" : `<strong>${period}</strong>`}</p>${ageProgramsMarkup(guide)}` : ""}
           ${hasVariants ? `<p class="product-package"><span>Tamaños</span><strong>${variants.length} presentaciones</strong></p>` : (presentation ? `<p class="product-package"><span>Presentación</span><strong>${presentation}</strong></p>` : "")}
@@ -281,7 +293,7 @@
 
     elements.emptyState.hidden = count !== 0;
     elements.loadMoreWrap.hidden = state.visible >= count || count === 0;
-    elements.resetFilters.classList.toggle("visible", Boolean(state.query) || state.type !== "all" || state.category !== "all" || state.stage !== "all");
+    elements.resetFilters.classList.toggle("visible", Boolean(state.query) || state.type !== "all" || state.category !== "all" || state.stage !== "all" || state.vetCategory !== "all" || state.vetSpecies !== "all");
     elements.searchClear.classList.toggle("visible", Boolean(state.query));
     attachImageFallbacks(elements.productsGrid);
   }
@@ -309,6 +321,8 @@
   }
 
   function setFilter(group, value) {
+    if (group === "vetCategory") { state.type = "medicinas"; state.vetCategory = value; state.vetSpecies = "all"; }
+    if (group === "vetSpecies") { state.type = "medicinas"; state.vetSpecies = value; }
     if (group === "type") state.type = value;
     if (group === "category") state.category = value;
     if (group === "stage") state.stage = value;
@@ -353,6 +367,12 @@
     elements.typeFilterSelect.value = state.type;
     elements.typeFilterSelect.closest("label").hidden = true;
     elements.categoryFilterSelect.closest(".filter-block").hidden = !food;
+    elements.vetFilters.hidden = state.type !== "medicinas";
+    elements.vetCategorySelect.innerHTML = option("all", "Todos los tipos") + MODEL.getAvailableVetCategories().map(key => option(key, MODEL.vetCategories[key])).join("");
+    elements.vetSpeciesSelect.innerHTML = option("all", "Todas las especies") + MODEL.getAvailableVetSpecies(state.vetCategory).map(value => option(value, value)).join("");
+    elements.vetCategorySelect.value = state.vetCategory;
+    elements.vetSpeciesSelect.value = state.vetSpecies;
+    elements.sortSelect.querySelector('option[value="default"]').textContent = food ? "Categoría y etapa" : state.type === "medicinas" ? "Tipo de producto" : "Categoría";
     const lines = document.getElementById("pig-lines");
     if (lines) lines.hidden = !food || state.category !== "cerdos";
     document.querySelectorAll("[data-pig-line]").forEach((button) => {
@@ -370,6 +390,8 @@
   }
 
   function resetFilters() {
+    state.vetCategory = "all";
+    state.vetSpecies = "all";
     state.type = "all";
     state.category = "all";
     state.stage = "all";
@@ -394,6 +416,8 @@
     if (state.type !== "all") params.set("type", state.type);
     if (state.stage !== "all") params.set("stage", state.stage);
     if (state.pigLine !== "all") params.set("line", state.pigLine);
+    if (state.vetCategory !== "all") params.set("vet", state.vetCategory);
+    if (state.vetSpecies !== "all") params.set("especie", state.vetSpecies);
     if (state.query) params.set("q", state.query);
     if (state.sort !== "default") params.set("sort", state.sort);
     const queryString = params.toString();
@@ -412,6 +436,9 @@
     const query = params.get("q") || "";
 
     state.type = validTypes.includes(type) ? type : "all";
+    state.vetCategory = params.get("vet") || "all";
+    state.vetSpecies = params.get("especie") || "all";
+    if (state.type === "all" && (state.vetCategory !== "all" || state.vetSpecies !== "all")) state.type = "medicinas";
     state.category = validCategories.includes(category) ? category : "all";
     state.stage = validStages.includes(stage) ? stage : "all";
     state.pigLine = MODEL.pigLines[params.get("line")] ? params.get("line") : "all";
@@ -488,7 +515,7 @@
             <span class="cart-item-name">${name}</span>
             <button class="cart-item-remove" type="button" data-remove="${item.id}">Quitar</button>
           </div>
-          <p class="cart-item-meta">${escapeHtml(labelType(item.type))} · ${escapeHtml(labelCategory(item.category))}</p>
+          <p class="cart-item-meta">${escapeHtml(labelType(item.type))} · ${escapeHtml(product ? productCategoryLabel(product) : labelCategory(item.category))}</p>
           <div class="quantity-control" aria-label="Cantidad de ${name}">
             <button type="button" data-decrease="${item.id}" aria-label="Disminuir cantidad">−</button>
             <input type="number" min="1" max="999" value="${item.qty}" data-quantity="${item.id}" aria-label="Cantidad">
@@ -565,13 +592,14 @@
     const name = escapeHtml(MODEL.getName(product));
     const variants = MODEL.getVariants(product);
     const guide = getFeedGuide(product);
+    const vet = MODEL.getVetInfo(product);
     const initialViewLabel = escapeHtml(activeProductViews[0].label.toLowerCase());
     const nextViewLabel = activeProductViews[1] ? escapeHtml(activeProductViews[1].label.toLowerCase()) : '';
     const guideRow = (label, value) => value ? `<div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>` : '';
     const useHeading = product.type === 'herramientas' ? 'Características y uso' : product.type === 'medicinas' ? 'Información del producto' : 'Uso y etapa recomendada';
-    const presentation = guide?.presentation || product.presentation || 'Consultar presentación';
+    const presentation = guide?.presentation || vet?.presentation || product.presentation || 'Presentación por confirmar';
     const quantityLabel = product.type === 'alimentos' && /(?:100|55)\s*lb\b/.test(presentation) ? 'Cantidad de sacos' : 'Cantidad de unidades';
-    const category = product.category === 'otros' ? labelType(product.type) : `${labelType(product.type)} · ${labelCategory(product.category)}`;
+    const category = vet ? productCategoryLabel(product) : product.category === 'otros' ? labelType(product.type) : `${labelType(product.type)} · ${labelCategory(product.category)}`;
     const variantMarkup = variants.length > 1
       ? `<label class="product-variant-label" for="product-presentation-select"><span>Elegí la presentación</span><select id="product-presentation-select" data-product-variant>${variants.map(variant => `<option value="${variant.id}"${variant.id === product.id ? ' selected' : ''}>${escapeHtml(getFeedGuide(variant)?.presentation || variant.name)}</option>`).join('')}</select></label>`
       : `<div class="product-presentation-fixed"><span>Presentación</span><strong>${escapeHtml(presentation)}</strong></div>`;
@@ -582,7 +610,17 @@
       const value = Array.isArray(entry) ? entry[2] : entry.value;
       return `<div><dt>${escapeHtml(nutrient)}</dt><dd><span>${escapeHtml(qualifier)}</span><strong>${escapeHtml(value)}</strong></dd></div>`;
     }).join('')}</dl></details>` : '';
-    const useMarkup = guide ? `<div class="feed-guide" aria-label="Guía de uso de ${name}">
+    const vetRow = (label, value) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value || 'Por confirmar en etiqueta')}</dd></div>`;
+    const vetFacts = vet ? `<dl class="vet-facts">
+      ${vetRow('Tipo de producto', productCategoryLabel(product))}
+      ${vetRow('Especies indicadas', vet.species?.join(' · '))}
+      ${vetRow('Composición', vet.composition)}
+      ${vetRow('Forma del producto', vet.form)}
+      ${vetRow('Fabricante / marca', vet.manufacturer)}
+      </dl>${vet.identityNote ? `<p class="vet-identity-note">${escapeHtml(vet.identityNote)}</p>` : ''}` : '';
+    const vetPrecautions = vet ? `<details class="product-information-section"><summary>Precauciones</summary><div class="product-information-body"><ul>${(vet.precautions?.length ? vet.precautions : ['Confirmá las precauciones de la presentación exacta en su etiqueta y con el médico veterinario.']).map(value => `<li>${escapeHtml(value)}</li>`).join('')}</ul></div></details>` : '';
+    const vetSources = vet?.sources?.length ? `<details class="product-information-section"><summary>Fuentes de información</summary><div class="product-information-body"><ul class="vet-sources">${vet.sources.filter(source => /^https:\/\//.test(source.url) || source.url.startsWith('./assets/')).map(source => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.label)}</a></li>`).join('')}</ul><p class="vet-source-date">Información revisada: ${escapeHtml(vet.reviewed || 'septiembre de 2026')}. Confirmá siempre el envase y la presentación disponibles.</p></div></details>` : '';
+    const useMarkup = vet ? vetFacts : guide ? `<div class="feed-guide" aria-label="Guía de uso de ${name}">
       ${guideRow('Nombre en catálogo', guide.officialName && guide.officialName !== product.name ? guide.officialName : '')}
       ${guideRow('Animal', labelCategory(product.category))}
       ${guideRow('Etapa productiva', guide.stage)}
@@ -612,7 +650,7 @@
         <h2 id="modal-product-name">${name}</h2>
         ${guide?.stage ? `<p class="product-stage-label">${escapeHtml(guide.stage)}</p>` : ''}
         ${guide?.agePrograms ? ageProgramsMarkup(guide) : guide?.period ? `<p class="product-period">${escapeHtml(guide.period)}</p>` : ''}
-        <p class="modal-description">${escapeHtml(guide?.use || product.description || 'Consultá las características de este producto.')}</p>
+        <p class="modal-description">${escapeHtml(guide?.use || vet?.summary || product.description || 'Consultá las características de este producto.')}</p>
         ${MODEL.getPigLine(product) ? `<p class="feed-line">${escapeHtml(MODEL.pigLines[MODEL.getPigLine(product)])}</p>` : ''}
       </div>
       <div class="modal-product-selection">
@@ -626,8 +664,8 @@
         <p class="modal-order-feedback" data-modal-order-feedback role="status" aria-live="polite" hidden></p>
       </div>
       <div class="modal-product-details">
-        <details class="product-information-section"><summary>${useHeading}</summary><div class="product-information-body">${useMarkup}</div></details>
-        ${benefitsMarkup}${analysisMarkup}
+        <details class="product-information-section"${vet ? ' open' : ''}><summary>${useHeading}</summary><div class="product-information-body">${useMarkup}</div></details>
+        ${benefitsMarkup}${analysisMarkup}${vetPrecautions}${vetSources}
         ${guide ? `<a class="product-guide-link" href="guia-de-uso.html?tema=${({ aves: 'aves', cerdos: 'cerdos', equinos: 'equinos', perros: 'mascotas', gatos: 'mascotas' })[product.category] || 'compra'}">Guía de uso y preguntas frecuentes →</a>` : ''}
       </div>
     </div>`;
@@ -930,6 +968,9 @@
       typeFilterSelect: document.getElementById("type-filter-select"),
       categoryFilterSelect: document.getElementById("category-filter-select"),
       stageFilterSelect: document.getElementById("stage-filter-select"),
+      vetFilters: document.getElementById("vet-filters"),
+      vetCategorySelect: document.getElementById("vet-category-select"),
+      vetSpeciesSelect: document.getElementById("vet-species-select"),
       orderButton: document.getElementById("order-btn"),
       cartCount: document.getElementById("cart-count"),
       mobileCart: document.getElementById("mobile-cart"),
@@ -959,6 +1000,8 @@
   }
 
   function bindEvents() {
+    elements.vetCategorySelect.addEventListener("change", event => setFilter("vetCategory", event.target.value));
+    elements.vetSpeciesSelect.addEventListener("change", event => setFilter("vetSpecies", event.target.value));
     document.querySelectorAll("[data-pig-line]").forEach((button) => {
       button.addEventListener("click", () => setFilter("pigLine", button.dataset.pigLine));
     });
