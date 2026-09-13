@@ -1,4 +1,14 @@
 /* All product photography shares the same stage and floating motion. */
+/* Limita el menú de guardado en navegadores compatibles sin afectar el zoom ni el deslizamiento. */
+:is(.home-product-image, .product-image, .modal-product-image, .cart-item-image),
+:is(.home-product-image, .product-image, .modal-product-image, .cart-item-image) img {
+  -webkit-touch-callout: none;
+}
+:is(.home-product-image, .product-image, .modal-product-image, .cart-item-image) img {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
 img[src$="/posturina-fase1-catalog-v32.png"] { --catalog-mask: url("./assets/cutouts/posturina-fase1-silhouette-v32.svg"); }
 img[src$="/posturina-hp-catalog-v32.png"] { --catalog-mask: url("./assets/cutouts/posturina-hp-silhouette-v32.svg"); }
 img[src$="/posturina-fase1-original-v31.png"] { --catalog-mask: url("./assets/cutouts/posturina-fase1-silhouette-v31.svg"); }

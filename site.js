@@ -19,7 +19,7 @@
       const name = escapeHtml(MODEL.getName(product));
       const href = `products.html?product=${id}`;
       return `<article class="home-product">
-        <a class="home-product-image is-cutout-catalog" href="${href}"><img src="${escapeHtml(MODEL.getImage(product))}" ${MODEL.getResponsiveAttributes(MODEL.getImage(product), "(max-width: 760px) 29vw, (max-width: 1100px) 40vw, 280px")} alt="${name}" loading="lazy" decoding="async"></a>
+        <a class="home-product-image is-cutout-catalog" draggable="false" href="${href}"><img draggable="false" src="${escapeHtml(MODEL.getImage(product))}" ${MODEL.getResponsiveAttributes(MODEL.getImage(product), "(max-width: 760px) 29vw, (max-width: 1100px) 40vw, 280px")} alt="${name}" loading="lazy" decoding="async"></a>
         <div class="home-product-body">
           <span class="home-product-meta">${escapeHtml(MODEL.categories[product.category])} · ${escapeHtml(guide?.stage || "")}</span>
           <h3><a href="${href}">${name}</a></h3>

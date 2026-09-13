@@ -256,7 +256,7 @@
       <article class="product-card" data-product-card="${product.id}">
         <button class="product-image${cleanImageClass}" type="button" data-detail="${product.id}" aria-label="Ver detalles de ${name}">
           <span class="product-badge">${type}</span>
-          <img src="${image}" ${MODEL.getResponsiveAttributes(imageSource, "(max-width: 760px) 29vw, (max-width: 1100px) 40vw, 280px")} alt="${name}" loading="lazy" decoding="async" data-catalog-image data-image-fallback="${escapeHtml(MODEL.getFallbackImage(product))}">
+          <img src="${image}" ${MODEL.getResponsiveAttributes(imageSource, "(max-width: 760px) 29vw, (max-width: 1100px) 40vw, 280px")} alt="${name}" loading="lazy" decoding="async" draggable="false" data-catalog-image data-image-fallback="${escapeHtml(MODEL.getFallbackImage(product))}">
         </button>
         <div class="product-body">
           <p class="product-category">${category}</p>
@@ -519,7 +519,7 @@
     const fallback = product ? MODEL.getFallbackImage(product) : "";
     return `
       <div class="cart-item" data-cart-item="${item.id}">
-        <div class="cart-item-image"><img src="${image}" ${MODEL.getResponsiveAttributes(item.image, "64px")} alt="" loading="lazy" decoding="async" data-catalog-image data-image-fallback="${escapeHtml(fallback)}"></div>
+        <div class="cart-item-image"><img src="${image}" ${MODEL.getResponsiveAttributes(item.image, "64px")} alt="" loading="lazy" decoding="async" draggable="false" data-catalog-image data-image-fallback="${escapeHtml(fallback)}"></div>
         <div class="cart-item-info">
           <div class="cart-item-top">
             <span class="cart-item-name">${name}</span>
