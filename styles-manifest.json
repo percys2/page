@@ -19,7 +19,7 @@
       "sha256": "4bc48cb0f1c6b6a678a2c1e83eaddbc5924bb1c8f93a13c83b48763b17d8e65a"
     },
     "products.html": {
-      "bundle": "styles-products-de2142b02e5a.css",
+      "bundle": "styles-products-0bfdcb3eb252.css",
       "sources": [
         "font-manrope.css",
         "products.css",
@@ -32,9 +32,9 @@
         "brand.css",
         "visual-polish.css"
       ],
-      "bytes": 159937,
-      "gzip_bytes": 27844,
-      "sha256": "de2142b02e5a5fd22fa375f4f6ed58538d74a35efc1bb9b22e8da7cadf599f89"
+      "bytes": 160345,
+      "gzip_bytes": 27955,
+      "sha256": "0bfdcb3eb2523c2420c7c6f98079152aba117c3d8672841265fe0bf0c419118c"
     },
     "contact.html": {
       "bundle": "styles-contact-b9d272c63548.css",
@@ -64,6 +64,22 @@
       "bytes": 102345,
       "gzip_bytes": 18627,
       "sha256": "80db2874ed8bc25be41a0b8aaa208de3e809f3dbd8624d724355f7645afc8b87"
+    },
+    "comparar-alimentos.html": {
+      "bundle": "styles-comparar-alimentos-08a1a3f7c488.css",
+      "sources": [
+        "font-manrope.css",
+        "site.css",
+        "catalog-cutouts.css",
+        "marketing.css",
+        "mobile.css",
+        "brand.css",
+        "visual-polish.css",
+        "feed-comparison.css"
+      ],
+      "bytes": 115231,
+      "gzip_bytes": 21067,
+      "sha256": "08a1a3f7c488ad348d55cd1b7f728a4e3009439e351806834bd63ceaa03e2605"
     }
   }
 }

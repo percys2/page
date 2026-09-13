@@ -48,6 +48,10 @@ PAGE_SOURCES = {
         "site.css", "usage-guide.css", "marketing.css", "mobile.css",
         "brand.css", "visual-polish.css",
     ],
+    "comparar-alimentos.html": [
+        "site.css", "catalog-cutouts.css", "marketing.css", "mobile.css",
+        "brand.css", "visual-polish.css", "feed-comparison.css",
+    ],
 }
 
 

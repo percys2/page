@@ -684,7 +684,7 @@
       <div class="modal-product-details">
         <details class="product-information-section"${vet ? ' open' : ''}><summary>${useHeading}</summary><div class="product-information-body">${useMarkup}</div></details>
         ${benefitsMarkup}${analysisMarkup}${vetPrecautions}
-        ${guide ? `<a class="product-guide-link" href="guia-de-uso.html?tema=${({ aves: 'aves', cerdos: 'cerdos', equinos: 'equinos', perros: 'mascotas', gatos: 'mascotas' })[product.category] || 'compra'}">Guía de uso y preguntas frecuentes →</a>` : ''}
+        ${guide ? `<div class="product-detail-links"><a class="product-guide-link" href="comparar-alimentos.html?productos=${product.id}">Comparar este alimento ↗</a><a class="product-guide-link" href="guia-de-uso.html?tema=${({ aves: 'aves', cerdos: 'cerdos', equinos: 'equinos', perros: 'mascotas', gatos: 'mascotas' })[product.category] || 'compra'}">Guía de uso y preguntas frecuentes →</a></div>` : ''}
       </div>
     </div>`;
 
