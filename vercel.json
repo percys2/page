@@ -79,24 +79,13 @@
           "value": "public, max-age=31536000, immutable"
         }
       ]
-    },
+    }
+  ],
+  "redirects": [
     {
-      "source": "/styles-products-0bfdcb3eb252.css",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/styles-comparar-alimentos-08a1a3f7c488.css",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
+      "source": "/comparar-alimentos.html",
+      "destination": "/products.html",
+      "permanent": false
     }
   ]
 }

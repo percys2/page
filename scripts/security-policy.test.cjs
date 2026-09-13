@@ -129,7 +129,7 @@ test("same-origin search forms remain usable under form-action", () => {
       }
     }
   }
-  assert.equal(searches, 6, "Five header searches and the home search must remain usable");
+  assert.equal(searches, 5, "Four header searches and the home search must remain usable");
 });
 
 test("security headers preserve long-lived asset and stylesheet caching", () => {

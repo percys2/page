@@ -81,7 +81,6 @@
 .store-page .product-information-section.catalog-analysis dd { min-width: 0; justify-content: flex-end; flex-wrap: wrap; gap: 4px 8px; }
 .store-page .product-information-section.catalog-analysis dd span, .store-page .product-information-section.catalog-analysis dd strong { font-size: .875rem; }
 .store-page .product-guide-link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; padding-block: 8px; color: var(--green-950); font-size: .875rem; font-weight: 800; text-underline-offset: 3px; }
-.store-page .product-detail-links { display: flex; flex-wrap: wrap; gap: 0 24px; }
 .store-page .product-detail-layout :is(button, input, select, summary, a):focus-visible { outline: 3px solid var(--maize); outline-offset: 3px; }
 .store-page .product-detail-layout .product-photo-toggle:focus-visible { outline-offset: -3px; }
 @media (max-width: 620px) {
