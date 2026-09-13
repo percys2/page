@@ -41,6 +41,16 @@
 .store-page .product-detail-layout .modal-price-note { grid-column: 1 / -1; margin: 0; min-height: 0; padding: 0; font-size: .875rem; line-height: 1.4; color: var(--muted); }
 .store-page .modal-order-feedback { grid-column: 1 / -1; margin: 0; padding: 8px 10px; font-size: .875rem; line-height: 1.4; background: var(--green-050); color: var(--green-950); overflow-wrap: anywhere; }
 .store-page .modal-order-feedback[hidden] { display: none; }
+.store-page .modal-share { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 0; min-height: 44px; margin-top: 4px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: #f3f6f2; color: var(--green-950); font: inherit; font-size: .875rem; font-weight: 700; cursor: pointer; }
+.store-page .modal-share svg { flex-shrink: 0; }
+.store-page .modal-share:hover { background: #e7eee5; }
+.store-page .modal-share:disabled { opacity: .65; cursor: wait; }
+.store-page .product-share-fallback { grid-column: 1 / -1; min-width: 0; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: #f8faf6; }
+.store-page .product-share-fallback[hidden] { display: none; }
+.store-page .product-share-fallback label { display: block; margin-bottom: 6px; color: var(--green-950); font-size: .875rem; font-weight: 700; }
+.store-page .product-share-fallback input { display: block; box-sizing: border-box; width: 100%; min-width: 0; min-height: 44px; padding: 8px; border: 1px solid #a6b7aa; border-radius: 6px; background: #fff; color: var(--green-950); font: inherit; font-size: 1rem; }
+.store-page .product-share-fallback p { margin: 8px 0 0; color: var(--muted); font-size: .875rem; line-height: 1.5; }
+.store-page .product-share-fallback a { display: inline-flex; align-items: center; min-height: 44px; max-width: 100%; color: var(--green-950); font-size: .875rem; font-weight: 700; text-underline-offset: 3px; overflow-wrap: anywhere; }
 .store-page .modal-product-details { grid-area: details; min-width: 0; margin-top: 6px; border-top: 1px solid var(--line); }
 .store-page .vet-card-species { margin: 0; color: var(--muted); font-size: .875rem; line-height: 1.5; }
 .store-page .vet-card-species span { font-weight: 700; color: var(--green-950); }

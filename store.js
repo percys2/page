@@ -429,6 +429,7 @@
     if (state.vetSpecies !== "all") params.set("especie", state.vetSpecies);
     if (state.query) params.set("q", state.query);
     if (state.sort !== "default") params.set("sort", state.sort);
+    if (activeModalProductId !== null) params.set("product", activeModalProductId);
     const queryString = params.toString();
     const nextUrl = `${window.location.pathname}${queryString ? `?${queryString}` : ""}`;
     window.history.replaceState({}, "", nextUrl);
@@ -607,6 +608,8 @@
     const guideRow = (label, value) => value ? `<div><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>` : '';
     const useHeading = product.type === 'herramientas' ? 'Características y uso' : product.type === 'medicinas' ? 'Información del producto' : 'Uso y etapa recomendada';
     const presentation = guide?.presentation || vet?.presentation || product.presentation || 'Presentación por confirmar';
+    const shareUrl = getProductShareUrl(product);
+    const shareText = `${MODEL.getName(product)} · ${presentation}\nAgroCentro Nica`;
     const quantityLabel = product.type === 'alimentos' && /(?:100|55)\s*lb\b/.test(presentation) ? 'Cantidad de sacos' : 'Cantidad de unidades';
     const category = vet ? productCategoryLabel(product) : product.category === 'otros' ? labelType(product.type) : `${labelType(product.type)} · ${labelCategory(product.category)}`;
     const variantMarkup = variants.length > 1
@@ -670,6 +673,13 @@
         <a class="modal-whatsapp" data-modal-consult href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hola, quisiera confirmar precio y disponibilidad de ${previousQuantity} × ${MODEL.getOrderName(product)}.`)}" target="_blank" rel="noopener noreferrer">Consultar</a>
         <p class="modal-price-note">Precio y disponibilidad por confirmar.</p>
         <p class="modal-order-feedback" data-modal-order-feedback role="status" aria-live="polite" hidden></p>
+        <button class="modal-share" type="button" data-share-product="${product.id}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg>Compartir ficha</button>
+        <div class="product-share-fallback" data-share-fallback hidden>
+          <label for="product-share-url">Enlace de esta ficha</label>
+          <input id="product-share-url" type="url" value="${escapeHtml(shareUrl)}" readonly aria-describedby="product-share-help">
+          <p id="product-share-help">Copiá este enlace o compartilo por WhatsApp.</p>
+          <a href="https://wa.me/?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}" target="_blank" rel="noopener noreferrer">Compartir por WhatsApp</a>
+        </div>
       </div>
       <div class="modal-product-details">
         <details class="product-information-section"${vet ? ' open' : ''}><summary>${useHeading}</summary><div class="product-information-body">${useMarkup}</div></details>
@@ -687,12 +697,55 @@
     elements.productModal.classList.add('open');
     elements.productModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('no-scroll');
+    syncUrl();
     if (changingVariant) elements.modalContent.querySelector('[data-product-variant]')?.focus({ preventScroll: true });
     else elements.modalClose.focus();
   }
 
   function getModalQuantity() {
     return clampQuantity(elements.modalContent.querySelector('[data-modal-quantity]')?.value || 1);
+  }
+
+  function getProductShareUrl(product) {
+    const url = new URL('https://www.agrocentronica.com/products.html');
+    url.searchParams.set('product', product.id);
+    return url.href;
+  }
+
+  async function shareProduct(button) {
+    const product = catalog.find(entry => entry.id === Number(button.dataset.shareProduct));
+    if (!product || button.disabled) return;
+    const url = getProductShareUrl(product);
+    const presentation = getFeedGuide(product)?.presentation || MODEL.getVetInfo(product)?.presentation || product.presentation;
+    const name = MODEL.getName(product);
+    const text = `${name}${presentation ? ` · ${presentation}` : ''}\nAgroCentro Nica`;
+    button.disabled = true;
+    try {
+      if (typeof navigator.share === 'function') {
+        try {
+          await navigator.share({ title: `${name} | AgroCentro Nica`, text, url });
+          return;
+        } catch (error) {
+          if (error?.name === 'AbortError') return;
+        }
+      }
+      if (!button.isConnected || activeModalProductId !== product.id) return;
+      try {
+        await navigator.clipboard.writeText(url);
+        if (button.isConnected && activeModalProductId === product.id) showToast('Enlace copiado. Ya podés compartir la ficha.');
+      } catch (error) {
+        if (!button.isConnected || activeModalProductId !== product.id) return;
+        const fallback = elements.modalContent.querySelector('[data-share-fallback]');
+        const input = elements.modalContent.querySelector('#product-share-url');
+        if (fallback && input) {
+          fallback.hidden = false;
+          input.focus();
+          input.select();
+        }
+      }
+    } finally {
+      button.disabled = false;
+    }
   }
 
   function updateModalQuantity(value = getModalQuantity()) {
@@ -732,6 +785,7 @@
     window.clearTimeout(productViewSwapTimer);
     activeProductViews = [];
     activeModalProductId = null;
+    syncUrl();
     productViewWasDragged = false;
     activeProductViewIndex = 0;
     productViewPointerStart = null;
@@ -900,6 +954,11 @@
   }
 
   function handleCatalogClick(event) {
+    const shareButton = event.target.closest('[data-share-product]');
+    if (shareButton) {
+      void shareProduct(shareButton);
+      return;
+    }
     const step = event.target.closest('[data-modal-quantity-step]');
     if (step) {
       updateModalQuantity(getModalQuantity() + Number(step.dataset.modalQuantityStep));
