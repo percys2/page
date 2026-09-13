@@ -14,9 +14,9 @@
     return;
   }
 
-  const MIN_VISIBLE_MS = 780;
+  const MIN_VISIBLE_MS = 240;
   const MAX_VISIBLE_MS = 2500;
-  const NORMAL_FADE_MS = 300;
+  const NORMAL_FADE_MS = 160;
   const REDUCED_FADE_MS = 120;
   const pageStartedAt = Number(window.__agroIntroStartedAt) || Date.now();
   let dismissed = false;
@@ -24,7 +24,8 @@
   let minimumTimer = 0;
   let safetyFadeTimer = 0;
   let visualStartedAt = null;
-  let pageLoaded = document.readyState === "complete";
+  // Content is ready after parsing; don't hold the screen for image downloads.
+  let pageLoaded = document.readyState !== "loading";
 
   function removeSplash() {
     if (dismissed) return;
@@ -80,7 +81,7 @@
   }
 
   if (!pageLoaded) {
-    window.addEventListener("load", function () {
+    document.addEventListener("DOMContentLoaded", function () {
       pageLoaded = true;
       scheduleDismissal();
     }, { once: true });

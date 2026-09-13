@@ -236,7 +236,7 @@
       <article class="product-card" data-product-card="${product.id}">
         <button class="product-image${cleanImageClass}" type="button" data-detail="${product.id}" aria-label="Ver detalles de ${name}">
           <span class="product-badge">${type}</span>
-          <img src="${image}" alt="${name}" loading="lazy" decoding="async" data-catalog-image data-image-fallback="${escapeHtml(MODEL.getFallbackImage(product))}">
+          <img src="${image}" ${MODEL.getResponsiveAttributes(imageSource, "(max-width: 760px) 29vw, (max-width: 1100px) 40vw, 280px")} alt="${name}" loading="lazy" decoding="async" data-catalog-image data-image-fallback="${escapeHtml(MODEL.getFallbackImage(product))}">
         </button>
         <div class="product-body">
           <p class="product-category">${category}</p>
@@ -289,6 +289,12 @@
   function attachImageFallbacks(container) {
     container.querySelectorAll("[data-catalog-image]").forEach((image) => {
       image.addEventListener("error", () => {
+        // Retry the original before using an alternate image or the logo.
+        if (image.hasAttribute("srcset")) {
+          image.removeAttribute("srcset");
+          image.removeAttribute("sizes");
+          return;
+        }
         if (image.dataset.imageFallback && !image.dataset.alternateTried) {
           image.dataset.alternateTried = "1";
           image.src = image.dataset.imageFallback;
@@ -476,7 +482,7 @@
     const fallback = product ? MODEL.getFallbackImage(product) : "";
     return `
       <div class="cart-item" data-cart-item="${item.id}">
-        <div class="cart-item-image"><img src="${image}" alt="" loading="lazy" data-catalog-image data-image-fallback="${escapeHtml(fallback)}"></div>
+        <div class="cart-item-image"><img src="${image}" ${MODEL.getResponsiveAttributes(item.image, "64px")} alt="" loading="lazy" decoding="async" data-catalog-image data-image-fallback="${escapeHtml(fallback)}"></div>
         <div class="cart-item-info">
           <div class="cart-item-top">
             <span class="cart-item-name">${name}</span>
@@ -596,7 +602,7 @@
       <div class="modal-product-media">
         <button class="product-photo-toggle" type="button" data-photo-zoom aria-expanded="false" aria-controls="modal-product-photo" aria-label="Ampliar foto de ${name}">
           <span id="modal-product-photo" class="modal-product-image is-cutout-catalog${activeProductViews.length > 1 ? ' has-product-views' : ''}" data-product-viewer>
-            <img src="${image}" alt="${name} — ${initialViewLabel}" draggable="false" data-catalog-image data-product-view-image data-image-fallback="${escapeHtml(MODEL.getFallbackImage(product))}">
+            <img src="${image}" ${MODEL.getResponsiveAttributes(activeProductViews[0].src, "(max-width: 760px) 90vw, 480px")} alt="${name} — ${initialViewLabel}" decoding="async" draggable="false" data-catalog-image data-product-view-image data-image-fallback="${escapeHtml(MODEL.getFallbackImage(product))}">
           </span><span class="product-photo-caption" data-photo-caption>Ampliar foto</span>
         </button>
         ${viewControlsMarkup}
@@ -663,6 +669,8 @@
     if (!layout || !button) return;
     const expanded = typeof force === 'boolean' ? force : !layout.classList.contains('is-photo-expanded');
     layout.classList.toggle('is-photo-expanded', expanded);
+    const image = elements.modalContent.querySelector('[data-product-view-image]');
+    if (image && image.hasAttribute('srcset')) image.sizes = expanded ? '(max-width: 760px) 94vw, 900px' : '(max-width: 760px) 90vw, 480px';
     button.setAttribute('aria-expanded', String(expanded));
     button.setAttribute('aria-label', `${expanded ? 'Reducir' : 'Ampliar'} foto del producto`);
     const caption = elements.modalContent.querySelector('[data-photo-caption]');
@@ -700,7 +708,9 @@
     window.clearTimeout(productViewSwapTimer);
     productViewSwapTimer = window.setTimeout(() => {
       delete image.dataset.fallbackApplied;
-      image.src = nextView.src;
+      delete image.dataset.alternateTried;
+      const expanded = elements.modalContent.querySelector('[data-detail-layout]')?.classList.contains('is-photo-expanded');
+      MODEL.setResponsiveSource(image, nextView.src, expanded ? '(max-width: 760px) 94vw, 900px' : '(max-width: 760px) 90vw, 480px');
       image.alt = `${document.getElementById("modal-product-name")?.textContent || "Saco"} — ${nextView.label.toLowerCase()}`;
       if (toggleLabel) toggleLabel.textContent = `Ver ${followingView.label.toLowerCase()}`;
       toggleButton.setAttribute("aria-label", `Mostrar ${followingView.label.toLowerCase()} del saco`);

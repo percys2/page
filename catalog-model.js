@@ -34,6 +34,30 @@
     return { ...guide, presentation: (guide.presentation || "").split(/\s*·\s*línea/i)[0] };
   }
   function getImage(product) { return images[product.id] || product.image || "./assets/logo.png"; }
+  // Keep the original src: the existing cutout masks identify products by that path.
+  // Browsers select the appropriately sized download from srcset instead.
+  function getResponsiveAttributes(source, sizes) {
+    const image = (window.AGROCENTRO_RESPONSIVE_IMAGES || {})[source];
+    if (!image || !image.variants?.length) return "";
+    const escapeAttribute = (value) => String(value).replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
+    const srcset = image.variants.map((variant) => `${variant.src} ${variant.width}w`).join(", ");
+    return `srcset="${escapeAttribute(srcset)}" sizes="${escapeAttribute(sizes)}" width="${image.width}" height="${image.height}"`;
+  }
+  function setResponsiveSource(element, source, sizes) {
+    const image = (window.AGROCENTRO_RESPONSIVE_IMAGES || {})[source];
+    if (image?.variants?.length) {
+      element.setAttribute("sizes", sizes);
+      element.setAttribute("srcset", image.variants.map((variant) => `${variant.src} ${variant.width}w`).join(", "));
+      element.setAttribute("width", image.width);
+      element.setAttribute("height", image.height);
+    } else {
+      element.removeAttribute("srcset");
+      element.removeAttribute("sizes");
+      element.removeAttribute("width");
+      element.removeAttribute("height");
+    }
+    element.src = source;
+  }
   function getFallbackImage(product) {
     return ({
       33: "./assets/petmaster-catalog-v10.webp",
@@ -110,7 +134,7 @@
     return product.type === "alimentos" ? `${type} · ${categories[product.category] || "Otros"}` : type;
   }
   window.AGROCENTRO_CATALOG = {
-    products, types, categories, stages, pigLines, getPigLine, getGuide, getImage, getFallbackImage, getName, getOrderName, getVariants,
+    products, types, categories, stages, pigLines, getPigLine, getGuide, getImage, getResponsiveAttributes, setResponsiveSource, getFallbackImage, getName, getOrderName, getVariants,
     getAvailableCategories, getAvailableStages, normalizeFilters, compareProducts, groupProducts, sectionName
   };
 })();

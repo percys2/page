@@ -1,0 +1,19 @@
+{
+  "source_css": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap",
+  "license": "assets/fonts/OFL-Manrope.txt",
+  "assets": [
+    {
+      "source": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggmxSuXd.woff2",
+      "subset": "latin-ext",
+      "path": "assets/fonts/manrope-latin-ext-3911b66d9f2e.woff2",
+      "bytes": 15120
+    },
+    {
+      "source": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2",
+      "subset": "latin",
+      "path": "assets/fonts/manrope-latin-a30ddcd34970.woff2",
+      "bytes": 24836
+    }
+  ],
+  "preload_latin": "assets/fonts/manrope-latin-a30ddcd34970.woff2"
+}

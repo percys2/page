@@ -1,0 +1,69 @@
+{
+  "font_css": "font-manrope.css",
+  "preload_latin": "assets/fonts/manrope-latin-a30ddcd34970.woff2",
+  "pages": {
+    "index.html": {
+      "bundle": "styles-index-79cd7d1b1e4d.css",
+      "sources": [
+        "font-manrope.css",
+        "site.css",
+        "catalog-cutouts.css",
+        "catalog-navigation.css",
+        "marketing.css",
+        "mobile.css",
+        "brand-preview.css",
+        "visual-polish.css"
+      ],
+      "bytes": 114615,
+      "gzip_bytes": 20847,
+      "sha256": "79cd7d1b1e4d221b7c666199c3033b251e08f5999dff0f535769784bf93092a1"
+    },
+    "products.html": {
+      "bundle": "styles-products-1996b1a2c0bc.css",
+      "sources": [
+        "font-manrope.css",
+        "products.css",
+        "site.css",
+        "catalog-cutouts.css",
+        "catalog-navigation.css",
+        "marketing.css",
+        "mobile.css",
+        "product-detail.css",
+        "brand-preview.css",
+        "visual-polish.css"
+      ],
+      "bytes": 157092,
+      "gzip_bytes": 27413,
+      "sha256": "1996b1a2c0bc6f9e2acd8bb0d3937d65159e4b00704b96849726f969a5b22278"
+    },
+    "contact.html": {
+      "bundle": "styles-contact-1a557bf79f77.css",
+      "sources": [
+        "font-manrope.css",
+        "site.css",
+        "marketing.css",
+        "mobile.css",
+        "brand-preview.css",
+        "visual-polish.css"
+      ],
+      "bytes": 95812,
+      "gzip_bytes": 17653,
+      "sha256": "1a557bf79f77612ea09d6385b64a06b0ca47935e0b566f8ac56e6e1765c7c333"
+    },
+    "guia-de-uso.html": {
+      "bundle": "styles-guia-de-uso-ff4a3aa70e71.css",
+      "sources": [
+        "font-manrope.css",
+        "site.css",
+        "usage-guide.css",
+        "marketing.css",
+        "mobile.css",
+        "brand-preview.css",
+        "visual-polish.css"
+      ],
+      "bytes": 102375,
+      "gzip_bytes": 18668,
+      "sha256": "ff4a3aa70e718125d0ffebf3cd1b5957c2051261a508e1dd073724daaf118699"
+    }
+  }
+}

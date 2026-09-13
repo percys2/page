@@ -22,3 +22,20 @@ Así se pueden cambiar imágenes sin modificar la información del catálogo. Si
 ## Flujo del pedido
 
 El cliente puede buscar y filtrar productos, agregarlos al pedido, indicar cantidades, completar sus datos y elegir retiro o entrega. Al finalizar, la página prepara un mensaje de WhatsApp con número de pedido, datos del cliente, productos y notas.
+
+## Imágenes y estilos optimizados
+
+Los archivos originales se conservan. `srcset` entrega versiones de 320, 640 o
+960 píxeles según la pantalla; `src` mantiene la ruta original porque las máscaras
+de los sacos dependen de ella. Las imágenes nuevas sin variantes siguen funcionando.
+
+- Después de cambiar una fotografía, ejecutá `python scripts/generate-responsive-images.py`
+  con Pillow instalado para regenerar `responsive-images.js` y las variantes activas.
+- Después de editar CSS, ejecutá `python scripts/build-styles.py` y actualizá el
+  enlace de cada página con el nombre indicado en `styles-manifest.json`. Actualizá
+  también las rutas de los bundles en `vercel.json`.
+- Los bundles conservan el orden de los estilos originales. Manrope se sirve
+  desde `assets/fonts` con su licencia OFL. `--download-fonts` permite renovar
+  las fuentes; no se necesita red para reconstruir los bundles existentes.
+- Los recursos con hash tienen caché prolongada. HTML y scripts conservan
+  revalidación; al cambiar los scripts, actualizá su parámetro de versión.
