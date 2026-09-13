@@ -1,4 +1,45 @@
 /* Ajustes compartidos de celular. Se carga después de los estilos de cada página. */
+/* El pedido mantiene su propio espacio para el icono, el texto y el contador. */
+.store-page .cart-trigger.order-link {
+  width: auto;
+  min-width: 0;
+  min-height: 44px;
+  flex: 0 0 auto;
+  gap: 8px;
+  padding: 0 12px;
+  line-height: 1;
+}
+.store-page .cart-trigger .order-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+}
+.store-page .cart-trigger .cart-label {
+  display: inline;
+  min-width: 0;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: inherit;
+}
+.store-page .cart-trigger .cart-count {
+  position: static;
+  min-width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 5px;
+  line-height: 1;
+  font-size: .75rem;
+  font-variant-numeric: tabular-nums;
+}
+.store-page .cart-trigger:focus-visible {
+  outline: 3px solid var(--green-900);
+  outline-offset: 3px;
+}
 @media (max-width: 900px) {
   .guide-hero-grid, .guide-layout { grid-template-columns: minmax(0, 1fr); }
   .guide-content, .guide-sidebar, .guide-table-wrap { min-width: 0; }
@@ -16,6 +57,8 @@
   .header-actions { gap: 6px; }
   .order-link { min-width: 0; min-height: 44px; padding-inline: 8px; font-size: .875rem; }
   .order-link span { min-width: 20px; margin-left: 5px; }
+  .store-page .cart-trigger.order-link { gap: 6px; padding-inline: 9px; }
+  .store-page .cart-trigger .cart-label { display: none; }
   .menu-toggle { width: 44px; height: 44px; flex: 0 0 44px; }
   .utility-inner { gap: 8px; }
   .utility-inner span:first-child { min-width: 0; }

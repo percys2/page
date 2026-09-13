@@ -14,7 +14,7 @@ window.AGROCENTRO_IMAGE_OVERRIDES = {
   1: "./assets/engordina-clean-v26.webp",
   2: "./assets/iniciarina-reference-v28.webp",
   3: "./assets/novagallos-catalog-v10.webp",
-  4: "./assets/preiniciarina-clean-v20.webp",
+  4: "./assets/preiniciarina-reference-v40.webp",
   5: "./assets/cavalleria-forte-clean-v26.webp",
   6: "./assets/omalina-100-clean-v26.webp",
   7: "./assets/omalina-200-clean-v26.webp",
