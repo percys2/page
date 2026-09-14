@@ -51,7 +51,7 @@
       "sha256": "e24976819d877f3da3dbe7d7f57ef2d97ff930a593950369833b3adfe1dcbc98"
     },
     "guia-de-uso.html": {
-      "bundle": "styles-guia-de-uso-08610c80f805.css",
+      "bundle": "styles-guia-de-uso-63050ea7a7c6.css",
       "sources": [
         "font-manrope.css",
         "site.css",
@@ -61,9 +61,9 @@
         "brand.css",
         "visual-polish.css"
       ],
-      "bytes": 105041,
-      "gzip_bytes": 19020,
-      "sha256": "08610c80f8058aed0f0ba2f9bcb4f32896f10c5a7bd8a5f33e6d3823761ee9a1"
+      "bytes": 105441,
+      "gzip_bytes": 19137,
+      "sha256": "63050ea7a7c65ec35bb49cfbd919c7dda201341c2a96ac939f1d9d1db1dbfb09"
     }
   }
 }
