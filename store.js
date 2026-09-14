@@ -552,7 +552,7 @@
   // Enlace de la ficha a la pregunta de la guía que corresponde al producto.
   const GUIDE_QUESTIONS = [
     { ids: [4, 2, 1], hash: "consumo-pollos", label: "¿Cuánto alimento consume un pollo de engorde?" },
-    { ids: [38, 39, 11], hash: "postura", label: "¿Cuál es la diferencia entre Posturina Fase 1 y Posturina HP?" },
+    { ids: [38, 39, 11], hash: "consumo-gallinas", label: "¿Cuánto come una gallina ponedora y cuántos sacos necesito?" },
     { ids: [10], hash: "pollo-criollo", label: "¿Para qué se usa Pollo Criollo?" },
     { ids: [3], hash: "novagallos", label: "¿En qué etapa se usa Novagallos?" },
     { ids: [24, 25, 37, 26], hash: "neopigg", label: "¿A qué edad se usan NeoPigg 1, 2, 3 y 4?" },

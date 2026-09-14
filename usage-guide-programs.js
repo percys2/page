@@ -2,7 +2,7 @@
  * Calculadoras de la página "Guía de uso"; se insertan en las respuestas con <div data-calc="…">.
  * Las etapas, edades y productos salen de las fichas (feed-guides) y del catálogo FY26.
  * Cerdos: consumos por fase y pesos esperados del catálogo Purina/Cargill (fotos del usuario, sep. 2026).
- * Gallinas: el consumo diario es una referencia general editable, no del catálogo; se indica en pantalla.
+ * Gallinas: consumos diarios por línea según las guías oficiales (Hy-Line, Lohmann, ISA, Dekalb); editable.
  */
 (function () {
   "use strict";
@@ -117,7 +117,7 @@
     },
     layers: {
       title: "Calculá cuántos sacos necesitás para tus gallinas",
-      html: `<div class="guide-ration-fields guide-ration-fields--three">${field("prog-layer-count", "Cantidad de gallinas", 'type="number" min="1" max="100000" step="1" value="50" inputmode="numeric"')}${field("prog-layer-grams", "Consumo por gallina al día (g)", 'type="number" min="50" max="250" step="5" value="115" inputmode="numeric"')}${field("prog-layer-days", "Días a cubrir", 'type="number" min="1" max="365" step="1" value="30" inputmode="numeric"')}</div><div class="guide-ration-fields guide-ration-fields--single">${select("prog-layer-product", "Alimento", [[38, `${name(38)} (gallinas de patio)`], [39, `${name(39)} (gallinas de granja)`], [11, `${name(11)} (gallinas criollas)`]])}</div><div class="guide-ration-result" id="prog-layer-result" role="status" aria-live="polite"></div><p class="guide-ration-note">El consumo de 115 g es una <strong>referencia general</strong> para gallinas en postura, no un dato del catálogo: ajustalo según la etiqueta del saco, la raza y el clima. Sacos de 100 lb.</p>`,
+      html: `<div class="guide-ration-fields guide-ration-fields--three">${field("prog-layer-count", "Cantidad de gallinas", 'type="number" min="1" max="100000" step="1" value="50" inputmode="numeric"')}${select("prog-layer-line", "Línea", [[112, "Hy-Line Brown (112 g/día)"], [115, "Lohmann Brown-Classic (115 g/día)"], [112, "ISA Brown (112 g/día)"], [110, "Dekalb White (110 g/día)"], [110, "Lohmann LSL-Classic (110 g/día)"], [0, "Otra: escribir el consumo"]])}${field("prog-layer-grams", "Consumo por gallina al día (g)", 'type="number" min="50" max="250" step="1" value="112" inputmode="numeric"')}</div><div class="guide-ration-fields">${field("prog-layer-days", "Días a cubrir", 'type="number" min="1" max="365" step="1" value="30" inputmode="numeric"')}${select("prog-layer-product", "Alimento", [[38, `${name(38)} (gallinas de patio)`], [39, `${name(39)} (gallinas de granja)`], [11, `${name(11)} (gallinas criollas)`]])}</div><div class="guide-ration-result" id="prog-layer-result" role="status" aria-live="polite"></div><p class="guide-ration-note">Consumos diarios promedio en postura según la guía oficial de cada línea (Hy-Line 109–117 g, Lohmann Brown 110–120 g, ISA Brown 112 g, Dekalb White 110 g, LSL 105–115 g). Sacos de 100 lb. El consumo real sube con el frío y baja con el calor.</p>`,
       bind() {
         const ids = ["prog-layer-count", "prog-layer-grams", "prog-layer-days"].map(id => document.getElementById(id));
         const out = document.getElementById("prog-layer-result");
@@ -132,6 +132,8 @@
           bindOrder(out, plan);
         };
         const productSelect = document.getElementById("prog-layer-product");
+        const lineSelect = document.getElementById("prog-layer-line");
+        lineSelect.addEventListener("change", () => { if (Number(lineSelect.value) > 0) { ids[1].value = lineSelect.value; run(); } else { ids[1].focus(); } });
         [...ids, productSelect].forEach(el => el.addEventListener("input", run)); run();
       }
     },
