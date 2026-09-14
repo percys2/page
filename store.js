@@ -567,7 +567,7 @@
   ];
   function productGuideLink(product) {
     const match = GUIDE_QUESTIONS.find((entry) => entry.ids.includes(product.id));
-    const topic = ({ aves: 'aves', cerdos: 'cerdos', equinos: 'equinos', perros: 'mascotas', gatos: 'mascotas' })[product.category];
+    const topic = ({ aves: 'aves', cerdos: 'cerdos', equinos: 'equinos', perros: 'mascotas', gatos: 'mascotas', conejos: 'conejos' })[product.category];
     const href = match ? `guia-de-uso.html#${match.hash}` : `guia-de-uso.html${topic ? `?tema=${topic}` : ''}`;
     const label = match ? `Guía de uso: ${match.label}` : 'Guía de uso y preguntas frecuentes';
     return `<a class="product-guide-link" href="${href}">${escapeHtml(label)} →</a>`;
