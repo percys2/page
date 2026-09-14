@@ -536,8 +536,8 @@ window.AGROCENTRO_VETERINARY = {
   "241": {
     "id": 241,
     "name": "Broncowell · Wellco",
-    "category": "por-confirmar",
-    "summary": "Broncowell en polvo soluble. Consultá la identificación completa de esta fórmula antes de elegir el producto.",
+    "category": "respiratorios",
+    "summary": "Producto veterinario en polvo soluble de la línea respiratoria de Wellco.",
     "species": [],
     "composition": null,
     "form": "Polvo soluble",
@@ -549,12 +549,16 @@ window.AGROCENTRO_VETERINARY = {
       {
         "label": "Etiqueta del envase fotografiado",
         "url": "./assets/bronccowell.webp"
+      },
+      {
+        "label": "Wellco — Broncowell: identificación y categoría respiratoria",
+        "url": "https://wellcovet.com/products/broncowell"
       }
     ],
     "verification": "partial",
-    "identityNote": "La categoría, la composición y las especies de esta fórmula están pendientes de confirmar.",
+    "identityNote": "La composición y las especies de esta presentación están pendientes de confirmar con su etiqueta.",
     "manufacturer": "Wellco Corporation",
-    "reviewed": "13 de septiembre de 2026"
+    "reviewed": "14 de septiembre de 2026"
   },
   "242": {
     "id": 242,
