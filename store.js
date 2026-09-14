@@ -583,7 +583,7 @@
 
   function ageProgramsMarkup(guide, withSource = false) {
     if (!Array.isArray(guide?.agePrograms)) return "";
-    return `<div class="age-programs"><p>Edad del lechón</p><dl>${guide.agePrograms.map((program) => `<div><dt>${escapeHtml(program.label)}</dt><dd>${escapeHtml(program.days)} días</dd></div>`).join("")}</dl>${withSource ? `<p class="age-program-note">Días de vida desde el nacimiento. Usá las fases del mismo programa.</p><a class="age-program-source" href="${escapeHtml(guide.ageSource)}" target="_blank" rel="noopener noreferrer">Consultar programa NeoPigg</a>` : ""}</div>`;
+    return `<div class="age-programs"><p>Edad del lechón</p><dl>${guide.agePrograms.map((program) => `<div><dt>${escapeHtml(program.label)}</dt><dd>${escapeHtml(program.days)} días</dd></div>`).join("")}</dl>${withSource ? `<p class="age-program-note">Días de vida desde el nacimiento. Usá las fases del mismo programa.</p>` : ""}</div>`;
   }
 
   function openProductModal(productId, changingVariant = false) {
@@ -641,7 +641,7 @@
       ${guideRow('Presentación', guide.presentation)}
       ${guideRow('Programa de uso', guide.feeding)}
       </div>
-      ${guide.agePrograms ? `<p class="age-program-note">Días de vida desde el nacimiento. Usá las fases del mismo programa.</p><a class="age-program-source" href="${escapeHtml(guide.ageSource)}" target="_blank" rel="noopener noreferrer">Consultar programa NeoPigg</a>` : ''}
+      ${guide.agePrograms ? `<p class="age-program-note">Días de vida desde el nacimiento. Usá las fases del mismo programa.</p>` : ''}
       ${guide.catalogNote ? `<p class="catalog-data-note"><strong>Nota de revisión:</strong> ${escapeHtml(guide.catalogNote)}</p>` : ''}
       <p class="feed-guide-note">Los resultados y consumos pueden variar según manejo, instalaciones, clima, sanidad y genética. Seguí la etiqueta del saco o la indicación de un técnico para ajustar la ración.</p>`
       : `<p>${escapeHtml(product.instructions || product.description || 'Consultanos las características y la presentación de este producto.')}</p>`;
