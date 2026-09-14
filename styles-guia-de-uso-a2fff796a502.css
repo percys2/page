@@ -1705,7 +1705,8 @@ html.agro-intro-seen .agro-splash { display: none; }
 .guide-table-wrap td span { display: block; margin-top: 4px; }
 .guide-table-wrap th, .guide-table-wrap td { overflow-wrap: normal; word-break: normal; }
 .guide-table-wrap tbody th, .guide-table-wrap thead th:first-child { position: sticky; left: 0; z-index: 1; background: var(--paper); box-shadow: inset -1px 0 0 var(--line); }
-.guide-table-wrap tbody tr:nth-child(even):not(.guide-total) > * { background: #f7faf8; }
+.guide-table-wrap tbody tr:nth-child(even):not(.guide-total):not(.guide-subhead) > * { background: #f7faf8; }
+.guide-table-wrap .guide-subhead th { background: var(--green-050); color: var(--green-950); font-weight: 800; padding-top: 9px; padding-bottom: 9px; }
 .guide-table-wrap .guide-total th, .guide-table-wrap .guide-total td { background: var(--green-050); color: var(--green-950); font-weight: 800; }
 .guide-ration-tool { margin-top: 22px; padding: 20px; border-radius: 9px; background: var(--green-050); }
 .guide-ration-tool h3 { margin: 0 0 15px; }
