@@ -49,8 +49,41 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon-v48.png">
   <script src="splash.js?v=49" defer></script>
   <title>AgroCentro Nica | Catálogo</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "AgroCentro Nica",
+    "url": "https://www.agrocentronica.com/",
+    "logo": "https://www.agrocentronica.com/assets/logo-ac-surcos-v48.png",
+    "image": "https://www.agrocentronica.com/assets/agrocentro-social-v48.png",
+    "telephone": "+50582403490",
+    "email": "percyscastillo2013@outlook.com",
+    "address": {"@type": "PostalAddress", "addressCountry": "NI"},
+    "openingHoursSpecification": [
+      {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:00"},
+      {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "14:00"}
+    ],
+    "department": [
+      {
+        "@type": "Store",
+        "name": "AgroCentro Nica Diriomo",
+        "address": {"@type": "PostalAddress", "addressLocality": "Diriomo", "addressRegion": "Granada", "addressCountry": "NI"},
+        "geo": {"@type": "GeoCoordinates", "latitude": 11.8764, "longitude": -86.0519},
+        "telephone": "+50582403490"
+      },
+      {
+        "@type": "Store",
+        "name": "AgroCentro Nica Masatepe",
+        "address": {"@type": "PostalAddress", "streetAddress": "Del puesto de chequeo de buses, 4 cuadras al norte", "addressLocality": "Masatepe", "addressRegion": "Masaya", "addressCountry": "NI"},
+        "geo": {"@type": "GeoCoordinates", "latitude": 11.911683, "longitude": -86.145126},
+        "telephone": "+50582403490"
+      }
+    ]
+  }
+  </script>
   <link rel="preload" href="./assets/fonts/manrope-latin-a30ddcd34970.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles-index-4bc48cb0f1c6.css">
+  <link rel="stylesheet" href="styles-index-08c7a3f4758e.css">
   <link rel="preload" as="image" href="./assets/responsive/engordina-clean-v26-320w-fac0c0c46970.webp" imagesrcset="./assets/responsive/engordina-clean-v26-320w-fac0c0c46970.webp 320w, ./assets/responsive/engordina-clean-v26-640w-b650d99ce397.webp 640w, ./assets/responsive/engordina-clean-v26-960w-e841b769e14a.webp 960w" imagesizes="(max-width: 760px) 30vw, (max-width: 1100px) 28vw, 190px" fetchpriority="high">
 </head>
 <body class="home-page" id="page-top">
@@ -197,6 +230,7 @@
         <a class="footer-branch" href="contact.html#sucursal-diriomo"><span><strong>Diriomo</strong><small>Granada</small></span><span aria-hidden="true">↗</span></a>
         <a class="footer-branch" href="contact.html#sucursal-masatepe"><span><strong>Masatepe</strong><small>Masaya</small></span><span aria-hidden="true">↗</span></a>
       </div>
+      <p class="footer-hours">Lun. a vie. 8:00 a.m. – 5:00 p.m. · Sáb. 8:00 a.m. – 2:00 p.m.</p>
     </div>
   </div>
   <div class="shell footer-bottom"><p>© 2026 AgroCentro Nica</p><a href="#page-top">Volver arriba ↑</a></div>

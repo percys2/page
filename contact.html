@@ -49,8 +49,41 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon-v48.png">
   <script src="splash.js?v=49" defer></script>
   <title>Contacto | AgroCentro Nica</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "AgroCentro Nica",
+    "url": "https://www.agrocentronica.com/",
+    "logo": "https://www.agrocentronica.com/assets/logo-ac-surcos-v48.png",
+    "image": "https://www.agrocentronica.com/assets/agrocentro-social-v48.png",
+    "telephone": "+50582403490",
+    "email": "percyscastillo2013@outlook.com",
+    "address": {"@type": "PostalAddress", "addressCountry": "NI"},
+    "openingHoursSpecification": [
+      {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:00"},
+      {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "14:00"}
+    ],
+    "department": [
+      {
+        "@type": "Store",
+        "name": "AgroCentro Nica Diriomo",
+        "address": {"@type": "PostalAddress", "addressLocality": "Diriomo", "addressRegion": "Granada", "addressCountry": "NI"},
+        "geo": {"@type": "GeoCoordinates", "latitude": 11.8764, "longitude": -86.0519},
+        "telephone": "+50582403490"
+      },
+      {
+        "@type": "Store",
+        "name": "AgroCentro Nica Masatepe",
+        "address": {"@type": "PostalAddress", "streetAddress": "Del puesto de chequeo de buses, 4 cuadras al norte", "addressLocality": "Masatepe", "addressRegion": "Masaya", "addressCountry": "NI"},
+        "geo": {"@type": "GeoCoordinates", "latitude": 11.911683, "longitude": -86.145126},
+        "telephone": "+50582403490"
+      }
+    ]
+  }
+  </script>
   <link rel="preload" href="./assets/fonts/manrope-latin-a30ddcd34970.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles-contact-b9d272c63548.css">
+  <link rel="stylesheet" href="styles-contact-e24976819d87.css">
 </head>
 <body id="page-top">
   <div class="agro-splash agro-splash--ac" id="agrocentro-splash" role="status" aria-label="Cargando AgroCentro Nica" aria-live="polite">
@@ -104,6 +137,7 @@
             <div><dt>WhatsApp y teléfono</dt><dd><a href="tel:+50582403490">+505 8240 3490</a></dd></div>
             <div><dt>Correo</dt><dd><a href="mailto:percyscastillo2013@outlook.com">percyscastillo2013@outlook.com</a></dd></div>
             <div><dt>Zonas</dt><dd>Diriomo, Masatepe y sectores cercanos</dd></div>
+            <div><dt>Horario</dt><dd>Lunes a viernes de 8:00 a.m. a 5:00 p.m.<br>Sábados de 8:00 a.m. a 2:00 p.m.</dd></div>
           </dl>
           <a class="whatsapp-button" href="https://wa.me/50582403490?text=Hola%2C%20quiero%20consultar%20precio%20y%20disponibilidad" target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a>
         </section>
@@ -128,11 +162,11 @@
         <div class="location-grid">
           <article class="location-card">
             <iframe id="sucursal-diriomo" title="Mapa de Diriomo" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-86.07%2C11.86%2C-86.03%2C11.90&amp;layer=mapnik&amp;marker=11.8764%2C-86.0519"></iframe>
-            <div><h3>Diriomo</h3><p>Diriomo, Granada</p><a href="https://www.openstreetmap.org/?mlat=11.8764&amp;mlon=-86.0519#map=15/11.8764/-86.0519" target="_blank" rel="noopener noreferrer">Abrir mapa</a></div>
+            <div><h3>Diriomo</h3><p>Diriomo, Granada</p><p class="location-hours"><strong>Horario</strong><br>Lun. a vie. 8:00 a.m. – 5:00 p.m.<br>Sáb. 8:00 a.m. – 2:00 p.m.</p><a href="https://www.openstreetmap.org/?mlat=11.8764&amp;mlon=-86.0519#map=15/11.8764/-86.0519" target="_blank" rel="noopener noreferrer">Abrir mapa</a></div>
           </article>
           <article class="location-card">
             <iframe id="sucursal-masatepe" title="Mapa de Masatepe" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-86.17%2C11.89%2C-86.12%2C11.93&amp;layer=mapnik&amp;marker=11.911683%2C-86.145126"></iframe>
-            <div><h3>Masatepe</h3><p>Del puesto de chequeo de buses, 4 cuadras al norte.</p><a href="https://www.openstreetmap.org/?mlat=11.911683&amp;mlon=-86.145126#map=15/11.911683/-86.145126" target="_blank" rel="noopener noreferrer">Abrir mapa</a></div>
+            <div><h3>Masatepe</h3><p>Del puesto de chequeo de buses, 4 cuadras al norte.</p><p class="location-hours"><strong>Horario</strong><br>Lun. a vie. 8:00 a.m. – 5:00 p.m.<br>Sáb. 8:00 a.m. – 2:00 p.m.</p><a href="https://www.openstreetmap.org/?mlat=11.911683&amp;mlon=-86.145126#map=15/11.911683/-86.145126" target="_blank" rel="noopener noreferrer">Abrir mapa</a></div>
           </article>
         </div>
       </section>
@@ -151,6 +185,7 @@
         <a class="footer-branch" href="contact.html#sucursal-diriomo"><span><strong>Diriomo</strong><small>Granada</small></span><span aria-hidden="true">↗</span></a>
         <a class="footer-branch" href="contact.html#sucursal-masatepe"><span><strong>Masatepe</strong><small>Masaya</small></span><span aria-hidden="true">↗</span></a>
       </div>
+      <p class="footer-hours">Lun. a vie. 8:00 a.m. – 5:00 p.m. · Sáb. 8:00 a.m. – 2:00 p.m.</p>
     </div>
   </div>
   <div class="shell footer-bottom"><p>© 2026 AgroCentro Nica</p><a href="#page-top">Volver arriba ↑</a></div>

@@ -6,7 +6,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'sha256-Av1t8foBhDd0ungdkuUF/6+3MjttYwgyZQ3mFX5XMQc=' 'sha256-Z6fDTewNOCcRZ5hNyQBGWU8VXMkO6ujpDui4rb68v50='; script-src-attr 'none'; style-src 'self'; style-src-attr 'none'; img-src 'self'; font-src 'self'; connect-src 'self'; frame-src https://www.openstreetmap.org; frame-ancestors 'none'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' 'sha256-LrHktsD9bavnNZz0JRLcTvQYSuZbnav7qM5SoSqSee8=' 'sha256-Z6fDTewNOCcRZ5hNyQBGWU8VXMkO6ujpDui4rb68v50='; script-src-attr 'none'; style-src 'self'; style-src-attr 'none'; img-src 'self'; font-src 'self'; connect-src 'self'; frame-src https://www.openstreetmap.org; frame-ancestors 'none'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests"
         },
         {
           "key": "X-Content-Type-Options",
@@ -45,7 +45,7 @@
       ]
     },
     {
-      "source": "/styles-index-4bc48cb0f1c6.css",
+      "source": "/styles-index-08c7a3f4758e.css",
       "headers": [
         {
           "key": "Cache-Control",
@@ -54,7 +54,7 @@
       ]
     },
     {
-      "source": "/styles-contact-b9d272c63548.css",
+      "source": "/styles-products-65f5df971567.css",
       "headers": [
         {
           "key": "Cache-Control",
@@ -63,7 +63,7 @@
       ]
     },
     {
-      "source": "/styles-guia-de-uso-9e943f2d305e.css",
+      "source": "/styles-contact-e24976819d87.css",
       "headers": [
         {
           "key": "Cache-Control",
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "source": "/styles-products-de2142b02e5a.css",
+      "source": "/styles-guia-de-uso-73b4d3ababea.css",
       "headers": [
         {
           "key": "Cache-Control",

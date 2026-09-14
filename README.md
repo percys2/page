@@ -5,7 +5,7 @@ Tienda estática para consultar el catálogo, armar un pedido y enviarlo al What
 ## Cambiar la fotografía de un producto
 
 1. Guardá la nueva fotografía dentro de `assets/`. Es preferible usar WebP o PNG con fondo limpio.
-2. Buscá el ID del producto en `products.js`.
+2. Buscá el ID del producto en `catalog-data.js`.
 3. Agregá el ID y la nueva ruta en `image-overrides.js`.
 
 Ejemplo:
@@ -31,7 +31,8 @@ de los sacos dependen de ella. Las imágenes nuevas sin variantes siguen funcion
 
 - Después de cambiar una fotografía, ejecutá `python scripts/generate-responsive-images.py`
   con Pillow instalado para regenerar `responsive-images.js` y las variantes activas.
-- Después de editar CSS, ejecutá `python scripts/build-styles.py` y actualizá el
+- Después de editar CSS, ejecutá `python scripts/build-styles.py`, borrá los bundles
+  anteriores y actualizá el
   enlace de cada página con el nombre indicado en `styles-manifest.json`. Actualizá
   también las rutas de los bundles en `vercel.json`.
 - Los bundles conservan el orden de los estilos originales. Manrope se sirve
