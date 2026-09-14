@@ -137,15 +137,89 @@
       .trim();
   }
 
-  function matchesSearch(searchable, query) {
-    if (!query) return true;
-    if (!/\d/.test(query)) return searchable.includes(query);
+  // Distancia de edición (Damerau-Levenshtein restringida) para tolerar errores de tipeo.
+  function editDistance(a, b, limit) {
+    if (a === b) return 0;
+    if (Math.abs(a.length - b.length) > limit) return limit + 1;
+    let previous = Array.from({ length: b.length + 1 }, (_, i) => i);
+    let beforePrevious = null;
+    for (let i = 1; i <= a.length; i++) {
+      const current = [i];
+      let rowMin = i;
+      for (let j = 1; j <= b.length; j++) {
+        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+        let value = Math.min(previous[j] + 1, current[j - 1] + 1, previous[j - 1] + cost);
+        if (beforePrevious && i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) value = Math.min(value, beforePrevious[j - 2] + 1);
+        current[j] = value;
+        if (value < rowMin) rowMin = value;
+      }
+      if (rowMin > limit) return limit + 1;
+      beforePrevious = previous;
+      previous = current;
+    }
+    return previous[b.length];
+  }
+  const typoLimit = (word) => (word.length >= 8 ? 2 : word.length >= 5 ? 1 : 0);
+  function fuzzyWord(word, tokens) {
+    if (tokens.some((token) => token.startsWith(word))) return true;
+    const limit = typoLimit(word);
+    if (!limit) return false;
+    return tokens.some((token) => Math.abs(token.length - word.length) <= limit && editDistance(word, token, limit) <= limit);
+  }
+  const tokenize = (text) => text.split(/[^a-z0-9]+/).filter(Boolean);
+  const STOPWORDS = new Set(["de", "del", "la", "el", "los", "las", "un", "una", "unos", "unas", "para", "por", "con", "sin", "y", "o", "en", "mi", "mis", "que", "al", "lo", "le", "se", "a"]);
+  const SYNONYMS = {
+    pollo: ["aves"], pollos: ["aves"], pollito: ["aves"], pollitos: ["aves"], gallina: ["aves"], gallinas: ["aves"], gallo: ["aves"], ponedora: ["postura"], ponedoras: ["postura"],
+    cerdo: ["cerdos"], chancho: ["cerdos"], chanchos: ["cerdos"], cerda: ["cerdos"], cerdas: ["cerdos"], lechon: ["cerdos"], lechones: ["cerdos"], marrano: ["cerdos"], marranos: ["cerdos"],
+    perro: ["perros"], perrito: ["perros"], cachorro: ["cachorros", "perros"], gato: ["gatos"], gatito: ["gatos"],
+    caballo: ["equinos", "caballos"], caballos: ["equinos"], yegua: ["equinos"], potro: ["equinos"], potros: ["equinos"],
+    vaca: ["bovinos"], vacas: ["bovinos"], toro: ["bovinos"], ternero: ["bovinos"], terneros: ["bovinos"], ganado: ["bovinos"], res: ["bovinos"], oveja: ["ovinos"], ovejas: ["ovinos"], cabra: ["caprinos"], cabras: ["caprinos"], conejo: ["conejos"],
+    desparasitante: ["antiparasitario", "antiparasitarios"], desparasitar: ["antiparasitario", "antiparasitarios"], purgante: ["antiparasitario", "antiparasitarios"], parasitos: ["antiparasitario", "antiparasitarios"],
+    vitamina: ["vitaminas"], antibiotico: ["antibioticos"], comida: ["alimento"], concentrado: ["alimento"], alimentos: ["alimento"], medicina: ["medicinas", "veterinaria"], engorde: ["engorde", "finalizacion"], destete: ["preinicio", "lechones"]
+  };
+  const alternatives = (word) => [word, ...(SYNONYMS[word] || [])];
 
+  function matchesSearch(searchable, query, fuzzy = false) {
+    if (!query) return true;
     const numbers = query.match(/\d+/g) || [];
-    const words = query.replace(/\d+/g, " ").split(/[^a-z]+/).filter(Boolean);
+    const allWords = query.replace(/\d+/g, " ").split(/[^a-z]+/).filter(Boolean);
+    const meaningful = allWords.filter((word) => !STOPWORDS.has(word));
+    const words = meaningful.length ? meaningful : allWords;
     const numbersMatch = numbers.every((number) => new RegExp(`(^|[^0-9])${number}(?=$|[^0-9])`).test(searchable));
-    const wordsMatch = words.every((word) => searchable.includes(word));
-    return numbersMatch && wordsMatch;
+    if (!numbersMatch) return false;
+    if (!numbers.length && searchable.includes(query)) return true;
+    if (words.every((word) => searchable.includes(word))) return true;
+    if (!fuzzy) return false;
+    const tokens = tokenize(searchable);
+    return words.every((word) => alternatives(word).some((option) => searchable.includes(option) || fuzzyWord(option, tokens)));
+  }
+
+  // Sugerencias "¿Quisiste decir…?" cuando la búsqueda no encuentra nada.
+  function searchSuggestions(query, limit = 4) {
+    const words = tokenize(query).filter((word) => !/^\d+$/.test(word) && !STOPWORDS.has(word));
+    if (!words.length) return [];
+    const scored = [];
+    catalog.forEach((product) => {
+      const guide = getFeedGuide(product);
+      const vet = MODEL.getVetInfo(product);
+      const names = [MODEL.getName(product), product.name, guide?.officialName, ...(guide?.aliases || [])].filter(Boolean);
+      const tokens = tokenize(normalizeText([...names, vet?.composition, vet?.manufacturer].filter(Boolean).join(" ")));
+      let score = 0;
+      let strong = false;
+      for (const word of words) {
+        let best = Infinity;
+        for (const token of tokens) {
+          if (token.startsWith(word) || word.startsWith(token) && token.length >= 4) { best = 0.5; break; }
+          const distance = editDistance(word, token, 3);
+          if (distance < best) best = distance;
+        }
+        if (best <= 1) strong = true;
+        score += Math.min(best, 4);
+      }
+      if (strong && score / words.length <= 2.5) scored.push({ name: MODEL.getName(product), score });
+    });
+    const seen = new Set();
+    return scored.sort((a, b) => a.score - b.score).filter((item) => !seen.has(item.name) && seen.add(item.name)).slice(0, limit).map((item) => item.name);
   }
 
   function searchRank(product, query) {
@@ -154,7 +228,8 @@
     const names = [product.name, MODEL.getName(product), guide?.officialName, ...(guide?.aliases || [])]
       .filter(Boolean).map(normalizeText);
     if (names.includes(query)) return 0;
-    return names.some((name) => matchesSearch(name, query)) ? 1 : 2;
+    if (names.some((name) => matchesSearch(name, query))) return 1;
+    return names.some((name) => matchesSearch(name, query, true)) ? 2 : 3;
   }
 
   function labelType(type) {
@@ -216,7 +291,7 @@
         guide && Array.isArray(guide.stages) ? guide.stages.map(labelStage).join(" ") : "",
         guide && Array.isArray(guide.stages) ? guide.stages.map((stage) => stageSearchTerms[stage] || "").join(" ") : ""
       ].join(" "));
-      const matchesQuery = matchesSearch(searchable, query);
+      const matchesQuery = matchesSearch(searchable, query, true);
       return matchesType && matchesCategory && matchesStage && matchesLine && matchesVetCategory && matchesVetSpecies && matchesQuery;
     });
 
@@ -230,7 +305,8 @@
 
     state.filtered = MODEL.groupProducts(filtered, (product) => Boolean(query) && matchesSearch(normalizeText([
       product.name, MODEL.getName(product), getFeedGuide(product)?.presentation
-    ].join(" ")), query));
+    ].join(" ")), query, true));
+    state.suggestions = query && !filtered.length ? searchSuggestions(query) : [];
     renderCatalog();
     syncUrl();
   }
@@ -301,6 +377,13 @@
     }
 
     elements.emptyState.hidden = count !== 0;
+    if (elements.searchSuggestions) {
+      const suggestions = count === 0 ? (state.suggestions || []) : [];
+      elements.searchSuggestions.hidden = !suggestions.length;
+      elements.searchSuggestions.innerHTML = suggestions.length
+        ? `<span>¿Quisiste decir…?</span>${suggestions.map((name) => `<button type="button" data-suggest="${escapeHtml(name)}">${escapeHtml(name)}</button>`).join("")}`
+        : "";
+    }
     elements.loadMoreWrap.hidden = state.visible >= count || count === 0;
     elements.resetFilters.classList.toggle("visible", Boolean(state.query) || state.type !== "all" || state.category !== "all" || state.stage !== "all" || state.vetCategory !== "all" || state.vetSpecies !== "all");
     elements.searchClear.classList.toggle("visible", Boolean(state.query));
@@ -1026,6 +1109,7 @@
       productsGrid: document.getElementById("products-grid"),
       productsCount: document.getElementById("products-count"),
       emptyState: document.getElementById("empty-state"),
+      searchSuggestions: document.getElementById("search-suggestions"),
       loadMoreWrap: document.getElementById("load-more-wrap"),
       loadMore: document.getElementById("load-more"),
       resetFilters: document.getElementById("reset-filters"),
@@ -1096,6 +1180,16 @@
       state.query = event.target.value.slice(0, 80);
       state.visible = PAGE_SIZE;
       filterCatalog();
+    });
+
+    elements.searchSuggestions?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-suggest]");
+      if (!button) return;
+      state.query = button.dataset.suggest;
+      elements.searchInput.value = state.query;
+      state.visible = PAGE_SIZE;
+      filterCatalog();
+      elements.productsGrid.scrollIntoView({ block: "start", behavior: "smooth" });
     });
 
     elements.searchClear.addEventListener("click", () => {

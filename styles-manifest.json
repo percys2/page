@@ -19,7 +19,7 @@
       "sha256": "08c7a3f4758e4239bc7e2e6c007e983b8b9a9c354987e8008c813166b0bbb694"
     },
     "products.html": {
-      "bundle": "styles-products-65f5df971567.css",
+      "bundle": "styles-products-e1260d41e12e.css",
       "sources": [
         "font-manrope.css",
         "products.css",
@@ -32,9 +32,9 @@
         "brand.css",
         "visual-polish.css"
       ],
-      "bytes": 160198,
-      "gzip_bytes": 27890,
-      "sha256": "65f5df971567ef1a05b53a2eee18ec6d684a51957406895d13b49ee99d88ef8b"
+      "bytes": 160820,
+      "gzip_bytes": 28090,
+      "sha256": "e1260d41e12ee4ba055ba4a0cf766fa18daaf54e4bd3e9a30a29938f0b2e632a"
     },
     "contact.html": {
       "bundle": "styles-contact-e24976819d87.css",
@@ -51,7 +51,7 @@
       "sha256": "e24976819d877f3da3dbe7d7f57ef2d97ff930a593950369833b3adfe1dcbc98"
     },
     "guia-de-uso.html": {
-      "bundle": "styles-guia-de-uso-73b4d3ababea.css",
+      "bundle": "styles-guia-de-uso-a9727ee0e175.css",
       "sources": [
         "font-manrope.css",
         "site.css",
@@ -61,9 +61,9 @@
         "brand.css",
         "visual-polish.css"
       ],
-      "bytes": 103669,
-      "gzip_bytes": 18827,
-      "sha256": "73b4d3ababeac21c0a946bdde5e80eac8c3503f3080b16b65dfb5a4145edc0b5"
+      "bytes": 109745,
+      "gzip_bytes": 19826,
+      "sha256": "a9727ee0e1758facf38aa5acf8efdc1aa742fc2eb45336bcd8e6d67d87e77621"
     }
   }
 }
