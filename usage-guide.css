@@ -89,47 +89,21 @@
 }
 
 /* ---- Guías por animal ---- */
-.guide-programs-section { padding-top: 40px; }
+.guide-programs-section { padding-top: 38px; }
 .guide-programs-section .section-title-row p { margin: 6px 0 0; max-width: 640px; color: var(--muted); font-size: 15px; }
-.guide-animal-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 18px; }
-.guide-animal-tabs button { display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 9px 16px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--green-950); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
-.guide-animal-tabs button span { font-size: 18px; line-height: 1; }
-.guide-animal-tabs button:hover { border-color: #a9c2b3; background: var(--green-050); }
-.guide-animal-tabs button[aria-selected="true"] { border-color: var(--green-950); background: var(--green-950); color: #fff; }
-.guide-program { scroll-margin-top: 150px; padding: 26px 28px 24px; border: 1px solid var(--line); border-radius: 14px; background: #fff; font-size: 14px; line-height: 1.7; }
-.guide-program__head { margin-bottom: 18px; }
-.guide-program__head h3 { margin: 0; color: var(--green-950); font-size: 24px; letter-spacing: -.02em; }
-.guide-program__head p { margin: 6px 0 0; color: var(--muted); font-size: 15px; }
-.guide-program a { color: var(--green-900); font-weight: 700; text-underline-offset: 3px; }
-.guide-subtitle { margin: 26px 0 12px; font-size: 16px; color: var(--green-900); }
-.guide-note { margin: 12px 0 0; padding: 12px 15px; border-left: 3px solid var(--maize); background: var(--green-050); border-radius: 0 8px 8px 0; }
-.guide-timeline { display: flex; gap: 4px; margin: 6px 0 18px; }
-.guide-timeline__seg { flex: 1 1 0; min-width: 0; padding: 10px 12px; border-radius: 8px; background: var(--green-100); color: var(--green-950); border-top: 4px solid var(--green-700); }
-.guide-timeline__seg--1 { border-top-color: var(--maize); }
-.guide-timeline__seg--2 { border-top-color: var(--green-950); }
-.guide-timeline__seg--3 { border-top-color: #8fb39d; }
-.guide-timeline__seg strong { display: block; font-size: 13px; line-height: 1.3; }
-.guide-timeline__seg span { display: block; margin-top: 3px; font-size: 12px; color: #3f5548; }
-.guide-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-.guide-steps li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 14px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; }
-.guide-steps__num { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: var(--green-950); color: #fff; font-weight: 800; }
-.guide-steps li strong { display: block; font-size: 15px; color: var(--green-950); }
-.guide-steps li p { margin: 5px 0 0; }
-.guide-steps li em { color: var(--muted); font-style: normal; }
-.guide-steps__tip { color: var(--green-900); }
-.guide-choice { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 8px 0; }
-.guide-choice > div { padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--green-050); }
-.guide-choice > div > strong { display: block; margin-bottom: 4px; color: var(--green-950); font-size: 15px; }
-.guide-choice p { margin: 4px 0 0; }
-.guide-choice .guide-timeline { margin: 8px 0 10px; }
-.guide-product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin: 20px 0 6px; }
-.guide-product-card { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 10px; text-decoration: none; background: #fff; }
-.guide-product-card:hover { border-color: #a9c2b3; background: var(--green-050); }
-.guide-product-card__img { display: flex; align-items: center; justify-content: center; width: 56px; height: 64px; }
-.guide-product-card__img img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
-.guide-product-card strong { display: block; font-size: 13px; line-height: 1.3; color: var(--green-950); }
-.guide-product-card small { display: block; margin-top: 2px; font-size: 11px; line-height: 1.35; color: var(--muted); font-weight: 500; }
-.guide-program__links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; }
+#guide-programs { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 50px; }
+.guide-programs-nav { top: 160px; }
+.guide-program { scroll-margin-top: 150px; font-size: 14px; line-height: 1.75; }
+.guide-program__head { margin-bottom: 4px; }
+.guide-program__head h3 { margin: 0; color: var(--green-950); font-size: 22px; letter-spacing: -.02em; }
+.guide-program__head p { margin: 6px 0 0; color: var(--muted); }
+.guide-program p { margin: 17px 0; }
+.guide-program a { color: var(--green-900); text-underline-offset: 3px; font-weight: 700; }
+.guide-program .guide-table-wrap { margin: 18px 0; }
+.guide-program tbody th { width: 24%; }
+.guide-program tbody td:first-of-type { width: 26%; }
+.guide-programs-section { padding-bottom: 44px; border-bottom: 1px solid var(--line); }
+.guide-program .guide-product-list { margin: 18px 0; padding: 0; list-style: none; }
 .guide-ration-fields--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .guide-ration-result:empty { display: none; }
 .guide-ration-result span { display: block; margin-top: 4px; font-weight: 500; color: var(--muted); font-size: 13px; }
@@ -138,22 +112,12 @@
 .guide-ration-result td span { font-weight: 500; }
 .guide-inline-input { width: 84px; min-height: 36px; padding: 5px 8px; border: 1px solid #a9c2b3; border-radius: 6px; font: inherit; font-size: 13px; }
 @media (max-width: 900px) {
-  .guide-program { padding: 20px 18px; }
+  #guide-programs { grid-template-columns: 1fr; gap: 22px; }
+  .guide-programs-nav { position: static; }
   .guide-ration-fields--three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 620px) {
-  .guide-programs-section { padding-top: 28px; }
-  .guide-animal-tabs { gap: 6px; }
-  .guide-animal-tabs button { min-height: 42px; padding: 7px 12px; font-size: 13px; }
-  .guide-program { padding: 18px 14px; border-radius: 12px; }
-  .guide-program__head h3 { font-size: 21px; }
-  .guide-timeline { flex-direction: column; gap: 6px; }
-  .guide-timeline__seg { border-top: 0; border-left: 4px solid var(--green-700); border-radius: 6px; }
-  .guide-timeline__seg--1 { border-left-color: var(--maize); }
-  .guide-timeline__seg--2 { border-left-color: var(--green-950); }
-  .guide-timeline__seg--3 { border-left-color: #8fb39d; }
-  .guide-steps li { grid-template-columns: 30px minmax(0, 1fr); gap: 10px; padding: 12px; }
-  .guide-steps__num { width: 30px; height: 30px; }
+  .guide-programs-section { padding-top: 26px; }
+  .guide-program__head h3 { font-size: 20px; }
   .guide-ration-fields--three { grid-template-columns: 1fr; }
-  .guide-product-grid { grid-template-columns: 1fr; }
 }

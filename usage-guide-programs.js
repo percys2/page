@@ -21,13 +21,11 @@
   const WA = text => `https://wa.me/50582403490?text=${encodeURIComponent(text)}`;
   const DAY = 86400000;
 
-  const productCard = id => {
-    const p = product(id);
-    if (!p) return "";
+  const productRow = id => {
     const g = guide(id);
-    const img = MODEL.getImage ? MODEL.getImage(p) : p.image;
-    return `<a class="guide-product-card" href="products.html?product=${id}"><span class="guide-product-card__img"><img src="${escape(img)}" ${MODEL.getResponsiveAttributes ? MODEL.getResponsiveAttributes(img, "96px") : ""} alt="" loading="lazy" decoding="async"></span><span><strong>${escape(name(id))}</strong><small>${escape(g.stage || "")}</small><small>${escape(g.presentation || "")}</small></span></a>`;
+    return `<li>${link(id)}<span>${escape(g.use || "")} ${escape(g.presentation ? `Presentación: ${g.presentation}.` : "")}</span></li>`;
   };
+  const productList = ids => `<ul class="guide-product-list">${ids.map(productRow).join("")}</ul>`;
 
   // ---------- Programas de alimentación (etapas oficiales) ----------
   const broiler = [
@@ -52,17 +50,13 @@
   function stageRange(s) { return s.open ? `Día ${s.from} → peso de mercado` : `Días ${s.from}–${s.to}`; }
   function stageDays(s) { return s.to - s.from + 1; }
 
-  function timeline(stages, caption) {
-    const total = stages.reduce((sum, s) => sum + stageDays(s), 0);
-    return `<div class="guide-timeline" role="img" aria-label="${escape(caption)}">${stages.map((s, i) => `<div class="guide-timeline__seg guide-timeline__seg--${i % 4}" style="flex-grow:${Math.max(stageDays(s), Math.round(total * 0.12))}"><strong>${escape(name(s.id))}</strong><span>${escape(stageRange(s))}</span></div>`).join("")}</div>`;
-  }
-
-  function steps(stages) {
-    return `<ol class="guide-steps">${stages.map((s, i) => {
+  function programTable(stages, caption) {
+    return `<div class="guide-table-wrap" role="region" aria-label="${escape(caption)}" tabindex="0"><table><caption>${escape(caption)}</caption><thead><tr><th scope="col">Edad</th><th scope="col">Alimento</th><th scope="col">Uso</th></tr></thead><tbody>${stages.map(s => {
       const g = guide(s.id);
-      return `<li><span class="guide-steps__num" aria-hidden="true">${i + 1}</span><div><strong>${escape(stageRange(s))} · ${link(s.id)}</strong><p>${escape(g.use || "")}${g.form ? ` <em>Presentación: ${escape(g.form)}, ${escape(g.presentation || "")}.</em>` : ""}</p>${g.feeding ? `<p class="guide-steps__tip">${escape(g.feeding)}</p>` : ""}</div></li>`;
-    }).join("")}</ol>`;
+      return `<tr><th scope="row">${escape(stageRange(s))}</th><td>${link(s.id)}<span>${escape(g.form || "")}${g.presentation ? ` · ${escape(g.presentation)}` : ""}</span></td><td>${escape(g.use || "")}</td></tr>`;
+    }).join("")}</tbody></table></div>`;
   }
+  const feedingNote = ids => { const note = ids.map(id => guide(id).feeding).find(Boolean); return note ? `<p>${escape(note)}</p>` : ""; };
 
   // ---------- Calculadoras ----------
   function field(id, label, attrs) { return `<label for="${id}">${escape(label)}<input id="${id}" ${attrs}></label>`; }
@@ -180,49 +174,49 @@
   // ---------- Guías ----------
   const programs = [
     {
-      key: "pollos", label: "Pollos de engorde", icon: "🐔",
-      summary: "Tres alimentos, tres etapas: del día 1 al peso de mercado.",
-      body: () => `${timeline(broiler, "Programa para pollos de engorde")}${steps(broiler)}<div class="guide-product-grid">${[4, 2, 1].map(productCard).join("")}</div>${calculator("broiler")}`,
-      links: [["products.html?type=alimentos&category=aves", "Ver alimentos para aves"], ["#consumo-pollos", "Pregunta: ¿cuánto consume un pollo?"]]
+      key: "pollos", label: "Pollos de engorde",
+      summary: "Tres alimentos según la edad, del día 1 al peso de mercado.",
+      body: () => `${programTable(broiler, "Programa para pollos de engorde")}${calculator("broiler")}`,
+      links: [["products.html?type=alimentos&category=aves", "Ver alimentos para aves"], ["#consumo-pollos", "¿Cuánto consume un pollo?"]]
     },
     {
-      key: "ponedoras", label: "Gallinas ponedoras", icon: "🥚",
-      summary: "Elegí según el tipo de gallina: de patio, de granja o criolla.",
-      body: () => `<div class="guide-choice"><div><strong>Gallinas de patio</strong><p>${link(38)} — ${escape(guide(38).period)}.</p></div><div><strong>Gallinas de granja</strong><p>${link(39)} — ${escape(guide(39).period)}.</p></div><div><strong>Gallinas criollas</strong><p>${link(11)} — ${escape(guide(11).period)}.</p></div></div><div class="guide-product-grid">${[38, 39, 11].map(productCard).join("")}</div>${calculator("layers")}`,
-      links: [["products.html?type=alimentos&category=aves&stage=produccion", "Ver alimentos de postura"], ["#postura", "Pregunta: Posturina Fase 1 vs HP"]]
+      key: "ponedoras", label: "Gallinas ponedoras",
+      summary: "El alimento depende del tipo de gallina: de patio, de granja o criolla.",
+      body: () => `<div class="guide-table-wrap" role="region" aria-label="Alimentos de postura" tabindex="0"><table><caption>Alimentos de postura</caption><thead><tr><th scope="col">Tipo de gallina</th><th scope="col">Alimento</th><th scope="col">Cuándo</th></tr></thead><tbody><tr><th scope="row">Gallinas de patio</th><td>${link(38)}</td><td>${escape(guide(38).period)}</td></tr><tr><th scope="row">Gallinas de granja</th><td>${link(39)}</td><td>${escape(guide(39).period)}</td></tr><tr><th scope="row">Gallinas criollas</th><td>${link(11)}</td><td>${escape(guide(11).period)}</td></tr></tbody></table></div>${calculator("layers")}`,
+      links: [["products.html?type=alimentos&category=aves&stage=produccion", "Ver alimentos de postura"], ["#postura", "Posturina Fase 1 y Posturina HP"]]
     },
     {
-      key: "cerdos", label: "Cerdos", icon: "🐖",
-      summary: "NeoPigg 1 → 4 para lechones y luego línea estándar o premium hasta el mercado.",
-      body: () => `<h3 class="guide-subtitle">1. Lechones: NeoPigg (programa Óptimo)</h3>${timeline(neopigg.optimo, "Programa NeoPigg Óptimo")}<p class="guide-note">Programa <strong>Plus</strong>: ${neopigg.plus.map(s => `${escape(name(s.id))} días ${s.from}–${s.to}`).join(" · ")}. Seguí las cuatro fases de un mismo programa, contando la edad desde el nacimiento.</p><h3 class="guide-subtitle">2. Desarrollo y engorde: elegí una línea</h3><div class="guide-choice"><div><strong>Línea estándar</strong>${timeline(pigLines.estandar, "Línea estándar")}<p>${link(27)} y luego ${link(28)} hasta el peso de mercado.</p></div><div><strong>Línea premium</strong>${timeline(pigLines.premium, "Línea premium")}<p>${link(31)}, ${link(32)} y ${link(36)} para el acabado final (últimos 28–42 días).</p></div></div><h3 class="guide-subtitle">3. Cerdas reproductoras</h3><div class="guide-choice"><div><strong>Gestación</strong><p>${link(29)} — ${escape(guide(29).period)}.</p></div><div><strong>Lactancia</strong><p>${link(30)} — ${escape(guide(30).period)}.</p></div></div><div class="guide-product-grid">${[24, 25, 37, 26, 27, 28, 31, 32, 36, 29, 30].map(productCard).join("")}</div>${calculator("pigs")}`,
-      links: [["products.html?type=alimentos&category=cerdos", "Ver alimentos para cerdos"], ["#lineas-cerdos", "Pregunta: ¿estándar o premium?"]]
+      key: "cerdos", label: "Cerdos",
+      summary: "NeoPigg 1 al 4 para lechones; después, línea estándar o premium hasta el peso de mercado.",
+      body: () => `${programTable(neopigg.optimo, "Lechones: NeoPigg, programa Óptimo")}<p>Programa Plus: ${neopigg.plus.map(s => `${escape(name(s.id))} días ${s.from}–${s.to}`).join(" · ")}. ${escape(guide(24).feeding)}</p>${programTable(pigLines.estandar, "Desarrollo y engorde: línea estándar")}${programTable(pigLines.premium, "Desarrollo y engorde: línea premium")}<p>${escape(guide(36).feeding)} ${escape(guide(36).period)}.</p><div class="guide-table-wrap" role="region" aria-label="Cerdas reproductoras" tabindex="0"><table><caption>Cerdas reproductoras</caption><thead><tr><th scope="col">Etapa</th><th scope="col">Alimento</th><th scope="col">Cuándo</th></tr></thead><tbody><tr><th scope="row">Gestación</th><td>${link(29)}</td><td>${escape(guide(29).period)}</td></tr><tr><th scope="row">Lactancia</th><td>${link(30)}</td><td>${escape(guide(30).period)}</td></tr></tbody></table></div>${calculator("pigs")}`,
+      links: [["products.html?type=alimentos&category=cerdos", "Ver alimentos para cerdos"], ["#lineas-cerdos", "¿Línea estándar o premium?"], ["#neopigg-optimo-plus", "¿Óptimo o Plus?"]]
     },
     {
-      key: "mascotas", label: "Perros y gatos", icon: "🐶",
-      summary: "Cachorro o adulto: la edad define el alimento.",
-      body: () => `<div class="guide-choice"><div><strong>Perros cachorros</strong><p>${link(35)} (${escape(guide(35).period)}), ${link(17)} (${escape(guide(17).period)}) o ${link(13)}.</p></div><div><strong>Perros adultos</strong><p>${link(33)} (${escape(guide(33).period)}), ${link(15)} (${escape(guide(15).period)}) o ${link(12)}.</p></div><div><strong>Gatos adultos</strong><p>${link(19)} o ${link(21)} — ${escape(guide(19).period)}.</p></div></div><p class="guide-note">Cada marca indica en la etiqueta la ración diaria según el peso del animal; la presentación de 454 g sirve para probar antes de comprar el saco.</p><div class="guide-product-grid">${[35, 33, 17, 15, 13, 12, 19, 21].map(productCard).join("")}</div>`,
-      links: [["products.html?type=alimentos&category=perros", "Ver alimentos para perros"], ["products.html?type=alimentos&category=gatos", "Ver alimentos para gatos"], ["#pet-master", "Pregunta: Pet Master Cachorros o Adultos"]]
+      key: "mascotas", label: "Perros y gatos",
+      summary: "La edad del animal define el alimento: cachorro o adulto.",
+      body: () => `<div class="guide-table-wrap" role="region" aria-label="Alimentos para perros y gatos" tabindex="0"><table><caption>Alimentos para perros y gatos</caption><thead><tr><th scope="col">Animal</th><th scope="col">Alimentos</th><th scope="col">Edad</th></tr></thead><tbody><tr><th scope="row">Perros cachorros</th><td>${link(35)} · ${link(17)} · ${link(13)}</td><td>${escape(guide(35).period)}</td></tr><tr><th scope="row">Perros adultos</th><td>${link(33)} · ${link(15)} · ${link(12)}</td><td>${escape(guide(33).period)}</td></tr><tr><th scope="row">Gatos adultos</th><td>${link(19)} · ${link(21)}</td><td>${escape(guide(19).period)}</td></tr></tbody></table></div><p>Cada marca indica en la etiqueta la ración diaria según el peso del animal. La presentación de 454 g sirve para probar antes de comprar el saco.</p>`,
+      links: [["products.html?type=alimentos&category=perros", "Ver alimentos para perros"], ["products.html?type=alimentos&category=gatos", "Ver alimentos para gatos"], ["#pet-master", "¿Pet Master Cachorros o Adultos?"]]
     },
     {
-      key: "caballos", label: "Caballos", icon: "🐴",
-      summary: "Omalina según el trabajo del caballo, más fibra y proteína como suplemento.",
-      body: () => `<div class="guide-choice"><div><strong>Recreación y trabajo ligero</strong><p>${link(6)} — ${escape(guide(6).period)}.</p></div><div><strong>Trabajo intenso o deporte</strong><p>${link(7)} — ${escape(guide(7).period)}.</p></div><div><strong>Yeguas de cría y potros</strong><p>${link(8)} — ${escape(guide(8).period)}.</p></div></div><h3 class="guide-subtitle">Suplementos</h3><ul class="guide-product-list"><li>${link(23)}<span>${escape(guide(23).use)} ${escape(guide(23).feeding)}</span></li><li>${link(5)}<span>${escape(guide(5).use)} ${escape(guide(5).feeding)}</span></li></ul><div class="guide-product-grid">${[6, 7, 8, 23, 5].map(productCard).join("")}</div>${calculator("horse")}`,
-      links: [["products.html?type=alimentos&category=equinos", "Ver alimentos para caballos"], ["#omalina", "Pregunta: Omalina 100, 200 o 300"]]
+      key: "caballos", label: "Caballos",
+      summary: "Omalina según el trabajo del caballo; Forrajina y Cavalleria Forte como suplementos.",
+      body: () => `<div class="guide-table-wrap" role="region" aria-label="Alimentos para caballos" tabindex="0"><table><caption>Alimentos para caballos</caption><thead><tr><th scope="col">Situación</th><th scope="col">Alimento</th><th scope="col">Cuándo</th></tr></thead><tbody><tr><th scope="row">Recreación y trabajo ligero</th><td>${link(6)}</td><td>${escape(guide(6).period)}</td></tr><tr><th scope="row">Trabajo intenso o deporte</th><td>${link(7)}</td><td>${escape(guide(7).period)}</td></tr><tr><th scope="row">Yeguas de cría y potros</th><td>${link(8)}</td><td>${escape(guide(8).period)}</td></tr></tbody></table></div>${productList([23, 5])}${calculator("horse")}`,
+      links: [["products.html?type=alimentos&category=equinos", "Ver alimentos para caballos"], ["#omalina", "¿Omalina 100, 200 o 300?"]]
     },
     {
-      key: "conejos", label: "Conejos", icon: "🐇",
+      key: "conejos", label: "Conejos",
       summary: "Un solo alimento completo para todas las razas y edades.",
-      body: () => `<ul class="guide-product-list"><li>${link(9)}<span>${escape(guide(9).use)} ${escape(guide(9).feeding)} Presentación: ${escape(guide(9).presentation)}.</span></li></ul><div class="guide-product-grid">${productCard(9)}</div>`,
+      body: () => `${productList([9])}<p>${escape(guide(9).feeding)}</p>`,
       links: [["products.html?type=alimentos&category=conejos", "Ver alimento para conejos"]]
     }
   ];
 
-  root.innerHTML = `<div class="guide-animal-tabs" role="tablist" aria-label="Elegí un animal">${programs.map((p, i) => `<button type="button" role="tab" id="tab-${p.key}" aria-selected="${i === 0}" aria-controls="panel-${p.key}" data-program="${p.key}"><span aria-hidden="true">${p.icon}</span>${escape(p.label)}</button>`).join("")}</div>${programs.map((p, i) => `<section class="guide-program" role="tabpanel" id="panel-${p.key}" aria-labelledby="tab-${p.key}"${i === 0 ? "" : " hidden"}><div class="guide-program__head"><h3>${escape(p.label)}</h3><p>${escape(p.summary)}</p></div>${p.body()}<div class="guide-program__links">${p.links.map(([href, label]) => `<a href="${href}">${escape(label)} →</a>`).join("")}<a href="${WA(`Hola, AgroCentro Nica. Tengo una consulta sobre alimentación de ${p.label.toLowerCase()}.\n\nMi caso: `)}" target="_blank" rel="noopener noreferrer">Consultar por WhatsApp ↗</a></div></section>`).join("")}`;
+  root.innerHTML = `<aside class="guide-sidebar guide-programs-nav"><h2>Elegí tu animal</h2><div class="guide-topic-list" role="tablist" aria-label="Elegí un animal">${programs.map((p, i) => `<button type="button" role="tab" id="tab-${p.key}" aria-pressed="${i === 0}" aria-selected="${i === 0}" aria-controls="panel-${p.key}" data-program="${p.key}">${escape(p.label)}</button>`).join("")}</div></aside><div class="guide-programs-content">${programs.map((p, i) => `<section class="guide-program" role="tabpanel" id="panel-${p.key}" aria-labelledby="tab-${p.key}"${i === 0 ? "" : " hidden"}><div class="guide-program__head"><h3>${escape(p.label)}</h3><p>${escape(p.summary)}</p></div>${p.body()}<div class="guide-answer-footer">${p.links.map(([href, label]) => `<a href="${href}">${escape(label)} →</a>`).join("")}<a href="${WA(`Hola, AgroCentro Nica. Tengo una consulta sobre alimentación de ${p.label.toLowerCase()}.\n\nMi caso: `)}" target="_blank" rel="noopener noreferrer">Consultar por WhatsApp ↗</a></div></section>`).join("")}</div>`;
 
   const tabs = [...root.querySelectorAll("[data-program]")];
   const panels = [...root.querySelectorAll(".guide-program")];
   function show(key, focus) {
-    tabs.forEach(tab => tab.setAttribute("aria-selected", String(tab.dataset.program === key)));
+    tabs.forEach(tab => { const on = String(tab.dataset.program === key); tab.setAttribute("aria-selected", on); tab.setAttribute("aria-pressed", on); });
     panels.forEach(panel => { panel.hidden = panel.id !== `panel-${key}`; });
     if (focus) root.querySelector(`#panel-${key}`).scrollIntoView({ block: "start", behavior: "smooth" });
   }
