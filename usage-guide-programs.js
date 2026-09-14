@@ -1,5 +1,5 @@
 /*
- * Guías por animal y calculadoras de la página "Guía de uso".
+ * Calculadoras de la página "Guía de uso"; se insertan en las respuestas con <div data-calc="…">.
  * Las etapas, edades y productos salen de las fichas (feed-guides) y del catálogo FY26.
  * Los consumos diarios marcados como "referencia" NO provienen del catálogo: son valores
  * generales editables por el usuario para estimar sacos; siempre se indica en pantalla.
@@ -8,8 +8,8 @@
   "use strict";
 
   const MODEL = window.AGROCENTRO_CATALOG;
-  const root = document.getElementById("guide-programs");
-  if (!MODEL || !root) return;
+  const slots = [...document.querySelectorAll("#guide-questions [data-calc]")];
+  if (!MODEL || !slots.length) return;
 
   const escape = value => String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
   const product = id => MODEL.products.find(entry => entry.id === id);
@@ -18,14 +18,7 @@
   const link = (id, label) => `<a href="products.html?product=${id}">${escape(label || name(id))}</a>`;
   const fmt = (value, digits = 1) => Number(value).toLocaleString("es-NI", { maximumFractionDigits: digits });
   const SACK_LB = 100;
-  const WA = text => `https://wa.me/50582403490?text=${encodeURIComponent(text)}`;
   const DAY = 86400000;
-
-  const productRow = id => {
-    const g = guide(id);
-    return `<li>${link(id)}<span>${escape(g.use || "")} ${escape(g.presentation ? `Presentación: ${g.presentation}.` : "")}</span></li>`;
-  };
-  const productList = ids => `<ul class="guide-product-list">${ids.map(productRow).join("")}</ul>`;
 
   // ---------- Programas de alimentación (etapas oficiales) ----------
   const broiler = [
@@ -49,14 +42,6 @@
 
   function stageRange(s) { return s.open ? `Día ${s.from} → peso de mercado` : `Días ${s.from}–${s.to}`; }
   function stageDays(s) { return s.to - s.from + 1; }
-
-  function programTable(stages, caption) {
-    return `<div class="guide-table-wrap" role="region" aria-label="${escape(caption)}" tabindex="0"><table><caption>${escape(caption)}</caption><thead><tr><th scope="col">Edad</th><th scope="col">Alimento</th><th scope="col">Uso</th></tr></thead><tbody>${stages.map(s => {
-      const g = guide(s.id);
-      return `<tr><th scope="row">${escape(stageRange(s))}</th><td>${link(s.id)}<span>${escape(g.form || "")}${g.presentation ? ` · ${escape(g.presentation)}` : ""}</span></td><td>${escape(g.use || "")}</td></tr>`;
-    }).join("")}</tbody></table></div>`;
-  }
-  const feedingNote = ids => { const note = ids.map(id => guide(id).feeding).find(Boolean); return note ? `<p>${escape(note)}</p>` : ""; };
 
   // ---------- Calculadoras ----------
   function field(id, label, attrs) { return `<label for="${id}">${escape(label)}<input id="${id}" ${attrs}></label>`; }
@@ -166,70 +151,11 @@
     }
   };
 
-  function calculator(key) {
-    const c = calculators[key];
-    return `<div class="guide-ration-tool" data-calculator="${key}"><h3>${escape(c.title)}</h3>${c.html}</div>`;
-  }
-
-  // ---------- Guías ----------
-  const programs = [
-    {
-      key: "pollos", label: "Pollos de engorde",
-      summary: "Tres alimentos según la edad, del día 1 al peso de mercado.",
-      body: () => `${programTable(broiler, "Programa para pollos de engorde")}${calculator("broiler")}`,
-      links: [["products.html?type=alimentos&category=aves", "Ver alimentos para aves"], ["#consumo-pollos", "¿Cuánto consume un pollo?"]]
-    },
-    {
-      key: "ponedoras", label: "Gallinas ponedoras",
-      summary: "El alimento depende del tipo de gallina: de patio, de granja o criolla.",
-      body: () => `<div class="guide-table-wrap" role="region" aria-label="Alimentos de postura" tabindex="0"><table><caption>Alimentos de postura</caption><thead><tr><th scope="col">Tipo de gallina</th><th scope="col">Alimento</th><th scope="col">Cuándo</th></tr></thead><tbody><tr><th scope="row">Gallinas de patio</th><td>${link(38)}</td><td>${escape(guide(38).period)}</td></tr><tr><th scope="row">Gallinas de granja</th><td>${link(39)}</td><td>${escape(guide(39).period)}</td></tr><tr><th scope="row">Gallinas criollas</th><td>${link(11)}</td><td>${escape(guide(11).period)}</td></tr></tbody></table></div>${calculator("layers")}`,
-      links: [["products.html?type=alimentos&category=aves&stage=produccion", "Ver alimentos de postura"], ["#postura", "Posturina Fase 1 y Posturina HP"]]
-    },
-    {
-      key: "cerdos", label: "Cerdos",
-      summary: "NeoPigg 1 al 4 para lechones; después, línea estándar o premium hasta el peso de mercado.",
-      body: () => `${programTable(neopigg.optimo, "Lechones: NeoPigg, programa Óptimo")}<p>Programa Plus: ${neopigg.plus.map(s => `${escape(name(s.id))} días ${s.from}–${s.to}`).join(" · ")}. ${escape(guide(24).feeding)}</p>${programTable(pigLines.estandar, "Desarrollo y engorde: línea estándar")}${programTable(pigLines.premium, "Desarrollo y engorde: línea premium")}<p>${escape(guide(36).feeding)} ${escape(guide(36).period)}.</p><div class="guide-table-wrap" role="region" aria-label="Cerdas reproductoras" tabindex="0"><table><caption>Cerdas reproductoras</caption><thead><tr><th scope="col">Etapa</th><th scope="col">Alimento</th><th scope="col">Cuándo</th></tr></thead><tbody><tr><th scope="row">Gestación</th><td>${link(29)}</td><td>${escape(guide(29).period)}</td></tr><tr><th scope="row">Lactancia</th><td>${link(30)}</td><td>${escape(guide(30).period)}</td></tr></tbody></table></div>${calculator("pigs")}`,
-      links: [["products.html?type=alimentos&category=cerdos", "Ver alimentos para cerdos"], ["#lineas-cerdos", "¿Línea estándar o premium?"], ["#neopigg-optimo-plus", "¿Óptimo o Plus?"]]
-    },
-    {
-      key: "mascotas", label: "Perros y gatos",
-      summary: "La edad del animal define el alimento: cachorro o adulto.",
-      body: () => `<div class="guide-table-wrap" role="region" aria-label="Alimentos para perros y gatos" tabindex="0"><table><caption>Alimentos para perros y gatos</caption><thead><tr><th scope="col">Animal</th><th scope="col">Alimentos</th><th scope="col">Edad</th></tr></thead><tbody><tr><th scope="row">Perros cachorros</th><td>${link(35)} · ${link(17)} · ${link(13)}</td><td>${escape(guide(35).period)}</td></tr><tr><th scope="row">Perros adultos</th><td>${link(33)} · ${link(15)} · ${link(12)}</td><td>${escape(guide(33).period)}</td></tr><tr><th scope="row">Gatos adultos</th><td>${link(19)} · ${link(21)}</td><td>${escape(guide(19).period)}</td></tr></tbody></table></div><p>Cada marca indica en la etiqueta la ración diaria según el peso del animal. La presentación de 454 g sirve para probar antes de comprar el saco.</p>`,
-      links: [["products.html?type=alimentos&category=perros", "Ver alimentos para perros"], ["products.html?type=alimentos&category=gatos", "Ver alimentos para gatos"], ["#pet-master", "¿Pet Master Cachorros o Adultos?"]]
-    },
-    {
-      key: "caballos", label: "Caballos",
-      summary: "Omalina según el trabajo del caballo; Forrajina y Cavalleria Forte como suplementos.",
-      body: () => `<div class="guide-table-wrap" role="region" aria-label="Alimentos para caballos" tabindex="0"><table><caption>Alimentos para caballos</caption><thead><tr><th scope="col">Situación</th><th scope="col">Alimento</th><th scope="col">Cuándo</th></tr></thead><tbody><tr><th scope="row">Recreación y trabajo ligero</th><td>${link(6)}</td><td>${escape(guide(6).period)}</td></tr><tr><th scope="row">Trabajo intenso o deporte</th><td>${link(7)}</td><td>${escape(guide(7).period)}</td></tr><tr><th scope="row">Yeguas de cría y potros</th><td>${link(8)}</td><td>${escape(guide(8).period)}</td></tr></tbody></table></div>${productList([23, 5])}${calculator("horse")}`,
-      links: [["products.html?type=alimentos&category=equinos", "Ver alimentos para caballos"], ["#omalina", "¿Omalina 100, 200 o 300?"]]
-    },
-    {
-      key: "conejos", label: "Conejos",
-      summary: "Un solo alimento completo para todas las razas y edades.",
-      body: () => `${productList([9])}<p>${escape(guide(9).feeding)}</p>`,
-      links: [["products.html?type=alimentos&category=conejos", "Ver alimento para conejos"]]
-    }
-  ];
-
-  root.innerHTML = `<aside class="guide-sidebar guide-programs-nav"><h2>Elegí tu animal</h2><div class="guide-topic-list" role="tablist" aria-label="Elegí un animal">${programs.map((p, i) => `<button type="button" role="tab" id="tab-${p.key}" aria-pressed="${i === 0}" aria-selected="${i === 0}" aria-controls="panel-${p.key}" data-program="${p.key}">${escape(p.label)}</button>`).join("")}</div></aside><div class="guide-programs-content">${programs.map((p, i) => `<section class="guide-program" role="tabpanel" id="panel-${p.key}" aria-labelledby="tab-${p.key}"${i === 0 ? "" : " hidden"}><div class="guide-program__head"><h3>${escape(p.label)}</h3><p>${escape(p.summary)}</p></div>${p.body()}<div class="guide-answer-footer">${p.links.map(([href, label]) => `<a href="${href}">${escape(label)} →</a>`).join("")}<a href="${WA(`Hola, AgroCentro Nica. Tengo una consulta sobre alimentación de ${p.label.toLowerCase()}.\n\nMi caso: `)}" target="_blank" rel="noopener noreferrer">Consultar por WhatsApp ↗</a></div></section>`).join("")}</div>`;
-
-  const tabs = [...root.querySelectorAll("[data-program]")];
-  const panels = [...root.querySelectorAll(".guide-program")];
-  function show(key, focus) {
-    tabs.forEach(tab => { const on = String(tab.dataset.program === key); tab.setAttribute("aria-selected", on); tab.setAttribute("aria-pressed", on); });
-    panels.forEach(panel => { panel.hidden = panel.id !== `panel-${key}`; });
-    if (focus) root.querySelector(`#panel-${key}`).scrollIntoView({ block: "start", behavior: "smooth" });
-  }
-  tabs.forEach(tab => tab.addEventListener("click", () => { show(tab.dataset.program, false); history.replaceState(null, "", `#guia-${tab.dataset.program}`); }));
-  Object.values(calculators).forEach(c => c.bind());
-  function openFromHash() {
-    const match = /^#guia-([a-z]+)$/.exec(location.hash);
-    if (match && programs.some(p => p.key === match[1])) show(match[1], true);
-  }
-  window.addEventListener("hashchange", openFromHash);
-  document.querySelectorAll('a[href^="#guia-"]').forEach(anchor => anchor.addEventListener("click", () => {
-    if (anchor.getAttribute("href") === location.hash) openFromHash();
-  }));
-  openFromHash();
-  root.hidden = false;
+  slots.forEach(slot => {
+    const c = calculators[slot.dataset.calc];
+    if (!c) { slot.remove(); return; }
+    slot.className = "guide-ration-tool";
+    slot.innerHTML = `<h3>${escape(c.title)}</h3>${c.html}`;
+    c.bind();
+  });
 })();
