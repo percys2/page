@@ -16,24 +16,22 @@
   function uses(ids) {
     return `<ul class="guide-product-list">${ids.map(id => `<li>${link(id)}<span>${escape(guide(id).use)}</span></li>`).join("")}</ul>`;
   }
-  // Rangos calculados con los objetivos 2022 para lotes mixtos Ross 308 y Cobb500.
-  // Fuentes técnicas: Aviagen Ross 308/308 FF Broiler Performance Objectives, pág. 3;
-  // Cobb500 Broiler Performance & Nutrition Supplement, págs. 2 y 5.
-  // Los períodos de los alimentos corresponden al catálogo FY26 de Cargill Nicaragua, pág. 8.
+  // Base comercial redondeada a 10 lb por ave hasta 42 días.
+  // Los períodos corresponden al catálogo FY26 de Cargill Nicaragua, pág. 8.
+  // Como contraste técnico, los objetivos 2022 para lotes mixtos Ross 308 y Cobb500
+  // sitúan el consumo acumulado a 42 días entre 10.11 y 11.26 lb por ave viva.
   const broilerReference = [
-    { period: "Días 1–7", feed: "Preiniciarina Plus LA", pounds: "0.37–0.40 lb" },
-    { period: "Días 8–21", feed: "Iniciarina", pounds: "2.18–2.53 lb" },
-    { period: "Días 22–42", feed: "Engordina", pounds: "7.56–8.33 lb" },
-    { period: "Días 43–45", feed: "Engordina", pounds: "1.41–1.50 lb" }
+    { period: "Días 1–7", feed: "Preiniciarina Plus LA", pounds: "0.4 lb" },
+    { period: "Días 8–21", feed: "Iniciarina", pounds: "2.2 lb" },
+    { period: "Días 22–42", feed: "Engordina", pounds: "7.4 lb" }
   ];
   function broilerConsumptionTable() {
     const rows = broilerReference.map(item => `<tr><th scope="row">${item.period}</th><td>${item.feed}</td><td>${item.pounds}</td></tr>`).join("");
-    return `<div class="guide-table-wrap" role="region" aria-label="Rango de consumo de referencia por ave" tabindex="0"><table><caption>Objetivos 2022 Ross 308–Cobb500 por ave viva</caption><thead><tr><th scope="col">Período</th><th scope="col">Alimento de la etapa</th><th scope="col">Rango de consumo</th></tr></thead><tbody>${rows}<tr class="guide-total"><th scope="row" colspan="2">Total hasta 42 días</th><td>10.11–11.26 lb</td></tr><tr class="guide-total"><th scope="row" colspan="2">Total hasta 45 días</th><td>11.52–12.76 lb</td></tr></tbody></table></div>`;
+    return `<div class="guide-table-wrap" role="region" aria-label="Consumo base por pollo" tabindex="0"><table><caption>Plan base por pollo hasta 42 días</caption><thead><tr><th scope="col">Período</th><th scope="col">Alimento de la etapa</th><th scope="col">Consumo base</th></tr></thead><tbody>${rows}<tr class="guide-total"><th scope="row" colspan="2">Total por pollo</th><td>10 lb</td></tr></tbody></table></div>`;
   }
   const questions = [
     { id: "pollos-engorde", topic: "aves", question: "¿Qué alimento le toca a mi pollo según su edad?", keywords: "pollitos preinicio inicio engorde preiniciarina iniciarina engordina", answer: `<p>Para pollos de engorde, el programa avanza en tres etapas. Contá la edad del pollo desde su nacimiento:</p>${periods([4, 2, 1], "Etapas del pollo de engorde")}<p>Entrá a la ficha del saco para ver su presentación y sus características.</p>` },
-    { id: "consumo-pollos", topic: "aves", question: "¿Cuánto alimento consume un pollo de engorde?", keywords: "consumo racion libras gramos sacos lote 42 45 dias calculadora ross cobb", answer: `<p>Esta referencia sirve para planificar compras y revisar el consumo del lote. Combina las etapas del programa Purina Nicaragua con objetivos productivos oficiales para lotes mixtos Ross 308 y Cobb500.</p>${broilerConsumptionTable()}<p><strong>Es un rango de consumo esperado, no una cantidad que debás limitar.</strong> El consumo real cambia con la genética, el clima, la salud, el manejo y la disponibilidad de agua y alimento. Tampoco incluye alimento desperdiciado.</p><div class="guide-ration-tool" data-broiler-calculator><h3>Calculá el alimento para tu lote</h3><div class="guide-ration-fields"><label for="broiler-count">Cantidad de pollos<input id="broiler-count" type="number" min="1" max="100000" step="1" value="100" inputmode="numeric" required></label><label for="broiler-days">Duración<select id="broiler-days"><option value="42">Hasta 42 días</option><option value="45">Hasta 45 días</option></select></label></div><p class="guide-ration-result" id="broiler-result" role="status" aria-live="polite"></p><p class="guide-ration-note">El resultado expresa un rango en libras y sacos equivalentes de 100 lb. Redondeá la compra según la presentación disponible y revisá el consumo real durante el ciclo.</p></div>` },
-    { id: "cambio-pollos", topic: "aves", question: "¿Cuándo cambio de Preiniciarina a Iniciarina y Engordina?", keywords: "cambio transicion preiniciarina iniciarina engordina dia 7 8 21 22", answer: `<p>El programa de Cargill Nicaragua marca estos cambios por edad:</p>${periods([4, 2, 1], "Cambio de alimento por edad")}<ul><li>Al terminar el día 7, continuá con ${link(2)} desde el día 8.</li><li>Al terminar el día 21, continuá con ${link(1)} desde el día 22 hasta el peso de mercado.</li><li>Anotá diariamente cuánto alimento servís y cuánto queda para detectar cambios inesperados en el consumo.</li></ul>` },
+    { id: "consumo-pollos", topic: "aves", question: "¿Cuánto alimento consume un pollo de engorde?", keywords: "consumo racion libras sacos lote 42 dias calculadora peso vivo", answer: `<p>Para planificar de forma sencilla, esta tabla usa una base redondeada de <strong>10 lb de alimento por pollo hasta 42 días</strong>.</p>${broilerConsumptionTable()}<p><strong>Usala para planificar, no para limitar el alimento.</strong> El consumo real puede superar las 10 lb según la genética, el clima, la salud, el manejo y el tiempo de salida. Sumá aparte cualquier desperdicio.</p><p>El dato de <strong>7.2–7.9 lb alrededor de 45 días corresponde al peso vivo esperado</strong>; no es la cantidad total de alimento consumido.</p><div class="guide-ration-tool" data-broiler-calculator><h3>Calculá el alimento para tu lote</h3><div class="guide-ration-fields guide-ration-fields--single"><label for="broiler-count">Cantidad de pollos<input id="broiler-count" type="number" min="1" max="100000" step="1" value="100" inputmode="numeric" required></label></div><p class="guide-ration-result" id="broiler-result" role="status" aria-live="polite"></p><p class="guide-ration-note">Cálculo base: 10 lb por pollo y sacos equivalentes de 100 lb. Ajustá la compra con el consumo real del lote.</p></div>` },
     { id: "postura", topic: "aves", question: "¿Cuál es la diferencia entre Posturina Fase 1 y Posturina HP?", keywords: "gallinas ponedoras huevos postura patio granja", answer: `${uses([38, 39])}${periods([38, 39], "Uso de los alimentos de postura")}<p>Para gallinas criollas también tenés ${link(11)}, durante todo el ciclo de postura.</p><a class="guide-inline-link" href="products.html?type=alimentos&amp;category=aves&amp;stage=produccion">Ver alimentos de postura →</a>` },
     { id: "pollo-criollo", topic: "aves", question: "¿Para qué se usa Pollo Criollo?", keywords: "patio crecimiento engorde", answer: `${uses([10])}<p>Se usa durante el crecimiento y engorde de pollos criollos. Si tu gallina está produciendo huevos, revisá ${link(11)}.</p>` },
     { id: "novagallos", topic: "aves", question: "¿En qué etapa se usa Novagallos?", keywords: "gallos crecimiento adulto actividad", answer: `${uses([3])}<p><strong>Etapa:</strong> ${escape(guide(3).period)}.</p><p>Contanos la etapa y la actividad del gallo para orientarte sobre el alimento.</p>` },
@@ -101,22 +99,20 @@
   document.getElementById("guide-controls").hidden = false;
   document.getElementById("guide-result-count").hidden = false;
   const broilerCount = document.getElementById("broiler-count");
-  const broilerDays = document.getElementById("broiler-days");
   const broilerResult = document.getElementById("broiler-result");
   function updateBroilerCalculation() {
-    if (!broilerCount || !broilerDays || !broilerResult) return;
+    if (!broilerCount || !broilerResult) return;
     if (!broilerCount.checkValidity()) {
       broilerResult.textContent = "Ingresá una cantidad entera entre 1 y 100,000 pollos.";
       return;
     }
     const birds = Number(broilerCount.value);
-    const range = broilerDays.value === "45" ? [11.52, 12.76] : [10.11, 11.26];
-    const totalPounds = range.map(value => birds * value);
-    const sacks = totalPounds.map(value => value / 100);
+    const totalPounds = birds * 10;
+    const sacks = totalPounds / 100;
     const format = value => value.toLocaleString("es-NI", { maximumFractionDigits: 1 });
-    broilerResult.innerHTML = `<strong>${birds.toLocaleString("es-NI")} pollos:</strong> ${format(totalPounds[0])}–${format(totalPounds[1])} lb · ${format(sacks[0])}–${format(sacks[1])} sacos equivalentes`;
+    broilerResult.innerHTML = `<strong>${birds.toLocaleString("es-NI")} pollos:</strong> ${format(totalPounds)} lb · ${format(sacks)} sacos equivalentes`;
   }
-  [broilerCount, broilerDays].forEach(control => control?.addEventListener("input", updateBroilerCalculation));
+  broilerCount?.addEventListener("input", updateBroilerCalculation);
   updateBroilerCalculation();
   applyFilters();
   openHash();
