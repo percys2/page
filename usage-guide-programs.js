@@ -1,8 +1,8 @@
 /*
  * Calculadoras de la página "Guía de uso"; se insertan en las respuestas con <div data-calc="…">.
  * Las etapas, edades y productos salen de las fichas (feed-guides) y del catálogo FY26.
- * Los consumos diarios marcados como "referencia" NO provienen del catálogo: son valores
- * generales editables por el usuario para estimar sacos; siempre se indica en pantalla.
+ * Cerdos: consumos por fase y pesos esperados del catálogo Purina/Cargill (fotos del usuario, sep. 2026).
+ * Gallinas: el consumo diario es una referencia general editable, no del catálogo; se indica en pantalla.
  */
 (function () {
   "use strict";
@@ -26,16 +26,17 @@
     { id: 2, from: 8, to: 21, lb: 2.2 },
     { id: 1, from: 22, to: 42, lb: 7.4, open: true }
   ];
+  // Consumo por fase (lb por cerdo) y edades según el catálogo Purina/Cargill, "Resultados esperados".
+  // NeoPigg 1 incluye el creep feeding desde el día 5 (0.3–0.4 lb por lechón, a voluntad).
   const neopigg = {
-    optimo: [{ id: 24, from: 5, to: 27 }, { id: 25, from: 28, to: 34 }, { id: 37, from: 35, to: 43 }, { id: 26, from: 44, to: 70 }],
-    plus: [{ id: 24, from: 5, to: 30 }, { id: 25, from: 31, to: 39 }, { id: 37, from: 40, to: 48 }, { id: 26, from: 49, to: 70 }]
+    optimo: [{ id: 24, from: 5, to: 27, lb: 3.0, creep: true }, { id: 25, from: 28, to: 34, lb: 6.0 }, { id: 37, from: 35, to: 43, lb: 12.0 }, { id: 26, from: 44, to: 70, lb: 64.0 }],
+    plus: [{ id: 24, from: 5, to: 30, lb: 5.0, creep: true }, { id: 25, from: 31, to: 39, lb: 10.0 }, { id: 37, from: 40, to: 48, lb: 15.0 }, { id: 26, from: 49, to: 70, lb: 55.0 }]
   };
   const pigLines = {
-    estandar: [{ id: 27, from: 71, to: 119 }, { id: 28, from: 120, to: 160, open: true }],
-    premium: [{ id: 31, from: 71, to: 91 }, { id: 32, from: 92, to: 119 }, { id: 36, from: 120, to: 160, open: true }]
+    estandar: { label: "Estándar: Desarrollina → Jamonina", weight: 224, stages: [{ id: 27, from: 71, to: 119, lb: 228 }, { id: 28, from: 120, to: 154, lb: 214 }] },
+    estandarLean: { label: "Estándar + Pur-A-Lean: Desarrollina → Jamonina → Pur-A-Lean", weight: 232, stages: [{ id: 27, from: 71, to: 98, lb: 120 }, { id: 28, from: 99, to: 126, lb: 150 }, { id: 36, from: 127, to: 154, lb: 172 }] },
+    premium: { label: "Premium: Pig-Nova 5 → Pig-Nova 6 → Pur-A-Lean", weight: 245, stages: [{ id: 31, from: 71, to: 91, lb: 90 }, { id: 32, from: 92, to: 119, lb: 130 }, { id: 36, from: 120, to: 154, lb: 222 }] }
   };
-  // Consumo diario de referencia (lb por animal y día). No es dato del catálogo.
-  const pigReference = { 24: 0.4, 25: 0.9, 37: 1.3, 26: 2.2, 27: 4.0, 31: 4.0, 32: 5.0, 28: 6.0, 36: 6.0 };
   // Tamaño del saco según la presentación de la ficha (lb).
   const sackSize = { 24: 44, 25: 55.1, 37: 55.1 };
   const sacksFor = (id, lb) => lb / (sackSize[id] || SACK_LB);
@@ -100,38 +101,31 @@
       }
     },
     pigs: {
-      title: "Planificá las etapas y los sacos de tus cerdos",
-      html: `<div class="guide-ration-fields guide-ration-fields--three">${field("prog-pig-count", "Cantidad de cerdos", 'type="number" min="1" max="10000" step="1" value="10" inputmode="numeric"')}${select("prog-pig-program", "Programa NeoPigg", [["optimo", "Óptimo"], ["plus", "Plus"]])}${select("prog-pig-line", "Línea después de NeoPigg 4", [["estandar", "Estándar (Desarrollina → Jamonina)"], ["premium", "Premium (Pig-Nova 5 → 6 → Pur-A-Lean)"]])}</div><div class="guide-ration-fields guide-ration-fields--three">${dateInput("prog-pig-date", "Fecha de nacimiento (opcional)")}${field("prog-pig-market", "Edad de salida (días)", 'type="number" min="121" max="240" step="1" value="160" inputmode="numeric"')}</div><div class="guide-ration-result" id="prog-pig-result" role="status" aria-live="polite"></div><p class="guide-ration-note">Las edades de cada etapa son las del catálogo. El consumo diario por etapa es una <strong>referencia general editable</strong> (no del catálogo): cambiá los valores de la tabla con el consumo real de tu granja. Los sacos se calculan con la presentación de cada alimento (NeoPigg 1: 44 lb; NeoPigg 2 y 3: 55.1 lb; el resto: 100 lb).</p>`,
+      title: "Calculá los sacos y las fechas de tu lote de cerdos",
+      html: `<div class="guide-ration-fields guide-ration-fields--three">${field("prog-pig-count", "Cantidad de cerdos", 'type="number" min="1" max="10000" step="1" value="10" inputmode="numeric"')}${select("prog-pig-program", "Programa NeoPigg", [["optimo", "Óptimo"], ["plus", "Plus"]])}${select("prog-pig-line", "Línea del día 71 al 154", Object.entries(pigLines).map(([key, l]) => [key, l.label]))}</div><div class="guide-ration-fields guide-ration-fields--single">${dateInput("prog-pig-date", "Fecha de nacimiento del lote (opcional)")}</div><div class="guide-ration-result" id="prog-pig-result" role="status" aria-live="polite"></div><p class="guide-ration-note">Consumos por fase y edades del catálogo Purina/Cargill (resultados esperados hasta los 154 días). NeoPigg 1 incluye el creep feeding desde el día 5: 0.3–0.4 lb por lechón, a voluntad y en pocas cantidades varias veces al día. El consumo real varía con la genética, la sanidad y el manejo; sumá aparte el desperdicio. Sacos según la presentación de cada alimento: NeoPigg 1, 44 lb; NeoPigg 2 y 3, 55.1 lb; los demás, 100 lb.</p>`,
       bind() {
         const count = document.getElementById("prog-pig-count");
         const program = document.getElementById("prog-pig-program");
         const line = document.getElementById("prog-pig-line");
         const date = document.getElementById("prog-pig-date");
-        const market = document.getElementById("prog-pig-market");
         const out = document.getElementById("prog-pig-result");
-        const custom = {};
         const run = () => {
-          if (!count.checkValidity() || !count.value || !market.checkValidity() || !market.value) { out.textContent = "Ingresá entre 1 y 10,000 cerdos y una edad de salida entre 121 y 240 días."; return; }
+          if (!count.checkValidity() || !count.value) { out.textContent = "Ingresá entre 1 y 10,000 cerdos."; return; }
           const pigs = Number(count.value);
-          const exit = Number(market.value);
-          const stages = [...neopigg[program.value], ...pigLines[line.value]].map(s => s.open ? { ...s, to: exit, open: false, market: true } : s);
+          const chosen = pigLines[line.value];
+          const stages = [...neopigg[program.value], ...chosen.stages];
           let totalLb = 0;
           const rows = stages.map(s => {
-            const daily = custom[s.id] ?? pigReference[s.id];
-            const lb = pigs * daily * stageDays(s);
+            const lb = pigs * s.lb;
             totalLb += lb;
-            return `<tr><th scope="row">${escape(name(s.id))}</th><td>${s.market ? `Días ${s.from}–${s.to}` : escape(stageRange(s))}<span>${stageDays(s)} días</span></td><td><input class="guide-inline-input" type="number" min="0.1" max="15" step="0.1" value="${daily}" data-pig-daily="${s.id}" aria-label="Consumo diario por cerdo en ${escape(name(s.id))}"></td><td>${fmt(lb, 0)} lb<span>${fmt(sacksFor(s.id, lb))} sacos de ${sackSize[s.id] || SACK_LB} lb</span></td></tr>`;
+            return `<tr><th scope="row">${escape(name(s.id))}</th><td>${escape(stageRange(s))}<span>${stageDays(s)} días</span></td><td>${fmt(s.lb)} lb</td><td>${fmt(lb, 0)} lb<span>${fmt(sacksFor(s.id, lb))} sacos de ${sackSize[s.id] || SACK_LB} lb</span></td></tr>`;
           }).join("");
-          let html = `<div class="guide-table-wrap" role="region" aria-label="Alimento por etapa" tabindex="0"><table><caption>${pigs.toLocaleString("es-NI")} cerdos · programa ${program.value === "optimo" ? "Óptimo" : "Plus"} · línea ${line.value === "estandar" ? "estándar" : "premium"}</caption><thead><tr><th scope="col">Alimento</th><th scope="col">Edad</th><th scope="col">lb/cerdo/día (editable)</th><th scope="col">Total</th></tr></thead><tbody>${rows}<tr class="guide-total"><th scope="row" colspan="3">Total estimado hasta los ${exit} días</th><td>${fmt(totalLb, 0)} lb</td></tr></tbody></table></div>`;
+          let html = `<div class="guide-table-wrap" role="region" aria-label="Alimento por etapa" tabindex="0"><table><caption>${pigs.toLocaleString("es-NI")} cerdos · NeoPigg ${program.value === "optimo" ? "Óptimo" : "Plus"} · ${escape(chosen.label.split(":")[0])}</caption><thead><tr><th scope="col">Alimento</th><th scope="col">Edad</th><th scope="col">Por cerdo</th><th scope="col">Lote</th></tr></thead><tbody>${rows}<tr class="guide-total"><th scope="row" colspan="2">Total hasta los 154 días · peso esperado ${chosen.weight} lb por cerdo</th><td>${fmt(totalLb / pigs, 0)} lb</td><td>${fmt(totalLb, 0)} lb</td></tr></tbody></table></div>`;
           const birth = parseDate(date.value);
-          if (birth) html += scheduleTable(stages.map(s => (s.market ? { ...s, open: true } : s)), birth);
+          if (birth) html += scheduleTable(stages, birth);
           out.innerHTML = html;
-          out.querySelectorAll("[data-pig-daily]").forEach(input => input.addEventListener("change", () => {
-            const value = Number(input.value);
-            if (value > 0 && value <= 15) { custom[input.dataset.pigDaily] = value; run(); }
-          }));
         };
-        [count, program, line, date, market].forEach(el => el.addEventListener("input", run)); run();
+        [count, program, line, date].forEach(el => el.addEventListener("input", run)); run();
       }
     },
     horse: {
