@@ -46,8 +46,8 @@
 .guide-table-wrap thead th { font-size: 12px; color: var(--muted); font-weight: 600; }
 .guide-table-wrap td span { display: block; margin-top: 4px; }
 .guide-table-wrap th, .guide-table-wrap td { overflow-wrap: normal; word-break: normal; }
-.guide-table-wrap tbody th, .guide-table-wrap thead th:first-child { position: sticky; left: 0; z-index: 1; background: var(--paper); box-shadow: inset -1px 0 0 var(--line); }
-.guide-table-wrap tbody tr:nth-child(even):not(.guide-total) > * { background: #f7faf8; }
+.guide-table-wrap tbody tr:nth-child(even):not(.guide-total):not(.guide-subhead) > * { background: #f7faf8; }
+.guide-table-wrap .guide-subhead th { background: var(--green-050); color: var(--green-950); font-weight: 800; padding-top: 9px; padding-bottom: 9px; }
 .guide-table-wrap .guide-total th, .guide-table-wrap .guide-total td { background: var(--green-050); color: var(--green-950); font-weight: 800; }
 .guide-ration-tool { margin-top: 22px; padding: 20px; border-radius: 9px; background: var(--green-050); }
 .guide-ration-tool h3 { margin: 0 0 15px; }
@@ -107,3 +107,25 @@
 .guide-inline-input { width: 84px; min-height: 36px; padding: 5px 8px; border: 1px solid #a9c2b3; border-radius: 6px; font: inherit; font-size: 13px; }
 @media (max-width: 900px) { .guide-ration-fields--three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 620px) { .guide-ration-fields--three { grid-template-columns: 1fr; } }
+
+/* ---- Campos de fecha en iPhone ---- */
+.guide-ration-fields label { min-width: 0; }
+.guide-ration-fields input[type="date"] { display: block; min-width: 0; max-width: 100%; appearance: none; -webkit-appearance: none; }
+.guide-ration-fields input[type="date"]::-webkit-date-and-time-value { text-align: left; }
+
+.guide-table-wrap .guide-cell-value { display: block; margin-top: 0; }
+
+/* ---- Tablas de 4 o más columnas en celular: una tarjeta por fila ---- */
+@media (max-width: 620px) {
+  .guide-table--stack { overflow: visible; }
+  .guide-table--stack table, .guide-table--stack tbody, .guide-table--stack tr, .guide-table--stack tbody th, .guide-table--stack td { display: block; }
+  .guide-table--stack caption { display: block; }
+  .guide-table--stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .guide-table--stack tbody tr { padding: 6px 0 9px; border-top: 1px solid var(--line); }
+  .guide-table--stack tbody tr:nth-child(even):not(.guide-total):not(.guide-subhead) { background: #f7faf8; }
+  .guide-table--stack tbody tr.guide-total { background: var(--green-050); }
+  .guide-table--stack tbody th, .guide-table--stack td { border-top: 0; min-width: 0; }
+  .guide-table--stack tbody th { padding: 8px 12px 4px; font-size: 14px; }
+  .guide-table--stack td { display: grid; grid-template-columns: minmax(0, 42%) minmax(0, 1fr); column-gap: 12px; align-items: baseline; padding: 4px 12px; }
+  .guide-table--stack td::before { content: attr(data-label); color: var(--muted); font-size: 12px; font-weight: 600; line-height: 1.4; }
+}
