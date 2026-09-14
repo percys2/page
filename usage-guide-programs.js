@@ -41,6 +41,37 @@
   const sackSize = { 24: 44, 25: 55.1, 37: 55.1 };
   const sacksFor = (id, lb) => lb / (sackSize[id] || SACK_LB);
 
+  // Pedido: mismo almacenamiento que la tienda (store.js lee id y cantidad y completa el resto).
+  const CART_KEY = "agrocentro_cart";
+  function addSacksToOrder(items) {
+    let cart = [];
+    try { const stored = JSON.parse(localStorage.getItem(CART_KEY)); if (Array.isArray(stored)) cart = stored; } catch (error) { cart = []; }
+    items.forEach(({ id, qty }) => {
+      const existing = cart.find(entry => Number(entry.id) === id);
+      if (existing) existing.qty = Math.min(999, Number(existing.qty || 0) + qty);
+      else cart.push({ id, qty: Math.min(999, qty) });
+    });
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (error) { /* sin almacenamiento: la tienda abrirá vacía */ }
+    location.href = "products.html?cart=open";
+  }
+  // Sacos completos por producto a partir de las libras de cada etapa.
+  function sackPlan(stages, multiplier) {
+    const plan = new Map();
+    stages.forEach(s => {
+      const lb = multiplier * s.lb;
+      const qty = Math.ceil(sacksFor(s.id, lb) - 1e-9);
+      if (qty > 0) plan.set(s.id, (plan.get(s.id) || 0) + qty);
+    });
+    return [...plan.entries()].map(([id, qty]) => ({ id, qty }));
+  }
+  function orderBlock(key, plan) {
+    const total = plan.reduce((sum, item) => sum + item.qty, 0);
+    return `<div class="guide-ration-actions"><button type="button" data-order="${key}">Agregar estos sacos a mi pedido</button><span>${total} ${total === 1 ? "saco" : "sacos"} en total: ${plan.map(item => `${item.qty} ${escape(name(item.id))}`).join(", ")}. Redondeado a sacos completos.</span></div>`;
+  }
+  function bindOrder(out, getPlan) {
+    out.querySelector("[data-order]")?.addEventListener("click", () => addSacksToOrder(getPlan()));
+  }
+
   function stageRange(s) { return s.open ? `Día ${s.from} → peso de mercado` : `Días ${s.from}–${s.to}`; }
   function stageDays(s) { return s.to - s.from + 1; }
 
@@ -78,14 +109,15 @@
           let html = `<div class="guide-table-wrap" role="region" aria-label="Alimento por etapa" tabindex="0"><table><caption>${birds.toLocaleString("es-NI")} pollos · alimento por etapa</caption><thead><tr><th scope="col">Alimento</th><th scope="col">Período</th><th scope="col">Libras</th><th scope="col">Sacos</th></tr></thead><tbody>${rows}<tr class="guide-total"><th scope="row" colspan="2">Total del lote</th><td>${fmt(total)} lb</td><td>${fmt(total / SACK_LB)}</td></tr></tbody></table></div>`;
           const birth = parseDate(date.value);
           if (birth) html += scheduleTable(broiler, birth);
-          out.innerHTML = html;
+          out.innerHTML = html + orderBlock("broiler", sackPlan(broiler, birds));
+          bindOrder(out, () => sackPlan(broiler, Number(count.value)));
         };
         count.addEventListener("input", run); date.addEventListener("input", run); run();
       }
     },
     layers: {
       title: "Calculá cuántos sacos necesitás para tus gallinas",
-      html: `<div class="guide-ration-fields guide-ration-fields--three">${field("prog-layer-count", "Cantidad de gallinas", 'type="number" min="1" max="100000" step="1" value="50" inputmode="numeric"')}${field("prog-layer-grams", "Consumo por gallina al día (g)", 'type="number" min="50" max="250" step="5" value="115" inputmode="numeric"')}${field("prog-layer-days", "Días a cubrir", 'type="number" min="1" max="365" step="1" value="30" inputmode="numeric"')}</div><div class="guide-ration-result" id="prog-layer-result" role="status" aria-live="polite"></div><p class="guide-ration-note">El consumo de 115 g es una <strong>referencia general</strong> para gallinas en postura, no un dato del catálogo: ajustalo según la etiqueta del saco, la raza y el clima. Sacos de 100 lb.</p>`,
+      html: `<div class="guide-ration-fields guide-ration-fields--three">${field("prog-layer-count", "Cantidad de gallinas", 'type="number" min="1" max="100000" step="1" value="50" inputmode="numeric"')}${field("prog-layer-grams", "Consumo por gallina al día (g)", 'type="number" min="50" max="250" step="5" value="115" inputmode="numeric"')}${field("prog-layer-days", "Días a cubrir", 'type="number" min="1" max="365" step="1" value="30" inputmode="numeric"')}</div><div class="guide-ration-fields guide-ration-fields--single">${select("prog-layer-product", "Alimento", [[38, `${name(38)} (gallinas de patio)`], [39, `${name(39)} (gallinas de granja)`], [11, `${name(11)} (gallinas criollas)`]])}</div><div class="guide-ration-result" id="prog-layer-result" role="status" aria-live="polite"></div><p class="guide-ration-note">El consumo de 115 g es una <strong>referencia general</strong> para gallinas en postura, no un dato del catálogo: ajustalo según la etiqueta del saco, la raza y el clima. Sacos de 100 lb.</p>`,
       bind() {
         const ids = ["prog-layer-count", "prog-layer-grams", "prog-layer-days"].map(id => document.getElementById(id));
         const out = document.getElementById("prog-layer-result");
@@ -95,9 +127,12 @@
           const lbPerDay = hens * grams / 453.592;
           const total = lbPerDay * days;
           const sackDays = SACK_LB / lbPerDay;
-          out.innerHTML = `<strong>${hens.toLocaleString("es-NI")} gallinas × ${days} días:</strong> ${fmt(total)} lb · ${fmt(total / SACK_LB)} sacos de 100 lb<br><span>Consumo del lote: ${fmt(lbPerDay)} lb por día · un saco de 100 lb dura aproximadamente ${fmt(sackDays, sackDays < 10 ? 1 : 0)} días.</span>`;
+          const plan = () => [{ id: Number(productSelect.value), qty: Math.max(1, Math.ceil(total / SACK_LB - 1e-9)) }];
+          out.innerHTML = `<strong>${hens.toLocaleString("es-NI")} gallinas × ${days} días:</strong> ${fmt(total)} lb · ${fmt(total / SACK_LB)} sacos de 100 lb<br><span>Consumo del lote: ${fmt(lbPerDay)} lb por día · un saco de 100 lb dura aproximadamente ${fmt(sackDays, sackDays < 10 ? 1 : 0)} días.</span>${orderBlock("layers", plan())}`;
+          bindOrder(out, plan);
         };
-        ids.forEach(el => el.addEventListener("input", run)); run();
+        const productSelect = document.getElementById("prog-layer-product");
+        [...ids, productSelect].forEach(el => el.addEventListener("input", run)); run();
       }
     },
     pigs: {
@@ -123,7 +158,8 @@
           let html = `<div class="guide-table-wrap" role="region" aria-label="Alimento por etapa" tabindex="0"><table><caption>${pigs.toLocaleString("es-NI")} cerdos · NeoPigg ${program.value === "optimo" ? "Óptimo" : "Plus"} · ${escape(chosen.label.split(":")[0])}</caption><thead><tr><th scope="col">Alimento</th><th scope="col">Edad</th><th scope="col">Por cerdo</th><th scope="col">Lote</th></tr></thead><tbody>${rows}<tr class="guide-total"><th scope="row" colspan="2">Total hasta los 154 días · peso esperado ${chosen.weight} lb por cerdo</th><td>${fmt(totalLb / pigs, 0)} lb</td><td>${fmt(totalLb, 0)} lb</td></tr></tbody></table></div>`;
           const birth = parseDate(date.value);
           if (birth) html += scheduleTable(stages, birth);
-          out.innerHTML = html;
+          out.innerHTML = html + orderBlock("pigs", sackPlan(stages, pigs));
+          bindOrder(out, () => sackPlan(stages, Number(count.value)));
         };
         [count, program, line, date].forEach(el => el.addEventListener("input", run)); run();
       }

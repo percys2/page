@@ -549,6 +549,30 @@
     document.querySelectorAll(".category-btn").forEach((button) => button.classList.toggle("active", button.dataset.category === state.category));
   }
 
+  // Enlace de la ficha a la pregunta de la guía que corresponde al producto.
+  const GUIDE_QUESTIONS = [
+    { ids: [4, 2, 1], hash: "consumo-pollos", label: "¿Cuánto alimento consume un pollo de engorde?" },
+    { ids: [38, 39, 11], hash: "postura", label: "¿Cuál es la diferencia entre Posturina Fase 1 y Posturina HP?" },
+    { ids: [10], hash: "pollo-criollo", label: "¿Para qué se usa Pollo Criollo?" },
+    { ids: [3], hash: "novagallos", label: "¿En qué etapa se usa Novagallos?" },
+    { ids: [24, 25, 37, 26], hash: "neopigg", label: "¿A qué edad se usan NeoPigg 1, 2, 3 y 4?" },
+    { ids: [27, 28, 31, 32, 36], hash: "consumo-cerdos", label: "¿Cuánto alimento consume un cerdo hasta el peso de mercado?" },
+    { ids: [29, 30], hash: "cerdas", label: "¿Se usa el mismo alimento durante gestación y lactancia?" },
+    { ids: [33, 34, 35, 40], hash: "pet-master", label: "¿Cuándo se usa Pet Master Cachorros y cuándo Adultos?" },
+    { ids: [12, 13], hash: "mimados", label: "¿Cuál Mimados elijo para mi perro?" },
+    { ids: [18, 19, 20, 21], hash: "gatos", label: "¿Don Gato y Gati Mar y Tierra son para gatos adultos?" },
+    { ids: [6, 7, 8], hash: "omalina", label: "¿Qué diferencia hay entre Omalina 100, 200 y 300?" },
+    { ids: [23, 5], hash: "suplementos-caballos", label: "¿Para qué sirven Forrajina y Caballería Forte?" },
+    { ids: [9], hash: "conejos", label: "¿Qué alimento le doy a mis conejos?" }
+  ];
+  function productGuideLink(product) {
+    const match = GUIDE_QUESTIONS.find((entry) => entry.ids.includes(product.id));
+    const topic = ({ aves: 'aves', cerdos: 'cerdos', equinos: 'equinos', perros: 'mascotas', gatos: 'mascotas' })[product.category];
+    const href = match ? `guia-de-uso.html#${match.hash}` : `guia-de-uso.html${topic ? `?tema=${topic}` : ''}`;
+    const label = match ? `Guía de uso: ${match.label}` : 'Guía de uso y preguntas frecuentes';
+    return `<a class="product-guide-link" href="${href}">${escapeHtml(label)} →</a>`;
+  }
+
   function addToOrder(productId, quantity = 1) {
     const product = catalog.find((entry) => entry.id === productId);
     if (!product) return;
@@ -767,7 +791,7 @@
       <div class="modal-product-details">
         <details class="product-information-section"${vet ? ' open' : ''}><summary>${useHeading}</summary><div class="product-information-body">${useMarkup}</div></details>
         ${benefitsMarkup}${analysisMarkup}${vetPrecautions}
-        ${guide ? `<a class="product-guide-link" href="guia-de-uso.html?tema=${({ aves: 'aves', cerdos: 'cerdos', equinos: 'equinos', perros: 'mascotas', gatos: 'mascotas' })[product.category] || 'compra'}">Guía de uso y preguntas frecuentes →</a>` : ''}
+        ${guide ? productGuideLink(product) : ''}
       </div>
     </div>`;
 

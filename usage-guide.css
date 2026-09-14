@@ -96,6 +96,10 @@
 .guide-ration-result .guide-table-wrap { margin: 0 0 12px; background: #fff; }
 .guide-ration-result .guide-table-wrap:last-child { margin-bottom: 0; }
 .guide-ration-result td span { font-weight: 500; }
+.guide-ration-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 14px; }
+.guide-ration-actions button { min-height: 44px; padding: 10px 16px; border: 0; border-radius: 6px; background: var(--green-950); color: #fff; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+.guide-ration-actions button:hover { background: var(--green-900); }
+.guide-ration-actions span { flex: 1 1 260px; color: var(--muted); font-size: 13px; line-height: 1.5; }
 .guide-inline-input { width: 84px; min-height: 36px; padding: 5px 8px; border: 1px solid #a9c2b3; border-radius: 6px; font: inherit; font-size: 13px; }
 @media (max-width: 900px) { .guide-ration-fields--three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 620px) { .guide-ration-fields--three { grid-template-columns: 1fr; } }
