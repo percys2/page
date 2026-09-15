@@ -125,7 +125,7 @@
       "Alto rendimiento / trabajo intenso", "Deporte y trabajo intenso · potros desde 24 meses · yeguas del mes 1 al 9 de gestación · garañones en reproducción", ["mantenimiento", "gestacion"], "Peletizado (checker)", "45.4 kg / 100 lb",
       ["Ayuda a reducir riesgos nutricionales asociados a cólicos y laminitis.", "Apoya la salud intestinal y aporta 14% de proteína cruda para alto rendimiento."],
       analysis("Energía digestible", ["13.00%", "14.00%", "4.00%", "15.00%", "3,000 Kcal/Kg", "0.80–1.40%", "0.50–1.00%", "0.40%"]), "págs. 55 y 58",
-      { feeding: "Repartir en al menos 3 comidas al día. La ración depende del peso del caballo y de la intensidad del trabajo." }
+      { feeding: "Ración diaria según el peso y el trabajo. Caballo de 453 kg: mantenimiento, 3.62 kg · trabajo liviano, 4.07 kg · moderado, 4.53 kg · intenso, 6.79 kg · acondicionamiento, 5.66 kg, además de 9.07 kg de heno. Repartir en al menos 3 comidas y ajustar hasta 10% según la condición corporal." }
     ),
     8: ficha(
       "Alimento para yeguas de cría y potros en crecimiento.",

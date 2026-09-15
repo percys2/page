@@ -561,7 +561,7 @@
     { ids: [33, 34, 35, 40], hash: "pet-master", label: "¿Cuándo se usa Pet Master Cachorros y cuándo Adultos?" },
     { ids: [12, 13], hash: "mimados", label: "¿Cuál Mimados elijo para mi perro?" },
     { ids: [18, 19, 20, 21], hash: "gatos", label: "¿Don Gato y Gati Mar y Tierra son para gatos adultos?" },
-    { ids: [6, 8, 23, 5], hash: "racion-caballos", label: "¿Cuánto alimento le doy a mi caballo al día?" },
+    { ids: [6, 7, 8, 23, 5], hash: "racion-caballos", label: "¿Cuánto alimento le doy a mi caballo al día?" },
     { ids: [6, 7, 8], hash: "omalina", label: "¿Qué diferencia hay entre Omalina 100, 200 y 300?" },
     { ids: [23, 5], hash: "suplementos-caballos", label: "¿Para qué sirven Forrajina y Caballería Forte?" },
     { ids: [9], hash: "conejos", label: "¿Qué alimento le doy a mis conejos?" }

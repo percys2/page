@@ -138,6 +138,11 @@
   const horseFeeds = {
     omalina100: { id: 6, label: "Omalina 100 · paseo y trabajo ligero", weightLabel: "Peso del caballo", who: "Caballo de unos", columns: ["Omalina 100 al día", "Heno al día"],
       rows: [[270, [2.45, 2.70], [4.90, 5.40]], [360, [3.05, 3.60], [6.54, 7.20]], [450, [4.00, 4.50], [8.18, 9.00]], [545, [4.95, 5.45], [9.90, 10.90]], [635, [5.77, 6.35], [11.54, 12.70]]] },
+    // Acondicionamiento (273 kg) y heno (273, 363 y 453 kg) salen de la tabla en libras del mismo saco.
+    omalina200: { id: 7, label: "Omalina 200 · deporte y trabajo intenso", weightLabel: "Peso del caballo", who: "Caballo de unos", weights: [273, 363, 453, 544, 636],
+      activities: [["Mantenimiento", "en mantenimiento", [2.18, 2.96, 3.62, 4.35, 5.08]], ["Trabajo liviano", "con trabajo liviano", [2.45, 3.33, 4.07, 4.89, 5.72]], ["Trabajo moderado", "con trabajo moderado", [2.73, 3.73, 4.53, 5.44, 6.36]],
+        ["Trabajo intenso", "con trabajo intenso", [4.09, 5.80, 6.79, 8.10, 8.58]], ["Acondicionamiento", "en acondicionamiento", [3.40, 4.66, 5.66, 6.80, 7.95]]],
+      hay: [5.44, 7.44, 9.07, 10.88, 12.72] },
     omalina300: { id: 8, label: "Omalina 300 · yegua con potro", weightLabel: "Peso del potro", who: "Yegua con un potro de unos", columns: ["Omalina 300 al día", "Heno al día"],
       rows: [[100, [7.5], [5]], [150, [8], [6]], [200, [9], [6.5]], [250, [8], [7]], [300, [7], [7.5]]] },
     forrajina: { id: 23, label: "Forrajina · fibra", weightLabel: "Peso del caballo", who: "Caballo de unos", fiber: true, columns: ["Como única fuente de fibra", "Como complemento de la fibra"],
@@ -153,7 +158,18 @@
     const fewest = Math.floor(sackKg / max), most = Math.floor(sackKg / min);
     return fewest === most ? `unos ${fewest} días` : `entre ${fewest} y ${most} días`;
   };
+  // Omalina 200 se lee por actividad: arma las filas de peso con la actividad elegida.
+  const horseRows = (feed, activityIndex) => feed.activities
+    ? feed.weights.map((kg, i) => [kg, [feed.activities[activityIndex][2][i]], [feed.hay[i]]])
+    : feed.rows;
   function horseTable(feed) {
+    if (feed.activities) {
+      const caption = `${name(feed.id)}: kg al día según peso y trabajo · heno con 20% de humedad`;
+      const head = ["Actividad", ...feed.weights.map(kg => `${fmt(kg, 0)} kg · ${fmt(kg * LB_PER_KG, 0)} lb`)];
+      const rows = [...feed.activities.map(([label, , values]) => [label, values]), ["Heno", feed.hay]]
+        .map(([label, values]) => `<tr><th scope="row">${escape(label)}</th>${values.map(value => `<td>${kgAmount([value])}<span>${lbAmount([value])}</span></td>`).join("")}</tr>`);
+      return `<div class="guide-table-wrap" role="region" aria-label="${escape(caption)}" tabindex="0"><table><caption>${escape(caption)}</caption><thead><tr>${head.map(label => `<th scope="col">${escape(label)}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table></div>`;
+    }
     const caption = feed.stages ? `${name(feed.id)}: cantidad al día por etapa` : `${name(feed.id)}: ración diaria${feed.fiber ? "" : " · heno con 20% de humedad"}`;
     const head = feed.stages ? ["Etapa", "Al día"] : [feed.weightLabel, ...feed.columns];
     const cell = value => `<td>${kgAmount(value)}<span>${lbAmount(value)}</span></td>`;
@@ -268,12 +284,13 @@
     },
     horse: {
       title: "Calculá la ración diaria de tu caballo",
-      html: `<div class="guide-ration-fields">${select("prog-horse-product", "Alimento", Object.entries(horseFeeds).map(([key, feed]) => [key, feed.label]))}${field("prog-horse-weight", "Peso del caballo", 'type="number" min="50" max="1500" step="any" value="450" inputmode="decimal"')}${select("prog-horse-unit", "Unidad del peso", [["kg", "Kilos (kg)"], ["lb", "Libras (lb)"]])}${select("prog-horse-stage", "Etapa", horseFeeds.cavalleria.stages.map(([label], index) => [index, label]))}</div><div class="guide-ration-result" id="prog-horse-result" role="status" aria-live="polite"></div><div id="prog-horse-table"></div><p class="guide-ration-note">Repartí la ración en varias comidas al día (Omalina, en al menos 3) y ajustala hasta 10% según la condición corporal. Para Omalina 200, consultanos con el peso y el trabajo de tu caballo.</p>`,
+      html: `<div class="guide-ration-fields">${select("prog-horse-product", "Alimento", Object.entries(horseFeeds).map(([key, feed]) => [key, feed.label]))}${field("prog-horse-weight", "Peso del caballo", 'type="number" min="50" max="1500" step="any" value="450" inputmode="decimal"')}${select("prog-horse-unit", "Unidad del peso", [["kg", "Kilos (kg)"], ["lb", "Libras (lb)"]])}${select("prog-horse-activity", "Trabajo", horseFeeds.omalina200.activities.map(([label], index) => [index, label]))}${select("prog-horse-stage", "Etapa", horseFeeds.cavalleria.stages.map(([label], index) => [index, label]))}</div><div class="guide-ration-result" id="prog-horse-result" role="status" aria-live="polite"></div><div id="prog-horse-table"></div><p class="guide-ration-note">Repartí la ración en varias comidas al día (Omalina, en al menos 3) y ajustala hasta 10% según la condición corporal.</p>`,
       bind() {
         const product = document.getElementById("prog-horse-product");
         const weight = document.getElementById("prog-horse-weight");
         const unit = document.getElementById("prog-horse-unit");
         const stage = document.getElementById("prog-horse-stage");
+        const activity = document.getElementById("prog-horse-activity");
         const out = document.getElementById("prog-horse-result");
         const table = document.getElementById("prog-horse-table");
         const run = () => {
@@ -282,6 +299,7 @@
           weight.closest("label").hidden = byStage;
           unit.closest("label").hidden = byStage;
           stage.closest("label").hidden = !byStage;
+          activity.closest("label").hidden = !feed.activities;
           if (!byStage) weight.closest("label").firstChild.nodeValue = feed.weightLabel;
           table.innerHTML = horseTable(feed);
           if (byStage) {
@@ -291,19 +309,20 @@
           }
           if (!weight.checkValidity() || !weight.value) { out.textContent = "Escribí el peso aproximado."; return; }
           const kg = Number(weight.value) / (unit.value === "lb" ? LB_PER_KG : 1);
-          const lightest = feed.rows[0][0], heaviest = feed.rows[feed.rows.length - 1][0];
+          const rows = horseRows(feed, Number(activity.value));
+          const lightest = rows[0][0], heaviest = rows[rows.length - 1][0];
           if (kg < lightest * 0.9 || kg > heaviest * 1.1) {
             out.textContent = `La tabla de ${name(feed.id)} va de ${fmt(lightest, 0)} a ${fmt(heaviest, 0)} kg (${fmt(lightest * LB_PER_KG, 0)} a ${fmt(heaviest * LB_PER_KG, 0)} lb). Para otro peso, consultanos.`;
             return;
           }
-          const [rowKg, first, second] = feed.rows.reduce((best, row) => Math.abs(row[0] - kg) < Math.abs(best[0] - kg) ? row : best);
+          const [rowKg, first, second] = rows.reduce((best, row) => Math.abs(row[0] - kg) < Math.abs(best[0] - kg) ? row : best);
           const who = `<strong>${feed.who} ${fmt(rowKg, 0)} kg (${fmt(rowKg * LB_PER_KG, 0)} lb):</strong>`;
           const nearest = Math.abs(rowKg - kg) > 5 ? `<span>Se toma la fila de ${fmt(rowKg, 0)} kg, la más cercana al peso que escribiste.</span>` : "";
           out.innerHTML = feed.fiber
             ? `${who} ${dose(first)} de ${escape(name(feed.id))} al día si es su única fuente de fibra, o ${dose(second)} si complementa el pasto o el heno.<br><span>Un saco de 100 lb dura ${sackDays(45.4, first)} como única fuente o ${sackDays(45.4, second)} como complemento.</span>${nearest}`
-            : `${who} ${dose(first)} de ${escape(name(feed.id))} al día y ${dose(second)} de heno.<br><span>Un saco de 100 lb dura ${sackDays(45.4, first)} para un animal.</span>${nearest}`;
+            : `${who} ${dose(first)} de ${escape(name(feed.id))} al día${feed.activities ? ` ${feed.activities[Number(activity.value)][1]}` : ""} y ${dose(second)} de heno.<br><span>Un saco de 100 lb dura ${sackDays(45.4, first)} para un animal.</span>${nearest}`;
         };
-        [product, weight, unit, stage].forEach(el => el.addEventListener("input", run));
+        [product, weight, unit, stage, activity].forEach(el => el.addEventListener("input", run));
         run();
       }
     }
