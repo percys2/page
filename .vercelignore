@@ -1,0 +1,7 @@
+# Partes del repositorio que no forman parte del sitio publicado.
+/docs
+/scripts
+/tests
+/README.md
+# Estilos sin compilar: las páginas usan solo css/dist/.
+/css/*.css

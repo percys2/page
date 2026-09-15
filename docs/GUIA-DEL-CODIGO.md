@@ -64,6 +64,9 @@ Tu computadora ──► GitHub ──► Vercel ──► agrocentronica.com
 `vercel.json` le dice a Vercel cosas extra: cabeceras de seguridad, cuánto tiempo guardar archivos en caché y
 redirecciones (por ejemplo, `/animals.html` → `/products.html`).
 
+`.vercelignore` lista lo que **no** se publica: `docs/`, `scripts/`, `tests/`, el README y los CSS sin compilar.
+Esos archivos solo sirven para trabajar en el código; el sitio no los necesita.
+
 Las visitas se cuentan con **Vercel Web Analytics**: cada página carga `/_vercel/insights/script.js`, un
 archivo que Vercel sirve solo en el sitio publicado (en tu computadora da "no encontrado", y está bien). No usa
 cookies. Los números se ven en Vercel → proyecto `page` → **Analytics**.
