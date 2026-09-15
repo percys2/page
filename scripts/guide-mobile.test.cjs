@@ -188,3 +188,51 @@ test("guide tables, cards and calculators fit phone screens", { skip: !CHROME &&
     server.close();
   }
 });
+
+// Product pages from scripts/build-product-pages.cjs: one of each kind of product.
+const PRODUCT_SAMPLES = [31, 200, 16];
+const PRODUCT_AUDIT = `(async () => {
+  await document.fonts.ready;
+  const image = document.querySelector("main img");
+  if (image && !image.complete) await new Promise(done => { image.addEventListener("load", done); image.addEventListener("error", done); setTimeout(done, 4000); });
+  const screen = document.documentElement.clientWidth;
+  const problems = [];
+  if (!document.querySelector("main h1")) problems.push("falta el título");
+  if (!image || !image.naturalWidth) problems.push("la foto no cargó");
+  if (document.documentElement.scrollWidth > screen + 1) problems.push("la página se desplaza de lado " + (document.documentElement.scrollWidth - screen) + " px");
+  document.querySelectorAll("main *").forEach(element => {
+    const box = element.getBoundingClientRect();
+    if (box.width && box.right > screen + 1) problems.push((element.className || element.tagName) + " pasa el borde de la pantalla");
+  });
+  return { title: document.title, problems: [...new Set(problems)].slice(0, 10) };
+})()`;
+
+test("product pages fit phone screens", { skip: !CHROME && "Chrome no está instalado (definí CHROME_PATH)", timeout: 90000 }, async () => {
+  const { buildSite } = require("./build-product-pages.cjs");
+  const { pages } = buildSite();
+  const samples = PRODUCT_SAMPLES.map(id => pages.find(page => page.id === id) || pages.find(page => page.html.includes(`product=${id}"`)));
+  const tool = pages.find(page => page.html.includes('type=herramientas"'));
+  if (tool) samples.push(tool);
+  assert.ok(samples.every(Boolean), "sample product pages were not generated");
+  const server = await serve();
+  const browser = launchChrome();
+  try {
+    const { targetId } = await browser.send("Target.createTarget", { url: "about:blank" });
+    const { sessionId } = await browser.send("Target.attachToTarget", { targetId, flatten: true });
+    await browser.send("Page.enable", {}, sessionId);
+    for (const width of PHONE_WIDTHS) {
+      await browser.send("Emulation.setDeviceMetricsOverride", { width, height: 800, deviceScaleFactor: 2, mobile: true }, sessionId);
+      for (const page of samples) {
+        const loaded = browser.once("Page.loadEventFired");
+        await browser.send("Page.navigate", { url: `http://127.0.0.1:${server.address().port}/${page.path}` }, sessionId);
+        await loaded;
+        const { result, exceptionDetails } = await browser.send("Runtime.evaluate", { expression: PRODUCT_AUDIT, awaitPromise: true, returnByValue: true }, sessionId);
+        assert.equal(exceptionDetails, undefined, exceptionDetails && (exceptionDetails.exception?.description || exceptionDetails.text));
+        assert.deepEqual(result.value.problems, [], `${width} px · ${page.path}`);
+      }
+    }
+  } finally {
+    await browser.close();
+    server.close();
+  }
+});
