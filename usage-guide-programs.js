@@ -37,8 +37,6 @@
     estandarLean: { label: "Estándar + Pur-A-Lean: Desarrollina → Jamonina → Pur-A-Lean", weight: 232, stages: [{ id: 27, from: 71, to: 98, lb: 120 }, { id: 28, from: 99, to: 126, lb: 150 }, { id: 36, from: 127, to: 154, lb: 172 }] },
     premium: { label: "Premium: Pig-Nova 5 → Pig-Nova 6 → Pur-A-Lean", weight: 245, stages: [{ id: 31, from: 71, to: 91, lb: 90 }, { id: 32, from: 92, to: 119, lb: 130 }, { id: 36, from: 120, to: 154, lb: 222 }] }
   };
-  // Metas de 71 a 119 días para un cerdo de 66 lb: la línea estándar llega a 156 lb (gana 90) y Pig-Nova a 162 lb (gana 96).
-  const PIG_GAIN_71_119 = { estandar: 90, premium: 96 };
   // Tamaño del saco según la presentación de la ficha (lb).
   const sackSize = { 24: 44, 25: 55.1, 37: 55.1 };
   const sacksFor = (id, lb) => lb / (sackSize[id] || SACK_LB);
@@ -207,46 +205,6 @@
           bindOrder(out, () => sackPlan(stages, Number(count.value)));
         };
         [count, program, line, date].forEach(el => el.addEventListener("input", run)); run();
-      }
-    },
-    pigCost: {
-      title: "Compará el costo de los dos programas (días 71–119)",
-      html: `<div class="guide-ration-fields guide-ration-fields--three">${[27, 31, 32].map(id => field(`prog-pigcost-${id}`, `Precio del saco de ${name(id)} (C$)`, 'type="number" min="0.01" max="100000" step="0.01" inputmode="decimal" placeholder="Ej. 1200"')).join("")}</div><div class="guide-ration-fields guide-ration-fields--single">${field("prog-pigcost-count", "Cantidad de cerdos", 'type="number" min="1" max="10000" step="1" value="10" inputmode="numeric"')}</div><div class="guide-ration-result" id="prog-pigcost-result" role="status" aria-live="polite"></div><p class="guide-ration-note">Sacos de 100 lb. Metas por cerdo de 66 lb a los 71 días: 228 lb de Desarrollina para ganar 90 lb, o 90 lb de Pig-Nova 5 y 130 lb de Pig-Nova 6 para ganar 96 lb. El resultado real cambia con el manejo, el clima, la sanidad y la genética.</p>`,
-      bind() {
-        const prices = [27, 31, 32].map(id => document.getElementById(`prog-pigcost-${id}`));
-        const count = document.getElementById("prog-pigcost-count");
-        const out = document.getElementById("prog-pigcost-result");
-        const programs = [
-          { label: "Línea estándar", stages: pigLines.estandar.stages.filter(s => s.to <= 119), gain: PIG_GAIN_71_119.estandar },
-          { label: "Línea Pig-Nova", stages: pigLines.premium.stages.filter(s => s.to <= 119), gain: PIG_GAIN_71_119.premium }
-        ].map(program => ({ ...program, feed: program.stages.reduce((sum, s) => sum + s.lb, 0) }));
-        const money = value => `C$\u00a0${Number(value).toLocaleString("es-NI", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-        const run = () => {
-          if (!count.checkValidity() || !count.value) { out.textContent = "Ingresá entre 1 y 10,000 cerdos."; return; }
-          if (prices.some(el => !el.value)) { out.textContent = "Escribí el precio de cada saco de 100 lb para comparar."; return; }
-          if (prices.some(el => !el.checkValidity())) { out.textContent = "Revisá los precios: tienen que ser mayores que cero."; return; }
-          const priceOf = Object.fromEntries(prices.map(el => [Number(el.id.split("-").pop()), Number(el.value)]));
-          const pigs = Number(count.value);
-          const [standard, pignova] = programs.map(program => {
-            const cost = program.stages.reduce((sum, s) => sum + s.lb / SACK_LB * priceOf[s.id], 0);
-            return { ...program, cost, perLb: cost / program.gain };
-          });
-          const rows = [
-            ["Alimento", `${fmt(standard.feed, 0)} lb`, `${fmt(pignova.feed, 0)} lb`],
-            ["Peso ganado", `${standard.gain} lb`, `${pignova.gain} lb`],
-            ["Costo por cerdo", money(standard.cost), money(pignova.cost)],
-            ["Costo por lb ganada", money(standard.perLb), money(pignova.perLb)],
-            [`Lote de ${pigs.toLocaleString("es-NI")}`, money(standard.cost * pigs), money(pignova.cost * pigs)]
-          ].map(([label, a, b]) => `<tr><th scope="row">${escape(label)}</th><td>${escape(a)}</td><td>${escape(b)}</td></tr>`).join("");
-          const gap = standard.perLb - pignova.perLb;
-          const extra = pignova.gain - standard.gain;
-          const verdict = Math.abs(gap) < 0.005 ? `Con estos precios, los dos programas cuestan lo mismo por libra ganada, y con Pig-Nova cada cerdo gana ${extra} lb más.`
-            : gap > 0 ? `Con estos precios, Pig-Nova sale ${money(gap)} más barato por libra ganada y cada cerdo gana ${extra} lb más.`
-            : `Con estos precios, la línea estándar sale ${money(-gap)} más barata por libra ganada, aunque con Pig-Nova cada cerdo gana ${extra} lb más.`;
-          out.innerHTML = `<div class="guide-table-wrap guide-table--compare" role="region" aria-label="Costo de cada programa" tabindex="0"><table><caption>Días 71 a 119, por cerdo y por lote</caption><thead><tr><th scope="col">Concepto</th><th scope="col">${escape(standard.label)}</th><th scope="col">${escape(pignova.label)}</th></tr></thead><tbody>${rows}</tbody></table></div><span>${escape(verdict)}</span>`;
-        };
-        [...prices, count].forEach(el => el.addEventListener("input", run));
-        run();
       }
     },
     layerCompare: {
