@@ -19,7 +19,7 @@
       "sha256": "6c5ed6e80db63d3ef4394aaab8cb4f5d2f8130b50c0324b6e49050be6c57ceab"
     },
     "products.html": {
-      "bundle": "css/dist/styles-products-35577c79c368.css",
+      "bundle": "css/dist/styles-products-777c43612ab5.css",
       "sources": [
         "css/font-manrope.css",
         "css/products.css",
@@ -32,9 +32,9 @@
         "css/brand.css",
         "css/visual-polish.css"
       ],
-      "bytes": 160589,
-      "gzip_bytes": 28072,
-      "sha256": "35577c79c36858dc8df19b8a3acfeccd19d7e1bc7ee948bb38e8da0654683a0f"
+      "bytes": 160721,
+      "gzip_bytes": 28082,
+      "sha256": "777c43612ab535e783b370add68faa0336a2beac578dbfa927895730bf280375"
     },
     "contact.html": {
       "bundle": "css/dist/styles-contact-2cbe28b423df.css",

@@ -48,14 +48,15 @@ function siteChrome() {
   const footer = store.match(/  <footer class="footer-first"[\s\S]*?<\/footer>/);
   const siteScript = contact.match(/<script src="js\/site\.js\?v=\d+" defer><\/script>/);
   const protection = store.match(/<script src="js\/image-protection\.js\?v=\d+" defer><\/script>/);
-  if (!header || !footer || !siteScript || !protection) throw new Error("No encontré el encabezado, el pie o los scripts del sitio");
+  const analytics = contact.match(/<script src="\/_vercel\/insights\/script\.js" defer><\/script>/);
+  if (!header || !footer || !siteScript || !protection || !analytics) throw new Error("No encontré el encabezado, el pie o los scripts del sitio");
   const nav = header[0]
     .replace(/ class="active"/g, "").replace(/ aria-current="page"/g, "")
     .replace('<a href="products.html">Tienda</a>', '<a class="active" href="products.html">Tienda</a>');
   return {
     header: absolutize(nav),
     footer: absolutize(footer[0]),
-    scripts: [protection[0], siteScript[0]].map(tag => tag.replace('src="', 'src="/')).join("\n  ")
+    scripts: [...[protection[0], siteScript[0]].map(tag => tag.replace('src="', 'src="/')), analytics[0]].join("\n  ")
   };
 }
 
@@ -72,6 +73,23 @@ function guideQuestions() {
 function styles() {
   const manifest = JSON.parse(read("css/dist/styles-manifest.json"));
   return { bundle: manifest.pages["products.html"].bundle, font: manifest.preload_latin };
+}
+
+// Otras formas de escribir el nombre ("Pignova 5" para "Pig-Nova 5"), para que los buscadores las encuentren.
+// Solo se muestran variantes del propio nombre: se descartan palabras de búsqueda como "Ponedoras".
+function spellings(name, aliases) {
+  const plain = text => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const withoutSize = text => text.replace(/\s*\b\d+(?:[.,]\d+)?\s*(?:lbs?|kg|g)\b\.?/gi, "").trim();
+  const squeeze = text => plain(withoutSize(text)).replace(/[^a-z0-9]/g, "");
+  const visible = plain(name).replace(/\s+/g, " ");
+  const seen = new Set();
+  return aliases.map(withoutSize).filter(alias => {
+    const key = squeeze(alias);
+    const variant = key && (squeeze(name).startsWith(key) || key.startsWith(squeeze(name)));
+    if (!variant || visible.includes(plain(alias).replace(/\s+/g, " ")) || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 // Arma la descripción con partes completas: si no cabe, se quitan detalles del medio y se conserva el cierre.
@@ -117,6 +135,7 @@ function productPage(model, product, slug, chrome, css) {
   const row = (label, value) => value ? `<div><span>${escape(label)}</span><strong>${escape(value)}</strong></div>` : "";
   const vetRow = (label, value) => `<div><dt>${escape(label)}</dt><dd>${escape(value || "Por confirmar en etiqueta")}</dd></div>`;
   const pigLine = model.pigLines[model.getPigLine(product)];
+  const otherNames = spellings(name, variants.flatMap(variant => model.getGuide(variant)?.aliases || []));
   const agePrograms = Array.isArray(guide?.agePrograms)
     ? `<div class="age-programs"><p>Edad del lechón</p><dl>${guide.agePrograms.map(program => `<div><dt>${escape(program.label)}</dt><dd>${escape(program.days)} días</dd></div>`).join("")}</dl></div>`
     : guide?.period ? `<p class="product-period">${escape(guide.period)}</p>` : "";
@@ -186,6 +205,7 @@ ${chrome.header}
           ${guide?.stage ? `<p class="product-stage-label">${escape(guide.stage)}</p>` : ""}
           ${agePrograms}
           <p class="modal-description">${escape(summary)}</p>
+          ${otherNames.length ? `<p class="product-aliases">También lo buscan como: ${otherNames.map(escape).join(" · ")}</p>` : ""}
           ${pigLine ? `<p class="feed-line">${escape(pigLine)}</p>` : ""}
         </div>
         ${presentations.length ? `<div class="modal-product-selection">
