@@ -41,10 +41,18 @@ de los sacos dependen de ella. Las imágenes nuevas sin variantes siguen funcion
 - Los recursos con hash tienen caché prolongada. HTML y scripts conservan
   revalidación; al cambiar los scripts, actualizá su parámetro de versión.
 
+## Páginas de productos
+
+Cada producto tiene su propia página en `productos/`, con título, descripción y foto para buscadores y para compartir.
+Las páginas se generan desde el catálogo, las fichas y las imágenes; no se editan a mano. Después de cambiar un
+producto, una ficha, una foto o el encabezado del sitio, ejecutá `node scripts/build-product-pages.cjs`: vuelve a
+crear las páginas, borra las de productos que ya no existen y actualiza `sitemap.xml`.
+
 ## Pruebas
 
 Antes de publicar, ejecutá:
 
+- `node --test scripts/product-pages.test.cjs`: falla si las páginas de productos o el sitemap quedaron desactualizados.
 - `node --test scripts/security-policy.test.cjs`
 - `node --test scripts/form-security.test.cjs`
 - `node --test scripts/guide-mobile.test.cjs`: abre la guía en Chrome sin ventana a 360 y 390 px de
