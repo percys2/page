@@ -134,6 +134,11 @@ const AUDIT = `(async () => {
     input.value = "2026-01-15";
     input.dispatchEvent(new Event("input", { bubbles: true }));
   });
+  document.querySelectorAll("#guide-questions input[type=number]").forEach(input => {
+    if (input.value) return;
+    input.value = String(Math.min(Number(input.max) || 12345.67, 12345.67));
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  });
   await wait(150);
   await new Promise(done => requestAnimationFrame(() => requestAnimationFrame(done)));
   const screen = document.documentElement.clientWidth;
