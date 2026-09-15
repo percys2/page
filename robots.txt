@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /animals.html
 
 Sitemap: https://www.agrocentronica.com/sitemap.xml

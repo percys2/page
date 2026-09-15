@@ -86,6 +86,11 @@
       "source": "/comparar-alimentos.html",
       "destination": "/products.html",
       "permanent": false
+    },
+    {
+      "source": "/animals.html",
+      "destination": "/products.html",
+      "permanent": false
     }
   ]
 }
