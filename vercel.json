@@ -45,34 +45,7 @@
       ]
     },
     {
-      "source": "/styles-index-08c7a3f4758e.css",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/styles-products-e1260d41e12e.css",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/styles-contact-e24976819d87.css",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/styles-guia-de-uso-a8a7a08497cf.css",
+      "source": "/css/dist/(.*).css",
       "headers": [
         {
           "key": "Cache-Control",

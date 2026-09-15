@@ -4,7 +4,7 @@
 // After reviewing an intentional inline-script edit, run:
 //   node scripts/csp-hashes.cjs
 // Replace only the sha256 tokens in vercel.json's script-src with this output,
-// then run: node --test scripts/security-policy.test.cjs
+// then run: node --test tests/security-policy.test.cjs
 // Whitespace inside <script> is significant; never trim before hashing.
 const { createHash } = require("node:crypto");
 const { readdirSync, readFileSync } = require("node:fs");

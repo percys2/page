@@ -1,0 +1,179 @@
+/* All product photography shares the same stage and floating motion. */
+/* Limita el menú de guardado en navegadores compatibles sin afectar el zoom ni el deslizamiento. */
+:is(.home-product-image, .product-image, .modal-product-image, .cart-item-image),
+:is(.home-product-image, .product-image, .modal-product-image, .cart-item-image) img {
+  -webkit-touch-callout: none;
+}
+:is(.home-product-image, .product-image, .modal-product-image, .cart-item-image) img {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+img[src$="/posturina-fase1-catalog-v32.png"] { --catalog-mask: url("/assets/cutouts/posturina-fase1-silhouette-v32.svg"); }
+img[src$="/posturina-hp-catalog-v32.png"] { --catalog-mask: url("/assets/cutouts/posturina-hp-silhouette-v32.svg"); }
+img[src$="/posturina-fase1-original-v31.png"] { --catalog-mask: url("/assets/cutouts/posturina-fase1-silhouette-v31.svg"); }
+img[src$="/posturina-hp-original-v31.png"] { --catalog-mask: url("/assets/cutouts/posturina-hp-silhouette-v31.svg"); }
+.store-page .product-image,
+.store-page .modal-product-image,
+.home-page .home-product-image {
+  isolation: isolate;
+  background: #eff2ed;
+}
+
+.store-page .product-image img,
+.store-page .modal-product-image img,
+.store-page .cart-item-image img,
+.home-page .home-product-image img,
+.sample-product-page .image-wrap img {
+  position: relative;
+  z-index: 1;
+  object-fit: contain;
+  object-position: center;
+  -webkit-mask-image: var(--catalog-mask, none);
+  mask-image: var(--catalog-mask, none);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  filter: none;
+}
+
+.store-page .product-image img,
+.store-page .modal-product-image img,
+.home-page .home-product-image img,
+.sample-product-page .image-wrap img {
+  animation: catalog-product-float 3.8s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+.sample-product-page .image-shadow { animation: catalog-product-shadow 3.8s ease-in-out infinite; }
+
+.home-page .home-product-image { position: relative; overflow: hidden; }
+.store-page .product-card .product-image::after,
+.store-page .modal-product-image::after,
+.home-page .home-product-image::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  display: block;
+  left: 50%;
+  right: auto;
+  bottom: 6%;
+  width: min(56%, 200px);
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(7, 58, 41, .15);
+  filter: blur(7px);
+  pointer-events: none;
+  animation: catalog-product-shadow 3.8s ease-in-out infinite;
+}
+
+@keyframes catalog-product-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes catalog-product-shadow {
+  0%, 100% { opacity: .65; transform: translateX(-50%) scale(.95); }
+  50% { opacity: .36; transform: translateX(-50%) scale(.78); }
+}
+
+/* Keep the static cutout and its shadow when reduced motion is requested. */
+@media (prefers-reduced-motion: reduce) {
+  .store-page .product-image img,
+  .store-page .modal-product-image img,
+  .home-page .home-product-image img,
+  .sample-product-page .image-wrap img { animation: none; transform: none; }
+  .store-page .product-card .product-image::after,
+  .store-page .modal-product-image::after,
+  .home-page .home-product-image::after,
+  .sample-product-page .image-shadow {
+    animation: none;
+    opacity: .55;
+    transform: translateX(-50%);
+  }
+}
+
+/* Masks align with the unmodified photograph's native aspect ratio. */
+img[src$="/engordina-clean-v26.webp"] { --catalog-mask: url("/assets/engordina-silhouette-v27.svg"); }
+img[src$="/iniciarina-reference-v28.webp"] { --catalog-mask: url("/assets/iniciarina-silhouette-v28.svg"); }
+img[src$="/neopigg-1-reference-v28.webp"] { --catalog-mask: url("/assets/neopigg-1-silhouette-v28.svg"); }
+img[src$="/neopigg-2-reference-v28.webp"] { --catalog-mask: url("/assets/neopigg-2-silhouette-v28.svg"); }
+img[src$="/neopigg-3-reference-v28.webp"] { --catalog-mask: url("/assets/neopigg-3-silhouette-v28.svg"); }
+img[src$="/linterna3cabezas.jpeg"] { --catalog-mask: url("/assets/cutouts/product-128-v29.svg"); }
+img[src$="/portalampara.jpeg"] { --catalog-mask: url("/assets/cutouts/product-233-v29.svg"); }
+img[src$="/almadanafibradevidrio.png"] { --catalog-mask: url("/assets/cutouts/product-100-v29.svg"); }
+img[src$="/almadanamangodemadera.png"] { --catalog-mask: url("/assets/cutouts/product-101-v29.svg"); }
+img[src$="/azadonCA.png"] { --catalog-mask: url("/assets/cutouts/product-103-v29.svg"); }
+img[src$="/bieldoheno.jpg"] { --catalog-mask: url("/assets/cutouts/product-104-v29.svg"); }
+img[src$="/bomba16litros.png.webp"] { --catalog-mask: url("/assets/cutouts/product-105-v29.svg"); }
+img[src$="/bombafumigar5litros.png.webp"] { --catalog-mask: url("/assets/cutouts/product-106-v29.svg"); }
+img[src$="/carretilla-IMACASA.png"] { --catalog-mask: url("/assets/cutouts/product-109-v29.svg"); }
+img[src$="/chuzoforjado.jpg"] { --catalog-mask: url("/assets/cutouts/product-110-v29.svg"); }
+img[src$="/dispensadorcintaempaque.png"] { --catalog-mask: url("/assets/cutouts/product-114-v29.svg"); }
+img[src$="/escobarecta.webp"] { --catalog-mask: url("/assets/cutouts/product-116-v29.svg"); }
+img[src$="/lentesajustables.jpeg"] { --catalog-mask: url("/assets/cutouts/product-121-v29.svg"); }
+img[src$="/lentesnegros.jpg"] { --catalog-mask: url("/assets/cutouts/product-122-v29.svg"); }
+img[src$="/limacuchillobastarda.webp"] { --catalog-mask: url("/assets/cutouts/product-124-v29.svg"); }
+img[src$="/limacuchilloconmango.webp"] { --catalog-mask: url("/assets/cutouts/product-125-v29.svg"); }
+img[src$="/limamotosierra.jpg"] { --catalog-mask: url("/assets/cutouts/product-126-v29.svg"); }
+img[src$="/linterna1led.jpeg"] { --catalog-mask: url("/assets/cutouts/product-127-v29.svg"); }
+img[src$="/linternacob.jpeg"] { --catalog-mask: url("/assets/cutouts/product-129-v29.svg"); }
+img[src$="/machete.webp"] { --catalog-mask: url("/assets/cutouts/product-132-v29.svg"); }
+img[src$="/machete26pulgadas.webp"] { --catalog-mask: url("/assets/cutouts/product-133-v29.svg"); }
+img[src$="/machete28pulgada.jpeg"] { --catalog-mask: url("/assets/cutouts/product-134-v29.svg"); }
+img[src$="/machetecutacha.jpeg"] { --catalog-mask: url("/assets/cutouts/product-135-v29.svg"); }
+img[src$="/machetesierra.png"] { --catalog-mask: url("/assets/cutouts/product-136-v29.svg"); }
+img[src$="/stilson.jpeg"] { --catalog-mask: url("/assets/cutouts/product-137-v29.svg"); }
+img[src$="/tenazaddepreesion.jpeg"] { --catalog-mask: url("/assets/cutouts/product-214-v29.svg"); }
+img[src$="/tenzafinquera.jpg"] { --catalog-mask: url("/assets/cutouts/product-218-v29.svg"); }
+img[src$="/palacuadrada.png"] { --catalog-mask: url("/assets/cutouts/product-220-v29.svg"); }
+img[src$="/palaredonda.webp"] { --catalog-mask: url("/assets/cutouts/product-221-v29.svg"); }
+img[src$="/palamangometalico.webp"] { --catalog-mask: url("/assets/cutouts/product-222-v29.svg"); }
+img[src$="/palaacovahoyos.jpeg"] { --catalog-mask: url("/assets/cutouts/product-224-v29.svg"); }
+img[src$="/rastrillo16ddientes.jpg"] { --catalog-mask: url("/assets/cutouts/product-226-v29.svg"); }
+img[src$="/rastrillojardinero16ddientes.jpeg"] { --catalog-mask: url("/assets/cutouts/product-227-v29.svg"); }
+img[src$="/rastrillousopesado.png"] { --catalog-mask: url("/assets/cutouts/product-228-v29.svg"); }
+img[src$="/regleta.webp"] { --catalog-mask: url("/assets/cutouts/product-234-v29.svg"); }
+img[src$="/regletaconusb.jpg"] { --catalog-mask: url("/assets/cutouts/product-235-v29.svg"); }
+img[src$="/rociadoradepresion.jpeg"] { --catalog-mask: url("/assets/cutouts/product-236-v29.svg"); }
+img[src$="/valvulaaesferadedlaton.jpeg"] { --catalog-mask: url("/assets/cutouts/product-237-v29.svg"); }
+img[src$="/preiniciarina-reference-v40.webp"] { --catalog-mask: url("/assets/cutouts/preiniciarina-silhouette-v39.svg"); }
+img[src$="/cavalleria-forte-clean-v26.webp"] { --catalog-mask: url("/assets/cutouts/product-5-v29.svg"); }
+img[src$="/omalina-100-clean-v26.webp"] { --catalog-mask: url("/assets/cutouts/product-6-v29.svg"); }
+img[src$="/omalina-200-clean-v26.webp"] { --catalog-mask: url("/assets/cutouts/product-7-v29.svg"); }
+img[src$="/omalina-300-clean-v26.webp"] { --catalog-mask: url("/assets/cutouts/product-8-v29.svg"); }
+img[src$="/forrajina-clean-v26.webp"] { --catalog-mask: url("/assets/cutouts/product-23-v29.svg"); }
+img[src$="/neopigg-4-clean-v26.webp"] { --catalog-mask: url("/assets/cutouts/product-26-v29.svg"); }
+img[src$="/desarrollina-clean-v26.webp"] { --catalog-mask: url("/assets/cutouts/product-27-v29.svg"); }
+img[src$="/jamonina-clean-v26.webp"] { --catalog-mask: url("/assets/cutouts/product-28-v29.svg"); }
+img[src$="/criacerdina-clean-v26.webp"] { --catalog-mask: url("/assets/cutouts/product-29-v29.svg"); }
+img[src$="/pignova-5-clean-v26.webp"] { --catalog-mask: url("/assets/cutouts/product-31-v29.svg"); }
+img[src$="/pignova-6-clean-v26.webp"] { --catalog-mask: url("/assets/cutouts/product-32-v29.svg"); }
+img[src$="/puralean-clean-v26.webp"] { --catalog-mask: url("/assets/cutouts/product-36-v29.svg"); }
+img[src$="/Amoxi Lh500.jpg"] { --catalog-mask: url("/assets/cutouts/product-200-v29.svg"); }
+img[src$="/Bolos Uterinos.jpg"] { --catalog-mask: url("/assets/cutouts/product-201-v29.svg"); }
+img[src$="/Broomexihina.jpg"] { --catalog-mask: url("/assets/cutouts/product-202-v29.svg"); }
+img[src$="/Calfstonic.jpg"] { --catalog-mask: url("/assets/cutouts/product-203-v29.svg"); }
+img[src$="/Chicken vit plus.jpg"] { --catalog-mask: url("/assets/cutouts/product-204-v29.svg"); }
+img[src$="/dolfen.jpg"] { --catalog-mask: url("/assets/cutouts/product-205-v29.svg"); }
+img[src$="/Doxiclina Lh500.jpg"] { --catalog-mask: url("/assets/cutouts/product-206-v29.svg"); }
+img[src$="/electrolitos.jpg"] { --catalog-mask: url("/assets/cutouts/product-207-v29.svg"); }
+img[src$="/eritroomicina avicola.jpg"] { --catalog-mask: url("/assets/cutouts/product-208-v29.svg"); }
+img[src$="/fenbendazol.jpg"] { --catalog-mask: url("/assets/cutouts/product-209-v29.svg"); }
+img[src$="/livermectina oral.jpg"] { --catalog-mask: url("/assets/cutouts/product-210-v29.svg"); }
+img[src$="/oxitolac.jpg"] { --catalog-mask: url("/assets/cutouts/product-211-v29.svg"); }
+img[src$="/selevit e.jpg"] { --catalog-mask: url("/assets/cutouts/product-212-v29.svg"); }
+img[src$="/vitamina k.jpg"] { --catalog-mask: url("/assets/cutouts/product-213-v29.svg"); }
+img[src$="/antitermico-AleBet.jpg"] { --catalog-mask: url("/assets/cutouts/product-238-v29.svg"); }
+img[src$="/ascorbol.webp"] { --catalog-mask: url("/assets/cutouts/product-239-v29.svg"); }
+img[src$="/azulpiotanico.webp"] { --catalog-mask: url("/assets/cutouts/product-240-v29.svg"); }
+img[src$="/bronccowell.webp"] { --catalog-mask: url("/assets/cutouts/product-241-v29.svg"); }
+img[src$="/dermacalm.jpeg"] { --catalog-mask: url("/assets/cutouts/product-242-v29.svg"); }
+img[src$="/desparasitante.jpg"] { --catalog-mask: url("/assets/cutouts/product-244-v29.svg"); }
+img[src$="/electrowell.jpeg"] { --catalog-mask: url("/assets/cutouts/product-245-v29.svg"); }
+img[src$="/endalplus.jpeg"] { --catalog-mask: url("/assets/cutouts/product-246-v29.svg"); }
+img[src$="/enrozol.jpeg"] { --catalog-mask: url("/assets/cutouts/product-247-v29.svg"); }
+img[src$="/eriprin.jpeg"] { --catalog-mask: url("/assets/cutouts/product-248-v29.svg"); }
+img[src$="/fibronex.png"] { --catalog-mask: url("/assets/cutouts/product-249-v29.svg"); }
+img[src$="/fortalizador.jpeg"] { --catalog-mask: url("/assets/cutouts/product-250-v29.svg"); }

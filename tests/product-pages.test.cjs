@@ -1,20 +1,19 @@
 "use strict";
 
-// Run with node --test scripts/product-pages.test.cjs. Checks that productos/ and sitemap.xml
+// Run with node --test tests/product-pages.test.cjs. Checks that productos/ and sitemap.xml
 // match scripts/build-product-pages.cjs and that every product page is safe to publish:
 // no inline code, only local files that exist, a cached stylesheet and links to order.
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
 const { existsSync, readdirSync, readFileSync } = require("node:fs");
 const { resolve } = require("node:path");
-const { buildSite, OUTPUT_DIR, ORIGIN } = require("./build-product-pages.cjs");
+const { buildSite, OUTPUT_DIR, ORIGIN } = require("../scripts/build-product-pages.cjs");
 
 const root = resolve(__dirname, "..");
 const { pages, sitemap } = buildSite();
 const config = JSON.parse(readFileSync(resolve(root, "vercel.json"), "utf8"));
-const cachedSources = new Set(config.headers
-  .filter(rule => rule.headers.some(header => header.key.toLowerCase() === "cache-control"))
-  .map(rule => rule.source));
+const cachesBundles = config.headers.some(rule => rule.source === "/css/dist/(.*).css"
+  && rule.headers.some(header => header.key.toLowerCase() === "cache-control"));
 
 function attributes(tag) {
   const attrs = {};
@@ -72,7 +71,7 @@ test("product pages load only existing local files and contain no inline code", 
         assert.ok(existsSync(localFile(url)), `${page.path}: ${url} does not exist`);
       }
       if (name === "link" && attrs.rel === "stylesheet") {
-        assert.ok(cachedSources.has(attrs.href), `${page.path}: ${attrs.href} must be a cached stylesheet bundle`);
+        assert.ok(cachesBundles && /^\/css\/dist\/styles-[a-z-]+-[0-9a-f]{12}\.css$/.test(attrs.href), `${page.path}: ${attrs.href} must be a cached stylesheet bundle`);
       }
       if (name === "a" && attrs.href?.startsWith("/")) {
         assert.ok(existsSync(localFile(attrs.href)), `${page.path}: link to missing ${attrs.href}`);

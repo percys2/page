@@ -1,6 +1,6 @@
 "use strict";
 
-// Run with node --test scripts/guide-mobile.test.cjs. Opens the usage guide in headless
+// Run with node --test tests/guide-mobile.test.cjs. Opens the usage guide in headless
 // Chrome at phone widths with every question and calculator expanded, and fails when a
 // table, card or field does not fit the screen. It also keeps source citations out of
 // the visible guide text. Set CHROME_PATH to use another Chromium-based browser; the
@@ -12,7 +12,7 @@ const { createServer } = require("node:http");
 const { existsSync, mkdtempSync, readFileSync, rmSync, statSync } = require("node:fs");
 const { tmpdir } = require("node:os");
 const { extname, join, resolve, sep } = require("node:path");
-const { root } = require("./csp-hashes.cjs");
+const { root } = require("../scripts/csp-hashes.cjs");
 
 const PHONE_WIDTHS = [360, 390];
 const CHROME = [
@@ -44,7 +44,7 @@ const CITATIONS = [
 ];
 
 test("guide text states data without citing where it comes from", () => {
-  for (const file of ["usage-guide.js", "usage-guide-programs.js"]) {
+  for (const file of ["js/usage-guide.js", "js/usage-guide-programs.js"]) {
     readFileSync(resolve(root, file), "utf8").split("\n").forEach((line, index) => {
       const code = line.trim();
       if (code.startsWith("//") || code.startsWith("*") || code.startsWith("/*")) return;
@@ -208,7 +208,7 @@ const PRODUCT_AUDIT = `(async () => {
 })()`;
 
 test("product pages fit phone screens", { skip: !CHROME && "Chrome no está instalado (definí CHROME_PATH)", timeout: 90000 }, async () => {
-  const { buildSite } = require("./build-product-pages.cjs");
+  const { buildSite } = require("../scripts/build-product-pages.cjs");
   const { pages } = buildSite();
   const samples = PRODUCT_SAMPLES.map(id => pages.find(page => page.id === id) || pages.find(page => page.html.includes(`product=${id}"`)));
   const tool = pages.find(page => page.html.includes('type=herramientas"'));

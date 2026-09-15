@@ -1,12 +1,12 @@
 "use strict";
 
-// Run with node --test scripts/security-policy.test.cjs. This checks the static
+// Run with node --test tests/security-policy.test.cjs. This checks the static
 // deployment contract; browser checks still cover real CSP enforcement and UI.
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
-const { readFileSync } = require("node:fs");
+const { readdirSync, readFileSync } = require("node:fs");
 const { resolve } = require("node:path");
-const { root, pages, inlineScripts } = require("./csp-hashes.cjs");
+const { root, pages, inlineScripts } = require("../scripts/csp-hashes.cjs");
 const config = JSON.parse(readFileSync(resolve(root, "vercel.json"), "utf8"));
 const origin = "https://www.agrocentronica.com";
 const globalRules = config.headers.filter(rule => rule.source === "/(.*)");
@@ -139,15 +139,17 @@ test("security headers preserve long-lived asset and stylesheet caching", () => 
   for (const rule of cached) {
     assert.equal(rule.headers.find(header => header.key.toLowerCase() === "cache-control").value, "public, max-age=31536000, immutable");
   }
-  const manifest = JSON.parse(readFileSync(resolve(root, "styles-manifest.json"), "utf8"));
-  const cacheSources = new Set(cached.map(rule => rule.source));
+  const manifest = JSON.parse(readFileSync(resolve(root, "css/dist/styles-manifest.json"), "utf8"));
+  assert.ok(cached.some(rule => rule.source === "/css/dist/(.*).css"), "compiled stylesheets must stay cached");
+  const bundles = Object.values(manifest.pages).map(page => page.bundle).sort();
+  const onDisk = readdirSync(resolve(root, "css/dist")).filter(file => file.endsWith(".css")).map(file => `css/dist/${file}`).sort();
+  assert.deepEqual(onDisk, bundles, "css/dist must contain only the current bundles: run python3 scripts/build-styles.py");
   for (const page of pages) {
     const html = readFileSync(resolve(root, page), "utf8");
     for (const match of html.matchAll(/<link\b[^>]*>/gi)) {
       const attrs = attributes(match[0]);
       if (attrs.rel === "stylesheet") {
-        assert.ok(cacheSources.has(`/${attrs.href}`), `${page}: hashed CSS must remain cached`);
-        assert.ok(JSON.stringify(manifest).includes(attrs.href), `${page}: stylesheet must remain in manifest`);
+        assert.equal(attrs.href, manifest.pages[page]?.bundle, `${page}: stylesheet must be its current bundle in css/dist`);
       }
     }
   }

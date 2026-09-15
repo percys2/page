@@ -33,7 +33,7 @@ def catalogue_runtime(root):
     script = r'''
 const fs=require('node:fs'), path=require('node:path'), vm=require('node:vm');
 const root=process.argv[1], context={window:{}}; vm.createContext(context);
-for(const file of ['catalog-data.js','image-overrides.js','feed-guides-v12.js','catalog-model.js']){
+for(const file of ['data/catalog-data.js','data/image-overrides.js','data/feed-guides.js','js/catalog-model.js']){
  vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file,timeout:3000});
 }
 const model=context.window.AGROCENTRO_CATALOG;
