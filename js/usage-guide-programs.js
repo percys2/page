@@ -133,6 +133,36 @@
     }).join("")}</tbody></table></div>`;
   }
 
+  // Ración diaria de caballos. Filas: [peso en kg, dosis 1, dosis 2]; cada dosis es [mín, máx] en kg.
+  const LB_PER_KG = 2.2046;
+  const horseFeeds = {
+    omalina100: { id: 6, label: "Omalina 100 · paseo y trabajo ligero", weightLabel: "Peso del caballo", who: "Caballo de unos", columns: ["Omalina 100 al día", "Heno al día"],
+      rows: [[270, [2.45, 2.70], [4.90, 5.40]], [360, [3.05, 3.60], [6.54, 7.20]], [450, [4.00, 4.50], [8.18, 9.00]], [545, [4.95, 5.45], [9.90, 10.90]], [635, [5.77, 6.35], [11.54, 12.70]]] },
+    omalina300: { id: 8, label: "Omalina 300 · yegua con potro", weightLabel: "Peso del potro", who: "Yegua con un potro de unos", columns: ["Omalina 300 al día", "Heno al día"],
+      rows: [[100, [7.5], [5]], [150, [8], [6]], [200, [9], [6.5]], [250, [8], [7]], [300, [7], [7.5]]] },
+    forrajina: { id: 23, label: "Forrajina · fibra", weightLabel: "Peso del caballo", who: "Caballo de unos", fiber: true, columns: ["Como única fuente de fibra", "Como complemento de la fibra"],
+      rows: [[300, [4.5], [1.5]], [450, [5], [2]], [500, [5.5], [2.5]], [550, [6], [3]]] },
+    cavalleria: { id: 5, label: "Cavalleria Forte · suplemento", sackKg: 25,
+      stages: [["Potros", [0.2, 0.25]], ["Caballos en crecimiento y recuperación", [0.5, 0.75]], ["Caballos en competencia", [0.5, 1]], ["Yeguas y sementales", [0.75, 1]]] }
+  };
+  const amount = (min, max, unit, digits) => min === max ? `${fmt(min, digits)} ${unit}` : `${fmt(min, digits)}–${fmt(max, digits)} ${unit}`;
+  const kgAmount = ([min, max = min]) => max < 1 ? amount(min * 1000, max * 1000, "g", 0) : min < 1 ? `${fmt(min * 1000, 0)} g–${fmt(max, 2)} kg` : amount(min, max, "kg", 2);
+  const lbAmount = ([min, max = min]) => amount(min * LB_PER_KG, max * LB_PER_KG, "lb", 1);
+  const dose = value => `${kgAmount(value)} (${lbAmount(value)})`;
+  const sackDays = (sackKg, [min, max = min]) => {
+    const fewest = Math.floor(sackKg / max), most = Math.floor(sackKg / min);
+    return fewest === most ? `unos ${fewest} días` : `entre ${fewest} y ${most} días`;
+  };
+  function horseTable(feed) {
+    const caption = feed.stages ? `${name(feed.id)}: cantidad al día por etapa` : `${name(feed.id)}: ración diaria${feed.fiber ? "" : " · heno con 20% de humedad"}`;
+    const head = feed.stages ? ["Etapa", "Al día"] : [feed.weightLabel, ...feed.columns];
+    const cell = value => `<td>${kgAmount(value)}<span>${lbAmount(value)}</span></td>`;
+    const rows = feed.stages
+      ? feed.stages.map(([label, value]) => `<tr><th scope="row">${escape(label)}</th>${cell(value)}</tr>`)
+      : feed.rows.map(([kg, ...values]) => `<tr><th scope="row">${fmt(kg, 0)} kg · ${fmt(kg * LB_PER_KG, 0)} lb</th>${values.map(cell).join("")}</tr>`);
+    return `<div class="guide-table-wrap" role="region" aria-label="${escape(caption)}" tabindex="0"><table><caption>${escape(caption)}</caption><thead><tr>${head.map(label => `<th scope="col">${escape(label)}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table></div>`;
+  }
+
   const calculators = {
     broiler: {
       title: "Calculá el alimento y las fechas de tu lote de pollos",
@@ -237,18 +267,44 @@
       }
     },
     horse: {
-      title: "Calculá la Forrajina de tu caballo",
-      html: `<div class="guide-ration-fields">${field("prog-horse-weight", "Peso del caballo (kg)", 'type="number" min="100" max="1000" step="10" value="400" inputmode="numeric"')}</div><div class="guide-ration-result" id="prog-horse-result" role="status" aria-live="polite"></div><p class="guide-ration-note">Forrajina: 0.5–1.5 kg por cada 100 kg de peso vivo, repartidos en 2 o más raciones al día. Para Omalina y Cavalleria Forte usá la tabla de la etiqueta.</p>`,
+      title: "Calculá la ración diaria de tu caballo",
+      html: `<div class="guide-ration-fields">${select("prog-horse-product", "Alimento", Object.entries(horseFeeds).map(([key, feed]) => [key, feed.label]))}${field("prog-horse-weight", "Peso del caballo", 'type="number" min="50" max="1500" step="any" value="450" inputmode="decimal"')}${select("prog-horse-unit", "Unidad del peso", [["kg", "Kilos (kg)"], ["lb", "Libras (lb)"]])}${select("prog-horse-stage", "Etapa", horseFeeds.cavalleria.stages.map(([label], index) => [index, label]))}</div><div class="guide-ration-result" id="prog-horse-result" role="status" aria-live="polite"></div><div id="prog-horse-table"></div><p class="guide-ration-note">Repartí la ración en varias comidas al día (Omalina, en al menos 3) y ajustala hasta 10% según la condición corporal. Para Omalina 200, consultanos con el peso y el trabajo de tu caballo.</p>`,
       bind() {
+        const product = document.getElementById("prog-horse-product");
         const weight = document.getElementById("prog-horse-weight");
+        const unit = document.getElementById("prog-horse-unit");
+        const stage = document.getElementById("prog-horse-stage");
         const out = document.getElementById("prog-horse-result");
+        const table = document.getElementById("prog-horse-table");
         const run = () => {
-          if (!weight.checkValidity() || !weight.value) { out.textContent = "Ingresá un peso entre 100 y 1,000 kg."; return; }
-          const kg = Number(weight.value);
-          const min = kg / 100 * 0.5, max = kg / 100 * 1.5;
-          out.innerHTML = `<strong>Caballo de ${fmt(kg, 0)} kg:</strong> entre ${fmt(min)} y ${fmt(max)} kg de Forrajina al día (${fmt(min * 2.2046)}–${fmt(max * 2.2046)} lb), repartidos en 2 o más raciones.<br><span>Un saco de 100 lb (45.4 kg) rinde entre ${fmt(45.4 / max, 0)} y ${fmt(45.4 / min, 0)} días.</span>`;
+          const feed = horseFeeds[product.value];
+          const byStage = Boolean(feed.stages);
+          weight.closest("label").hidden = byStage;
+          unit.closest("label").hidden = byStage;
+          stage.closest("label").hidden = !byStage;
+          if (!byStage) weight.closest("label").firstChild.nodeValue = feed.weightLabel;
+          table.innerHTML = horseTable(feed);
+          if (byStage) {
+            const [label, value] = feed.stages[Number(stage.value)];
+            out.innerHTML = `<strong>${escape(label)}:</strong> ${dose(value)} de ${escape(name(feed.id))} al día.<br><span>Un saco de ${feed.sackKg} kg dura ${sackDays(feed.sackKg, value)} para un animal.</span>`;
+            return;
+          }
+          if (!weight.checkValidity() || !weight.value) { out.textContent = "Escribí el peso aproximado."; return; }
+          const kg = Number(weight.value) / (unit.value === "lb" ? LB_PER_KG : 1);
+          const lightest = feed.rows[0][0], heaviest = feed.rows[feed.rows.length - 1][0];
+          if (kg < lightest * 0.9 || kg > heaviest * 1.1) {
+            out.textContent = `La tabla de ${name(feed.id)} va de ${fmt(lightest, 0)} a ${fmt(heaviest, 0)} kg (${fmt(lightest * LB_PER_KG, 0)} a ${fmt(heaviest * LB_PER_KG, 0)} lb). Para otro peso, consultanos.`;
+            return;
+          }
+          const [rowKg, first, second] = feed.rows.reduce((best, row) => Math.abs(row[0] - kg) < Math.abs(best[0] - kg) ? row : best);
+          const who = `<strong>${feed.who} ${fmt(rowKg, 0)} kg (${fmt(rowKg * LB_PER_KG, 0)} lb):</strong>`;
+          const nearest = Math.abs(rowKg - kg) > 5 ? `<span>Se toma la fila de ${fmt(rowKg, 0)} kg, la más cercana al peso que escribiste.</span>` : "";
+          out.innerHTML = feed.fiber
+            ? `${who} ${dose(first)} de ${escape(name(feed.id))} al día si es su única fuente de fibra, o ${dose(second)} si complementa el pasto o el heno.<br><span>Un saco de 100 lb dura ${sackDays(45.4, first)} como única fuente o ${sackDays(45.4, second)} como complemento.</span>${nearest}`
+            : `${who} ${dose(first)} de ${escape(name(feed.id))} al día y ${dose(second)} de heno.<br><span>Un saco de 100 lb dura ${sackDays(45.4, first)} para un animal.</span>${nearest}`;
         };
-        weight.addEventListener("input", run); run();
+        [product, weight, unit, stage].forEach(el => el.addEventListener("input", run));
+        run();
       }
     }
   };

@@ -108,38 +108,38 @@
 
     5: ficha(
       "Suplemento proteico para caballos en cualquier etapa fisiológica.",
-      "Todas las edades y etapas", "Cualquier edad; seguir la etiqueta", ["desarrollo", "gestacion", "lactancia", "mantenimiento"], "Peletizado (checker)", "25 kg / 55.11 lb",
+      "Todas las edades y etapas", "Potros, crecimiento, recuperación, competencia y reproductores", ["desarrollo", "gestacion", "lactancia", "mantenimiento"], "Peletizado (checker)", "25 kg / 55.11 lb",
       ["Favorece el desarrollo de masa muscular y la salud intestinal.", "Apoya la recuperación y es apropiado para yeguas de cría y potros."],
       analysis("Energía digestible", ["12.00%", "30.00%", "3.00%", "8.00%", "2,610 Kcal/Kg", "1.40–2.35%", "1.00–1.50%", "1.45%"]), "págs. 57–58",
-      { feeding: "Consultar la tabla de indicaciones de la etiqueta del producto." }
+      { feeding: "Al día: potros, 200–250 g · caballos en crecimiento y recuperación, 500–750 g · caballos en competencia, 500 g–1 kg · yeguas y sementales, 750 g–1 kg. Con agua limpia y fresca siempre disponible." }
     ),
     6: ficha(
       "Alimento para recreación, trabajo ligero y mantenimiento; también para reproductores en descanso.",
       "Mantenimiento / trabajo ligero", "Recreación, trabajo ligero, mantenimiento o descanso reproductivo", ["mantenimiento"], "Peletizado (checker)", "45.4 kg / 100 lb",
       ["Ayuda a reducir riesgos nutricionales asociados a cólicos y laminitis.", "Apoya la salud intestinal y aporta 13% de proteína cruda."],
       analysis("Energía digestible", ["13.00%", "13.00%", "2.50%", "10.00%", "2,900 Kcal/Kg", "0.80–1.30%", "0.50–1.00%", "0.50%"]), "págs. 54 y 58",
-      { feeding: "Usar la tabla de la etiqueta para definir la ración." }
+      { feeding: "Ración diaria según el peso del caballo: 270 kg, 2.45–2.70 kg · 360 kg, 3.05–3.60 kg · 450 kg, 4.00–4.50 kg · 545 kg, 4.95–5.45 kg · 635 kg, 5.77–6.35 kg, además del heno. Repartir en al menos 3 comidas y ajustar hasta 10% según la condición corporal." }
     ),
     7: ficha(
-      "Alimento para caballos deportivos y de trabajo intenso.",
-      "Alto rendimiento / trabajo intenso", "Durante entrenamiento o trabajo exigente", ["mantenimiento"], "Peletizado (checker)", "45.4 kg / 100 lb",
+      "Alimento para caballos deportivos y de trabajo intenso: polo, equitación, salto, endurance y preparación de exposiciones.",
+      "Alto rendimiento / trabajo intenso", "Deporte y trabajo intenso · potros desde 24 meses · yeguas del mes 1 al 9 de gestación · garañones en reproducción", ["mantenimiento", "gestacion"], "Peletizado (checker)", "45.4 kg / 100 lb",
       ["Ayuda a reducir riesgos nutricionales asociados a cólicos y laminitis.", "Apoya la salud intestinal y aporta 14% de proteína cruda para alto rendimiento."],
       analysis("Energía digestible", ["13.00%", "14.00%", "4.00%", "15.00%", "3,000 Kcal/Kg", "0.80–1.40%", "0.50–1.00%", "0.40%"]), "págs. 55 y 58",
-      { feeding: "Usar la tabla de la etiqueta para definir la ración." }
+      { feeding: "Repartir en al menos 3 comidas al día. La ración depende del peso del caballo y de la intensidad del trabajo." }
     ),
     8: ficha(
       "Alimento para yeguas de cría y potros en crecimiento.",
       "Gestación, lactancia y crecimiento", "Yeguas: mes 9 de gestación al fin de lactancia · potros: 2–18 meses", ["desarrollo", "gestacion", "lactancia"], "Peletizado (checker)", "45.4 kg / 100 lb",
       ["Ayuda a reducir riesgos nutricionales asociados a cólicos y laminitis.", "Apoya la salud intestinal; aporta 16% de proteína y nutrientes para yeguas y potros."],
       analysis("Energía digestible", ["13.00%", "16.00%", "5.00%", "10.00%", "3,100 Kcal/Kg", "1.10–1.40%", "0.50–1.00%", "0.60%"]), "págs. 56 y 58",
-      { feeding: "Usar la tabla de la etiqueta para definir la ración." }
+      { feeding: "Yegua con potro, ración diaria según el peso del potro: 100 kg, 7.5 kg + 5 kg de heno · 150 kg, 8 kg + 6 kg · 200 kg, 9 kg + 6.5 kg · 250 kg, 8 kg + 7 kg · 300 kg, 7 kg + 7.5 kg. Repartir en al menos 3 comidas y ajustar hasta 10% según la condición corporal." }
     ),
     23: ficha(
-      "Suplemento de forraje fresco que aporta fibra a caballos de todas las edades.",
+      "Suplemento fuente de fibra que mejora el tránsito intestinal de caballos de todas las edades.",
       "Todas las edades / aporte de fibra", "Caballos de cualquier edad", ["desarrollo", "gestacion", "lactancia", "mantenimiento"], "Peletizado (checker)", "45.4 kg / 100 lb",
-      ["Puede sustituir hasta 50% del forraje.", "Ayuda a mantener un aporte fibroso uniforme y un nivel energético adecuado."],
-      analysis("Energía digestible", ["13.00%", "10.00%", "2.00%", "15.00%", "2,660 Mcal/Kg*", "1.00–2.00%", "050%–1.00%*", "0.20%"]), "págs. 53 y 58",
-      { feeding: "0.5–1.5 kg por cada 100 kg de peso vivo, repartidos 2 o más veces al día.", catalogNote: "Los valores con asterisco conservan literalmente dos datos inconsistentes impresos en el PDF. Confirmá energía y sal mínima en la etiqueta vigente." }
+      ["Se usa como fuente única de fibra o como complemento del pasto y el heno.", "Ayuda a mantener un aporte fibroso uniforme y un nivel energético adecuado."],
+      analysis("Energía digestible", ["13.00%", "10.00%", "2.00%", "15.00%", "2,660 Kcal/Kg", "0.40–1.40%", "0.50–1.00%", "0.20%"]), "págs. 53 y 58",
+      { feeding: "0.5–1.5 kg por cada 100 kg de peso vivo al día, repartidos en varias tomas. Como fuente única de fibra: 300 kg, 4.5 kg · 450 kg, 5 kg · 500 kg, 5.5 kg · 550 kg, 6 kg. Como complemento de la fibra: 1.5 · 2 · 2.5 · 3 kg." }
     ),
     9: ficha(
       "Alimento completo para conejos de todas las razas y edades.",
