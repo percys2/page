@@ -76,6 +76,46 @@
   function stageDays(s) { return s.to - s.from + 1; }
 
   // ---------- Calculadoras ----------
+  // ---------- Comparador de líneas de postura ----------
+  // Metas por gallina en postura: % de postura, huevos acumulados por gallina alojada, peso del huevo (g) y consumo (g/día).
+  const LAYER_AGES = [20, 24, 26, 30, 40, 50, 60, 70, 80, 90];
+  const layerLines = {
+    hylineBrown: { label: "Hy-Line Brown", shell: "marrón", lay: [[52,55],[92,97],[94,98],[93,98],[92,97],[90,96],[87,93],[84,90],[80,86],[75,82]], eggs: [6,[30,31],[43,45],[69,72],[133,140],[196,206],[256,271],[314,333],[368,391],[419,446]], egg: [[48,50],[53,56],[55,59],[58,62],[60,64],[60,64],[61,65],[61,65],[62,65],[62,66]], feed: [[91,98],[107,114],[109,117],[110,118],[110,118],[110,118],[110,118],[110,118],[110,118],[110,118]] },
+    lohmannBrown: { label: "Lohmann Brown-Classic", shell: "marrón", lay: [36,88,93,95,95,92,88,84,79,73], eggs: [3,24,37,63,129,193,254,313,367,416], egg: [46,55,58,62,65,66,66,67,68,68], feed: [null,null,null,null,null,null,null,null,null,null] },
+    isaBrown: { label: "ISA Brown", shell: "marrón", lay: [31,90,95,96,95,93,89,86,82,77], eggs: [3,23,36,63,129,192,254,314,371,426], egg: [50,58,60,62,64,64,64,64,65,65], feed: [102,114,117,119,119,119,118,118,118,118] },
+    dekalbWhite: { label: "Dekalb White", shell: "blanco", lay: [20,95,96,98,97,96,96,95,94,90], eggs: [2,23,37,64,131,198,263,328,391,452], egg: [47,55,58,60,62,63,64,64,64,64], feed: [97,109,112,112,112,112,112,112,112,112] },
+    lohmannLsl: { label: "Lohmann LSL-Classic", shell: "blanco", lay: [37,88,93,95,96,94,91,87,82,75], eggs: [3,24,37,63,130,195,258,318,374,425], egg: [45,54,57,60,63,64,65,66,66,66], feed: [null,null,null,null,null,null,null,null,null,null] },
+    hylineW36: { label: "Hy-Line W-36", shell: "blanco", lay: [[35,50],[91,94],[94,96],[95,97],[93,94],[89,91],[86,88],[82,84],[77,80],[72,75]], eggs: [[4,5],[26,29],[39,42],[65,69],[130,135],[193,199],[252,260],[309,318],[362,373],[411,424]], egg: [48,55,57,59,61,62,62,63,63,63], feed: [[73,80],[89,96],[94,101],[97,103],[98,105],[99,105],[99,105],[99,105],[99,105],[99,105]] },
+    hylineW80: { label: "Hy-Line W-80", shell: "blanco", lay: [[42,44],[90,94],[92,96],[94,98],[93,97],[91,95],[90,93],[88,92],[85,89],[82,85]], eggs: [[3,4],[26,28],[39,41],[65,68],[129,134],[191,199],[252,262],[311,323],[367,382],[421,438]], egg: [[47,49],[54,55],[56,58],[59,61],[62,64],[63,65],[63,65],[64,66],[64,66],[64,66]], feed: [[83,86],[94,97],[97,101],[101,105],[107,111],[107,111],[107,111],[107,111],[107,111],[107,111]] }
+  };
+  const layerMetrics = {
+    lay: { label: "Postura", unit: " %" },
+    eggs: { label: "Huevos por gallina (acumulados)", unit: "" },
+    egg: { label: "Peso del huevo", unit: " g" },
+    feed: { label: "Consumo por gallina al día", unit: " g" }
+  };
+  const layerValue = (value, unit) => value == null ? "Sin dato por edad"
+    : Array.isArray(value) ? (value[0] === value[1] ? `${value[0]}${unit}` : `${value[0]}–${value[1]}${unit}`) : `${value}${unit}`;
+  const layerMid = value => value == null ? null : Array.isArray(value) ? (value[0] + value[1]) / 2 : value;
+  function layerSummary(metric, a, b) {
+    const unit = layerMetrics[metric].unit;
+    const at = (line, age) => line[metric][LAYER_AGES.indexOf(age)];
+    if (a === b) return `${a.label}: huevo ${a.shell}. Elegí una línea distinta en «Línea 2» para compararlas.`;
+    const shells = `${a.label}: huevo ${a.shell}. ${b.label}: huevo ${b.shell}.`;
+    if (metric === "eggs") {
+      const gap = Math.round(Math.abs(layerMid(at(a, 90)) - layerMid(at(b, 90))));
+      return `${shells} A las 90 semanas, ${a.label} lleva ${layerValue(at(a, 90), "")} huevos por gallina y ${b.label}, ${layerValue(at(b, 90), "")}${gap ? `: unos ${gap} huevos de diferencia` : ""}.`;
+    }
+    if (metric === "lay") {
+      const peak = line => LAYER_AGES.reduce((best, age, i) => layerMid(line.lay[i]) > layerMid(line.lay[best]) ? i : best, 0);
+      const [pa, pb] = [peak(a), peak(b)];
+      return `${shells} Pico de postura: ${a.label} ${layerValue(a.lay[pa], unit)} a las ${LAYER_AGES[pa]} semanas; ${b.label} ${layerValue(b.lay[pb], unit)} a las ${LAYER_AGES[pb]} semanas. A las 90 semanas: ${layerValue(at(a, 90), unit)} y ${layerValue(at(b, 90), unit)}.`;
+    }
+    if (metric === "egg") return `${shells} A las 50 semanas el huevo pesa ${layerValue(at(a, 50), unit)} en ${a.label} y ${layerValue(at(b, 50), unit)} en ${b.label}.`;
+    const eats = line => at(line, 50) == null ? `${line.label} no tiene dato de consumo por edad` : `${line.label} come ${layerValue(at(line, 50), unit)} al día`;
+    return `${shells} En plena postura (50 semanas), ${eats(a)} y ${eats(b)}. El consumo real sube con el frío y baja con el calor.`;
+  }
+
   function field(id, label, attrs) { return `<label for="${id}">${escape(label)}<input id="${id}" ${attrs}></label>`; }
   function select(id, label, options) { return `<label for="${id}">${escape(label)}<select id="${id}">${options.map(([v, l]) => `<option value="${v}">${escape(l)}</option>`).join("")}</select></label>`; }
   const dateInput = (id, label) => field(id, label, 'type="date"');
@@ -117,7 +157,7 @@
     },
     layers: {
       title: "Calculá cuántos sacos necesitás para tus gallinas",
-      html: `<div class="guide-ration-fields guide-ration-fields--three">${field("prog-layer-count", "Cantidad de gallinas", 'type="number" min="1" max="100000" step="1" value="50" inputmode="numeric"')}${select("prog-layer-line", "Línea", [[112, "Hy-Line Brown (112 g/día)"], [115, "Lohmann Brown-Classic (115 g/día)"], [112, "ISA Brown (112 g/día)"], [110, "Dekalb White (110 g/día)"], [110, "Lohmann LSL-Classic (110 g/día)"], [0, "Otra: escribir el consumo"]])}${field("prog-layer-grams", "Consumo por gallina al día (g)", 'type="number" min="50" max="250" step="1" value="112" inputmode="numeric"')}</div><div class="guide-ration-fields">${field("prog-layer-days", "Días a cubrir", 'type="number" min="1" max="365" step="1" value="30" inputmode="numeric"')}${select("prog-layer-product", "Alimento", [[38, `${name(38)} (gallinas de patio)`], [39, `${name(39)} (gallinas de granja)`], [11, `${name(11)} (gallinas criollas)`]])}</div><div class="guide-ration-result" id="prog-layer-result" role="status" aria-live="polite"></div><p class="guide-ration-note">Consumo diario promedio en postura: Hy-Line Brown 109–117 g, Lohmann Brown 110–120 g, ISA Brown 112 g, Dekalb White 110 g, LSL 105–115 g. Sacos de 100 lb. El consumo real sube con el frío y baja con el calor.</p>`,
+      html: `<div class="guide-ration-fields guide-ration-fields--three">${field("prog-layer-count", "Cantidad de gallinas", 'type="number" min="1" max="100000" step="1" value="50" inputmode="numeric"')}${select("prog-layer-line", "Línea", [[112, "Hy-Line Brown (112 g/día)"], [115, "Lohmann Brown-Classic (115 g/día)"], [116, "ISA Brown (116 g/día)"], [110, "Dekalb White (110 g/día)"], [110, "Lohmann LSL-Classic (110 g/día)"], [0, "Otra: escribir el consumo"]])}${field("prog-layer-grams", "Consumo por gallina al día (g)", 'type="number" min="50" max="250" step="1" value="112" inputmode="numeric"')}</div><div class="guide-ration-fields">${field("prog-layer-days", "Días a cubrir", 'type="number" min="1" max="365" step="1" value="30" inputmode="numeric"')}${select("prog-layer-product", "Alimento", [[38, `${name(38)} (gallinas de patio)`], [39, `${name(39)} (gallinas de granja)`], [11, `${name(11)} (gallinas criollas)`]])}</div><div class="guide-ration-result" id="prog-layer-result" role="status" aria-live="polite"></div><p class="guide-ration-note">Consumo diario promedio en postura: Hy-Line Brown 109–117 g, Lohmann Brown 110–120 g, ISA Brown 114–119 g, Dekalb White 109–112 g, LSL 105–115 g. Sacos de 100 lb. El consumo real sube con el frío y baja con el calor.</p>`,
       bind() {
         const ids = ["prog-layer-count", "prog-layer-grams", "prog-layer-days"].map(id => document.getElementById(id));
         const out = document.getElementById("prog-layer-result");
@@ -164,6 +204,23 @@
           bindOrder(out, () => sackPlan(stages, Number(count.value)));
         };
         [count, program, line, date].forEach(el => el.addEventListener("input", run)); run();
+      }
+    },
+    layerCompare: {
+      title: "Compará dos líneas de gallinas",
+      html: `<div class="guide-ration-fields guide-ration-fields--three">${select("prog-curve-a", "Línea 1", Object.entries(layerLines).map(([key, line]) => [key, line.label]))}${select("prog-curve-b", "Línea 2", Object.entries(layerLines).map(([key, line]) => [key, line.label]))}${select("prog-curve-metric", "Comparar", Object.entries(layerMetrics).map(([key, metric]) => [key, metric.label]))}</div><div class="guide-ration-result" id="prog-curve-result" role="status" aria-live="polite"></div><p class="guide-ration-note">Metas por gallina con buen manejo, alimento de postura, agua a libre acceso y programa de luz. Los huevos acumulados cuentan desde que el lote entra a postura.</p>`,
+      bind() {
+        const [lineA, lineB, metric] = ["prog-curve-a", "prog-curve-b", "prog-curve-metric"].map(id => document.getElementById(id));
+        const out = document.getElementById("prog-curve-result");
+        const keys = Object.keys(layerLines);
+        lineB.value = keys.includes("dekalbWhite") ? "dekalbWhite" : keys[keys.length - 1];
+        const run = () => {
+          const a = layerLines[lineA.value], b = layerLines[lineB.value], m = layerMetrics[metric.value];
+          const rows = LAYER_AGES.map((age, i) => `<tr><th scope="row">${age} semanas</th><td>${escape(layerValue(a[metric.value][i], m.unit))}</td><td>${escape(layerValue(b[metric.value][i], m.unit))}</td></tr>`).join("");
+          out.innerHTML = `<div class="guide-table-wrap guide-table--compare" role="region" aria-label="${escape(m.label)} por edad" tabindex="0"><table><caption>${escape(m.label)} por edad</caption><thead><tr><th scope="col">Edad</th><th scope="col">${escape(a.label)}</th><th scope="col">${escape(b.label)}</th></tr></thead><tbody>${rows}</tbody></table></div><span>${escape(layerSummary(metric.value, a, b))}</span>`;
+        };
+        [lineA, lineB, metric].forEach(el => el.addEventListener("input", run));
+        run();
       }
     },
     horse: {
