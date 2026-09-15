@@ -4,7 +4,7 @@
 // Genera una página estática por producto en productos/ y la lista de esas páginas en sitemap.xml.
 // Después de cambiar el catálogo, las fichas, las imágenes o el encabezado del sitio, ejecutá:
 //   node scripts/build-product-pages.cjs
-// La prueba scripts/product-pages.test.cjs falla si las páginas quedaron desactualizadas.
+// La prueba tests/product-pages.test.cjs falla si las páginas quedaron desactualizadas.
 const { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } = require("node:fs");
 const { join, resolve } = require("node:path");
 const vm = require("node:vm");
@@ -13,7 +13,7 @@ const root = resolve(__dirname, "..");
 const ORIGIN = "https://www.agrocentronica.com";
 const OUTPUT_DIR = "productos";
 const WHATSAPP_NUMBER = "50582403490";
-const DATA_FILES = ["catalog-data.js", "image-overrides.js", "feed-guides-v12.js", "responsive-images.js", "veterinary-data.js", "catalog-model.js"];
+const DATA_FILES = ["data/catalog-data.js", "data/image-overrides.js", "data/feed-guides.js", "data/responsive-images.js", "data/veterinary-data.js", "js/catalog-model.js"];
 const SITEMAP_START = "  <!-- Páginas de productos: generadas por scripts/build-product-pages.cjs -->";
 const SITEMAP_END = "  <!-- Fin de páginas de productos -->";
 const GUIDE_TOPICS = { aves: "aves", cerdos: "cerdos", equinos: "equinos", perros: "mascotas", gatos: "mascotas", conejos: "conejos" };
@@ -46,8 +46,8 @@ function siteChrome() {
   const store = read("products.html");
   const header = contact.match(/  <div class="utility-bar">[\s\S]*?<\/header>/);
   const footer = store.match(/  <footer class="footer-first"[\s\S]*?<\/footer>/);
-  const siteScript = contact.match(/<script src="site\.js\?v=\d+" defer><\/script>/);
-  const protection = store.match(/<script src="image-protection\.js\?v=\d+" defer><\/script>/);
+  const siteScript = contact.match(/<script src="js\/site\.js\?v=\d+" defer><\/script>/);
+  const protection = store.match(/<script src="js\/image-protection\.js\?v=\d+" defer><\/script>/);
   if (!header || !footer || !siteScript || !protection) throw new Error("No encontré el encabezado, el pie o los scripts del sitio");
   const nav = header[0]
     .replace(/ class="active"/g, "").replace(/ aria-current="page"/g, "")
@@ -62,15 +62,15 @@ function siteChrome() {
 let questionsCache;
 function guideQuestions() {
   if (!questionsCache) {
-    const match = read("store.js").match(/const GUIDE_QUESTIONS = (\[[\s\S]*?\n  \]);/);
-    if (!match) throw new Error("No encontré GUIDE_QUESTIONS en store.js");
+    const match = read("js/store.js").match(/const GUIDE_QUESTIONS = (\[[\s\S]*?\n  \]);/);
+    if (!match) throw new Error("No encontré GUIDE_QUESTIONS en js/store.js");
     questionsCache = vm.runInNewContext(`(${match[1]})`);
   }
   return questionsCache;
 }
 
 function styles() {
-  const manifest = JSON.parse(read("styles-manifest.json"));
+  const manifest = JSON.parse(read("css/dist/styles-manifest.json"));
   return { bundle: manifest.pages["products.html"].bundle, font: manifest.preload_latin };
 }
 

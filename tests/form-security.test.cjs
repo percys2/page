@@ -1,6 +1,6 @@
 "use strict";
 
-// Run: node --test scripts/form-security.test.cjs
+// Run: node --test tests/form-security.test.cjs
 // Executes the real application closures in a Node VM with a small DOM fixture.
 // This verifies fail-closed setup and submission logic, not browser behavior/CSP.
 // window.open is a recording stub: no request or WhatsApp message is sent.
@@ -32,8 +32,8 @@ function formSource(file, id) {
 }
 
 const forms = [
-  { file: "contact.html", id: "contact-form", script: "site.js" },
-  { file: "products.html", id: "order-form", script: "store.js" }
+  { file: "contact.html", id: "contact-form", script: "js/site.js" },
+  { file: "products.html", id: "order-form", script: "js/store.js" }
 ];
 
 function fixture(spec, { failSubmitBinding = false } = {}) {

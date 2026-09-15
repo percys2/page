@@ -1,0 +1,69 @@
+{
+  "font_css": "css/font-manrope.css",
+  "preload_latin": "assets/fonts/manrope-latin-a30ddcd34970.woff2",
+  "pages": {
+    "index.html": {
+      "bundle": "css/dist/styles-index-6c5ed6e80db6.css",
+      "sources": [
+        "css/font-manrope.css",
+        "css/site.css",
+        "css/catalog-cutouts.css",
+        "css/catalog-navigation.css",
+        "css/marketing.css",
+        "css/mobile.css",
+        "css/brand.css",
+        "css/visual-polish.css"
+      ],
+      "bytes": 115077,
+      "gzip_bytes": 20976,
+      "sha256": "6c5ed6e80db63d3ef4394aaab8cb4f5d2f8130b50c0324b6e49050be6c57ceab"
+    },
+    "products.html": {
+      "bundle": "css/dist/styles-products-35577c79c368.css",
+      "sources": [
+        "css/font-manrope.css",
+        "css/products.css",
+        "css/site.css",
+        "css/catalog-cutouts.css",
+        "css/catalog-navigation.css",
+        "css/marketing.css",
+        "css/mobile.css",
+        "css/product-detail.css",
+        "css/brand.css",
+        "css/visual-polish.css"
+      ],
+      "bytes": 160589,
+      "gzip_bytes": 28072,
+      "sha256": "35577c79c36858dc8df19b8a3acfeccd19d7e1bc7ee948bb38e8da0654683a0f"
+    },
+    "contact.html": {
+      "bundle": "css/dist/styles-contact-2cbe28b423df.css",
+      "sources": [
+        "css/font-manrope.css",
+        "css/site.css",
+        "css/marketing.css",
+        "css/mobile.css",
+        "css/brand.css",
+        "css/visual-polish.css"
+      ],
+      "bytes": 95882,
+      "gzip_bytes": 17625,
+      "sha256": "2cbe28b423df512f6ce6f293791198d0e97e3d023fa02b3cc4263a0e5d6fa868"
+    },
+    "guia-de-uso.html": {
+      "bundle": "css/dist/styles-guia-de-uso-7c079307ef68.css",
+      "sources": [
+        "css/font-manrope.css",
+        "css/site.css",
+        "css/usage-guide.css",
+        "css/marketing.css",
+        "css/mobile.css",
+        "css/brand.css",
+        "css/visual-polish.css"
+      ],
+      "bytes": 107073,
+      "gzip_bytes": 19419,
+      "sha256": "7c079307ef6826819b33e9156acb0b900723dc0d6f43efe4d79dbbb8a401e2db"
+    }
+  }
+}
