@@ -1772,6 +1772,7 @@ html.agro-intro-seen .agro-splash { display: none; }
 .guide-ration-fields input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 
 .guide-table-wrap .guide-cell-value { display: block; margin-top: 0; }
+.guide-ration-result .guide-cell-value { color: inherit; font-size: inherit; font-weight: inherit; }
 
 /* ---- Tablas de 4 o más columnas en celular: una tarjeta por fila ---- */
 @media (max-width: 620px) {
@@ -1785,6 +1786,7 @@ html.agro-intro-seen .agro-splash { display: none; }
   .guide-table--stack tbody th, .guide-table--stack td { border-top: 0; min-width: 0; }
   .guide-table--stack tbody th { padding: 8px 12px 4px; font-size: 14px; }
   .guide-table--stack td { display: grid; grid-template-columns: minmax(0, 42%) minmax(0, 1fr); column-gap: 12px; align-items: baseline; padding: 4px 12px; }
+  .guide-table--compare tbody th, .guide-table--compare td { min-width: 0; }
   .guide-table--stack td::before { content: attr(data-label); color: var(--muted); font-size: 12px; font-weight: 600; line-height: 1.4; }
 }
 
