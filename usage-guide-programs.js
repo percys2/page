@@ -157,11 +157,12 @@
     },
     layers: {
       title: "Calculá cuántos sacos necesitás para tus gallinas",
-      html: `<div class="guide-ration-fields guide-ration-fields--three">${field("prog-layer-count", "Cantidad de gallinas", 'type="number" min="1" max="100000" step="1" value="50" inputmode="numeric"')}${select("prog-layer-line", "Línea", [[112, "Hy-Line Brown (112 g/día)"], [115, "Lohmann Brown-Classic (115 g/día)"], [116, "ISA Brown (116 g/día)"], [110, "Dekalb White (110 g/día)"], [110, "Lohmann LSL-Classic (110 g/día)"], [0, "Otra: escribir el consumo"]])}${field("prog-layer-grams", "Consumo por gallina al día (g)", 'type="number" min="50" max="250" step="1" value="112" inputmode="numeric"')}</div><div class="guide-ration-fields">${field("prog-layer-days", "Días a cubrir", 'type="number" min="1" max="365" step="1" value="30" inputmode="numeric"')}${select("prog-layer-product", "Alimento", [[38, `${name(38)} (gallinas de patio)`], [39, `${name(39)} (gallinas de granja)`], [11, `${name(11)} (gallinas criollas)`]])}</div><div class="guide-ration-result" id="prog-layer-result" role="status" aria-live="polite"></div><p class="guide-ration-note">Consumo diario promedio en postura: Hy-Line Brown 109–117 g, Lohmann Brown 110–120 g, ISA Brown 114–119 g, Dekalb White 109–112 g, LSL 105–115 g. Sacos de 100 lb. El consumo real sube con el frío y baja con el calor.</p>`,
+      html: `<div class="guide-ration-fields guide-ration-fields--three">${field("prog-layer-count", "Cantidad de gallinas", 'type="number" min="1" max="100000" step="1" value="50" inputmode="numeric"')}${select("prog-layer-line", "Línea", [[112, "Hy-Line Brown (112 g/día)"], [0, "Lohmann Brown-Classic: escribir consumo"], [116, "ISA Brown (116 g/día)"], [110, "Dekalb White (110 g/día)"], [0, "Lohmann LSL-Classic: escribir consumo"], [0, "Otra: escribir el consumo"]])}${field("prog-layer-grams", "Consumo por gallina al día (g)", 'type="number" min="50" max="250" step="1" value="112" inputmode="numeric"')}</div><div class="guide-ration-fields">${field("prog-layer-days", "Días a cubrir", 'type="number" min="1" max="365" step="1" value="30" inputmode="numeric"')}${select("prog-layer-product", "Alimento", [[38, `${name(38)} (gallinas de patio)`], [39, `${name(39)} (gallinas de granja)`], [11, `${name(11)} (gallinas criollas)`]])}</div><div class="guide-ration-result" id="prog-layer-result" role="status" aria-live="polite"></div><p class="guide-ration-note">Consumo diario promedio en postura: Hy-Line Brown 109–117 g, ISA Brown 114–119 g, Dekalb White 109–112 g. Para Lohmann u otra línea, escribí el consumo de tu lote. Sacos de 100 lb. El consumo real sube con el frío y baja con el calor.</p>`,
       bind() {
         const ids = ["prog-layer-count", "prog-layer-grams", "prog-layer-days"].map(id => document.getElementById(id));
         const out = document.getElementById("prog-layer-result");
         const run = () => {
+          if (!ids[1].value) { out.textContent = "Escribí el consumo por gallina al día (g) para calcular los sacos."; return; }
           if (ids.some(el => !el.checkValidity() || !el.value)) { out.textContent = "Revisá los valores: gallinas (1–100,000), consumo (50–250 g) y días (1–365)."; return; }
           const [hens, grams, days] = ids.map(el => Number(el.value));
           const lbPerDay = hens * grams / 453.592;
@@ -173,7 +174,7 @@
         };
         const productSelect = document.getElementById("prog-layer-product");
         const lineSelect = document.getElementById("prog-layer-line");
-        lineSelect.addEventListener("change", () => { if (Number(lineSelect.value) > 0) { ids[1].value = lineSelect.value; run(); } else { ids[1].focus(); } });
+        lineSelect.addEventListener("change", () => { ids[1].value = Number(lineSelect.value) > 0 ? lineSelect.value : ""; run(); if (!ids[1].value) ids[1].focus(); });
         [...ids, productSelect].forEach(el => el.addEventListener("input", run)); run();
       }
     },
@@ -214,7 +215,19 @@
         const out = document.getElementById("prog-curve-result");
         const keys = Object.keys(layerLines);
         lineB.value = keys.includes("dekalbWhite") ? "dekalbWhite" : keys[keys.length - 1];
+        // En cada opción solo aparecen las líneas que tienen ese dato por edad.
+        let listedFor = "";
+        const listLines = () => {
+          if (listedFor === metric.value) return;
+          listedFor = metric.value;
+          const available = keys.filter(key => layerLines[key][metric.value].some(value => value != null));
+          [[lineA, lineA.value], [lineB, lineB.value]].forEach(([select, wanted], index) => {
+            select.innerHTML = available.map(key => `<option value="${key}">${escape(layerLines[key].label)}</option>`).join("");
+            select.value = available.includes(wanted) ? wanted : available.find(key => index === 0 || key !== lineA.value) || available[0];
+          });
+        };
         const run = () => {
+          listLines();
           const a = layerLines[lineA.value], b = layerLines[lineB.value], m = layerMetrics[metric.value];
           const rows = LAYER_AGES.map((age, i) => `<tr><th scope="row">${age} semanas</th><td>${escape(layerValue(a[metric.value][i], m.unit))}</td><td>${escape(layerValue(b[metric.value][i], m.unit))}</td></tr>`).join("");
           out.innerHTML = `<div class="guide-table-wrap guide-table--compare" role="region" aria-label="${escape(m.label)} por edad" tabindex="0"><table><caption>${escape(m.label)} por edad</caption><thead><tr><th scope="col">Edad</th><th scope="col">${escape(a.label)}</th><th scope="col">${escape(b.label)}</th></tr></thead><tbody>${rows}</tbody></table></div><span>${escape(layerSummary(metric.value, a, b))}</span>`;
