@@ -40,7 +40,20 @@ de los sacos dependen de ella. Las imágenes nuevas sin variantes siguen funcion
   las fuentes; no se necesita red para reconstruir los bundles existentes.
 - Los recursos con hash tienen caché prolongada. HTML y scripts conservan
   revalidación; al cambiar los scripts, actualizá su parámetro de versión.
-# Fichas de veterinaria
+
+## Pruebas
+
+Antes de publicar, ejecutá:
+
+- `node --test scripts/security-policy.test.cjs`
+- `node --test scripts/form-security.test.cjs`
+- `node --test scripts/guide-mobile.test.cjs`: abre la guía en Chrome sin ventana a 360 y 390 px de
+  ancho, con todas las preguntas y calculadoras desplegadas, y falla si una tabla o un campo se sale
+  de la pantalla. También revisa que el texto de la guía no cite de dónde vienen los datos. Si Chrome
+  no está instalado, la parte del navegador se omite; con `CHROME_PATH` se puede usar otro navegador
+  basado en Chromium.
+
+## Fichas de veterinaria
 
 `veterinary-data.js` guarda los datos descriptivos y las fuentes de los 27 productos veterinarios. La categoría del producto y las especies se filtran por separado. Un valor `null` o una lista vacía identifica información pendiente; no debe completarse deduciendo una fórmula por el nombre comercial.
 
