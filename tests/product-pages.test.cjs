@@ -66,7 +66,8 @@ test("product pages load only existing local files and contain no inline code", 
       if (name === "script") assert.ok(attrs.src, `${page.path}: inline script`);
       const urls = [attrs.src, name === "a" ? null : attrs.href, ...(attrs.srcset || "").split(",").map(item => item.trim().split(/\s+/)[0])].filter(Boolean);
       for (const url of urls) {
-        if (/^https?:|^tel:/.test(url)) continue;
+        // /_vercel/insights/ lo sirve Vercel al publicar (contador de visitas); no existe en la carpeta.
+        if (/^https?:|^tel:|^\/_vercel\/insights\//.test(url)) continue;
         assert.ok(url.startsWith("/") && !url.startsWith("//"), `${page.path}: relative or protocol-less URL ${url}`);
         assert.ok(existsSync(localFile(url)), `${page.path}: ${url} does not exist`);
       }
