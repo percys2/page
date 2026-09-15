@@ -35,7 +35,7 @@
   const pigLines = {
     estandar: { label: "Estándar: Desarrollina → Jamonina", weight: 224, stages: [{ id: 27, from: 71, to: 119, lb: 228 }, { id: 28, from: 120, to: 154, lb: 214 }] },
     estandarLean: { label: "Estándar + Pur-A-Lean: Desarrollina → Jamonina → Pur-A-Lean", weight: 232, stages: [{ id: 27, from: 71, to: 98, lb: 120 }, { id: 28, from: 99, to: 126, lb: 150 }, { id: 36, from: 127, to: 154, lb: 172 }] },
-    premium: { label: "Premium: Pig-Nova 5 → Pig-Nova 6 → Pur-A-Lean", weight: 245, stages: [{ id: 31, from: 71, to: 91, lb: 90 }, { id: 32, from: 92, to: 119, lb: 130 }, { id: 36, from: 120, to: 154, lb: 222 }] }
+    premium: { label: "Pig-Nova: Pig-Nova 5 → Pig-Nova 6 → Pur-A-Lean", weight: 245, stages: [{ id: 31, from: 71, to: 91, lb: 90 }, { id: 32, from: 92, to: 119, lb: 130 }, { id: 36, from: 120, to: 154, lb: 222 }] }
   };
   // Tamaño del saco según la presentación de la ficha (lb).
   const sackSize = { 24: 44, 25: 55.1, 37: 55.1 };

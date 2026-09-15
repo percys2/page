@@ -208,14 +208,14 @@
       "Crecimiento · fase 5", "Días 71–91 de edad", ["desarrollo"], "Pellet", "45.4 kg / 100 lb",
       ["Alta digestibilidad y ganancia diaria de peso.", "Favorece una conversión alimenticia eficiente."],
       analysis("Energía digestible", ["13.00%", "16.50%", "3.00%", "6.00%", "2,390 Kcal/Kg", "0.10–1.50%", "0.10–1.00%", "0.10%"]), "págs. 36 y 40",
-      { feeding: "Línea premium después de NeoPigg 4: Pig-Nova 5 → Pig-Nova 6. Pur-A-Lean corresponde a la finalización del programa tecnificado.", aliases: ["Pignova 5", "Pignova premium"] }
+      { feeding: "Línea Pig-Nova después de NeoPigg 4: Pig-Nova 5 → Pig-Nova 6. Pur-A-Lean corresponde a la finalización del programa tecnificado.", aliases: ["Pignova 5", "Pignova premium"] }
     ),
     32: ficha(
       "Alimento para mejorar el aprovechamiento de nutrientes y el desempeño durante el desarrollo.",
       "Desarrollo · fase 6", "Días 92–119 de edad", ["desarrollo"], "Pellet", "45.4 kg / 100 lb",
       ["Alta digestibilidad y ganancia diaria de peso.", "Favorece una conversión alimenticia eficiente."],
       analysis("Energía digestible", ["13.00%", "16.00%", "2.00%", "6.50%", "2,345 Kcal/Kg", "0.10–1.50%", "0.10–1.00%", "0.10%"]), "págs. 37 y 40",
-      { feeding: "Línea premium: Pig-Nova 5 → Pig-Nova 6. Pur-A-Lean corresponde a la finalización del programa tecnificado.", aliases: ["Pignova 6", "Pignova premium"] }
+      { feeding: "Línea Pig-Nova: Pig-Nova 5 → Pig-Nova 6. Pur-A-Lean corresponde a la finalización del programa tecnificado.", aliases: ["Pignova 6", "Pignova premium"] }
     ),
     36: ficha(
       "Alimento para el acabado final del cerdo y su desempeño productivo.",

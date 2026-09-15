@@ -41,7 +41,7 @@
   // Secuencia de exhibición; no constituye un programa ni una ración recomendada.
   const feedOrder = [4, 2, 1, 38, 39, 11, 10, 3, 24, 25, 37, 26, 27, 28, 31, 32, 36, 29, 30, 8, 6, 7, 5, 23, 9, 13, 16, 17, 40, 35, 12, 14, 15, 34, 33, 18, 19, 20, 21];
   const feedRank = new Map(feedOrder.map((id, index) => [id, index]));
-  const pigLines = { estandar: "Línea estándar", premium: "Línea premium" };
+  const pigLines = { estandar: "Línea estándar", premium: "Línea Pig-Nova" };
   function getPigLine(product) {
     return [27,28].includes(product.id) ? "estandar" : ([31,32].includes(product.id) ? "premium" : "");
   }
